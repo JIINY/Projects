@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{0db9d9f6-d446-465d-8739-06b0db5f1eca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Common">
+      <UniqueIdentifier>{3f6c9a18-2930-44a0-b433-4c195052708d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Data">
+      <UniqueIdentifier>{e44a3ba9-6819-499d-b105-621549cc4f1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\IO">
+      <UniqueIdentifier>{a2ac83fa-0025-4739-ae19-fbf324b0785a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\UI">
+      <UniqueIdentifier>{ee094fce-84a1-43d1-80eb-ef65f40e747a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\UIMenu">
+      <UniqueIdentifier>{7ab601d9-8e4a-4cab-ac61-d21480e55a5a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Data\AddressBook.cpp">
+      <Filter>src\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Data\Personal.cpp">
+      <Filter>src\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IO\ErrorPrintHandler.cpp">
+      <Filter>src\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IO\InputHandler.cpp">
+      <Filter>src\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\AddressBookUI.cpp">
+      <Filter>src\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\OutputPrintHandler.cpp">
+      <Filter>src\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\UIOutput.cpp">
+      <Filter>src\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\UIPrintHandler.cpp">
+      <Filter>src\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\EditMenu.cpp">
+      <Filter>src\UIMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\AddMenu.cpp">
+      <Filter>src\UIMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\MainMenu.cpp">
+      <Filter>src\UIMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\UIUtils.cpp">
+      <Filter>src\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Common\ResultUtils.cpp">
+      <Filter>src\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Common\VariantUtils.cpp">
+      <Filter>src\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\ViewMenu.cpp">
+      <Filter>src\UIMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu.cpp">
+      <Filter>src\UIMenu</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Common\DataType.hpp">
+      <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Common\ResultEnums.hpp">
+      <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Common\VariantUtils.hpp">
+      <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Data\AddressBook.hpp">
+      <Filter>src\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Data\Personal.hpp">
+      <Filter>src\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IO\ErrorPrintHandler.hpp">
+      <Filter>src\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IO\InputHandler.hpp">
+      <Filter>src\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\AddressBookUI.hpp">
+      <Filter>src\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\OutputPrintHandler.hpp">
+      <Filter>src\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\UIOutput.hpp">
+      <Filter>src\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\UIPrintHandler.hpp">
+      <Filter>src\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\EditMenu.hpp">
+      <Filter>src\UIMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\AddMenu.hpp">
+      <Filter>src\UIMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\MainMenu.hpp">
+      <Filter>src\UIMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\UIUtils.hpp">
+      <Filter>src\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\UICommonData.hpp">
+      <Filter>src\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\UICommonHeader.hpp">
+      <Filter>src\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Common\ResultUtils.hpp">
+      <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\UICommonShard.hpp">
+      <Filter>src\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\ViewMenu.hpp">
+      <Filter>src\UIMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu.hpp">
+      <Filter>src\UIMenu</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
