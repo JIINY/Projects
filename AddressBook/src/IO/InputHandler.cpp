@@ -108,10 +108,8 @@ ResultVariant InputHandler::waitForAnyKeyOrQuit()
 	string input;
 	getline(cin, input);
 
-	if (cin.fail()) {
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+	if (resolveCinFailed()) 
+	{
 		this->str = "";
 		return InputResult::FAIL;
 	}
@@ -125,10 +123,8 @@ ResultVariant InputHandler::getInputString(StringRule rule)
 	string input;
 	getline(cin, input);
 
-	if (cin.fail()) {
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+	if (resolveCinFailed()) 
+	{
 		this->str = "";
 		return InputResult::FAIL;
 	}
@@ -174,10 +170,8 @@ ResultVariant InputHandler::getInputNumber(IntRule rule)
 	getline(cin, input); //파싱하기 위해 일단 string으로 입력
 	int num = -1;
 
-	if (cin.fail()) {
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+	if (resolveCinFailed()) 
+	{
 		this->num = -1;
 		return InputResult::FAIL;
 	}
@@ -200,10 +194,8 @@ ResultVariant InputHandler::getInputChar()
 	getline(cin, input);
 	char ch = '\0';
 
-	if (cin.fail()) {
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+	if (resolveCinFailed()) 
+	{
 		this->ch = ch;
 		return InputResult::FAIL;
 	}
@@ -246,10 +238,8 @@ ResultVariant InputHandler::getInputYesNo()
 	string input;
 	getline(cin, input);
 
-	if (cin.fail()) {
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+	if (resolveCinFailed()) 
+	{
 		this->str = "";
 		return InputResult::FAIL;
 	}
@@ -274,4 +264,15 @@ ResultVariant InputHandler::getInputYesNo()
 
 	this->yesNo = false;
 	return InputResult::INVALID_YESNO;
+}
+
+bool InputHandler::resolveCinFailed() 
+{
+	if (cin.fail()) 
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		return true;
+	}
+	return false;
 }

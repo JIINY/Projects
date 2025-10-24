@@ -54,4 +54,6 @@ private:
     std::string str = "";
     bool yesNo = false;
     ResultVariant lastError;
+
+    bool resolveCinFailed();
 };
