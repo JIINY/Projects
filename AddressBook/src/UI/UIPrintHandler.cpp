@@ -1,4 +1,6 @@
 #include "UIPrintHandler.hpp"
+#include <optional>
+#include <string>
 #include "../Common/DataType.hpp"
 #include "../Common/ResultEnums.hpp"
 #include "OutputPrintHandler.hpp"
@@ -7,7 +9,7 @@ using namespace std;
 
 
 
-UIFrame UIPrintHandler::mainMenu()
+UIFrame UIPrintHandler::mainMenu() 
 {
 	return UIFrame{
 		[]{
@@ -16,7 +18,7 @@ UIFrame UIPrintHandler::mainMenu()
 	};
 }
 
-UIFrame UIPrintHandler::searchMenu()
+UIFrame UIPrintHandler::searchMenu() 
 {
 	return UIFrame{
 		[]{
@@ -26,7 +28,7 @@ UIFrame UIPrintHandler::searchMenu()
 	};
 }
 
-UIFrame UIPrintHandler::menuSelect(optional<ResultVariant> err)
+UIFrame UIPrintHandler::menuSelect(optional<ResultVariant> err) 
 {
 	return UIFrame{
 		[]{
@@ -35,7 +37,7 @@ UIFrame UIPrintHandler::menuSelect(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::cancle(optional<ResultVariant> err, CancleType action)
+UIFrame UIPrintHandler::cancle(optional<ResultVariant> err, CancleType action) 
 {
 	return UIFrame{
 		[action]{
@@ -44,7 +46,7 @@ UIFrame UIPrintHandler::cancle(optional<ResultVariant> err, CancleType action)
 	};
 }
 
-UIFrame UIPrintHandler::inputName(optional<ResultVariant> err)
+UIFrame UIPrintHandler::inputName(optional<ResultVariant> err) 
 {
 	return UIFrame{
 		[]{
@@ -53,7 +55,7 @@ UIFrame UIPrintHandler::inputName(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::inputPhone()
+UIFrame UIPrintHandler::inputPhone() 
 {
 	return UIFrame{
 		[]{
@@ -62,7 +64,7 @@ UIFrame UIPrintHandler::inputPhone()
 	};
 }
 
-UIFrame UIPrintHandler::inputAddress()
+UIFrame UIPrintHandler::inputAddress() 
 {
 	return UIFrame{
 		[]{
@@ -71,7 +73,7 @@ UIFrame UIPrintHandler::inputAddress()
 	};
 }
 
-UIFrame UIPrintHandler::inputZipCode()
+UIFrame UIPrintHandler::inputZipCode() 
 {
 	return UIFrame{
 		[]{
@@ -80,7 +82,7 @@ UIFrame UIPrintHandler::inputZipCode()
 	};
 }
 
-UIFrame UIPrintHandler::inputEmail()
+UIFrame UIPrintHandler::inputEmail() 
 {
 	return UIFrame{
 		[]{
@@ -89,7 +91,7 @@ UIFrame UIPrintHandler::inputEmail()
 	};
 }
 
-UIFrame UIPrintHandler::short1Line()
+UIFrame UIPrintHandler::short1Line() 
 {
 	return UIFrame{
 		[]{
@@ -98,7 +100,7 @@ UIFrame UIPrintHandler::short1Line()
 	};
 }
 
-UIFrame UIPrintHandler::short2Line()
+UIFrame UIPrintHandler::short2Line() 
 {
 	return UIFrame{
 		[]{
@@ -107,7 +109,7 @@ UIFrame UIPrintHandler::short2Line()
 	};
 }
 
-UIFrame UIPrintHandler::addConfirm(const PersonalData& p)
+UIFrame UIPrintHandler::addConfirm(const PersonalData& p) 
 {
 	return UIFrame{
 		[p]{
@@ -118,7 +120,7 @@ UIFrame UIPrintHandler::addConfirm(const PersonalData& p)
 	};
 }
 
-UIFrame UIPrintHandler::addMenuLine(const PersonalData& p)
+UIFrame UIPrintHandler::addMenuLine(const PersonalData& p) 
 {
 	return UIFrame{
 		[p]{
@@ -132,7 +134,7 @@ UIFrame UIPrintHandler::addMenuLine(const PersonalData& p)
 	};
 }
 
-UIFrame UIPrintHandler::addSuccess(const int i, const PersonalData& p)
+UIFrame UIPrintHandler::addSuccess(const int i, const PersonalData& p) 
 {
 	return UIFrame{
 		[i, p]{
@@ -155,7 +157,7 @@ UIFrame UIPrintHandler::addAgain(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::addEditAgain(optional<ResultVariant> err, const int i, const PersonalData& p)
+UIFrame UIPrintHandler::addEditAgain(optional<ResultVariant> err, const int i, const PersonalData& p) 
 {
 	return UIFrame{
 		[i, p]{
@@ -170,7 +172,7 @@ UIFrame UIPrintHandler::addEditAgain(optional<ResultVariant> err, const int i, c
 	};
 }
 
-UIFrame UIPrintHandler::addEdit(const PersonalData& p)
+UIFrame UIPrintHandler::addEdit(const PersonalData& p) 
 {
 	return UIFrame{
 		[p]{
@@ -204,9 +206,37 @@ UIFrame UIPrintHandler::addEditLine(const PersonalData& p)
 	};
 }
 
-UIFrame UIPrintHandler::editName(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::editTitle()
+{
 	return UIFrame{
-		[] {
+		[]{
+			OutputPrintHandler::printEditTitle();
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
+	};
+}
+
+UIFrame UIPrintHandler::personalEdit(const PersonalData& p)
+{
+	return UIFrame{
+		[p] {
+			OutputPrintHandler::printPersonalEdit(p);
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
+	};
+}
+
+UIFrame UIPrintHandler::editConfirm()
+{
+	return UIFrame{
+		[]{
+			OutputPrintHandler::printEditConfirm();
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
+	};
+}
+
+UIFrame UIPrintHandler::editName(optional<ResultVariant> err)
+{
+	return UIFrame{
+		[]{
 			OutputPrintHandler::printEditName();
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
@@ -248,16 +278,26 @@ UIFrame UIPrintHandler::editEmail(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::viewTitle(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::editSuccess(const int i, const string& name)
+{
 	return UIFrame{
-		[] {
+		[i, name]{
+			OutputPrintHandler::printEditSuccess(i, name);
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
+	};
+}
+
+UIFrame UIPrintHandler::viewTitle(optional<ResultVariant> err) 
+{
+	return UIFrame{
+		[]{
 			OutputPrintHandler::printViewTitle();
 			OutputPrintHandler::printTableTitle();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::tableDataNormal(optional<ResultVariant> err, const int i, const PersonalData& p)
+UIFrame UIPrintHandler::tableDataNormal(optional<ResultVariant> err, const int i, const PersonalData& p) 
 {
 	return UIFrame{
 		[i, p]{
@@ -266,7 +306,7 @@ UIFrame UIPrintHandler::tableDataNormal(optional<ResultVariant> err, const int i
 	};
 }
 
-UIFrame UIPrintHandler::tableDataCenter(optional<ResultVariant> err, const int i, const PersonalData& p)
+UIFrame UIPrintHandler::tableDataCenter(optional<ResultVariant> err, const int i, const PersonalData& p) 
 {
 	return UIFrame{
 		[i, p]{
@@ -276,7 +316,7 @@ UIFrame UIPrintHandler::tableDataCenter(optional<ResultVariant> err, const int i
 	};
 }
 
-UIFrame UIPrintHandler::tableDataBottom(optional<ResultVariant> err, const int i, const PersonalData& p)
+UIFrame UIPrintHandler::tableDataBottom(optional<ResultVariant> err, const int i, const PersonalData& p) 
 {
 	return UIFrame{
 		[i, p]{
@@ -295,7 +335,7 @@ UIFrame UIPrintHandler::tableComplete(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::tableSearchEnd(optional<ResultVariant> err)
+UIFrame UIPrintHandler::tableSearchEnd(optional<ResultVariant> err) 
 {
 	return UIFrame{
 		[]{
@@ -304,7 +344,7 @@ UIFrame UIPrintHandler::tableSearchEnd(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::tableContinue(optional<ResultVariant> err)
+UIFrame UIPrintHandler::tableContinue(optional<ResultVariant> err) 
 {
 	return UIFrame{
 		[]{
@@ -313,7 +353,7 @@ UIFrame UIPrintHandler::tableContinue(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::tableStop(optional<ResultVariant> err)
+UIFrame UIPrintHandler::tableStop(optional<ResultVariant> err) 
 {
 	return UIFrame{
 		[]{
@@ -322,7 +362,7 @@ UIFrame UIPrintHandler::tableStop(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::searchTitle()
+UIFrame UIPrintHandler::searchTitle() 
 {
 	return UIFrame{
 		[]{
@@ -331,7 +371,7 @@ UIFrame UIPrintHandler::searchTitle()
 	};
 }
 
-UIFrame UIPrintHandler::searchResult()
+UIFrame UIPrintHandler::searchResult() 
 {
 	return UIFrame{
 		[]{
@@ -379,18 +419,38 @@ UIFrame UIPrintHandler::searchDelete(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::searchAgain(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::searchAgain(optional<ResultVariant> err) 
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printSearchAgain();
 		}, EnterType::None, err, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::searchEmpty() {
+UIFrame UIPrintHandler::searchEmpty()
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printSearchEmpty();
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
+	};
+}
+
+UIFrame UIPrintHandler::deleteConfirm(optional<ResultVariant> err, const int i, const string& name) 
+{
+	return UIFrame{
+		[i, name] {
+			OutputPrintHandler::printDeleteConfirm(i, name);
+		}, EnterType::None, err, RenderOrder::ErrorToRender
+	};
+}
+
+UIFrame UIPrintHandler::deleteSuccess(const int i, const string& name) 
+{
+	return UIFrame{
+		[i, name] {
+			OutputPrintHandler::printDeleteSuccess(i, name);
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }

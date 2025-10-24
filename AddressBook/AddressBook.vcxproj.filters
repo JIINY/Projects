@@ -140,9 +140,6 @@
     <ClInclude Include="src\Common\ResultUtils.hpp">
       <Filter>src\Common</Filter>
     </ClInclude>
-    <ClInclude Include="src\UI\UICommonShard.hpp">
-      <Filter>src\UI</Filter>
-    </ClInclude>
     <ClInclude Include="src\UIMenu\ViewMenu.hpp">
       <Filter>src\UIMenu</Filter>
     </ClInclude>

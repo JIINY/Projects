@@ -162,11 +162,10 @@ void ErrorPrintHandler::printRemoveOperationErrorMsg(const RemoveOperationResult
 	switch (err) 
 	{
 	case RemoveOperationResult::WRONG_INDEX:
-		cout << "[ERROR] 잘못된 번호입니다." << endl;
+		this->errorMsg = "[ERROR] 잘못된 번호입니다.";
 		break;
-
 	case RemoveOperationResult::FAIL:
-		cout << "[ERROR] 알 수 없는 이유로 삭제하지 못했습니다." << endl;
+		this->errorMsg = "[ERROR] 알 수 없는 이유로 삭제하지 못했습니다.";
 		break;
 	case RemoveOperationResult::SUCCESS:
 		this->errorMsg = "";

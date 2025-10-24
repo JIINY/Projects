@@ -7,7 +7,8 @@
 
 struct PersonalData;
 
-class UIUtils {
+class UIUtils
+{
 public:
     static void clearScreen();
     static void executeFunc0(void(*func)()) { func(); }

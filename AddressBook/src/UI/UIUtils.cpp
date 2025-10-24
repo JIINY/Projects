@@ -16,11 +16,13 @@
 using namespace std;
 
 
-PersonalData UIUtils::processInputPersonalData(void (*title)()) { //함수 포인터
+PersonalData UIUtils::processInputPersonalData(void (*title)()) //함수 포인터
+{
 	PersonalData p;
 	optional<ResultVariant> err = nullopt;
 
-	while (true) {
+	while (true)
+	{
 		executeFunc0(title);
 
 		//이름 입력(필수) + 에러 출력
@@ -32,7 +34,8 @@ PersonalData UIUtils::processInputPersonalData(void (*title)()) { //함수 포인터
 		lastError_ = inputH_.getLastError();
 
 		//에러 처리
-		if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS)) {
+		if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS))
+		{
 			err = wrapVariant<ResultVariant>(lastError_);
 			UIUtils::clearScreen();
 			continue;
@@ -66,7 +69,8 @@ PersonalData UIUtils::processInputPersonalData(void (*title)()) { //함수 포인터
 	return p;
 }
 
-void UIUtils::clearScreen() {
+void UIUtils::clearScreen()
+{
 #ifdef _WIN32
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -86,21 +90,26 @@ void UIUtils::clearScreen() {
 }
 
 
-string UIUtils::eucKrSubStr(const string& str, size_t maxBytes) {
+string UIUtils::eucKrSubStr(const string& str, size_t maxBytes)
+{
 	size_t i = 0;
 
-	if (str == "") {
+	if (str == "")
+	{
 		return " - ";
 	}
 
-	while (i < maxBytes && i < str.size()) {
+	while (i < maxBytes && i < str.size())
+	{
 		unsigned char c = static_cast<unsigned char>(str[i]);
 
-		if (c >= 0x80) {
+		if (c >= 0x80)
+		{
 			if (i + 1 >= maxBytes || i + 1 >= str.size()) { break; } //짝 안 맞는 한글이면 자름
 			i += 2;
 		}
-		else {
+		else
+		{
 			i += 1; //ASCII
 		}
 	}
@@ -109,7 +118,8 @@ string UIUtils::eucKrSubStr(const string& str, size_t maxBytes) {
 }
 
 
-PersonalData UIUtils::subtractPersonalData(const PersonalData& p) {
+PersonalData UIUtils::subtractPersonalData(const PersonalData& p)
+{
 	PersonalData sub;
 
 	sub.name = eucKrSubStr(p.name, f.name);
@@ -121,6 +131,7 @@ PersonalData UIUtils::subtractPersonalData(const PersonalData& p) {
 	return sub;
 }
 
-PersonalData UIUtils::getPersonalDataTableFormat(const PersonalData& p) {
+PersonalData UIUtils::getPersonalDataTableFormat(const PersonalData& p)
+{
 	return subtractPersonalData(p);
 }

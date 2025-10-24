@@ -5,21 +5,25 @@
 #include "../UI/UICommonData.hpp"
 #include "../UI/UICommonHeader.hpp"
 
-class SearchMenu {
+class AddressBookUi;
+
+class SearchMenu
+{
 public:
-    void run();
+    void run(AddressBookUI& bookUI);
 
 protected:
-    void processSearchMenu();
-    void searchMenuController(ContextData& context, std::vector<pair<PersonalData, int>>& result);
+    void processSearchMenu(AddressBookUI& bookUI);
+    void searchMenuController(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
     ResultVariant processSearchItem(ContextData& context);
-    void searchItemController(ContextData& context, std::vector<pair<PersonalData, int>>& result);
-    void printSearchResultTable(ContextData& context, vector<pair<PersonalData, int>> result);
+    void searchItemController(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
+    void printSearchResultTable(ContextData& context, std::vector<std::pair<PersonalData, int>> result);
 
     ResultVariant processSearchSubMenu(ContextData& context);
     ResultVariant processSearchEmptySubMenu(ContextData& context);
-    void searchSubMenuController(ContextData& context);
-
+    void searchSubMenuController(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
+    void processEditItem(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& searchResult);
+    void processDeleteItem(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& searchResult);
 
 private:
     ResultVariant lastError_;

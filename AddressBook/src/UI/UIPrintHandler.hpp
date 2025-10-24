@@ -8,7 +8,8 @@
 enum class CancleType;
 enum class EnterType;
 
-class UIPrintHandler {
+class UIPrintHandler
+{
 public:
     UIFrame menuSelect(std::optional<ResultVariant> err);
     UIFrame cancle(std::optional<ResultVariant> err, CancleType action);
@@ -42,12 +43,16 @@ public:
     UIFrame tableContinue(std::optional<ResultVariant> err);
     UIFrame tableStop(std::optional<ResultVariant> err);
 
+    UIFrame editTitle();
+    UIFrame personalEdit(const PersonalData& p);
+    UIFrame editConfirm();
     UIFrame editName(std::optional<ResultVariant> err);
     UIFrame editPhone(std::optional<ResultVariant> err);
     UIFrame editAddress(std::optional<ResultVariant> err);
     UIFrame editZipCode(std::optional<ResultVariant> err);
     UIFrame editEmail(std::optional<ResultVariant> err);
     UIFrame editInput(std::optional<ResultVariant> err);
+    UIFrame editSuccess(const int i, const std::string& name);
 
     UIFrame searchTitle();
     UIFrame searchResult();
@@ -57,4 +62,7 @@ public:
     UIFrame searchDelete(std::optional<ResultVariant> err);
     UIFrame searchAgain(std::optional<ResultVariant> err);
     UIFrame searchEmpty();
+
+    UIFrame deleteConfirm(std::optional<ResultVariant> err, const int i, const std::string& name);
+    UIFrame deleteSuccess(const int i, const std::string& name);
 };

@@ -55,7 +55,6 @@
     <ClInclude Include="src\UI\OutputPrintHandler.hpp" />
     <ClInclude Include="src\UI\UICommonData.hpp" />
     <ClInclude Include="src\UI\UICommonHeader.hpp" />
-    <ClInclude Include="src\UI\UICommonShard.hpp" />
     <ClInclude Include="src\UI\UIOutput.hpp" />
     <ClInclude Include="src\UI\UIPrintHandler.hpp" />
     <ClInclude Include="src\UI\UIUtils.hpp" />

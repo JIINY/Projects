@@ -51,6 +51,7 @@ public:
     static void printTableComplete();
     static void printTableStop();
 
+    static void printEditItem();
     static void printEditName();
     static void printEditPhone();
     static void printEditAddress();
@@ -59,9 +60,11 @@ public:
     static void printEditInput();
     static void printEditAgain();
     static void printEditConfirm();
+    static void printEditSuccess(int i, const std::string& name);
 
-    static void printEditItem();
     static void printDeleteItem();
+    static void printDeleteConfirm(int i, const std::string& name);
+    static void printDeleteSuccess(int i, const std::string& name);
     static void printSearchAgain();
     static void printSearchEmpty();
 

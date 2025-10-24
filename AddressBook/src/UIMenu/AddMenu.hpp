@@ -3,16 +3,16 @@
 #include "../UI/UICommonData.hpp"
 #include "../UI/UICommonHeader.hpp"
 
-
+class AddressBookUI;
 
 class AddMenu {
 public:
-    void run();
+    void run(AddressBookUI& bookUI);
 
 
 protected:
-    void processAddMenu();
-    void addController(ContextData& context);
+    void processAddMenu(AddressBookUI& bookUI);
+    void addController(AddressBookUI& bookUI, ContextData& context);
     void addMenuController(ContextData& context);
 
 

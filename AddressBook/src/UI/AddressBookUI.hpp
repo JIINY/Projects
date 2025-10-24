@@ -1,10 +1,12 @@
 #pragma once
+#include <string>
 #include "../Common/ResultEnums.hpp"
 #include "../Common/VariantUtils.hpp"
 #include "../Data/AddressBook.hpp"
 
 
-class AddressBookUI {
+class AddressBookUI 
+{
 public:
     void run();
     int getLastAdd() const;
@@ -12,12 +14,12 @@ public:
     ResultVariant getLastError() const;
 
     ResultVariant addPersonalData(const PersonalData& p);
-    PersonalData getPersonalDataAt(int i);
-    string getNameAt(int i) const;
-    string getPhoneAt(int i) const;
-    string getAddressAt(int i) const;
-    string getZipCodeAt(int i) const;
-    string getEmailAt(int i) const;
+    PersonalData getPersonalDataAt(int i) const;
+    std::string getNameAt(int i) const;
+    std::string getPhoneAt(int i) const;
+    std::string getAddressAt(int i) const;
+    std::string getZipCodeAt(int i) const;
+    std::string getEmailAt(int i) const;
 
     AddressBook& extractAddressBook();
     

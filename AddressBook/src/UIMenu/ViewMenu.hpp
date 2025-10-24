@@ -4,12 +4,13 @@
 
 class AddressBookUI;
 
-class ViewMenu {
+class ViewMenu
+{
 public:
-    void run() { processView(); }
+    void run(AddressBookUI& bookUI) { processView(bookUI); }
 
 protected:
-    void processView();
+    void processView(AddressBookUI& bookUI);
 
 private:
     ResultVariant lastError_;

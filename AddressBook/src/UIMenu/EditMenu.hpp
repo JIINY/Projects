@@ -3,17 +3,17 @@
 #include "../UI/UICommonData.hpp"
 #include "../UI/UICommonHeader.hpp"
 
+class AddressBookUI;
 
-class EditMenu {
+class EditMenu
+{
 public:
-    void editMenuPhaseController(ContextData& context);
+    std::optional<PersonalData> run(AddressBookUI& bookUI, const PersonalData& dataToEdit);
 
 protected:
-    void processAddEditMenu(ContextData& context);
-    void addEditController(ContextData& context);
+    void processEditMenu(AddressBookUI& bookUI, ContextData& context);
     void processEditData(ContextData& context);
     void editDataController(ContextData& context);
-    void processEditMenu(ContextData& context);
     void assignEditNameEmptyError(ContextData& context);
 
 private:

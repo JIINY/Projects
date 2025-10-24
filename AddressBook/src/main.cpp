@@ -4,7 +4,6 @@
 #include "Common/VariantUtils.hpp"
 #include "IO/ErrorPrintHandler.hpp"
 #include "Data/AddressBook.hpp"
-#include "UI/UICommonShard.hpp"
 #include "UI/AddressBookUI.hpp"
 using namespace std;
 
@@ -13,7 +12,6 @@ int main(void) {
 	AddressBookUI ui;
 	ErrorPrintHandler errorMsgH;
 	AddressBook& b = ui.extractAddressBook();
-	book = &ui; //UICommonShard
 
 	LoadOperationResult loadResult = b.loadFile("AddressBook.csv");
 	if (loadResult != LoadOperationResult::SUCCESS) {

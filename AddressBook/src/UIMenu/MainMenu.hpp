@@ -4,7 +4,8 @@
 
 class AddressBookUI;
 
-enum class MainMenuResult {
+enum class MainMenuResult
+{
     Add,
     View,
     Search,
@@ -12,14 +13,15 @@ enum class MainMenuResult {
 };
 
 
-class MainMenu {
+class MainMenu
+{
 public:
-    void run();
+    void run(AddressBookUI& bookUI);
     ResultVariant getLastError() const;
 
 protected:
-    void processMainMenu();
-    ResultVariant mainMenuController(int input);
+    void processMainMenu(AddressBookUI& bookUI);
+    ResultVariant mainMenuController(AddressBookUI& bookUI, int input);
 
 private:
     ResultVariant lastError_;

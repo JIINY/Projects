@@ -10,7 +10,7 @@ using namespace std;
 void AddressBookUI::run() 
 { 
 	MainMenu main;
-	main.run();
+	main.run(*this);
 }
 
 int AddressBookUI::getLastAdd() const 
@@ -42,9 +42,3 @@ AddressBook& AddressBookUI::extractAddressBook()
 {
 	return addressBook;
 }
-
-/*
-	case RemoveOperationResult::SUCCESS: //따로 처리할 예정
-		cout << "[완료] 주소록에서 " << index << " " << name << "이 삭제되었습니다." << endl;
-		break;
-*/

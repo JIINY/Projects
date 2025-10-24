@@ -25,16 +25,12 @@ enum class AddPhase
 {
     InputStart,
     AddMenuSelect,
+    AddEditStart,
+    AddEditConfirm,
+    CancleConfirm,
     InputAddCancle,
-    InputAddMenu,
     AddSuccess,
     AddAgain,
-    AddEditStart,
-    AddEditSelect,
-    AddEditMenu,
-    AddEditConfirm,
-    AddEditAgain,
-    CancleConfirm,
     Exit
 };
 
@@ -55,22 +51,22 @@ enum class SearchPhase
     Exit
 };
 
-enum class EditPhase {
-    EditStart
+enum class EditPhase 
+{
+    EditStart,
+    EditItem,
+    EditCancle,
+    ExitSuccess,
+    ExitCancel
 };
 
 using PhaseVariant = std::variant<AddPhase, EditPhase, SearchPhase>;
 
-enum class EditDataCaller {
-    AddEdit,
-    Edit
-};
 struct ContextData 
 {
     PhaseVariant phase;
     PersonalData p;
     PersonalData sub;
-    EditDataCaller caller = EditDataCaller::AddEdit;
 
     std::optional<ResultVariant> err = std::nullopt;
     int menu = -1;
