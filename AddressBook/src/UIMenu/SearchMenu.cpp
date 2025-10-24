@@ -17,33 +17,33 @@ void SearchMenu::printSearchResultTable(ContextData& context, vector<pair<Person
 
 	int length = static_cast<int>(result.size());
 	if (length == 0) {
-		frame = uiMsgH.searchEmpty();
-		frame(errorMsgH);
+		frame_ = uiMsgH_.searchEmpty();
+		frame_(errorMsgH_);
 	}
 	else {
 		for (int i = page; i < length && i < page + 10; i++) {
 			context.p = result[i].first;
-			context.sub = ui.getPersonalDataTableFormat(context.p);
+			context.sub = ui_.getPersonalDataTableFormat(context.p);
 
 			int remainder = (i + 1) % 10;
 			if (remainder == 5) {
-				frame = uiMsgH.tableDataCenter(context.err, i + 1, context.sub);
+				frame_ = uiMsgH_.tableDataCenter(context.err, i + 1, context.sub);
 			}
 			else if (remainder == 0 || (i + 1) == length) {
-				frame = uiMsgH.tableDataBottom(context.err, i + 1, context.sub);
-				frame(errorMsgH);
+				frame_ = uiMsgH_.tableDataBottom(context.err, i + 1, context.sub);
+				frame_(errorMsgH_);
 
 				if (i + 1 == length) {
-					frame = uiMsgH.tableSearchEnd(context.err);
+					frame_ = uiMsgH_.tableSearchEnd(context.err);
 				}
 				else {
-					frame = uiMsgH.tableContinue(context.err);
+					frame_ = uiMsgH_.tableContinue(context.err);
 				}
 			}
 			else {
-				frame = uiMsgH.tableDataNormal(context.err, i + 1, context.sub);
+				frame_ = uiMsgH_.tableDataNormal(context.err, i + 1, context.sub);
 			}
-			frame(errorMsgH);
+			frame_(errorMsgH_);
 		}
 	}
 }
@@ -57,11 +57,11 @@ void SearchMenu::processSearchMenu() {
 		SearchPhase phase = unwrapVariant<SearchPhase>(context.phase);
 		switch (phase) {
 		case (SearchPhase::SearchStart): {
-			frame = uiMsgH.searchMenu();
-			frame(errorMsgH);
-			frame = uiMsgH.menuSelect(context.err);
-			frame(errorMsgH);
 			searchMenuController(context, result);
+			frame_ = uiMsgH_.searchMenu();
+			frame_(errorMsgH_);
+			frame_ = uiMsgH_.menuSelect(context.err);
+			frame_(errorMsgH_);
 			break;
 		}
 		case(SearchPhase::SearchMenuSelect): {
@@ -70,37 +70,37 @@ void SearchMenu::processSearchMenu() {
 				break; 
 			}
 
-			frame = uiMsgH.searchMenu();
-			frame(errorMsgH);
-			frame = uiMsgH.menuSelect(context.err);
-			frame(errorMsgH);
 			searchMenuController(context, result);
+			frame_ = uiMsgH_.searchMenu();
+			frame_(errorMsgH_);
+			frame_ = uiMsgH_.menuSelect(context.err);
+			frame_(errorMsgH_);
 			break;
 		}
 		case(SearchPhase::SearchResultPrint): {
-			frame = uiMsgH.searchResult();
-			frame(errorMsgH);
+			frame_ = uiMsgH_.searchResult();
+			frame_(errorMsgH_);
 
 			printSearchResultTable(context, result);
 			searchMenuController(context, result);
 			break;
 		}
 		case(SearchPhase::SearchNextStart): {
-			frame = uiMsgH.searchResult();
-			frame(errorMsgH);
+			frame_ = uiMsgH_.searchResult();
+			frame_(errorMsgH_);
 			printSearchResultTable(context, result);
 
 			int length = static_cast<int>(result.size());
 			if (length == 0) {
-				frame = uiMsgH.searchEmptySubMenu();
-				frame(errorMsgH);
+				frame_ = uiMsgH_.searchEmptySubMenu();
+				frame_(errorMsgH_);
 			}
 			else {
-				frame = uiMsgH.searchSubMenu();
-				frame(errorMsgH);
+				frame_ = uiMsgH_.searchSubMenu();
+				frame_(errorMsgH_);
 			}
-			frame = uiMsgH.menuSelect(context.err);
-			frame(errorMsgH);
+			frame_ = uiMsgH_.menuSelect(context.err);
+			frame_(errorMsgH_);
 
 			searchMenuController(context, result);
 			continue;
@@ -112,12 +112,12 @@ void SearchMenu::processSearchMenu() {
 			break;
 		}
 		case(SearchPhase::EditStart): {
-			frame = uiMsgH.searchResult();
-			frame(errorMsgH);
+			frame_ = uiMsgH_.searchResult();
+			frame_(errorMsgH_);
 			printSearchResultTable(context, result);
 
-			frame = uiMsgH.searchEdit(context.err);
-			frame(errorMsgH);
+			frame_ = uiMsgH_.searchEdit(context.err);
+			frame_(errorMsgH_);
 
 			searchMenuController(context, result);
 			break;
@@ -134,7 +134,7 @@ void SearchMenu::processSearchMenu() {
 		}
 		}
 
-		ui.clearScreen();
+		ui_.clearScreen();
 		if (phase == SearchPhase::Exit) {
 			break;
 		}
@@ -145,11 +145,11 @@ void SearchMenu::searchMenuController(ContextData& context, vector<pair<Personal
 	SearchPhase phase = unwrapVariant<SearchPhase>(context.phase);
 	switch (phase) {
 	case(SearchPhase::SearchStart): {
-		context.menu = inputH.getInt(IntRule::ZeroOrPositive);
+		context.menu = inputH_.getInt(IntRule::ZeroOrPositive);
 
-		lastError = inputH.getLastError();
-		if (!isVariantEqualTo <InputResult>(lastError, InputResult::SUCCESS)) {
-			context.err = wrapVariant<ResultVariant>(lastError);
+		lastError_ = inputH_.getLastError();
+		if (!isVariantEqualTo <InputResult>(lastError_, InputResult::SUCCESS)) {
+			context.err = wrapVariant<ResultVariant>(lastError_);
 			break;
 		}
 
@@ -158,11 +158,11 @@ void SearchMenu::searchMenuController(ContextData& context, vector<pair<Personal
 		break;
 	}
 	case(SearchPhase::SearchMenuSelect): {
-		lastError = processSearchItem(context);
-		if (!isVariantEqualTo<MenuSelectResult>(lastError, MenuSelectResult::SUCCESS)) {
-			context.err = wrapVariant<ResultVariant>(lastError);
+		lastError_ = processSearchItem(context);
+		if (!isVariantEqualTo<MenuSelectResult>(lastError_, MenuSelectResult::SUCCESS)) {
+			context.err = wrapVariant<ResultVariant>(lastError_);
 			context.phase = wrapVariant<SearchPhase>(SearchPhase::SearchStart);
-			ui.clearScreen();
+			ui_.clearScreen();
 			break;
 		}
 
@@ -176,11 +176,11 @@ void SearchMenu::searchMenuController(ContextData& context, vector<pair<Personal
 		break;
 	}
 	case(SearchPhase::SearchNextStart): {
-		context.menu = inputH.getInt(IntRule::ZeroOrPositive);
-		lastError = inputH.getLastError();
-		if (!isVariantEqualTo<InputResult>(lastError, InputResult::SUCCESS)) {
-			context.err = wrapVariant<ResultVariant>(lastError);
-			ui.clearScreen();
+		context.menu = inputH_.getInt(IntRule::ZeroOrPositive);
+		lastError_ = inputH_.getLastError();
+		if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS)) {
+			context.err = wrapVariant<ResultVariant>(lastError_);
+			ui_.clearScreen();
 			break;
 		}
 		context.phase = wrapVariant<SearchPhase>(SearchPhase::SearchSubMenuSelect);
@@ -195,25 +195,25 @@ void SearchMenu::searchMenuController(ContextData& context, vector<pair<Personal
 
 		int length = static_cast<int>(result.size());
 		if (length == 0) {
-			lastError = processSearchEmptySubMenu(context);
+			lastError_ = processSearchEmptySubMenu(context);
 		}
 		else {
-			lastError = processSearchSubMenu(context);
+			lastError_ = processSearchSubMenu(context);
 		}
 
-		if (!isVariantEqualTo<MenuSelectResult>(lastError, MenuSelectResult::SUCCESS)) {
-			context.err = wrapVariant<ResultVariant>(lastError);
-			ui.clearScreen();
+		if (!isVariantEqualTo<MenuSelectResult>(lastError_, MenuSelectResult::SUCCESS)) {
+			context.err = wrapVariant<ResultVariant>(lastError_);
+			ui_.clearScreen();
 		}
 		searchSubMenuController(context);
 		break;
 	}
 	case(SearchPhase::EditStart): {
-		context.menu = inputH.getInt(IntRule::PositiveOnly);
+		context.menu = inputH_.getInt(IntRule::PositiveOnly);
 
-		lastError = inputH.getLastError();
-		if (!isVariantEqualTo <InputResult>(lastError, InputResult::SUCCESS)) {
-			context.err = wrapVariant<ResultVariant>(lastError);
+		lastError_ = inputH_.getLastError();
+		if (!isVariantEqualTo <InputResult>(lastError_, InputResult::SUCCESS)) {
+			context.err = wrapVariant<ResultVariant>(lastError_);
 			break;
 		}
 
@@ -237,8 +237,8 @@ void SearchMenu::searchMenuController(ContextData& context, vector<pair<Personal
 ResultVariant SearchMenu::processSearchEmptySubMenu(ContextData& context) {
 	switch (context.menu) {
 	case(9): {
-		frame = uiMsgH.searchAgain(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.searchAgain(context.err);
+		frame_(errorMsgH_);
 		return MenuSelectResult::SUCCESS;
 	}
 	default: {
@@ -250,18 +250,18 @@ ResultVariant SearchMenu::processSearchEmptySubMenu(ContextData& context) {
 ResultVariant SearchMenu::processSearchSubMenu(ContextData& context) {
 	switch (context.menu) {
 	case(1): {
-		frame = uiMsgH.searchEdit(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.searchEdit(context.err);
+		frame_(errorMsgH_);
 		return MenuSelectResult::SUCCESS;
 	}
 	case(2): {
-		frame = uiMsgH.searchDelete(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.searchDelete(context.err);
+		frame_(errorMsgH_);
 		return MenuSelectResult::SUCCESS;
 	}
 	case(9): {
-		frame = uiMsgH.searchAgain(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.searchAgain(context.err);
+		frame_(errorMsgH_);
 		return MenuSelectResult::SUCCESS;
 	}
 	default: {
@@ -281,11 +281,12 @@ void SearchMenu::searchSubMenuController(ContextData& context) {
 		break;
 	}
 	case(9): {
-		bool yesNo = inputH.askYesNo();
-		lastError = inputH.getLastError();
 
-		if (!isVariantEqualTo <InputResult>(lastError, InputResult::SUCCESS)) {
-			context.err = wrapVariant<ResultVariant>(lastError);
+		bool yesNo = inputH_.askYesNo();
+		lastError_ = inputH_.getLastError();
+
+		if (!isVariantEqualTo <InputResult>(lastError_, InputResult::SUCCESS)) {
+			context.err = wrapVariant<ResultVariant>(lastError_);
 			context.phase = wrapVariant<PhaseVariant>(SearchPhase::SearchNextStart);
 			break;
 		}
@@ -308,33 +309,33 @@ void SearchMenu::searchSubMenuController(ContextData& context) {
 
 ResultVariant SearchMenu::processSearchItem(ContextData& context) {
 	UIUtils::clearScreen();
-	frame = uiMsgH.searchTitle();
-	frame(errorMsgH);
+	frame_ = uiMsgH_.searchTitle();
+	frame_(errorMsgH_);
 
 	switch (context.menu) {
 	case 1: {
-		frame = uiMsgH.editName(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.editName(context.err);
+		frame_(errorMsgH_);
 		return MenuSelectResult::SUCCESS;
 	}
 	case 2: {
-		frame = uiMsgH.editPhone(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.editPhone(context.err);
+		frame_(errorMsgH_);
 		return MenuSelectResult::SUCCESS;
 	}
 	case 3: {
-		frame = uiMsgH.editAddress(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.editAddress(context.err);
+		frame_(errorMsgH_);
 		return MenuSelectResult::SUCCESS;
 	}
 	case 4: {
-		frame = uiMsgH.editZipCode(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.editZipCode(context.err);
+		frame_(errorMsgH_);
 		return MenuSelectResult::SUCCESS;
 	}
 	case 5: {
-		frame = uiMsgH.editEmail(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.editEmail(context.err);
+		frame_(errorMsgH_);
 		return MenuSelectResult::SUCCESS;
 	}
 	default:

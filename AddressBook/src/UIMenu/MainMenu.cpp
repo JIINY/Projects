@@ -42,16 +42,16 @@ void MainMenu::processMainMenu() {
 		//메뉴 선택처리
 		if (menu == 0) { break; }
 
-		lastError = mainMenuController(menu);
-		if (!isVariantEqualTo<MenuSelectResult>(lastError, MenuSelectResult::SUCCESS)) {
-			err = wrapVariant<ResultVariant>(lastError);
+		lastError_ = mainMenuController(bookUI, menu);
+		if (!isVariantEqualTo<MenuSelectResult>(lastError_, MenuSelectResult::SUCCESS)) {
+			err = wrapVariant<ResultVariant>(lastError_);
 			UIUtils::clearScreen();
 			continue;
 		}
 
 		//에러가 없다면 초기화
 		err = nullopt;
-		ui.clearScreen();
+		ui_.clearScreen();
 	}
 }
 

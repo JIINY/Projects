@@ -22,10 +22,10 @@ protected:
 
 
 private:
-    ResultVariant lastError;
-    InputHandler inputH;
-    ErrorPrintHandler errorMsgH;
-    UIPrintHandler uiMsgH;
-    UIFrame frame;
-    UIUtils ui;
+    ResultVariant lastError_;
+    InputHandler inputH_;
+    ErrorPrintHandler errorMsgH_;
+    UIPrintHandler uiMsgH_;
+    UIFrame frame_;
+    UIUtils ui_;
 };
