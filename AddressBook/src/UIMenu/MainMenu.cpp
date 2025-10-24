@@ -1,4 +1,3 @@
-#pragma once
 #include "MainMenu.hpp"
 #include <iostream>
 #include <optional>

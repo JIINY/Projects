@@ -1,4 +1,3 @@
-#pragma once
 #include "AddMenu.hpp"
 #include "../Common/VariantUtils.hpp"
 #include "../UI/UICommonData.hpp"

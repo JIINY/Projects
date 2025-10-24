@@ -1,4 +1,3 @@
-#pragma once
 #include "EditMenu.hpp"
 #include "../UI/UICommonData.hpp"
 #include "../UI/UICommonHeader.hpp"

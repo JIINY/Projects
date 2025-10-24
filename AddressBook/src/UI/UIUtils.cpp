@@ -1,4 +1,3 @@
-#pragma once
 #include "UIUtils.hpp"
 #include <iostream>
 #include <cstdlib>

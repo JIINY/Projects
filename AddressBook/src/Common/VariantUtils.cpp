@@ -1,4 +1,3 @@
-#pragma once
 #include "VariantUtils.hpp"
 #include <iostream>
 #include <optional>

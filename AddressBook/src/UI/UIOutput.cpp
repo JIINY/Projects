@@ -1,4 +1,3 @@
-#pragma once
 #include "UIOutput.hpp"
 #include <iostream>
 #include "../Common/ResultEnums.hpp"

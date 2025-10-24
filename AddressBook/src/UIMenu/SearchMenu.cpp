@@ -1,4 +1,3 @@
-#pragma once
 #include "SearchMenu.hpp"
 #include <vector>
 #include <optional>

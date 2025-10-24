@@ -1,4 +1,3 @@
-#pragma once
 #include "UIPrintHandler.hpp"
 #include "../Common/DataType.hpp"
 #include "../Common/ResultEnums.hpp"

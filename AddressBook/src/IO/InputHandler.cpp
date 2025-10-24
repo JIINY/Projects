@@ -1,4 +1,3 @@
-#pragma once
 #include "InputHandler.hpp"
 #include <iostream>
 #include <string>

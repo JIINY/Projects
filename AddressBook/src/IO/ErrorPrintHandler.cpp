@@ -1,4 +1,3 @@
-#pragma once
 #include "ErrorPrintHandler.hpp"
 #include <iostream>
 #include <string>

@@ -1,4 +1,3 @@
-#pragma once
 #include "ViewMenu.hpp"
 #include <iostream>
 #include <optional>

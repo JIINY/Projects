@@ -1,4 +1,3 @@
-#pragma once
 #include "OutputPrintHandler.hpp"
 #include <iostream>
 #include <iomanip>

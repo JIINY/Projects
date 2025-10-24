@@ -1,4 +1,3 @@
-#pragma once
 #include "ResultEnums.hpp"
 #include <string>
 using namespace std;
