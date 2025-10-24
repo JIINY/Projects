@@ -11,7 +11,6 @@
 #include "../Common/ResultEnums.hpp"
 #include "../IO/InputHandler.hpp"
 #include "../IO/ErrorPrintHandler.hpp"
-#include "UICommonShard.hpp"
 #include "UICommonData.hpp"
 #include "UIPrintHandler.hpp"
 using namespace std;
@@ -25,49 +24,45 @@ PersonalData UIUtils::processInputPersonalData(void (*title)()) { //함수 포인터
 		executeFunc0(title);
 
 		//이름 입력(필수) + 에러 출력
-		frame = uiMsgH.inputName(err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.inputName(err);
+		frame_(errorMsgH_);
 
 		//이름 입력 처리
-		p.name = inputH.getString(StringRule::EmptyDisallow);
+		p.name = inputH_.getString(StringRule::EmptyDisallow);
+		lastError_ = inputH_.getLastError();
 
-		lastError = inputH.getLastError();
 		//에러 처리
-		if (!isVariantEqualTo<InputResult>(lastError, InputResult::SUCCESS)) {
-			err = wrapVariant<ResultVariant>(lastError);
-
-			if (!isVariantEqualTo<InputResult>(lastError, InputResult::EMPTY_STRING)) {
-				lastError = AddDataResult::EMPTY_NAME; //err에 직접 넣으면 뎁스가 안맞아서 AddDataResult로 한번 더 씌워줘야 함
-				err = wrapVariant<ResultVariant>(lastError);
-			}
+		if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS)) {
+			err = wrapVariant<ResultVariant>(lastError_);
 			UIUtils::clearScreen();
 			continue;
 		}
+
+		//초기화
+		err = nullopt;
 		break;
 	}
 
 	//나머지 데이터 입력
-	frame = uiMsgH.inputPhone();
-	frame(errorMsgH);
-	p.phone = inputH.getString(StringRule::EmptyAllow);
+	frame_ = uiMsgH_.inputPhone();
+	frame_(errorMsgH_);
+	p.phone = inputH_.getString(StringRule::EmptyAllow);
 
-	frame = uiMsgH.inputAddress();
-	frame(errorMsgH);
-	p.address = inputH.getString(StringRule::EmptyAllow);
+	frame_ = uiMsgH_.inputAddress();
+	frame_(errorMsgH_);
+	p.address = inputH_.getString(StringRule::EmptyAllow);
 
-	frame = uiMsgH.inputZipCode();
-	frame(errorMsgH);
-	p.zipCode = inputH.getString(StringRule::EmptyAllow);
+	frame_ = uiMsgH_.inputZipCode();
+	frame_(errorMsgH_);
+	p.zipCode = inputH_.getString(StringRule::EmptyAllow);
 
-	frame = uiMsgH.inputEmail();
-	frame(errorMsgH);
-	p.email = inputH.getString(StringRule::EmptyAllow);
+	frame_ = uiMsgH_.inputEmail();
+	frame_(errorMsgH_);
+	p.email = inputH_.getString(StringRule::EmptyAllow);
 
-	frame = uiMsgH.short2Line();
-	frame(errorMsgH);
+	frame_ = uiMsgH_.short2Line();
+	frame_(errorMsgH_);
 
-	//에러가 없다면 초기화
-	err = nullopt;
 	return p;
 }
 

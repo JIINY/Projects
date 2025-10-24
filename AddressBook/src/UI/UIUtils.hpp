@@ -19,9 +19,9 @@ protected:
     std::string eucKrSubStr(const std::string& str, size_t maxBytes);
 
 private:
-    ResultVariant lastError;
-    UIFrame frame;
-    InputHandler inputH;
-    ErrorPrintHandler errorMsgH;
-    UIPrintHandler uiMsgH;
+    ResultVariant lastError_;
+    UIFrame frame_;
+    InputHandler inputH_;
+    ErrorPrintHandler errorMsgH_;
+    UIPrintHandler uiMsgH_;
 };

@@ -27,8 +27,8 @@ void AddMenu::addMenuController(ContextData& context) {
 		break;
 	}
 	default: {
-		lastError = MenuSelectResult::WRONG_INDEX;
-		context.err = wrapVariant<ResultVariant>(lastError);
+		lastError_ = MenuSelectResult::WRONG_INDEX;
+		context.err = wrapVariant<ResultVariant>(lastError_);
 		break;
 	}
 	}
@@ -46,20 +46,20 @@ void AddMenu::processAddMenu() {
 		}
 
 		case(AddPhase::AddMenuSelect): {
-			frame = uiMsgH.addConfirm(context.p);
-			frame(errorMsgH);
-			frame = uiMsgH.menuSelect(context.err);
-			frame(errorMsgH);
-			addController(context);
+			frame_ = uiMsgH_.addConfirm(context.p);
+			frame_(errorMsgH_);
+			frame_ = uiMsgH_.menuSelect(context.err);
+			frame_(errorMsgH_);
+			addController(bookUI, context);
 			break;
 		}
 
 		case(AddPhase::InputAddCancle): {
-			frame = uiMsgH.addMenuLine(context.p);
-			frame(errorMsgH);
-			frame = uiMsgH.cancle(context.err, CancleType::Input);
-			frame(errorMsgH);
-			addController(context);
+			frame_ = uiMsgH_.addMenuLine(context.p);
+			frame_(errorMsgH_);
+			frame_ = uiMsgH_.cancle(context.err, CancleType::Input);
+			frame_(errorMsgH_);
+			addController(bookUI, context);
 			break;
 		}
 
@@ -69,11 +69,11 @@ void AddMenu::processAddMenu() {
 		}
 
 		case(AddPhase::AddAgain): {
-			frame = uiMsgH.addSuccess(book->getLastAdd() + 1, context.sub);
-			frame(errorMsgH);
-			frame = uiMsgH.addAgain(context.err);
-			frame(errorMsgH);
 			addController(context);
+			frame_ = uiMsgH_.addSuccess(bookUI.getLastAdd() + 1, context.sub);
+			frame_(errorMsgH_);
+			frame_ = uiMsgH_.addAgain(context.err);
+			frame_(errorMsgH_);
 			break;
 		}
 
@@ -95,18 +95,18 @@ void AddMenu::addController(ContextData& context) {
 
 	switch (phase) {
 	case(AddPhase::InputStart): {
-		context.p = ui.processInputPersonalData(OutputPrintHandler::printAddTitle);
+		context.p = ui_.processInputPersonalData(OutputPrintHandler::printAddTitle);
 		context.phase = wrapVariant<PhaseVariant>(AddPhase::AddMenuSelect);
 		context.err = nullopt;
 		break;
 	}
 
 	case(AddPhase::AddMenuSelect): {
-		context.menu = inputH.getInt(IntRule::ZeroOrPositive);
+		context.menu = inputH_.getInt(IntRule::ZeroOrPositive);
 
-		lastError = inputH.getLastError();
-		if (!isVariantEqualTo <InputResult>(lastError, InputResult::SUCCESS)) {
-			context.err = wrapVariant<ResultVariant>(lastError);
+		lastError_ = inputH_.getLastError();
+		if (!isVariantEqualTo <InputResult>(lastError_, InputResult::SUCCESS)) {
+			context.err = wrapVariant<ResultVariant>(lastError_);
 			break;
 		}
 
@@ -116,8 +116,8 @@ void AddMenu::addController(ContextData& context) {
 	}
 
 	case(AddPhase::InputAddCancle): {
-		bool yesNo = inputH.askYesNo();
-		lastError = inputH.getLastError();
+		bool yesNo = inputH_.askYesNo();
+		lastError_ = inputH_.getLastError();
 
 		if (yesNo) {
 			context.phase = wrapVariant<PhaseVariant>(AddPhase::Exit);
@@ -125,8 +125,8 @@ void AddMenu::addController(ContextData& context) {
 			break;
 		}
 
-		if (!isVariantEqualTo <InputResult>(lastError, InputResult::SUCCESS)) {
-			context.err = wrapVariant<ResultVariant>(lastError);
+		if (!isVariantEqualTo <InputResult>(lastError_, InputResult::SUCCESS)) {
+			context.err = wrapVariant<ResultVariant>(lastError_);
 			context.phase = wrapVariant<PhaseVariant>(AddPhase::InputAddCancle);
 		}
 		else {
@@ -139,25 +139,25 @@ void AddMenu::addController(ContextData& context) {
 	case(AddPhase::AddSuccess): {
 		lastError = book->addPersonalData(context.p);
 
-		if (!isVariantEqualTo <AddOperationResult>(lastError, AddOperationResult::SUCCESS)) {
-			context.err = wrapVariant<ResultVariant>(lastError);
+		if (!isVariantEqualTo <AddOperationResult>(lastError_, AddOperationResult::SUCCESS)) {
+			context.err = wrapVariant<ResultVariant>(lastError_);
 			context.phase = wrapVariant<PhaseVariant>(AddPhase::AddAgain);
 			break;
 		}
 
 		context.p = book->getPersonalDataAt(book->getLastAdd());
-		context.sub = ui.getPersonalDataTableFormat(context.p);
+		context.sub = ui_.getPersonalDataTableFormat(context.p);
 		context.phase = wrapVariant<PhaseVariant>(AddPhase::AddAgain);
 		context.err = nullopt;
 		break;
 	}
 
 	case(AddPhase::AddAgain): {
-		bool yesNo = inputH.askYesNo();
-		lastError = inputH.getLastError();
+		bool yesNo = inputH_.askYesNo();
+		lastError_ = inputH_.getLastError();
 
-		if (!isVariantEqualTo <InputResult>(lastError, InputResult::SUCCESS)) {
-			context.err = wrapVariant<ResultVariant>(lastError);
+		if (!isVariantEqualTo <InputResult>(lastError_, InputResult::SUCCESS)) {
+			context.err = wrapVariant<ResultVariant>(lastError_);
 			context.phase = wrapVariant<PhaseVariant>(AddPhase::AddAgain);
 			break;
 		}

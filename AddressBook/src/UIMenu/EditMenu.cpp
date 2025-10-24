@@ -164,32 +164,32 @@ void EditMenu::processEditData(ContextData& context) {
 
 	switch (context.menu) {
 	case 1: {
-		frame = uiMsgH.editName(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.editName(context.err);
+		frame_(errorMsgH_);
 		break;
 	}
 	case 2: {
-		frame = uiMsgH.editPhone(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.editPhone(context.err);
+		frame_(errorMsgH_);
 		break;
 	}
 	case 3: {
-		frame = uiMsgH.editAddress(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.editAddress(context.err);
+		frame_(errorMsgH_);
 		break;
 	}
 	case 4: {
-		frame = uiMsgH.editZipCode(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.editZipCode(context.err);
+		frame_(errorMsgH_);
 		break;
 	}
 	case 5: {
-		frame = uiMsgH.editEmail(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.editEmail(context.err);
+		frame_(errorMsgH_);
 		break;
 	}
 	case 6: {
-		ui.clearScreen();
+		ui_.clearScreen();
 		break;
 	}
 	case 9: {
@@ -229,32 +229,32 @@ void EditMenu::editDataController(ContextData& context) {
 		break;
 	}
 	case 2: {
-		string s = inputH.getString(StringRule::EmptyAllow);
+		string s = inputH_.getString(StringRule::EmptyAllow);
 		context.p.phone = s;
-		context.err = wrapVariant<ResultVariant>(inputH.getLastError());
+		context.err = wrapVariant<ResultVariant>(inputH_.getLastError());
 		break;
 	}
 	case 3: {
-		string s = inputH.getString(StringRule::EmptyAllow);
+		string s = inputH_.getString(StringRule::EmptyAllow);
 		context.p.address = s;
-		context.err = wrapVariant<ResultVariant>(inputH.getLastError());
+		context.err = wrapVariant<ResultVariant>(inputH_.getLastError());
 		break;
 	}
 	case 4: {
-		string s = inputH.getString(StringRule::EmptyAllow);
+		string s = inputH_.getString(StringRule::EmptyAllow);
 		context.p.zipCode = s;
-		context.err = wrapVariant<ResultVariant>(inputH.getLastError());
+		context.err = wrapVariant<ResultVariant>(inputH_.getLastError());
 		break;
 	}
 	case 5: {
-		string s = inputH.getString(StringRule::EmptyAllow);
+		string s = inputH_.getString(StringRule::EmptyAllow);
 		context.p.email = s;
-		context.err = wrapVariant<ResultVariant>(inputH.getLastError());
+		context.err = wrapVariant<ResultVariant>(inputH_.getLastError());
 		break;
 	}
 	case 6: {
-		context.p = ui.processInputPersonalData(OutputPrintHandler::printAddEditTitle);
-		context.err = wrapVariant<ResultVariant>(inputH.getLastError());
+		context.p = ui_.processInputPersonalData(OutputPrintHandler::printAddEditTitle);
+		context.err = nullopt;
 		break;
 	}
 	default:
