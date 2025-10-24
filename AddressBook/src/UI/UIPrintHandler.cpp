@@ -7,98 +7,110 @@ using namespace std;
 
 
 
-UIFrame UIPrintHandler::mainMenu() {
+UIFrame UIPrintHandler::mainMenu()
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printMainMenu();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::searchMenu() {
+UIFrame UIPrintHandler::searchMenu()
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printSearchTitle();
 			OutputPrintHandler::printSearchMenu();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::menuSelect(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::menuSelect(optional<ResultVariant> err)
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printMenuSelect();
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::cancle(optional<ResultVariant> err, CancleType action) {
+UIFrame UIPrintHandler::cancle(optional<ResultVariant> err, CancleType action)
+{
 	return UIFrame{
-		[action] {
+		[action]{
 			OutputPrintHandler::printCancle(action);
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::inputName(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::inputName(optional<ResultVariant> err)
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printInputName();
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::inputPhone() {
+UIFrame UIPrintHandler::inputPhone()
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printInputPhone();
 		}, EnterType::None, nullopt, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::inputAddress() {
+UIFrame UIPrintHandler::inputAddress()
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printInputAddress();
 		}, EnterType::None, nullopt, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::inputZipCode() {
+UIFrame UIPrintHandler::inputZipCode()
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printInputZipCode();
 		}, EnterType::None, nullopt, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::inputEmail() {
+UIFrame UIPrintHandler::inputEmail()
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printInputEmail();
 		}, EnterType::None, nullopt, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::short1Line() {
+UIFrame UIPrintHandler::short1Line()
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printShort1Line();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::short2Line() {
+UIFrame UIPrintHandler::short2Line()
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printShort2Line();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::addConfirm(const PersonalData& p) {
+UIFrame UIPrintHandler::addConfirm(const PersonalData& p)
+{
 	return UIFrame{
-		[p] {
+		[p]{
 			OutputPrintHandler::printAddTitle();
 			OutputPrintHandler::printPersonalData(p);
 			OutputPrintHandler::printAddMenu();
@@ -106,9 +118,10 @@ UIFrame UIPrintHandler::addConfirm(const PersonalData& p) {
 	};
 }
 
-UIFrame UIPrintHandler::addMenuLine(const PersonalData& p) {
+UIFrame UIPrintHandler::addMenuLine(const PersonalData& p)
+{
 	return UIFrame{
-		[p] {
+		[p]{
 			OutputPrintHandler::printAddTitle();
 			OutputPrintHandler::printPersonalData(p);
 			OutputPrintHandler::printAddMenu();
@@ -119,9 +132,10 @@ UIFrame UIPrintHandler::addMenuLine(const PersonalData& p) {
 	};
 }
 
-UIFrame UIPrintHandler::addSuccess(const int i, const PersonalData& p) {
+UIFrame UIPrintHandler::addSuccess(const int i, const PersonalData& p)
+{
 	return UIFrame{
-		[i, p] {
+		[i, p]{
 			OutputPrintHandler::printAddTitle();
 			OutputPrintHandler::printPersonalData(p);
 			OutputPrintHandler::printAddMenu();
@@ -132,17 +146,19 @@ UIFrame UIPrintHandler::addSuccess(const int i, const PersonalData& p) {
 	};
 }
 
-UIFrame UIPrintHandler::addAgain(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::addAgain(optional<ResultVariant> err)
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printAddAgain();
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::addEditAgain(optional<ResultVariant> err, const int i, const PersonalData& p) {
+UIFrame UIPrintHandler::addEditAgain(optional<ResultVariant> err, const int i, const PersonalData& p)
+{
 	return UIFrame{
-		[i, p] {
+		[i, p]{
 			OutputPrintHandler::printAddEditTitle();
 			OutputPrintHandler::printPersonalEdit(p);
 			OutputPrintHandler::printAddEditConfirm();
@@ -154,9 +170,10 @@ UIFrame UIPrintHandler::addEditAgain(optional<ResultVariant> err, const int i, c
 	};
 }
 
-UIFrame UIPrintHandler::addEdit(const PersonalData& p) {
+UIFrame UIPrintHandler::addEdit(const PersonalData& p)
+{
 	return UIFrame{
-		[p] {
+		[p]{
 			OutputPrintHandler::printAddEditTitle();
 			OutputPrintHandler::printPersonalEdit(p);
 			OutputPrintHandler::printAddEditConfirm();
@@ -164,17 +181,19 @@ UIFrame UIPrintHandler::addEdit(const PersonalData& p) {
 	};
 }
 
-UIFrame UIPrintHandler::editInput(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::editInput(optional<ResultVariant> err)
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printEditInput();
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::addEditLine(const PersonalData& p) {
+UIFrame UIPrintHandler::addEditLine(const PersonalData& p)
+{
 	return UIFrame{
-		[p] {
+		[p]{
 			OutputPrintHandler::printAddEditTitle();
 			OutputPrintHandler::printPersonalEdit(p);
 			OutputPrintHandler::printAddEditConfirm();
@@ -193,33 +212,37 @@ UIFrame UIPrintHandler::editName(optional<ResultVariant> err) {
 	};
 }
 
-UIFrame UIPrintHandler::editPhone(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::editPhone(optional<ResultVariant> err)
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printEditPhone();
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::editAddress(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::editAddress(optional<ResultVariant> err)
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printEditAddress();
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::editZipCode(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::editZipCode(optional<ResultVariant> err)
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printEditZipCode();
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::editEmail(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::editEmail(optional<ResultVariant> err)
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printEditEmail();
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
@@ -234,111 +257,123 @@ UIFrame UIPrintHandler::viewTitle(optional<ResultVariant> err) {
 	};
 }
 
-UIFrame UIPrintHandler::tableDataNormal(optional<ResultVariant> err, const int i, const PersonalData& p) {
+UIFrame UIPrintHandler::tableDataNormal(optional<ResultVariant> err, const int i, const PersonalData& p)
+{
 	return UIFrame{
-		[i, p] {
+		[i, p]{
 			OutputPrintHandler::printTablePersonalData(i, p);
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::tableDataCenter(optional<ResultVariant> err, const int i, const PersonalData& p) {
+UIFrame UIPrintHandler::tableDataCenter(optional<ResultVariant> err, const int i, const PersonalData& p)
+{
 	return UIFrame{
-		[i, p] {
+		[i, p]{
 			OutputPrintHandler::printTablePersonalData(i, p);
 			OutputPrintHandler::printLong1Line();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::tableDataBottom(optional<ResultVariant> err, const int i, const PersonalData& p) {
+UIFrame UIPrintHandler::tableDataBottom(optional<ResultVariant> err, const int i, const PersonalData& p)
+{
 	return UIFrame{
-		[i, p] {
+		[i, p]{
 			OutputPrintHandler::printTablePersonalData(i, p);
 			OutputPrintHandler::printLong2Line();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::tableComplete(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::tableComplete(optional<ResultVariant> err)
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printTableComplete();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::tableSearchEnd(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::tableSearchEnd(optional<ResultVariant> err)
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printTableSearchEnd();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::tableContinue(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::tableContinue(optional<ResultVariant> err)
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printTableContinue();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::tableStop(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::tableStop(optional<ResultVariant> err)
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printTableStop();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::searchTitle() {
+UIFrame UIPrintHandler::searchTitle()
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printSearchTitle();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::searchResult() {
+UIFrame UIPrintHandler::searchResult()
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printSearchLongTitle();
 			OutputPrintHandler::printTableTitle();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::searchSubMenu() {
+UIFrame UIPrintHandler::searchSubMenu()
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printShort2Line();
 			OutputPrintHandler::printSearchSubMenu();
 		}, EnterType::Both, nullopt, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::searchEmptySubMenu() {
+UIFrame UIPrintHandler::searchEmptySubMenu()
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printShort2Line();
 			OutputPrintHandler::printSearchEmptySubMenu();
 		}, EnterType::Both, nullopt, RenderOrder::ErrorToRender
 	};
 }
 
-
-UIFrame UIPrintHandler::searchEdit(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::searchEdit(optional<ResultVariant> err)
+{
 	return UIFrame{		
-		[] {
+		[]{
 			OutputPrintHandler::printEditItem();
 		}, EnterType::Both, err, RenderOrder::ErrorToRender
 	};
 }
 
-UIFrame UIPrintHandler::searchDelete(optional<ResultVariant> err) {
+UIFrame UIPrintHandler::searchDelete(optional<ResultVariant> err)
+{
 	return UIFrame{
-		[] {
+		[]{
 			OutputPrintHandler::printDeleteItem();
 		}, EnterType::Both, err, RenderOrder::ErrorToRender
 	};

@@ -5,14 +5,16 @@
 
 class ErrorPrintHandler;
 
-enum class EnterType {
+enum class EnterType
+{
     None,
     RenderOnly,
     ErrorOnly,
     Both
 };
 
-enum class RenderOrder {
+enum class RenderOrder
+{
     RenderToError,
     ErrorToRender
 };
@@ -20,7 +22,8 @@ enum class RenderOrder {
 struct UIFrame;
 struct UITemplate;
 
-struct UIFrame {
+struct UIFrame
+{
     std::function<void()> renderFunc;
     EnterType enter = EnterType::None;
     std::optional<ResultVariant> errorPrint = std::nullopt;
@@ -29,7 +32,8 @@ struct UIFrame {
     void operator()(ErrorPrintHandler& errorMsgH) const;
 };
 
-struct UITemplate {
+struct UITemplate
+{
     std::function<void()> renderFunc;
     EnterType enter = EnterType::None;
     RenderOrder order = RenderOrder::RenderToError;
