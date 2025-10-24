@@ -3,7 +3,8 @@
 #include <string>
 
 
-struct PersonalData {
+struct PersonalData 
+{
 	std::string name = "";
 	std::string phone = "";
 	std::string address = "";

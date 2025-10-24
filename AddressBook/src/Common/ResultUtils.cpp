@@ -5,8 +5,10 @@ using namespace std;
 
 
 
-string toString(IntParsingResult value) {
-    switch (value) {
+string toString(IntParsingResult value) 
+{
+    switch (value) 
+    {
     case IntParsingResult::POSITIVE_NUMBER: return "IntParsing::POSITIVE_NUMBER";
     case IntParsingResult::NEGATIVE_NUMBER: return "IntParsing::NEGATIVE_NUMBER";
     case IntParsingResult::ZERO: return "IntParsing::ZERO";
@@ -16,8 +18,10 @@ string toString(IntParsingResult value) {
     }
 }
 
-string toString(InputResult value) {
-    switch (value) {
+string toString(InputResult value) 
+{
+    switch (value) 
+    {
     case InputResult::SUCCESS: return "Input::SUCCESS";
     case InputResult::FAIL: return "Input::FAIL";
     case InputResult::WRONG_NUMBER: return "Input::WRONG_NUMBER";
@@ -35,16 +39,20 @@ string toString(InputResult value) {
     }
 }
 
-string toString(SaveOperationResult value) {
-    switch (value) {
+string toString(SaveOperationResult value) 
+{
+    switch (value) 
+    {
     case SaveOperationResult::SUCCESS: return "SaveOperationResult::SUCCESS";
     case SaveOperationResult::FAIL: return "SaveOperationResult::Fail";
     default: return "SaveOperationResult::Default";
     }
 }
 
-string toString(LoadOperationResult value) {
-    switch (value) {
+string toString(LoadOperationResult value) 
+{
+    switch (value) 
+    {
     case LoadOperationResult::SUCCESS: return "LoadOperationResult::SUCCESS";
     case LoadOperationResult::FAIL: return "LoadOperationResult::Fail";
     case LoadOperationResult::NOT_EXIST_FILE: return "LoadOperationResult::NOT_EXIST_FILE";
@@ -52,8 +60,10 @@ string toString(LoadOperationResult value) {
     }
 }
 
-string toString(AddOperationResult value) {
-    switch (value) {
+string toString(AddOperationResult value) 
+{
+    switch (value) 
+    {
     case AddOperationResult::SUCCESS: return "AddOperation::SUCCESS";
     case AddOperationResult::FAIL: return "AddOperation::FAIL";
     case AddOperationResult::EMPTY_NAME: return "AddOperation::EMPTY_NAME";
@@ -62,8 +72,10 @@ string toString(AddOperationResult value) {
     }
 }
 
-string toString(RemoveOperationResult value) {
-    switch (value) {
+string toString(RemoveOperationResult value) 
+{
+    switch (value) 
+    {
     case RemoveOperationResult::SUCCESS: return "RemoveOperation::SUCCESS";
     case RemoveOperationResult::FAIL: return "RemoveOperation::FAIL";
     case RemoveOperationResult::WRONG_INDEX: return "RemoveOperation::WRONG_INDEX";
@@ -71,8 +83,10 @@ string toString(RemoveOperationResult value) {
     }
 }
 
-string toString(MenuSelectResult value) {
-    switch (value) {
+string toString(MenuSelectResult value) 
+{
+    switch (value) 
+    {
     case MenuSelectResult::SUCCESS: return "MenuSelect::SUCCESS";
     case MenuSelectResult::WRONG_INDEX: return "MenuSelect::WRONG_INDEX";
     case MenuSelectResult::UNKNOWN: return "MenuSelect::UNKNOWN";
@@ -80,8 +94,10 @@ string toString(MenuSelectResult value) {
     }
 }
 
-string toString(AddDataResult value) {
-    switch (value) {
+string toString(AddDataResult value) 
+{
+    switch (value) 
+    {
     case AddDataResult::SUCCESS: return "AddData::SUCCESS";
     case AddDataResult::EMPTY_NAME: return "AddData::EMPTY_NAME";
     case AddDataResult::UNKNOWN: return "AddData::UNKNOWN";
@@ -89,8 +105,10 @@ string toString(AddDataResult value) {
     }
 }
 
-string toString(AddEditResult value) {
-    switch (value) {
+string toString(AddEditResult value) 
+{
+    switch (value) 
+    {
     case AddEditResult::SUCCESS: return "AddEdit::SUCCESS";
     case AddEditResult::EMPTY_NAME: return "AddEdit::EMPTY_NAME";
     case AddEditResult::UNKNOWN: return "AddEdit::UNKNOWN";
@@ -98,8 +116,10 @@ string toString(AddEditResult value) {
     }
 }
 
-string toString(EditDataResult value) {
-    switch (value) {
+string toString(EditDataResult value) 
+{
+    switch (value) 
+    {
     case EditDataResult::SUCCESS: return "EditData::SUCCESS";
     case EditDataResult::EMPTY_NAME: return "EditData::EMPTY_NAME";
     case EditDataResult::UNKNOWN: return "EditData::UNKNOWN";
@@ -107,8 +127,10 @@ string toString(EditDataResult value) {
     }
 }
 
-string toString(SearchDataResult value) {
-    switch (value) {
+string toString(SearchDataResult value) 
+{
+    switch (value) 
+    {
     case SearchDataResult::SUCCESS: return "SearchData::SUCCESS";
     case SearchDataResult::EMPTY_ITEM: return "SearchData::EMPTY_ITEM";
     case SearchDataResult::UNKNOWN: return "SearchData::UNKNOWN";

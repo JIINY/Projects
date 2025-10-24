@@ -3,7 +3,8 @@
 
 
 //InputHandler
-enum class IntParsingResult {
+enum class IntParsingResult 
+{
     POSITIVE_NUMBER, 
     NEGATIVE_NUMBER, 
     ZERO,
@@ -11,7 +12,8 @@ enum class IntParsingResult {
     INVALID_CHAR
 };
 
-enum class InputResult {
+enum class InputResult 
+{
     SUCCESS, 
     FAIL,
     WRONG_NUMBER, 
@@ -30,25 +32,29 @@ enum class InputResult {
 
 
 //AddressBook
-enum class SaveOperationResult {
+enum class SaveOperationResult 
+{
     SUCCESS,
     FAIL
 };
 
-enum class LoadOperationResult {
+enum class LoadOperationResult 
+{
     SUCCESS,
     FAIL,
     NOT_EXIST_FILE
 };
 
-enum class AddOperationResult {
+enum class AddOperationResult 
+{
     SUCCESS,
     FAIL,
     EMPTY_NAME,
     UNKNOWN
 };
 
-enum class RemoveOperationResult {
+enum class RemoveOperationResult 
+{
     SUCCESS,
     FAIL,
     WRONG_INDEX
@@ -57,32 +63,37 @@ enum class RemoveOperationResult {
 
 
 //AddressBookUI
-enum class MenuSelectResult {
+enum class MenuSelectResult 
+{
     SUCCESS,
     WRONG_INDEX,
     EMPTY_ADDRESSBOOK,
     UNKNOWN
 };
 
-enum class AddDataResult {
+enum class AddDataResult 
+{
     SUCCESS,
     EMPTY_NAME,
     UNKNOWN
 };
 
-enum class AddEditResult {
+enum class AddEditResult 
+{
     SUCCESS,
     EMPTY_NAME,
     UNKNOWN
 };
 
-enum class EditDataResult {
+enum class EditDataResult 
+{
     SUCCESS,
     EMPTY_NAME,
     UNKNOWN
 };
 
-enum class SearchDataResult {
+enum class SearchDataResult 
+{
     SUCCESS,
     EMPTY_ITEM,
     UNKNOWN
