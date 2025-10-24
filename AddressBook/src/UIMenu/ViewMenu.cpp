@@ -11,42 +11,42 @@ void ViewMenu::processView() {
 	int page = 0;
 
 	while (page < length) {
-		ui.clearScreen();
+		ui_.clearScreen();
 		context.err = nullopt;
-		frame = uiMsgH.viewTitle(context.err);
-		frame(errorMsgH);
+		frame_ = uiMsgH_.viewTitle(context.err);
+		frame_(errorMsgH_);
 
 		for (int i = page; i < length && i < page + 10; i++) {
 			context.p = book->getPersonalDataAt(i);
-			context.sub = ui.getPersonalDataTableFormat(context.p);
+			context.sub = ui_.getPersonalDataTableFormat(context.p);
 
 			int remainder = (i + 1) % 10;
 			if (remainder == 5) {
-				frame = uiMsgH.tableDataCenter(context.err, i + 1, context.sub);
+				frame_ = uiMsgH_.tableDataCenter(context.err, i + 1, context.sub);
 			}
 			else if (remainder == 0 || (i + 1) == length) {
-				frame = uiMsgH.tableDataBottom(context.err, i + 1, context.sub);
-				frame(errorMsgH);
+				frame_ = uiMsgH_.tableDataBottom(context.err, i + 1, context.sub);
+				frame_(errorMsgH_);
 
 				if (i + 1 == length) {
-					frame = uiMsgH.tableComplete(context.err);
+					frame_ = uiMsgH_.tableComplete(context.err);
 				}
 				else {
-					frame = uiMsgH.tableContinue(context.err);
+					frame_ = uiMsgH_.tableContinue(context.err);
 				}
 			}
 			else {
-				frame = uiMsgH.tableDataNormal(context.err, i + 1, context.sub);
+				frame_ = uiMsgH_.tableDataNormal(context.err, i + 1, context.sub);
 			}
-			frame(errorMsgH);
+			frame_(errorMsgH_);
 		}
 
 		if ((page + 1) * 10 < length) {
-			if (inputH.anyKeyOrQuit()) {
-				frame = uiMsgH.tableStop(context.err);
-				frame(errorMsgH);
+			if (inputH_.anyKeyOrQuit()) {
+				frame_ = uiMsgH_.tableStop(context.err);
+				frame_(errorMsgH_);
 
-				if (inputH.askYesNo()) {
+				if (inputH_.askYesNo()) {
 					break;
 				}
 				else {
@@ -55,7 +55,7 @@ void ViewMenu::processView() {
 			}
 		}
 		else {
-			inputH.getAnyKey();
+			inputH_.getAnyKey();
 			break;
 		}
 
