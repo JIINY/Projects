@@ -5,7 +5,8 @@
 #include "../Common/VariantUtils.hpp"
 
 
-enum class IntRule {
+enum class IntRule 
+{
     IntAll,
     PositiveOnly,
     NegativeOnly,
@@ -14,13 +15,15 @@ enum class IntRule {
     NegativeOneToPositive,
 };
 
-enum class StringRule {
+enum class StringRule 
+{
     EmptyAllow,
     EmptyDisallow
 };
 
 
-class InputHandler {
+class InputHandler 
+{
 public:
     void getAnyKey();
     bool anyKeyOrQuit();

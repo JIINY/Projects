@@ -9,13 +9,13 @@
 using namespace std;
 
 
-//Public
 void ErrorPrintHandler::printErrorMsg(const std::variant<IntParsingResult, InputResult,
 	SaveOperationResult, LoadOperationResult, AddOperationResult, RemoveOperationResult,
-	MenuSelectResult, AddDataResult, AddEditResult, EditDataResult, SearchDataResult>& err) {
-
+	MenuSelectResult, AddDataResult, AddEditResult, EditDataResult, SearchDataResult>& err) 
+{
 	setErrorMsg(err);
-	if (this->errorMsg != "") {
+	if (this->errorMsg != "") 
+	{
 		cout << this->errorMsg << endl;
 		OutputPrintHandler::printShort2Line();
 	}
@@ -23,46 +23,56 @@ void ErrorPrintHandler::printErrorMsg(const std::variant<IntParsingResult, Input
 	
 
 //Protected
-void ErrorPrintHandler::setErrorMsg(const ResultVariant& err) {
-
-	visit([this](auto&& err) {
+void ErrorPrintHandler::setErrorMsg(const ResultVariant& err) 
+{
+	visit([this](auto&& err){
 		using T = decay_t<decltype(err)>;
-		if constexpr (is_same_v<T, InputResult>) {
+		if constexpr (is_same_v<T, InputResult>) 
+		{
 			printInputErrorMsg(err);
 		}
-		else if constexpr (is_same_v<T, SaveOperationResult>) {
+		else if constexpr (is_same_v<T, SaveOperationResult>) 
+		{
 			printSaveOperationErrorMsg(err);
 		}
-		else if constexpr (is_same_v<T, LoadOperationResult>) {
+		else if constexpr (is_same_v<T, LoadOperationResult>) 
+		{
 			printLoadOperationErrorMsg(err);
 		}
-		else if constexpr (is_same_v<T, AddOperationResult>) {
+		else if constexpr (is_same_v<T, AddOperationResult>) 
+		{
 			printAddOperationErrorMsg(err);
 		}
-		else if constexpr (is_same_v<T, RemoveOperationResult>) {
+		else if constexpr (is_same_v<T, RemoveOperationResult>) 
+		{
 			printRemoveOperationErrorMsg(err);
 		}
-		else if constexpr (is_same_v<T, MenuSelectResult>) {
+		else if constexpr (is_same_v<T, MenuSelectResult>) 
+		{
 			printMenuSelectErrorMsg(err);
 		}
-		else if constexpr (is_same_v<T, AddDataResult>) {
+		else if constexpr (is_same_v<T, AddDataResult>) 
+		{
 			printAddDataErrorMsg(err);
 		}
-		else if constexpr (is_same_v<T, AddEditResult>) {
+		else if constexpr (is_same_v<T, AddEditResult>) 
+		{
 			printAddEditErrorMsg(err);
 		}
-		else if constexpr (is_same_v<T, EditDataResult>) {
+		else if constexpr (is_same_v<T, EditDataResult>) 
+		{
 			printEditDataErrorMsg(err);
 		}
-		else if constexpr (is_same_v<T, SearchDataResult>) {
+		else if constexpr (is_same_v<T, SearchDataResult>) 
+		{
 			printSearchDataErrorMsg(err);
-		}
-		}, err);
-
+		}}, err);
 }
 
-void ErrorPrintHandler::printInputErrorMsg(const InputResult err) {
-	switch (err) {
+void ErrorPrintHandler::printInputErrorMsg(const InputResult err) 
+{
+	switch (err) 
+	{
 	case InputResult::WRONG_NUMBER:
 		this->errorMsg = "[ERROR] 입력: 해당 범위의 숫자를 입력해주세요. -1";
 		break;
@@ -105,8 +115,10 @@ void ErrorPrintHandler::printInputErrorMsg(const InputResult err) {
 	}
 }
 
-void ErrorPrintHandler::printMenuSelectErrorMsg(const MenuSelectResult err) {
-	switch (err) {
+void ErrorPrintHandler::printMenuSelectErrorMsg(const MenuSelectResult err) 
+{
+	switch (err) 
+	{
 	case MenuSelectResult::WRONG_INDEX:
 		this->errorMsg = "[ERROR] 입력: 원하는 메뉴 번호를 입력해 주세요.";
 		break;
@@ -122,8 +134,10 @@ void ErrorPrintHandler::printMenuSelectErrorMsg(const MenuSelectResult err) {
 	}
 }
 
-void ErrorPrintHandler::printAddOperationErrorMsg(const AddOperationResult err) {
-	switch (err) {
+void ErrorPrintHandler::printAddOperationErrorMsg(const AddOperationResult err) 
+{
+	switch (err) 
+	{
 	case AddOperationResult::FAIL:
 		this->errorMsg = "[ERROR] 로직: 알 수 없는 이유로 추가하지 못했습니다.";
 		break;
@@ -143,8 +157,10 @@ void ErrorPrintHandler::printAddOperationErrorMsg(const AddOperationResult err) 
 }
 
 
-void ErrorPrintHandler::printRemoveOperationErrorMsg(const RemoveOperationResult err) {
-	switch (err) {
+void ErrorPrintHandler::printRemoveOperationErrorMsg(const RemoveOperationResult err) 
+{
+	switch (err) 
+	{
 	case RemoveOperationResult::WRONG_INDEX:
 		cout << "[ERROR] 잘못된 번호입니다." << endl;
 		break;
@@ -160,8 +176,10 @@ void ErrorPrintHandler::printRemoveOperationErrorMsg(const RemoveOperationResult
 	}
 }
 
-void ErrorPrintHandler::printAddDataErrorMsg(const AddDataResult err) {
-	switch (err) {
+void ErrorPrintHandler::printAddDataErrorMsg(const AddDataResult err) 
+{
+	switch (err) 
+	{
 	case AddDataResult::EMPTY_NAME:
 		this->errorMsg = "[ERROR] 입력: 주소록 추가를 위해 이름 입력이 필요합니다.";
 		break;
@@ -174,8 +192,10 @@ void ErrorPrintHandler::printAddDataErrorMsg(const AddDataResult err) {
 	}
 }
 
-void ErrorPrintHandler::printAddEditErrorMsg(const AddEditResult err){
-	switch (err) {
+void ErrorPrintHandler::printAddEditErrorMsg(const AddEditResult err)
+{
+	switch (err) 
+	{
 	case AddEditResult::EMPTY_NAME:
 		this->errorMsg = "[ERROR] 입력: 주소록 추가를 위해 이름 입력이 필요합니다.";
 		break;
@@ -188,8 +208,10 @@ void ErrorPrintHandler::printAddEditErrorMsg(const AddEditResult err){
 	}
 }
 
-void ErrorPrintHandler::printEditDataErrorMsg(const EditDataResult err){
-	switch (err) {
+void ErrorPrintHandler::printEditDataErrorMsg(const EditDataResult err)
+{
+	switch (err) 
+	{
 	case EditDataResult::EMPTY_NAME:
 		this->errorMsg = "[ERROR] 입력: 주소록에는 이름 입력이 필요합니다.";
 		break;
@@ -202,8 +224,10 @@ void ErrorPrintHandler::printEditDataErrorMsg(const EditDataResult err){
 	}
 }
 
-void ErrorPrintHandler::printSaveOperationErrorMsg(const SaveOperationResult err) {
-	switch (err) {
+void ErrorPrintHandler::printSaveOperationErrorMsg(const SaveOperationResult err) 
+{
+	switch (err) 
+	{
 	case SaveOperationResult::SUCCESS:
 		this->errorMsg = "";
 		break;
@@ -216,8 +240,10 @@ void ErrorPrintHandler::printSaveOperationErrorMsg(const SaveOperationResult err
 	}
 }
 
-void ErrorPrintHandler::printLoadOperationErrorMsg(const LoadOperationResult err) {
-	switch (err) {
+void ErrorPrintHandler::printLoadOperationErrorMsg(const LoadOperationResult err) 
+{
+	switch (err) 
+	{
 	case LoadOperationResult::SUCCESS:
 		this->errorMsg = "";
 		break;
@@ -233,8 +259,10 @@ void ErrorPrintHandler::printLoadOperationErrorMsg(const LoadOperationResult err
 	}
 }
 
-void ErrorPrintHandler::printSearchDataErrorMsg(const SearchDataResult err) {
-	switch (err) {
+void ErrorPrintHandler::printSearchDataErrorMsg(const SearchDataResult err) 
+{
+	switch (err) 
+	{
 	case SearchDataResult::SUCCESS:
 		this->errorMsg = "";
 		break;

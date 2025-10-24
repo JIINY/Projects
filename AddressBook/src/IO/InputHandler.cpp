@@ -5,47 +5,56 @@
 using namespace std;
 
 //Public
-void InputHandler::getAnyKey() {
+void InputHandler::getAnyKey() 
+{
 	this->lastError = getInputString(StringRule::EmptyAllow);
 }
 
-bool InputHandler::anyKeyOrQuit() {
+bool InputHandler::anyKeyOrQuit() 
+{
 	this->lastError = waitForAnyKeyOrQuit();
 	return this->str == "Q";
 }
 
-int InputHandler::getInt(IntRule rule) {
+int InputHandler::getInt(IntRule rule) 
+{
 	this->lastError = getInputNumber(rule);
 	return this->num;
 }
-char InputHandler::getChar() {
+char InputHandler::getChar() 
+{
 	this->lastError = getInputChar();
 	return this->ch;
 }
-string InputHandler::getString(StringRule rule) {
+string InputHandler::getString(StringRule rule) 
+{
 	this->lastError = getInputString(rule);
 	return this->str;
 }
 
-bool InputHandler::askYesNo() {
+bool InputHandler::askYesNo() 
+{
 	this->lastError = getInputYesNo();
 	return this->yesNo;
 }
+
 ResultVariant InputHandler::getLastError() const { return this->lastError; }
 
 
-
-//Input: Protected
-string InputHandler::getNegativeSub(const string& input) {
-	if (input[0] == '-') {
+string InputHandler::getNegativeSub(const string& input) 
+{
+	if (input[0] == '-') 
+	{
 		string sub = input.substr(1);
 		return sub;
 	}
 	return input;
 }
 
-bool InputHandler::isAllDigits(const string& str) {
-	for (char ch : str) {
+bool InputHandler::isAllDigits(const string& str) 
+{
+	for (char ch : str) 
+	{
 		if (isdigit(ch) == 0) //숫자가 아니면 0 반환
 		{
 			return false;
@@ -54,32 +63,39 @@ bool InputHandler::isAllDigits(const string& str) {
 	return true;
 }
 
-bool InputHandler::isAllZero(const string& str) {
-	for (char ch : str) {
+bool InputHandler::isAllZero(const string& str) 
+{
+	for (char ch : str) 
+	{
 		if (ch != '0') { return false; }
 	}
 	return true;
 }
 
-IntParsingResult InputHandler::parsingInputNumber(const string& input, int& output) {
+IntParsingResult InputHandler::parsingInputNumber(const string& input, int& output) 
+{
 	int convertNum = atoi(input.c_str());
 
 	string numCheck = getNegativeSub(input);
 	bool isInputNumber = isAllDigits(numCheck);
 
-	if (input.empty()) {
+	if (input.empty()) 
+	{
 		output = -1;
 		return IntParsingResult::EMPTY;
 	}
-	if (input[0] == '-' && isInputNumber) { 
+	if (input[0] == '-' && isInputNumber) 
+	{ 
 		output = convertNum;
 		return IntParsingResult::NEGATIVE_NUMBER;
 	}
-	if (isAllZero(input)) {
+	if (isAllZero(input)) 
+	{
 		output = 0;
 		return IntParsingResult::ZERO;
 	}
-	if (!isInputNumber) {
+	if (!isInputNumber) 
+	{
 		output = -1;
 		return IntParsingResult::INVALID_CHAR; 
 	}
@@ -87,7 +103,8 @@ IntParsingResult InputHandler::parsingInputNumber(const string& input, int& outp
 	return IntParsingResult::POSITIVE_NUMBER;
 }
 
-ResultVariant InputHandler::waitForAnyKeyOrQuit() {
+ResultVariant InputHandler::waitForAnyKeyOrQuit() 
+{
 	string input;
 	getline(cin, input);
 
@@ -103,7 +120,8 @@ ResultVariant InputHandler::waitForAnyKeyOrQuit() {
 	return InputResult::SUCCESS;
 }
 
-ResultVariant InputHandler::getInputString(StringRule rule) {
+ResultVariant InputHandler::getInputString(StringRule rule) 
+{
 	string input;
 	getline(cin, input);
 
@@ -115,12 +133,15 @@ ResultVariant InputHandler::getInputString(StringRule rule) {
 		return InputResult::FAIL;
 	}
 
-	if (input.empty()) {
+	if (input.empty()) 
+	{
 		this->str = "";
-		if (rule == StringRule::EmptyAllow) {
+		if (rule == StringRule::EmptyAllow) 
+		{
 			return InputResult::SUCCESS;
 		}
-		else {
+		else 
+		{
 			return InputResult::EMPTY_STRING;
 		}
 	}
@@ -128,8 +149,10 @@ ResultVariant InputHandler::getInputString(StringRule rule) {
 	return InputResult::SUCCESS;
 }
 
-InputResult InputHandler::validateIntRule(int i, IntRule rule) {
-	switch (rule) {
+InputResult InputHandler::validateIntRule(int i, IntRule rule) 
+{
+	switch (rule) 
+	{
 	case (IntRule::IntAll): return InputResult::SUCCESS;
 	case (IntRule::PositiveOnly): 
 		return (i > 0) ? InputResult::SUCCESS : InputResult::WRONG_NUMBER;
@@ -145,7 +168,8 @@ InputResult InputHandler::validateIntRule(int i, IntRule rule) {
 	}
 }
 
-ResultVariant InputHandler::getInputNumber(IntRule rule) {
+ResultVariant InputHandler::getInputNumber(IntRule rule) 
+{
 	string input;
 	getline(cin, input); //파싱하기 위해 일단 string으로 입력
 	int num = -1;
@@ -170,7 +194,8 @@ ResultVariant InputHandler::getInputNumber(IntRule rule) {
 	return InputResult::SUCCESS;
 }
 
-ResultVariant InputHandler::getInputChar() {
+ResultVariant InputHandler::getInputChar() 
+{
 	string input;
 	getline(cin, input);
 	char ch = '\0';
@@ -183,18 +208,21 @@ ResultVariant InputHandler::getInputChar() {
 		return InputResult::FAIL;
 	}
 	
-	if (input.empty()) {
+	if (input.empty()) 
+	{
 		this->ch = ch;
 		return InputResult::EMPTY_CHAR;
 	}
 
-	if (input.length() != 1) {
+	if (input.length() != 1) 
+	{
 		this->ch = input[0];
 		this->str = input;
 		return InputResult::LENGTH_OVER;
 	}
 
-	if (!isalpha(input[0])) {
+	if (!isalpha(input[0])) 
+	{
 		this->ch = ch;
 		return InputResult::INVALID_CHAR;
 	}
@@ -203,15 +231,18 @@ ResultVariant InputHandler::getInputChar() {
 	return InputResult::SUCCESS;
 }
 
-string InputHandler::toUpper(const string& input) {
+string InputHandler::toUpper(const string& input) 
+{
 	string result = input;
-	for (char& ch : result) {
+	for (char& ch : result) 
+	{
 		ch = toupper(static_cast<unsigned char>(ch));
 	}
 	return result;
 }
 
-ResultVariant InputHandler::getInputYesNo() {
+ResultVariant InputHandler::getInputYesNo() 
+{
 	string input;
 	getline(cin, input);
 
@@ -223,17 +254,20 @@ ResultVariant InputHandler::getInputYesNo() {
 		return InputResult::FAIL;
 	}
 
-	if (input.empty()) {
+	if (input.empty()) 
+	{
 		this->yesNo = false;
 		return InputResult::EMPTY_CHAR;
 	}
 
 	this->str = toUpper(input);
-	if (this->str == "Y" || this->str == "YES") {
+	if (this->str == "Y" || this->str == "YES") 
+	{
 		this->yesNo = true;
 		return InputResult::SUCCESS;
 	}
-	if (this->str == "N" || this->str == "NO") {
+	if (this->str == "N" || this->str == "NO") 
+	{
 		this->yesNo = false;
 		return InputResult::SUCCESS;
 	}

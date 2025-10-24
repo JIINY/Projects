@@ -7,23 +7,27 @@
 using namespace std;
 
 
-//Public
-void AddressBookUI::run() { 
+void AddressBookUI::run() 
+{ 
 	MainMenu main;
 	main.run();
 }
-int AddressBookUI::getLastAdd() const {
+
+int AddressBookUI::getLastAdd() const 
+{
 	return addressBook.getLastAdd();
 }
 
 ResultVariant AddressBookUI::getLastError() const { return this->lastError; }
 
-ResultVariant AddressBookUI::addPersonalData(const PersonalData& p) {
+ResultVariant AddressBookUI::addPersonalData(const PersonalData& p) 
+{
 	AddOperationResult err = addressBook.add(p);
 	return wrapVariant<ResultVariant>(err);
 }
 
-PersonalData AddressBookUI::getPersonalDataAt(int i) {
+PersonalData AddressBookUI::getPersonalDataAt(int i) const 
+{
 	PersonalData p = addressBook.getPersonalAt(i);
 	return p;
 }
@@ -34,7 +38,8 @@ string AddressBookUI::getAddressAt(int i) const { return addressBook.getAddressA
 string AddressBookUI::getZipCodeAt(int i) const { return addressBook.getZipCodeAt(i); }
 string AddressBookUI::getEmailAt(int i) const { return addressBook.getEmailAt(i); }
 
-AddressBook& AddressBookUI::extractAddressBook() {
+AddressBook& AddressBookUI::extractAddressBook() 
+{
 	return addressBook;
 }
 

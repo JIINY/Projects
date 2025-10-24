@@ -6,20 +6,23 @@
 #include "AddressBookUI.hpp"
 
 
-struct PersonalPrintFormat {
+struct PersonalPrintFormat 
+{
     int no, name, phone, address, zipCode, email;
 };
 constexpr PersonalPrintFormat f = { 6, 12, 18, 40, 10, 25 };
 
 
-enum class CancleType {
+enum class CancleType 
+{
     Input,
     Edit,
     Delete,
     AddConfirm
 };
 
-enum class AddPhase {
+enum class AddPhase 
+{
     InputStart,
     AddMenuSelect,
     InputAddCancle,
@@ -35,7 +38,8 @@ enum class AddPhase {
     Exit
 };
 
-enum class SearchPhase {
+enum class SearchPhase 
+{
     SearchStart,
     SearchMenuSelect,
     SearchResultPrint,
@@ -61,8 +65,8 @@ enum class EditDataCaller {
     AddEdit,
     Edit
 };
-
-struct ContextData {
+struct ContextData 
+{
     PhaseVariant phase;
     PersonalData p;
     PersonalData sub;

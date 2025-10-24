@@ -7,7 +7,8 @@
 
 
 
-class ErrorPrintHandler {
+class ErrorPrintHandler 
+{
 public:
     void printErrorMsg(const std::variant<IntParsingResult, InputResult,
         SaveOperationResult, LoadOperationResult, AddOperationResult, RemoveOperationResult,
