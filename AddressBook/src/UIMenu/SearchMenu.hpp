@@ -12,18 +12,6 @@ class SearchMenu
 public:
     void run(AddressBookUI& bookUI);
 
-protected:
-    void processSearchMenu(AddressBookUI& bookUI);
-    void searchMenuController(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
-    ResultVariant processSearchItem(ContextData& context);
-    void searchItemController(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
-    void printSearchResultTable(ContextData& context, std::vector<std::pair<PersonalData, int>> result);
-
-    ResultVariant processSearchSubMenu(ContextData& context);
-    ResultVariant processSearchEmptySubMenu(ContextData& context);
-    void searchSubMenuController(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
-    void processEditItem(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& searchResult);
-    void processDeleteItem(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& searchResult);
 
 private:
     ResultVariant lastError_;
@@ -32,4 +20,19 @@ private:
     UIPrintHandler uiMsgH_;
     UIFrame frame_;
     UIUtils ui_;
+
+    SearchPhase onSearchStart(ContextData& context);
+    SearchPhase onSearchMenuSelect(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
+    SearchPhase onSearchSubMenuSelect(ContextData& context, const std::vector<std::pair<PersonalData, int>>& result);
+    SearchPhase onSearchNextStart(ContextData& context, const std::vector<std::pair<PersonalData, int>>& result);
+    SearchPhase onEditStart(ContextData& context, const std::vector<std::pair<PersonalData, int>>& result);
+    SearchPhase onEditItem(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
+    SearchPhase onDeleteStart(ContextData& context, const std::vector<std::pair<PersonalData, int>>& result);
+    SearchPhase onDeleteItem(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
+    SearchPhase onSearchAgain(ContextData& context);
+
+    void printSearchResultTable(ContextData& context, std::vector<std::pair<PersonalData, int>> result);
+    ResultVariant processSearchItem(ContextData& context);
+    ResultVariant processSearchSubMenu(ContextData& context);
+    ResultVariant processSearchEmptySubMenu(ContextData& context);
 };

@@ -10,11 +10,6 @@ class EditMenu
 public:
     std::optional<PersonalData> run(AddressBookUI& bookUI, const PersonalData& dataToEdit);
 
-protected:
-    void processEditMenu(AddressBookUI& bookUI, ContextData& context);
-    void processEditData(ContextData& context);
-    void editDataController(ContextData& context);
-    void assignEditNameEmptyError(ContextData& context);
 
 private:
     ResultVariant lastError_;
@@ -23,4 +18,10 @@ private:
     UIPrintHandler uiMsgH_;
     UIFrame frame_;
     UIUtils ui_;
+
+    EditPhase onEditStart(ContextData& context);
+    EditPhase onEditItem(ContextData& context);
+    EditPhase onEditCancle(ContextData& context);
+    void processEditData(ContextData& context);
+
 };

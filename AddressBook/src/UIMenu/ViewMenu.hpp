@@ -9,8 +9,6 @@ class ViewMenu
 public:
     void run(AddressBookUI& bookUI) { processView(bookUI); }
 
-protected:
-    void processView(AddressBookUI& bookUI);
 
 private:
     ResultVariant lastError_;
@@ -19,4 +17,8 @@ private:
     UIPrintHandler uiMsgH_;
     UIFrame frame_;
     UIUtils ui_;
+
+    void processView(AddressBookUI& bookUI);
+    void drawPage(AddressBookUI& bookUI, ContextData& context, int page, int length);
+    bool handlePageInput(ContextData& context, int page, int length);
 };

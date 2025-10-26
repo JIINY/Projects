@@ -5,15 +5,10 @@
 
 class AddressBookUI;
 
-class AddMenu {
+class AddMenu
+{
 public:
     void run(AddressBookUI& bookUI);
-
-
-protected:
-    void processAddMenu(AddressBookUI& bookUI);
-    void addController(AddressBookUI& bookUI, ContextData& context);
-    void addMenuController(ContextData& context);
 
 
 private:
@@ -23,4 +18,13 @@ private:
     UIPrintHandler uiMsgH_;
     UIFrame frame_;
     UIUtils ui_;
+
+    AddPhase onInputStart(ContextData& context);
+    AddPhase onAddMenuSelect(ContextData& context);
+    AddPhase onInputAddCancle(ContextData& context);
+    AddPhase onAddSuccess(AddressBookUI& bookUI, ContextData& context);
+    AddPhase onAddAgain(ContextData& context);
+    AddPhase onAddEditStart(AddressBookUI& bookUI, ContextData& context);
+    AddPhase onAddEditConfirm(AddressBookUI& bookUI, ContextData& context);
+    AddPhase processMenuSelection(ContextData& context);
 };

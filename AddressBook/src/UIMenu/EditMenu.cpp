@@ -11,28 +11,16 @@ using namespace std;
 optional<PersonalData> EditMenu::run(AddressBookUI& bookUI, const PersonalData& dataToEdit)
 {
 	ContextData context;
+	EditPhase currentPhase = EditPhase::EditStart;
 	context.p = dataToEdit;
-	context.phase = wrapVariant<PhaseVariant>(EditPhase::EditStart);
 	context.err = nullopt;
 	context.menu = -1;
 
-	processEditMenu(bookUI, context);
-
-	EditPhase result = unwrapVariant<EditPhase>(context.phase);
-	if (result == EditPhase::ExitSuccess) { return context.p; }
-
-	return std::nullopt;
-}
-
-void EditMenu::processEditMenu(AddressBookUI& bookUI, ContextData& context)
-{
-	while (true) 
+	while (currentPhase != EditPhase::ExitSuccess && currentPhase != EditPhase::ExitCancel) 
 	{
-		EditPhase phase = unwrapVariant<EditPhase>(context.phase);
-
-		switch (phase)
-		{
-		case(EditPhase::EditStart):
+		//그리기
+		switch (currentPhase) {
+		case EditPhase::EditStart:
 		{
 			frame_ = uiMsgH_.editTitle();
 			frame_(errorMsgH_);
@@ -42,46 +30,14 @@ void EditMenu::processEditMenu(AddressBookUI& bookUI, ContextData& context)
 			frame_(errorMsgH_);
 			frame_ = uiMsgH_.editInput(context.err);
 			frame_(errorMsgH_);
-
-			//입력 받기
-			context.menu = inputH_.getInt(IntRule::ZeroOrPositive);
-			lastError_ = inputH_.getLastError();
-			if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS)) 
-			{
-				context.err = wrapVariant<ResultVariant>(lastError_);
-				break;
-			}
-
-			//다음 상태 결정
-			context.err = nullopt;
-			if (context.menu == 0) 
-			{
-				context.phase = wrapVariant<PhaseVariant>(EditPhase::EditCancle);
-			}
-			else if (context.menu == 9)
-			{
-				context.phase = wrapVariant<PhaseVariant>(EditPhase::ExitSuccess);
-			}
-			else if (context.menu >= 1 && context.menu <= 6) 
-			{
-				context.phase = wrapVariant<PhaseVariant>(EditPhase::EditItem);
-			}
-			else 
-			{
-				lastError_ = MenuSelectResult::WRONG_INDEX;
-				context.err = wrapVariant<ResultVariant>(lastError_);
-			}
 			break;
 		}
-		case(EditPhase::EditItem):
+		case EditPhase::EditItem:
 		{
 			processEditData(context);
-			editDataController(context);
-
-			context.phase = wrapVariant<PhaseVariant>(EditPhase::EditStart);
 			break;
 		}
-		case(EditPhase::EditCancle):
+		case EditPhase::EditCancle:
 		{
 			frame_ = uiMsgH_.editTitle();
 			frame_(errorMsgH_);
@@ -91,38 +47,48 @@ void EditMenu::processEditMenu(AddressBookUI& bookUI, ContextData& context)
 			frame_(errorMsgH_);
 			frame_ = uiMsgH_.cancle(context.err, CancleType::Edit);
 			frame_(errorMsgH_);
-
-			bool yesNo = inputH_.askYesNo();
-			lastError_ = inputH_.getLastError();
-
-			if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS)) 
-			{
-				context.err = wrapVariant<ResultVariant>(lastError_);
-				break; //EditCancle 상태 유지
-			}
-
-			context.err = nullopt;
-			if (yesNo) 
-			{
-				context.phase = wrapVariant<PhaseVariant>(EditPhase::ExitCancel);
-			}
-			else 
-			{
-				context.phase = wrapVariant<PhaseVariant>(EditPhase::EditStart);
-			}
 			break;
 		}
-		case(EditPhase::ExitSuccess):
-		case(EditPhase::ExitCancel):
 		default:
 			break;
 		}
 
-		UIUtils::clearScreen();
 
-		phase = unwrapVariant<EditPhase>(context.phase);
-		if (phase == EditPhase::ExitSuccess || phase == EditPhase::ExitCancel) { break; }
+		//처리
+		EditPhase nextPhase = currentPhase;
+		switch (currentPhase){
+		case EditPhase::EditStart: 
+		{
+			nextPhase = onEditStart(context);
+			break;
+		}
+		case EditPhase::EditItem:
+		{
+			nextPhase = onEditItem(context);
+			break;
+		}
+		case EditPhase::EditCancle: 
+		{
+			nextPhase = onEditCancle(context);
+			break;
+		}
+		default:
+			break;
+		}
+
+
+		//화면 정리 및 상태 전이
+		UIUtils::clearScreen();
+		currentPhase = nextPhase;
 	}
+
+	if (currentPhase == EditPhase::ExitSuccess)
+	{
+		context.err = nullopt;
+		return context.p;
+	}
+
+	return std::nullopt;
 }
 
 void EditMenu::processEditData(ContextData& context)
@@ -171,33 +137,58 @@ void EditMenu::processEditData(ContextData& context)
 	}
 }
 
-void EditMenu::assignEditNameEmptyError(ContextData& context)
+EditPhase EditMenu::onEditStart(ContextData& context) 
 {
-		context.err = wrapVariant<ResultVariant>(EditDataResult::EMPTY_NAME);
+	context.menu = inputH_.getInt(IntRule::ZeroOrPositive);
+	lastError_ = inputH_.getLastError();
+	if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS))
+	{
+		context.err = wrapVariant<ResultVariant>(lastError_);
+		return EditPhase::EditStart;
+	}
+
+	//다음 상태 결정
+	context.err = nullopt;
+	if (context.menu == 0)
+	{
+		return EditPhase::EditCancle;
+	}
+	if (context.menu == 9)
+	{
+		return EditPhase::ExitSuccess;
+	}
+	if (context.menu >= 1 && context.menu <= 6)
+	{
+		return EditPhase::EditItem;
+	}
+
+	lastError_ = MenuSelectResult::WRONG_INDEX;
+	context.err = wrapVariant<ResultVariant>(lastError_);
+	return EditPhase::EditStart;
 }
 
-void EditMenu::editDataController(ContextData& context)
+EditPhase EditMenu::onEditItem(ContextData& context)
 {
 	if (context.menu == -1 && context.err.has_value() && holds_alternative<InputResult>(*context.err)) //InputResult인지 확인
 	{
 		if (get<InputResult>(*context.err) != InputResult::SUCCESS)
 		{
-			return;
+			return EditPhase::EditStart;
 		}
 	}
-		
-	switch (context.menu)
-	{
+
+	switch (context.menu){
 	case 1:
 	{
 		string s = inputH_.getString(StringRule::EmptyDisallow);
 		lastError_ = inputH_.getLastError();
 		context.err = wrapVariant<ResultVariant>(lastError_);
 
-		if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS)) 
+		if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS))
 		{
-			assignEditNameEmptyError(context);
-			break;
+			lastError_ = EditDataResult::EMPTY_NAME;
+			context.err = wrapVariant<ResultVariant>(lastError_);
+			return EditPhase::EditStart;
 		}
 
 		context.p.name = s;
@@ -242,4 +233,25 @@ void EditMenu::editDataController(ContextData& context)
 		context.err = wrapVariant<ResultVariant>(MenuSelectResult::WRONG_INDEX);
 		break;
 	}
+
+	return EditPhase::EditStart;
+}
+
+EditPhase EditMenu::onEditCancle(ContextData& context)
+{
+	bool yesNo = inputH_.askYesNo();
+	lastError_ = inputH_.getLastError();
+	if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS)) 
+	{
+		context.err = wrapVariant<ResultVariant>(lastError_);
+		return EditPhase::EditCancle;
+	}
+
+	context.err = nullopt;
+	if (yesNo) 
+	{
+		return EditPhase::ExitCancel;
+	}
+
+	return EditPhase::EditStart;
 }

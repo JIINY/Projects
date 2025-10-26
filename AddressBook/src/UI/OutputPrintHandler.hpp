@@ -5,7 +5,8 @@ enum class CancleType;
 struct PersonalData;
 
 
-class OutputPrintHandler {
+class OutputPrintHandler 
+{
 public:
     static std::string getVersion() { return version; }
 
