@@ -23,7 +23,6 @@ private:
 
     SearchPhase onSearchStart(ContextData& context);
     SearchPhase onSearchMenuSelect(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
-    SearchPhase onSearchSubMenuSelect(ContextData& context, const std::vector<std::pair<PersonalData, int>>& result);
     SearchPhase onSearchNextStart(ContextData& context, const std::vector<std::pair<PersonalData, int>>& result);
     SearchPhase onEditStart(ContextData& context, const std::vector<std::pair<PersonalData, int>>& result);
     SearchPhase onEditItem(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
@@ -32,6 +31,7 @@ private:
     SearchPhase onSearchAgain(ContextData& context);
 
     void printSearchResultTable(ContextData& context, std::vector<std::pair<PersonalData, int>> result);
+    void printSearchTitle();
     ResultVariant processSearchItem(ContextData& context);
     ResultVariant processSearchSubMenu(ContextData& context);
     ResultVariant processSearchEmptySubMenu(ContextData& context);

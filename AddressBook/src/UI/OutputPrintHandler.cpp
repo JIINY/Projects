@@ -86,20 +86,20 @@ void OutputPrintHandler::printMenuSelect()
     cout << "메뉴를 선택해 주세요: ";
 }
 
-void OutputPrintHandler::printCancle(CancleType action) 
+void OutputPrintHandler::printCancel(CancelType action) 
 {
 	switch (action) 
 	{
-	case CancleType::Input:
+	case CancelType::Input:
 		cout << "입력을";
 		break;
-	case CancleType::Edit:
+	case CancelType::Edit:
 		cout << "수정을";
 		break;
-	case CancleType::Delete:
+	case CancelType::Delete:
 		cout << "삭제를";
 		break;
-	case CancleType::AddConfirm:
+	case CancelType::AddConfirm:
 		cout << "추가를";
 		break;
 	}
@@ -215,6 +215,18 @@ void OutputPrintHandler::printTableSearchEnd()
 	cout << "검색이 끝났습니다. 수정/삭제하시려면 메뉴를 선택해 주세요. ";
 }
 
+void OutputPrintHandler::printTableEditSuccess(const int i, const string& name) 
+{
+	cout << "[완료] " << i << "번 " << name << "이(가) 수정되었습니다." << endl;
+	cout << "이어서 수정 / 삭제하시려면 메뉴를 선택해 주세요.";
+}
+
+void OutputPrintHandler::printTableDeleteSuccess(int i, const string& name)
+{
+	cout << "[완료] " << i << "번 " << name << "이(가) 삭제되었습니다." << endl;
+	cout << "이어서 수정 / 삭제하시려면 메뉴를 선택해 주세요.";
+}
+
 void OutputPrintHandler::printTableStop() 
 {
 	cout << "------------------------------------------------------------------------------------------------------------" << endl;
@@ -313,12 +325,6 @@ void OutputPrintHandler::printEditItem()
 	cout << "수정할 주소록의 번호를 입력해 주세요: ";
 }
 
-void OutputPrintHandler::printEditSuccess(int i, const string& name) 
-{
-	cout << "[완료] " << i << "번 " << name << "이(가) 수정되었습니다." << endl;
-	printLong2Line();
-}
-
 void OutputPrintHandler::printDeleteItem() {
 	cout << "---------------------------------------" << endl;
 	cout << "삭제할 주소록의 번호를 입력해 주세요: ";
@@ -329,12 +335,6 @@ void OutputPrintHandler::printDeleteConfirm(int i, const string& name)
 	cout << i << "번 " << name << "을(를) 정말 삭제하시겠습니까? (Y/N): ";
 }
 
-void OutputPrintHandler::printDeleteSuccess(int i, const string& name) 
-{
-	cout << "[완료] " << i << "번 " << name << "이(가) 삭제되었습니다." << endl;
-	cout << "============================================================================================================" << endl;
-}
-
 void OutputPrintHandler::printSearchAgain() 
 {
 	cout << "---------------------------------------" << endl;
@@ -343,5 +343,5 @@ void OutputPrintHandler::printSearchAgain()
 
 void OutputPrintHandler::printSearchEmpty() 
 {
-	cout << "검색 결과가 없습니다. ";
+	cout << "검색 결과가 없습니다. 메뉴를 선택해 주세요.";
 }

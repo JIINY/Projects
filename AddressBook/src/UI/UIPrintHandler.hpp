@@ -5,14 +5,14 @@
 #include "../Common/ResultEnums.hpp"
 #include "UIOutput.hpp"
 
-enum class CancleType;
+enum class CancelType;
 enum class EnterType;
 
 class UIPrintHandler
 {
 public:
     UIFrame menuSelect(std::optional<ResultVariant> err);
-    UIFrame cancle(std::optional<ResultVariant> err, CancleType action);
+    UIFrame cancel(std::optional<ResultVariant> err, CancelType action);
     UIFrame short1Line();
     UIFrame short2Line();
 
@@ -42,6 +42,8 @@ public:
     UIFrame tableComplete(std::optional<ResultVariant> err);
     UIFrame tableContinue(std::optional<ResultVariant> err);
     UIFrame tableStop(std::optional<ResultVariant> err);
+    UIFrame tableEditSuccess(const int i, const std::string& name);
+    UIFrame tableDeleteSuccess(const int i, const std::string& name);
 
     UIFrame editTitle();
     UIFrame personalEdit(const PersonalData& p);
@@ -52,17 +54,15 @@ public:
     UIFrame editZipCode(std::optional<ResultVariant> err);
     UIFrame editEmail(std::optional<ResultVariant> err);
     UIFrame editInput(std::optional<ResultVariant> err);
-    UIFrame editSuccess(const int i, const std::string& name);
 
     UIFrame searchTitle();
     UIFrame searchResult();
     UIFrame searchSubMenu();
     UIFrame searchEmptySubMenu();
-    UIFrame searchEdit(std::optional<ResultVariant> err);
-    UIFrame searchDelete(std::optional<ResultVariant> err);
     UIFrame searchAgain(std::optional<ResultVariant> err);
     UIFrame searchEmpty();
+    UIFrame searchEdit(std::optional<ResultVariant> err);
+    UIFrame searchDelete(std::optional<ResultVariant> err);
 
     UIFrame deleteConfirm(std::optional<ResultVariant> err, const int i, const std::string& name);
-    UIFrame deleteSuccess(const int i, const std::string& name);
 };

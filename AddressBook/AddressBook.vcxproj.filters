@@ -31,6 +31,9 @@
     <Filter Include="src\UIMenu">
       <UniqueIdentifier>{7ab601d9-8e4a-4cab-ac61-d21480e55a5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\UIMenu\States">
+      <UniqueIdentifier>{bbfe1c7d-4526-41a7-8acb-92be2859d49e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -83,6 +86,18 @@
     </ClCompile>
     <ClCompile Include="src\UIMenu\SearchMenu.cpp">
       <Filter>src\UIMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\DeleteMenu.cpp">
+      <Filter>src\UIMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\States\EditStartState.cpp">
+      <Filter>src\UIMenu\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\States\EditItemState.cpp">
+      <Filter>src\UIMenu\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\States\EditCancelState.cpp">
+      <Filter>src\UIMenu\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +160,21 @@
     </ClInclude>
     <ClInclude Include="src\UIMenu\SearchMenu.hpp">
       <Filter>src\UIMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\DeleteMenu.hpp">
+      <Filter>src\UIMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\States\IEditState.hpp">
+      <Filter>src\UIMenu\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\States\EditStartState.hpp">
+      <Filter>src\UIMenu\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\States\EditItemState.hpp">
+      <Filter>src\UIMenu\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\States\EditCancelState.hpp">
+      <Filter>src\UIMenu\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

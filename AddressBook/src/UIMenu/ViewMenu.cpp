@@ -26,12 +26,10 @@ void ViewMenu::processView(AddressBookUI& bookUI)
 		drawPage(bookUI, context, page, length);
 
 		//입력 처리
-		if (handlePageInput(context, page, length)) 
-		{
-			break;
-		}
+		int pageIncrement = handlePageInput(context, page, length);
+		if (pageIncrement == -1) { break; }
 
-		page += 10;
+		page += pageIncrement;
 	}
 }
 
@@ -69,14 +67,14 @@ void ViewMenu::drawPage(AddressBookUI& bookUI, ContextData& context, int page, i
 	}
 }
 
-bool ViewMenu::handlePageInput(ContextData& context, int page, int length) 
+int ViewMenu::handlePageInput(ContextData& context, int page, int length) 
 {
 	bool isLastPage = (page + 10) >= length;
 
 	if (isLastPage)
 	{
 		inputH_.getAnyKey();
-		return true;
+		return -1;
 	}
 
 	if (inputH_.anyKeyOrQuit())
@@ -86,12 +84,12 @@ bool ViewMenu::handlePageInput(ContextData& context, int page, int length)
 
 		if (inputH_.askYesNo())
 		{
-			return true;
+			return -1; //Quit
 		}
 		else
 		{
-			return false;
+			return 0; //currentPage
 		}
 	}
-	return false;
+	return 10; //nextPage
 }

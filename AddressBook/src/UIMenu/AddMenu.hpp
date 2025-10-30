@@ -21,7 +21,7 @@ private:
 
     AddPhase onInputStart(ContextData& context);
     AddPhase onAddMenuSelect(ContextData& context);
-    AddPhase onInputAddCancle(ContextData& context);
+    AddPhase onInputAddCancel(ContextData& context);
     AddPhase onAddSuccess(AddressBookUI& bookUI, ContextData& context);
     AddPhase onAddAgain(ContextData& context);
     AddPhase onAddEditStart(AddressBookUI& bookUI, ContextData& context);

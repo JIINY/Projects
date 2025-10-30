@@ -31,8 +31,6 @@ RemoveOperationResult DeleteMenu::run(AddressBookUI& bookUI, int index, const st
 
 		if (deleteResult == RemoveOperationResult::SUCCESS) 
 		{
-			frame_ = uiMsgH_.deleteSuccess(index + 1, removedName);
-			frame_(errorMsgH_);
 		}
 		else 
 		{

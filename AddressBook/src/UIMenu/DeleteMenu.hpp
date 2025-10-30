@@ -10,7 +10,7 @@ class AddressBookUI;
 class DeleteMenu 
 {
 public:
-	RemoveOperationResult run(AddressBookUI& bookUI, int originalIndex, const std::string& name);
+	RemoveOperationResult run(AddressBookUI& bookUI, int index, const std::string& name);
 
 
 private:

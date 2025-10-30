@@ -37,11 +37,11 @@ UIFrame UIPrintHandler::menuSelect(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::cancle(optional<ResultVariant> err, CancleType action) 
+UIFrame UIPrintHandler::cancel(optional<ResultVariant> err, CancelType action) 
 {
 	return UIFrame{
 		[action]{
-			OutputPrintHandler::printCancle(action);
+			OutputPrintHandler::printCancel(action);
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
 }
@@ -278,15 +278,6 @@ UIFrame UIPrintHandler::editEmail(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::editSuccess(const int i, const string& name)
-{
-	return UIFrame{
-		[i, name]{
-			OutputPrintHandler::printEditSuccess(i, name);
-		}, EnterType::None, nullopt, RenderOrder::RenderToError
-	};
-}
-
 UIFrame UIPrintHandler::viewTitle(optional<ResultVariant> err) 
 {
 	return UIFrame{
@@ -340,7 +331,7 @@ UIFrame UIPrintHandler::tableSearchEnd(optional<ResultVariant> err)
 	return UIFrame{
 		[]{
 			OutputPrintHandler::printTableSearchEnd();
-		}, EnterType::None, nullopt, RenderOrder::RenderToError
+		}, EnterType::None, err, RenderOrder::RenderToError
 	};
 }
 
@@ -358,6 +349,24 @@ UIFrame UIPrintHandler::tableStop(optional<ResultVariant> err)
 	return UIFrame{
 		[]{
 			OutputPrintHandler::printTableStop();
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
+	};
+}
+
+UIFrame UIPrintHandler::tableEditSuccess(const int i, const string& name) 
+{
+	return UIFrame{
+		[i, name] {
+			OutputPrintHandler::printTableEditSuccess(i, name);
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
+	};
+}
+
+UIFrame UIPrintHandler::tableDeleteSuccess(const int i, const string& name) 
+{
+	return UIFrame{
+		[i, name] {
+			OutputPrintHandler::printTableDeleteSuccess(i, name);
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
@@ -401,12 +410,30 @@ UIFrame UIPrintHandler::searchEmptySubMenu()
 	};
 }
 
+UIFrame UIPrintHandler::searchAgain(optional<ResultVariant> err)
+{
+	return UIFrame{
+		[] {
+			OutputPrintHandler::printSearchAgain();
+		}, EnterType::None, err, RenderOrder::RenderToError
+	};
+}
+
+UIFrame UIPrintHandler::searchEmpty()
+{
+	return UIFrame{
+		[] {
+			OutputPrintHandler::printSearchEmpty();
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
+	};
+}
+
 UIFrame UIPrintHandler::searchEdit(optional<ResultVariant> err)
 {
 	return UIFrame{		
 		[]{
 			OutputPrintHandler::printEditItem();
-		}, EnterType::Both, err, RenderOrder::ErrorToRender
+		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
 }
 
@@ -419,38 +446,11 @@ UIFrame UIPrintHandler::searchDelete(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::searchAgain(optional<ResultVariant> err) 
-{
-	return UIFrame{
-		[]{
-			OutputPrintHandler::printSearchAgain();
-		}, EnterType::None, err, RenderOrder::RenderToError
-	};
-}
-
-UIFrame UIPrintHandler::searchEmpty()
-{
-	return UIFrame{
-		[]{
-			OutputPrintHandler::printSearchEmpty();
-		}, EnterType::None, nullopt, RenderOrder::RenderToError
-	};
-}
-
-UIFrame UIPrintHandler::deleteConfirm(optional<ResultVariant> err, const int i, const string& name) 
+UIFrame UIPrintHandler::deleteConfirm(optional<ResultVariant> err, const int i, const string& name)
 {
 	return UIFrame{
 		[i, name] {
 			OutputPrintHandler::printDeleteConfirm(i, name);
 		}, EnterType::None, err, RenderOrder::ErrorToRender
-	};
-}
-
-UIFrame UIPrintHandler::deleteSuccess(const int i, const string& name) 
-{
-	return UIFrame{
-		[i, name] {
-			OutputPrintHandler::printDeleteSuccess(i, name);
-		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }

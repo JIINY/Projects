@@ -28,11 +28,11 @@ void AddMenu::run(AddressBookUI& bookUI)
 			frame_(errorMsgH_);
 			break;
 		}
-		case AddPhase::InputAddCancle:
+		case AddPhase::InputAddCancel:
 		{
 			frame_ = uiMsgH_.addMenuLine(context.p);
 			frame_(errorMsgH_);
-			frame_ = uiMsgH_.cancle(context.err, CancleType::Input);
+			frame_ = uiMsgH_.cancel(context.err, CancelType::Input);
 			frame_(errorMsgH_);
 			break;
 		}
@@ -62,9 +62,9 @@ void AddMenu::run(AddressBookUI& bookUI)
 			nextPhase = onAddMenuSelect(context);
 			break;
 		}
-		case AddPhase::InputAddCancle: 
+		case AddPhase::InputAddCancel: 
 		{
-			nextPhase = onInputAddCancle(context);
+			nextPhase = onInputAddCancel(context);
 			break;
 		}
 		case AddPhase::AddSuccess: 
@@ -126,7 +126,7 @@ AddPhase AddMenu::processMenuSelection(ContextData& context)
 	case(0):
 	{
 		context.err = nullopt;
-		return AddPhase::InputAddCancle;
+		return AddPhase::InputAddCancel;
 	}
 	case(1):
 	{
@@ -147,7 +147,7 @@ AddPhase AddMenu::processMenuSelection(ContextData& context)
 	}
 }
 
-AddPhase AddMenu::onInputAddCancle(ContextData& context)
+AddPhase AddMenu::onInputAddCancel(ContextData& context)
 {
 	bool yesNo = inputH_.askYesNo();
 	lastError_ = inputH_.getLastError();
@@ -161,7 +161,7 @@ AddPhase AddMenu::onInputAddCancle(ContextData& context)
 	if (!isVariantEqualTo <InputResult>(lastError_, InputResult::SUCCESS))
 	{
 		context.err = wrapVariant<ResultVariant>(lastError_);
-		return AddPhase::InputAddCancle;
+		return AddPhase::InputAddCancel;
 	}
 
 	context.err = nullopt;

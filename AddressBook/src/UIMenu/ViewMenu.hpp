@@ -20,5 +20,5 @@ private:
 
     void processView(AddressBookUI& bookUI);
     void drawPage(AddressBookUI& bookUI, ContextData& context, int page, int length);
-    bool handlePageInput(ContextData& context, int page, int length);
+    int handlePageInput(ContextData& context, int page, int length);
 };

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-enum class CancleType;
+enum class CancelType;
 struct PersonalData;
 
 
@@ -23,7 +23,7 @@ public:
     static void printSearchTitle();
     static void printSearchLongTitle();
     static void printMenuSelect();
-    static void printCancle(const CancleType cancle);
+    static void printCancel(const CancelType cancel);
 
     static void printPersonalData(const PersonalData& p);
     static void printPersonalEdit(const PersonalData& p);
@@ -51,6 +51,8 @@ public:
     static void printTableContinue();
     static void printTableComplete();
     static void printTableStop();
+    static void printTableEditSuccess(int i, const std::string& name);
+    static void printTableDeleteSuccess(int i, const std::string& name);
 
     static void printEditItem();
     static void printEditName();
@@ -61,11 +63,9 @@ public:
     static void printEditInput();
     static void printEditAgain();
     static void printEditConfirm();
-    static void printEditSuccess(int i, const std::string& name);
 
     static void printDeleteItem();
     static void printDeleteConfirm(int i, const std::string& name);
-    static void printDeleteSuccess(int i, const std::string& name);
     static void printSearchAgain();
     static void printSearchEmpty();
 

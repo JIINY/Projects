@@ -13,7 +13,7 @@ struct PersonalPrintFormat
 constexpr PersonalPrintFormat f = { 6, 12, 18, 40, 10, 25 };
 
 
-enum class CancleType 
+enum class CancelType 
 {
     Input,
     Edit,
@@ -27,8 +27,8 @@ enum class AddPhase
     AddMenuSelect,
     AddEditStart,
     AddEditConfirm,
-    CancleConfirm,
-    InputAddCancle,
+    CancelConfirm,
+    InputAddCancel,
     AddSuccess,
     AddAgain,
     Exit
@@ -40,13 +40,12 @@ enum class SearchPhase
     SearchMenuSelect,
     SearchResultPrint,
     SearchNextStart,
-    SearchSubMenuSelect,
     EditStart,
     EditItem,
-    EditSelect,
+    EditAgain,
     DeleteStart,
     DeleteItem,
-    DeleteSelect,
+    DeleteAgain,
     SearchAgain,
     Exit
 };
@@ -55,7 +54,7 @@ enum class EditPhase
 {
     EditStart,
     EditItem,
-    EditCancle,
+    EditCancel,
     ExitSuccess,
     ExitCancel
 };
