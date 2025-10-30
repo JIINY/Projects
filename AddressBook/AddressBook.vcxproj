@@ -37,6 +37,7 @@
     <ClCompile Include="src\UIMenu\ViewMenu.cpp" />
     <ClCompile Include="src\UI\AddressBookUI.cpp" />
     <ClCompile Include="src\UI\OutputPrintHandler.cpp" />
+    <ClCompile Include="src\UI\PersonalDataInput.cpp" />
     <ClCompile Include="src\UI\UIOutput.cpp" />
     <ClCompile Include="src\UI\UIPrintHandler.cpp" />
     <ClCompile Include="src\UI\UIUtils.cpp" />
@@ -58,10 +59,12 @@
     <ClInclude Include="src\UIMenu\States\EditCancelState.hpp" />
     <ClInclude Include="src\UIMenu\States\EditItemState.hpp" />
     <ClInclude Include="src\UIMenu\States\EditStartState.hpp" />
+    <ClInclude Include="src\UIMenu\States\IDataInputState.hpp" />
     <ClInclude Include="src\UIMenu\States\IEditState.hpp" />
     <ClInclude Include="src\UIMenu\ViewMenu.hpp" />
     <ClInclude Include="src\UI\AddressBookUI.hpp" />
     <ClInclude Include="src\UI\OutputPrintHandler.hpp" />
+    <ClInclude Include="src\UI\PersonalDataInput.hpp" />
     <ClInclude Include="src\UI\UICommonData.hpp" />
     <ClInclude Include="src\UI\UICommonHeader.hpp" />
     <ClInclude Include="src\UI\UIOutput.hpp" />
