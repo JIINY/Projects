@@ -1,6 +1,7 @@
 #include "EditItemState.hpp"
 #include <string>
 #include <optional>
+#include <cassert>
 #include "../EditMenu.hpp"
 #include "../../Common/VariantUtils.hpp"
 using namespace std;
@@ -99,6 +100,7 @@ EditPhase EditItemState::update()
 		context.p = ui.processInputPersonalData(OutputPrintHandler::printAddEditTitle);
 		break;
 	default:
+		assert(false && "EditItemState::update: Unhandled context.menu!");
 		break;
 	}
 

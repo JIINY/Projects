@@ -59,6 +59,16 @@ enum class EditPhase
     ExitCancel
 };
 
+enum class DataInputPhase 
+{
+    InputName,
+    InputPhone,
+    InputAddress,
+    InputZipCode,
+    InputEmail,
+    Exit
+};
+
 using PhaseVariant = std::variant<AddPhase, EditPhase, SearchPhase>;
 
 struct ContextData 

@@ -1,6 +1,7 @@
 #include "EditMenu.hpp"
 #include <iostream>
 #include <memory>
+#include <cassert>
 #include "../UI/AddressBookUI.hpp"
 #include "../Common/VariantUtils.hpp"//log
 
@@ -66,8 +67,19 @@ void EditMenu::transitionTo(EditPhase nextPhase)
 		break;
 	}
 	case EditPhase::ExitSuccess:
-	case EditPhase::ExitCancel:
+	{
 		currentState_ = nullptr;
 		break;
+	}
+	case EditPhase::ExitCancel:
+	{
+		currentState_ = nullptr;
+		break;
+	}
+	default:
+	{
+		assert(false && "EditMenu::transitionTo: unhandled EditPhase!");
+		break;
+	}
 	}
 }
