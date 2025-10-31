@@ -27,9 +27,9 @@ private:
     UIFrame frame_;
     UIUtils ui_;
 
-    AddressBookUI* bookUI_;
-    ContextData context_;
-    std::unique_ptr<IEditState> currentState_;
+    AddressBookUI* bookUI_ = nullptr;
+    ContextData context_{};
+    std::unique_ptr<IEditState> currentState_ = nullptr;
 
     void transitionTo(EditPhase nextPhase);
 };
