@@ -40,7 +40,7 @@ optional<PersonalData> EditMenu::run(AddressBookUI& bookUI, const PersonalData& 
 		return context_.p;
 	}
 
-	return std::nullopt;
+	return nullopt;
 }
 
 void EditMenu::transitionTo(EditPhase nextPhase) 
@@ -53,17 +53,17 @@ void EditMenu::transitionTo(EditPhase nextPhase)
 	switch (nextPhase) {
 	case EditPhase::EditStart: 
 	{
-		currentState_ = std::make_unique<EditStartState>(*this);
+		currentState_ = make_unique<EditStartState>(*this);
 		break;
 	}
 	case EditPhase::EditItem:
 	{
-		currentState_ = std::make_unique<EditItemState>(*this);
+		currentState_ = make_unique<EditItemState>(*this);
 		break;
 	}
 	case EditPhase::EditCancel:
 	{
-		currentState_ = std::make_unique<EditCancelState>(*this);
+		currentState_ = make_unique<EditCancelState>(*this);
 		break;
 	}
 	case EditPhase::ExitSuccess:
