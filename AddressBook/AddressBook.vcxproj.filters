@@ -34,6 +34,9 @@
     <Filter Include="src\UIMenu\States">
       <UniqueIdentifier>{bbfe1c7d-4526-41a7-8acb-92be2859d49e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\UI\States">
+      <UniqueIdentifier>{bc74523e-8bc1-4dc8-bd25-2a88a0a9bcf7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -102,6 +105,21 @@
     <ClCompile Include="src\UI\PersonalDataInput.cpp">
       <Filter>src\UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\UI\States\InputNameState.cpp">
+      <Filter>src\UI\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\States\InputAddressState.cpp">
+      <Filter>src\UI\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\States\InputEmailState.cpp">
+      <Filter>src\UI\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\States\InputPhoneState.cpp">
+      <Filter>src\UI\States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\States\InputZipCodeState.cpp">
+      <Filter>src\UI\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Common\DataType.hpp">
@@ -167,9 +185,6 @@
     <ClInclude Include="src\UIMenu\DeleteMenu.hpp">
       <Filter>src\UIMenu</Filter>
     </ClInclude>
-    <ClInclude Include="src\UIMenu\States\IEditState.hpp">
-      <Filter>src\UIMenu\States</Filter>
-    </ClInclude>
     <ClInclude Include="src\UIMenu\States\EditStartState.hpp">
       <Filter>src\UIMenu\States</Filter>
     </ClInclude>
@@ -179,11 +194,29 @@
     <ClInclude Include="src\UIMenu\States\EditCancelState.hpp">
       <Filter>src\UIMenu\States</Filter>
     </ClInclude>
-    <ClInclude Include="src\UIMenu\States\IDataInputState.hpp">
-      <Filter>src\UIMenu\States</Filter>
-    </ClInclude>
     <ClInclude Include="src\UI\PersonalDataInput.hpp">
       <Filter>src\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\States\IEditState.hpp">
+      <Filter>src\UIMenu\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\States\IDataInputState.hpp">
+      <Filter>src\UI\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\States\InputNameState.hpp">
+      <Filter>src\UI\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\States\InputPhoneState.hpp">
+      <Filter>src\UI\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\States\InputAddressState.hpp">
+      <Filter>src\UI\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\States\InputZipCodeState.hpp">
+      <Filter>src\UI\States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\States\InputEmailState.hpp">
+      <Filter>src\UI\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
