@@ -4,6 +4,7 @@
 #include <cassert>
 #include "../EditMenu.hpp"
 #include "../../Common/VariantUtils.hpp"
+#include "../../UI/PersonalDataInput.hpp"
 using namespace std;
 
 
@@ -47,7 +48,7 @@ void EditItemState::draw()
 		break;
 	}
 	default:
-		break; // 6. 전체수정은 UIUtils가 처리
+		break; // 6. 전체수정은 PersonalDataInput가 처리
 	}
 }
 
@@ -56,7 +57,6 @@ EditPhase EditItemState::update()
 {
 	auto& context = owner_.getContext();
 	auto& inputH = owner_.getInputH();
-	auto& ui = owner_.getUI();
 
 	switch (context.menu) {
 	case 1:
@@ -97,8 +97,11 @@ EditPhase EditItemState::update()
 		break;
 	}
 	case 6:
-		context.p = ui.processInputPersonalData(OutputPrintHandler::printAddEditTitle);
+	{
+		PersonalDataInput personalDataInput;
+		context.p = personalDataInput.run(context.p);
 		break;
+	}
 	default:
 		assert(false && "EditItemState::update: Unhandled context.menu!");
 		break;
