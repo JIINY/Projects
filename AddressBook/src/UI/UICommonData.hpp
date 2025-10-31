@@ -23,12 +23,12 @@ enum class CancelType
 
 enum class AddPhase 
 {
-    InputStart,
-    AddMenuSelect,
+    AddInputStart,
+    AddReview,
     AddEditStart,
     AddEditConfirm,
     CancelConfirm,
-    InputAddCancel,
+    AskAddCancel,
     AddSuccess,
     AddAgain,
     Exit
