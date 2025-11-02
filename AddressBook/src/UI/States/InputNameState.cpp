@@ -13,6 +13,26 @@ void InputNameState::draw()
 	auto& uiMsgH = owner_.getUIMsgH();
 	auto& errorMsgH = owner_.getErrorMsgH();
 
+	InputMode mode = owner_.getMode();
+	switch (mode) {
+	case InputMode::Add:
+	{
+		frame = uiMsgH.addTitle();
+		break;
+	}
+	case InputMode::AddEdit:
+	{
+		frame = uiMsgH.addEditTitle();
+		break;
+	}
+	case InputMode::Edit:
+	{
+		frame = uiMsgH.editTitle();
+		break;
+	}
+	}
+	frame(errorMsgH);
+
 	optional<ResultVariant> error = owner_.getLastError();
 	frame = uiMsgH.editName(error);
 	frame(errorMsgH);

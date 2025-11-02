@@ -7,10 +7,15 @@
 #include "States/IDataInputState.hpp"
 
 
+enum class InputMode { Add, AddEdit, Edit };
+
 class PersonalDataInput 
 {
 public:
+	PersonalDataInput(InputMode mode) : mode_(mode) {}
+
 	PersonalData run(std::optional<PersonalData> initialData);
+	InputMode getMode() const { return mode_; }
 
 	InputHandler& getInputH() { return inputH_; }
 	ErrorPrintHandler& getErrorMsgH() { return errorMsgH_; }
@@ -37,6 +42,7 @@ private:
 	UIUtils ui_;
 
 	PersonalData data_{};
+	InputMode mode_;
 	std::optional<ResultVariant> lastError_ = std::nullopt;
 	std::unique_ptr<IDataInputState> currentState_ = nullptr;
 

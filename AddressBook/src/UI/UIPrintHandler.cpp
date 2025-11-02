@@ -109,6 +109,15 @@ UIFrame UIPrintHandler::short2Line()
 	};
 }
 
+UIFrame UIPrintHandler::addTitle() 
+{
+	return UIFrame{
+		[] {
+			OutputPrintHandler::printAddTitle();
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
+	};
+}
+
 UIFrame UIPrintHandler::addConfirm(const PersonalData& p) 
 {
 	return UIFrame{
@@ -169,6 +178,15 @@ UIFrame UIPrintHandler::addEditAgain(optional<ResultVariant> err, const int i, c
 			OutputPrintHandler::printAddSuccess(i, p);
 			OutputPrintHandler::printAddAgain();
 		}, EnterType::ErrorOnly, err, RenderOrder::RenderToError
+	};
+}
+
+UIFrame UIPrintHandler::addEditTitle() 
+{
+	return UIFrame{
+		[] {
+			OutputPrintHandler::printAddEditTitle();
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
