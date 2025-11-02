@@ -38,6 +38,10 @@ PersonalData PersonalDataInput::run(optional<PersonalData> initialData)
 			transitionTo(nextPhase);
 			currentPhase = nextPhase;
 		}
+		else 
+		{
+			ui_.clearScreen();
+		}
 	}
 
 	return data_;
@@ -45,11 +49,6 @@ PersonalData PersonalDataInput::run(optional<PersonalData> initialData)
 
 void PersonalDataInput::transitionTo(DataInputPhase nextPhase) 
 {
-	if (nextPhase != DataInputPhase::Exit) 
-	{
-		ui_.clearScreen();
-	}
-
 	switch (nextPhase) {
 	case DataInputPhase::InputName:
 	{

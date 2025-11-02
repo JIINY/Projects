@@ -16,7 +16,7 @@ void AddAgainState::draw()
 	auto& uiMsgH = owner_.getUIMsgH();
 	auto& errorMsgH = owner_.getErrorMsgH();
 
-	if (!context.err.has_value()) 
+	if (!context.sub.name.empty()) 
 	{
 		frame = uiMsgH.addSuccess(bookUI->getLastAdd() + 1, context.sub); //성공 메세지
 		frame(errorMsgH);
