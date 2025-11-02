@@ -21,7 +21,7 @@ PersonalData PersonalDataInput::run(optional<PersonalData> initialData)
 	else 
 	{
 		data_ = PersonalData{};
-	}	
+	}
 	lastError_ = nullopt;
 
 	//시작 상태로 설정(이름 입력)
