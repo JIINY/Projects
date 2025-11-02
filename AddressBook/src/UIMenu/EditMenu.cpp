@@ -32,6 +32,10 @@ optional<PersonalData> EditMenu::run(AddressBookUI& bookUI, const PersonalData& 
 			transitionTo(nextPhase);
 			currentPhase = nextPhase;
 		}
+		else 
+		{
+			ui_.clearScreen();
+		}
 	}
 
 	if (currentPhase == EditPhase::ExitSuccess)
