@@ -7,7 +7,7 @@
 using namespace std;
 
 
-void InputNameState::draw() 
+void InputNameState::draw()
 {
 	auto& frame = owner_.getUIFrame();
 	auto& uiMsgH = owner_.getUIMsgH();
@@ -18,7 +18,7 @@ void InputNameState::draw()
 	frame(errorMsgH);
 }
 
-DataInputPhase InputNameState::update() 
+DataInputPhase InputNameState::update()
 {
 	auto& inputH = owner_.getInputH();
 
