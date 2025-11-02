@@ -98,7 +98,7 @@ EditPhase EditItemState::update()
 	}
 	case 6:
 	{
-		PersonalDataInput personalDataInput;
+		PersonalDataInput personalDataInput(owner_.getMode());
 		context.p = personalDataInput.run(context.p);
 		break;
 	}

@@ -10,7 +10,10 @@ class AddressBookUI;
 class EditMenu
 {
 public:
+    EditMenu(InputMode mode) : mode_(mode) {}
+
     std::optional<PersonalData> run(AddressBookUI& bookUI, const PersonalData& dataToEdit);
+    InputMode getMode() { return mode_; }
 
     ContextData& getContext() { return context_; }
     InputHandler& getInputH() { return inputH_; }
@@ -26,6 +29,7 @@ private:
     UIPrintHandler uiMsgH_;
     UIFrame frame_;
     UIUtils ui_;
+    InputMode mode_;
 
     AddressBookUI* bookUI_ = nullptr;
     ContextData context_{};

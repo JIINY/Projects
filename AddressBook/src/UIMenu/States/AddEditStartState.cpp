@@ -17,7 +17,7 @@ AddPhase AddEditStartState::update()
 	auto& context = owner_.getContext();
 	auto* bookUI = owner_.getAddressBookUI();
 
-	EditMenu editMenu;
+	EditMenu editMenu(InputMode::AddEdit);
 	optional<PersonalData> editResult = editMenu.run(*bookUI, context.p);
 
 	if (editResult.has_value()) 

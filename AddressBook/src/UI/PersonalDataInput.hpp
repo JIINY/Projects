@@ -7,8 +7,6 @@
 #include "States/IDataInputState.hpp"
 
 
-enum class InputMode { Add, AddEdit, Edit };
-
 class PersonalDataInput 
 {
 public:

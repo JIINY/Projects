@@ -10,7 +10,7 @@ void AddInputStartState::draw() {} //PersonalDataInput클래스가 처리
 AddPhase AddInputStartState::update() 
 {
 	auto& context = owner_.getContext();
-	PersonalDataInput personalDataInput;
+	PersonalDataInput personalDataInput(InputMode::Add);
 
 	context.p = personalDataInput.run(PersonalData{});
 	context.err = nullopt;

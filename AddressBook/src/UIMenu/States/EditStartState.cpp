@@ -11,8 +11,16 @@ void EditStartState::draw()
 	auto& uiMsgH = owner_.getUIMsgH();
 	auto& errorMsgH = owner_.getErrorMsgH();
 
-	frame = uiMsgH.editTitle();
+	if (owner_.getMode() == InputMode::AddEdit) 
+	{
+		frame = uiMsgH.addEditTitle();
+	}
+	else 
+	{
+		frame = uiMsgH.editTitle();
+	}
 	frame(errorMsgH);
+	
 	frame = uiMsgH.personalEdit(context.p);
 	frame(errorMsgH);
 	frame = uiMsgH.editConfirm();

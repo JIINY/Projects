@@ -341,7 +341,7 @@ SearchPhase SearchMenu::onEditItem(AddressBookUI& bookUI, ContextData& context, 
 	PersonalData dataToEdit = result[i].first;
 	int index = result[i].second;
 
-	EditMenu editMenu;
+	EditMenu editMenu(InputMode::Edit);
 	optional<PersonalData> editResult = editMenu.run(bookUI, dataToEdit);
 
 	if (editResult.has_value())

@@ -12,6 +12,12 @@ struct PersonalPrintFormat
 };
 constexpr PersonalPrintFormat f = { 6, 12, 18, 40, 10, 25 };
 
+enum class InputMode 
+{ 
+    Add, 
+    AddEdit, 
+    Edit 
+};
 
 enum class CancelType 
 {

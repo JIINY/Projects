@@ -25,11 +25,13 @@ public:
     UIFrame inputZipCode();
     UIFrame inputEmail();
 
+    UIFrame addTitle();
     UIFrame addConfirm(const PersonalData& p);
     UIFrame addMenuLine(const PersonalData& p);
     UIFrame addSuccess(const int i, const PersonalData& p);
     UIFrame addAgain(std::optional<ResultVariant> err);
 
+    UIFrame addEditTitle();
     UIFrame addEditAgain(std::optional<ResultVariant> err, const int i, const PersonalData& p);
     UIFrame addEdit(const PersonalData& p);
     UIFrame addEditLine(const PersonalData& p);
