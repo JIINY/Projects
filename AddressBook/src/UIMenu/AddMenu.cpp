@@ -49,10 +49,14 @@ void AddMenu::run(AddressBookUI& bookUI)
 			transitionTo(nextPhase);
 			currentPhase = nextPhase;
 		}
+		else
+		{
+			ui_.clearScreen();
+		}
 	}
 
-	//화면 정리
-	UIUtils::clearScreen();
+	//종료시 화면 정리
+	ui_.clearScreen();
 }
 
 void AddMenu::transitionTo(AddPhase nextPhase) 
