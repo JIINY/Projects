@@ -1,27 +1,27 @@
-#include "InputPhoneState.hpp"
+#include "InputZipCodeState.hpp"
 #include <string>
 #include <optional>
 #include <cassert>
-#include "../PersonalDataInput.hpp"
+#include "PersonalDataInput.hpp"
 #include "../../Common/VariantUtils.hpp"
 using namespace std;
 
 
-void InputPhoneState::draw()
+void InputZipCodeState::draw()
 {
 	auto& frame = owner_.getUIFrame();
 	auto& uiMsgH = owner_.getUIMsgH();
 	auto& errorMsgH = owner_.getErrorMsgH();
 
-	frame = uiMsgH.editPhone(nullopt);
+	frame = uiMsgH.editZipCode(nullopt);
 	frame(errorMsgH);
 }
 
-DataInputPhase InputPhoneState::update()
+DataInputPhase InputZipCodeState::update()
 {
 	auto& inputH = owner_.getInputH();
 
 	string s = inputH.getString(StringRule::EmptyAllow);
-	owner_.setPhone(s);
-	return DataInputPhase::InputAddress;
+	owner_.setZipCode(s);
+	return DataInputPhase::InputEmail;
 }

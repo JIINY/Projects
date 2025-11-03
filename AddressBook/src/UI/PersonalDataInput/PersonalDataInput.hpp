@@ -1,10 +1,10 @@
 #pragma once
 #include <memory>
 #include <optional>
-#include "../Common/DataType.hpp"
-#include "../UI/UICommonData.hpp"
-#include "../UI/UICommonHeader.hpp"
-#include "States/IDataInputState.hpp"
+#include "../../Common/DataType.hpp"
+#include "../UICommonData.hpp"
+#include "../UICommonHeader.hpp"
+#include "IDataInputState.hpp"
 
 
 class PersonalDataInput 

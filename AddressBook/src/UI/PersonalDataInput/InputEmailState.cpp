@@ -1,27 +1,27 @@
-#include "InputAddressState.hpp"
+#include "InputEmailState.hpp"
 #include <string>
 #include <optional>
 #include <cassert>
-#include "../PersonalDataInput.hpp"
+#include "PersonalDataInput.hpp"
 #include "../../Common/VariantUtils.hpp"
 using namespace std;
 
 
-void InputAddressState::draw()
+void InputEmailState::draw()
 {
 	auto& frame = owner_.getUIFrame();
 	auto& uiMsgH = owner_.getUIMsgH();
 	auto& errorMsgH = owner_.getErrorMsgH();
 
-	frame = uiMsgH.editAddress(nullopt);
+	frame = uiMsgH.editEmail(nullopt);
 	frame(errorMsgH);
 }
 
-DataInputPhase InputAddressState::update()
+DataInputPhase InputEmailState::update()
 {
 	auto& inputH = owner_.getInputH();
 
 	string s = inputH.getString(StringRule::EmptyAllow);
-	owner_.setAddress(s);
-	return DataInputPhase::InputZipCode;
+	owner_.setEmail(s);
+	return DataInputPhase::Exit;
 }

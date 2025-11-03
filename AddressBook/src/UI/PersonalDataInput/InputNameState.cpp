@@ -2,7 +2,7 @@
 #include <string>
 #include <optional>
 #include <cassert>
-#include "../PersonalDataInput.hpp"
+#include "PersonalDataInput.hpp"
 #include "../../Common/VariantUtils.hpp"
 using namespace std;
 

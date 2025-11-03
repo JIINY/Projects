@@ -1,5 +1,5 @@
 #pragma once
-#include "../../UI/UICommonData.hpp"
+#include "../UICommonData.hpp"
 
 class PersonalDataInput;
 

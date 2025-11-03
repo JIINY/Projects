@@ -3,11 +3,11 @@
 #include <optional>
 #include <cassert>
 
-#include "States/InputNameState.hpp"
-#include "States/InputPhoneState.hpp"
-#include "States/InputAddressState.hpp"
-#include "States/InputZipCodeState.hpp"
-#include "States/InputEmailState.hpp"
+#include "InputNameState.hpp"
+#include "InputPhoneState.hpp"
+#include "InputAddressState.hpp"
+#include "InputZipCodeState.hpp"
+#include "InputEmailState.hpp"
 using namespace std;
 
 
