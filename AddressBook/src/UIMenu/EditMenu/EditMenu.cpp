@@ -2,12 +2,12 @@
 #include <iostream>
 #include <memory>
 #include <cassert>
-#include "../UI/AddressBookUI.hpp"
-#include "../Common/VariantUtils.hpp"//log
+#include "../../UI/AddressBookUI.hpp"
+#include "../../Common/VariantUtils.hpp"//log
 
-#include "States/EditStartState.hpp"
-#include "States/EditItemState.hpp"
-#include "States/EditCancelState.hpp"
+#include "EditStartState.hpp"
+#include "EditItemState.hpp"
+#include "EditCancelState.hpp"
 using namespace std;
 
 

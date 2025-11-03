@@ -1,6 +1,6 @@
 #include "EditStartState.hpp"
 #include <optional>
-#include "../EditMenu.hpp"
+#include "EditMenu.hpp"
 using namespace std;
 
 

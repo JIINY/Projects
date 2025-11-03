@@ -2,9 +2,9 @@
 #include <string>
 #include <optional>
 #include <cassert>
-#include "../EditMenu.hpp"
+#include "EditMenu.hpp"
 #include "../../Common/VariantUtils.hpp"
-#include "../../UI/PersonalDataInput.hpp"
+#include "../../UI/PersonalDataInput/PersonalDataInput.hpp"
 using namespace std;
 
 

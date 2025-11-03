@@ -1,6 +1,6 @@
 #include "EditCancelState.hpp"
 #include <optional>
-#include "../EditMenu.hpp"
+#include "EditMenu.hpp"
 #include "../../Common/VariantUtils.hpp"
 using namespace std;
 
