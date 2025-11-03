@@ -48,6 +48,7 @@ void EditItemState::draw()
 		break;
 	}
 	default:
+		ui.clearScreen();
 		break; // 6. 전체수정은 PersonalDataInput가 처리
 	}
 }
