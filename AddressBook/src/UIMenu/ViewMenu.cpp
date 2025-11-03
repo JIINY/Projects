@@ -7,13 +7,14 @@
 using namespace std;
 
 
-void ViewMenu::processView(AddressBookUI& bookUI)
+void ViewMenu::run(AddressBookUI& bookUI)
 {
 	ContextData context;
 	int length = bookUI.getLength();
 	int page = 0;
+	ViewPhase currentPhase = ViewPhase::Stay;
 
-	while (page < length)
+	while (currentPhase != ViewPhase::Exit)
 	{
 		ui_.clearScreen();
 		context.err = nullopt;
@@ -23,17 +24,20 @@ void ViewMenu::processView(AddressBookUI& bookUI)
 		frame_(errorMsgH_);
 
 		//페이지
-		drawPage(bookUI, context, page, length);
+		draw(bookUI, context, page, length);
 
 		//입력 처리
-		int pageIncrement = handlePageInput(context, page, length);
-		if (pageIncrement == -1) { break; }
-
-		page += pageIncrement;
+		ViewPhase nextPhase = update(context, page, length);
+		
+		if (nextPhase == ViewPhase::Next) 
+		{
+			page += 10;
+		}
+		currentPhase = nextPhase;
 	}
 }
 
-void ViewMenu::drawPage(AddressBookUI& bookUI, ContextData& context, int page, int length) 
+void ViewMenu::draw(AddressBookUI& bookUI, ContextData& context, int page, int length) 
 {
 	for (int i = page; i < length && i < page + 10; i++)
 	{
@@ -67,14 +71,14 @@ void ViewMenu::drawPage(AddressBookUI& bookUI, ContextData& context, int page, i
 	}
 }
 
-int ViewMenu::handlePageInput(ContextData& context, int page, int length) 
+ViewPhase ViewMenu::update(ContextData& context, int page, int length) 
 {
 	bool isLastPage = (page + 10) >= length;
 
 	if (isLastPage)
 	{
 		inputH_.getAnyKey();
-		return -1;
+		return ViewPhase::Exit;
 	}
 
 	if (inputH_.anyKeyOrQuit())
@@ -84,12 +88,12 @@ int ViewMenu::handlePageInput(ContextData& context, int page, int length)
 
 		if (inputH_.askYesNo())
 		{
-			return -1; //Quit
+			return ViewPhase::Exit;
 		}
 		else
 		{
-			return 0; //currentPage
+			return ViewPhase::Stay;
 		}
 	}
-	return 10; //nextPage
+	return ViewPhase::Next;
 }

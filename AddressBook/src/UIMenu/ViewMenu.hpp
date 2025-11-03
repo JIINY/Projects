@@ -3,11 +3,12 @@
 #include "../UI/UICommonHeader.hpp"
 
 class AddressBookUI;
+enum class ViewPhase { Next, Stay, Exit };
 
 class ViewMenu
 {
 public:
-    void run(AddressBookUI& bookUI) { processView(bookUI); }
+    void run(AddressBookUI& bookUI);
 
 
 private:
@@ -18,7 +19,6 @@ private:
     UIFrame frame_;
     UIUtils ui_;
 
-    void processView(AddressBookUI& bookUI);
-    void drawPage(AddressBookUI& bookUI, ContextData& context, int page, int length);
-    int handlePageInput(ContextData& context, int page, int length);
+    void draw(AddressBookUI& bookUI, ContextData& context, int page, int length);
+    ViewPhase update(ContextData& context, int page, int length);
 };
