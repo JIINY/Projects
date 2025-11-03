@@ -4,7 +4,7 @@
 #include <cassert>
 #include "EditMenu.hpp"
 #include "../../Common/VariantUtils.hpp"
-#include "../../UI/PersonalDataInput/PersonalDataInput.hpp"
+#include "../PersonalDataInput/PersonalDataInput.hpp"
 using namespace std;
 
 
