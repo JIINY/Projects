@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "../Common/ResultEnums.hpp"
 #include "../UI/UICommonData.hpp"
 #include "../UI/UICommonHeader.hpp"
 

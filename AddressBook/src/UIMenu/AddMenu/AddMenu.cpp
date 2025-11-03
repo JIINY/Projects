@@ -2,7 +2,6 @@
 #include <iostream>
 #include <memory>
 #include <cassert>
-#include "../../Common/VariantUtils.hpp"
 #include "../../UI/AddressBookUI.hpp"
 #include "../../UI/UICommonData.hpp"
 #include "../../UI/UICommonHeader.hpp"
