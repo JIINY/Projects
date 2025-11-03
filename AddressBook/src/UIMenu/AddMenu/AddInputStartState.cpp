@@ -1,7 +1,7 @@
 #include "AddInputStartState.hpp"
 #include <optional>
-#include "../AddMenu.hpp"
-#include "../../UI/PersonalDataInput.hpp"
+#include "AddMenu.hpp"
+#include "../../UI/PersonalDataInput/PersonalDataInput.hpp"
 using namespace std;
 
 

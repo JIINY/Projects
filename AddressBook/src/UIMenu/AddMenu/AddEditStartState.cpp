@@ -5,8 +5,8 @@
 #include "../../UI/AddressBookUI.hpp"
 #include "../../UI/UICommonData.hpp"
 
-#include "../AddMenu.hpp"
-#include "../EditMenu.hpp"
+#include "AddMenu.hpp"
+#include "../EditMenu/EditMenu.hpp"
 using namespace std;
 
 

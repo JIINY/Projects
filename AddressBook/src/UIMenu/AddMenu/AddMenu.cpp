@@ -2,20 +2,20 @@
 #include <iostream>
 #include <memory>
 #include <cassert>
-#include "../Common/VariantUtils.hpp"
-#include "../UI/AddressBookUI.hpp"
-#include "../UI/UICommonData.hpp"
-#include "../UI/UICommonHeader.hpp"
+#include "../../Common/VariantUtils.hpp"
+#include "../../UI/AddressBookUI.hpp"
+#include "../../UI/UICommonData.hpp"
+#include "../../UI/UICommonHeader.hpp"
 
-#include "States/AddInputStartState.hpp"
-#include "States/AddReviewState.hpp"
-#include "States/AddEditStartState.hpp"
-#include "States/AskAddCancelState.hpp"
-#include "States/AddSuccessState.hpp"
-#include "States/AddAgainState.hpp"
+#include "AddInputStartState.hpp"
+#include "AddReviewState.hpp"
+#include "AddEditStartState.hpp"
+#include "AskAddCancelState.hpp"
+#include "AddSuccessState.hpp"
+#include "AddAgainState.hpp"
 
-#include "MainMenu.hpp"
-#include "EditMenu.hpp"
+#include "../MainMenu.hpp"
+#include "../EditMenu/EditMenu.hpp"
 using namespace std;
 
 

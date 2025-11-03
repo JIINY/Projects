@@ -1,9 +1,9 @@
 #include "AddReviewState.hpp"
 #include <optional>
-#include "../AddMenu.hpp"
 #include "../../Common/VariantUtils.hpp"
 #include "../../UI/UICommonData.hpp"
-#include "../../UI/PersonalDataInput.hpp"
+#include "../../UI/PersonalDataInput/PersonalDataInput.hpp"
+#include "AddMenu.hpp"
 using namespace std;
 
 
