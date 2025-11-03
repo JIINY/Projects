@@ -1,9 +1,8 @@
 #pragma once
 #include <vector>
 #include <utility>
-#include "../Common/DataType.hpp"
-#include "../UI/UICommonData.hpp"
-#include "../UI/UICommonHeader.hpp"
+#include "../../UI/UICommonData.hpp"
+#include "../../UI/UICommonHeader.hpp"
 
 class AddressBookUi;
 

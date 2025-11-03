@@ -3,12 +3,11 @@
 #include <optional>
 #include <algorithm>
 #include <utility>
-#include "../Common/DataType.hpp"
-#include "../UI/UICommonData.hpp"
-#include "../UI/UICommonHeader.hpp"
-#include "../UI/AddressBookUI.hpp"
-#include "EditMenu.hpp"
-#include "DeleteMenu.hpp"
+#include "../../UI/UICommonData.hpp"
+#include "../../UI/UICommonHeader.hpp"
+#include "../../UI/AddressBookUI.hpp"
+#include "../EditMenu/EditMenu.hpp"
+#include "../DeleteMenu.hpp"
 using namespace std;
 
 

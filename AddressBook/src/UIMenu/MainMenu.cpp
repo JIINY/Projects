@@ -6,7 +6,7 @@
 #include "../UI/AddressBookUI.hpp"
 #include "AddMenu/AddMenu.hpp"
 #include "ViewMenu.hpp"
-#include "SearchMenu.hpp"
+#include "SearchMenu/SearchMenu.hpp"
 using namespace std;
 
 
