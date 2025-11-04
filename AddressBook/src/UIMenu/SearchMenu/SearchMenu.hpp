@@ -1,37 +1,46 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include <utility>
 #include "../../UI/UICommonData.hpp"
 #include "../../UI/UICommonHeader.hpp"
+#include "ISearchState.hpp"
 
 class AddressBookUi;
+
+enum class SearchMode { Search, Edit, Delete };
 
 class SearchMenu
 {
 public:
     void run(AddressBookUI& bookUI);
 
+    ContextData& getContext() { return context_; }
+    InputHandler& getInputH() { return inputH_; }
+    ErrorPrintHandler& getErrorMsgH() { return errorMsgH_; }
+    UIPrintHandler& getUIMsgH() { return uiMsgH_; }
+    UIFrame& getUIFrame() { return frame_; }
+    UIUtils& getUI() { return ui_; }
+    
+    AddressBookUI* getBookUI() { return bookUI_; }
+    std::vector<std::pair<PersonalData, int>>& accessSearchResult() { return searchResult_; }
+    void setMode(SearchMode mode) { mode_ = mode; }
+    void drawLongTitle();
+    void drawResultTable();
+    void drawResultMsg();
 
 private:
-    ResultVariant lastError_;
     InputHandler inputH_;
     ErrorPrintHandler errorMsgH_;
     UIPrintHandler uiMsgH_;
     UIFrame frame_;
     UIUtils ui_;
+    SearchMode mode_ = SearchMode::Search;
 
-    SearchPhase onSearchStart(ContextData& context);
-    SearchPhase onSearchMenuSelect(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
-    SearchPhase onSearchNextStart(ContextData& context, const std::vector<std::pair<PersonalData, int>>& result);
-    SearchPhase onEditStart(ContextData& context, const std::vector<std::pair<PersonalData, int>>& result);
-    SearchPhase onEditItem(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
-    SearchPhase onDeleteStart(ContextData& context, const std::vector<std::pair<PersonalData, int>>& result);
-    SearchPhase onDeleteItem(AddressBookUI& bookUI, ContextData& context, std::vector<std::pair<PersonalData, int>>& result);
-    SearchPhase onSearchAgain(ContextData& context);
+    AddressBookUI* bookUI_ = nullptr;
+    ContextData context_;
+    std::unique_ptr<ISearchState> currentState_ = nullptr;
+    std::vector<std::pair<PersonalData, int>> searchResult_;
 
-    void printSearchResultTable(ContextData& context, std::vector<std::pair<PersonalData, int>> result);
-    void printSearchTitle();
-    ResultVariant processSearchItem(ContextData& context);
-    ResultVariant processSearchSubMenu(ContextData& context);
-    ResultVariant processSearchEmptySubMenu(ContextData& context);
+    void transitionTo(SearchPhase nextPhase);
 };

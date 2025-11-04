@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-enum class CancelType;
+enum class ActionType;
 struct PersonalData;
 
 
@@ -22,8 +22,11 @@ public:
     static void printEditTitle();
     static void printSearchTitle();
     static void printSearchLongTitle();
+    static void printEditLongTitle();
+    static void printDeleteLongTitle();
     static void printMenuSelect();
-    static void printCancel(const CancelType cancel);
+    static void printCancel(const ActionType action);
+    static void printTableAction(const ActionType action);
 
     static void printPersonalData(const PersonalData& p);
     static void printPersonalEdit(const PersonalData& p);

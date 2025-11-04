@@ -2,10 +2,23 @@
 #include <vector>
 #include <optional>
 #include <algorithm>
+#include <memory>
 #include <utility>
+#include <cassert>
 #include "../../UI/UICommonData.hpp"
 #include "../../UI/UICommonHeader.hpp"
 #include "../../UI/AddressBookUI.hpp"
+
+#include "SearchStartState.hpp"
+#include "SearchInputDataState.hpp"
+#include "SearchResultState.hpp"
+#include "SearchEditState.hpp"
+#include "SearchEditItemState.hpp"
+#include "SearchEditAgain.hpp"
+#include "SearchDeleteState.hpp"
+#include "SearchDeleteItemState.hpp"
+#include "SearchDeleteAgainState.hpp"
+#include "SearchAgainState.hpp"
 #include "../EditMenu/EditMenu.hpp"
 #include "../DeleteMenu.hpp"
 using namespace std;
@@ -13,530 +26,215 @@ using namespace std;
 
 void SearchMenu::run(AddressBookUI& bookUI)
 {
-	ContextData context;
+	bookUI_ = &bookUI;
+	context_ = ContextData{};
+	context_.err = nullopt;
+	searchResult_.clear();
+
+
 	SearchPhase currentPhase = SearchPhase::SearchStart;
-	vector<pair<PersonalData, int>> result;
-	context.err = nullopt;
+	transitionTo(currentPhase);
 
 	while (currentPhase != SearchPhase::Exit)
 	{
-		//그리기
-		switch (currentPhase){
-		case (SearchPhase::SearchStart):
+		if (currentState_)
 		{
-			ui_.clearScreen();
-			frame_ = uiMsgH_.searchMenu();
-			frame_(errorMsgH_);
-			frame_ = uiMsgH_.menuSelect(context.err);
-			frame_(errorMsgH_);
-			break;
-		}
-		case(SearchPhase::SearchResultPrint):
-		{
-			ui_.clearScreen();
-			frame_ = uiMsgH_.searchResult();
-			frame_(errorMsgH_);
-
-			printSearchResultTable(context, result);
-
-			if (context.err.has_value()) 
-			{
-				if (isVariantEqualTo<MenuSelectResult>(*context.err, MenuSelectResult::WRONG_INDEX) ||
-					isVariantEqualTo<InputResult>(*context.err, InputResult::INVALID_INT)) 
-				{
-					//context.err를 리셋하지 않기 위한 분기
-				}
-				if (isVariantEqualTo<AddOperationResult>(*context.err, AddOperationResult::SUCCESS)) 
-				{
-					frame_ = uiMsgH_.tableEditSuccess(context.menu + 1, context.p.name);
-					frame_(errorMsgH_);
-					context.err = nullopt;
-				}
-				else if (isVariantEqualTo<RemoveOperationResult>(*context.err, RemoveOperationResult::SUCCESS)) 
-				{
-					frame_ = uiMsgH_.tableDeleteSuccess(context.menu + 1, context.p.name);
-					frame_(errorMsgH_);
-					context.err = nullopt;
-				}
-				else if (holds_alternative<AddOperationResult>(*context.err)) 
-				{
-					errorMsgH_.printErrorMsg(*context.err);
-					context.err = nullopt;
-				}
-			}
-
-			if (!context.err.has_value())
-			{
-				frame_ = uiMsgH_.tableSearchEnd(context.err);
-				frame_(errorMsgH_);
-			}
-			context.p = PersonalData{};
-			context.menu = -1;
-			break;
-		}
-		case(SearchPhase::SearchNextStart):
-		{
-			int length = static_cast<int>(result.size());
-			if (length == 0)
-			{
-				frame_ = uiMsgH_.searchEmptySubMenu();
-			}
-			else
-			{
-				frame_ = uiMsgH_.searchSubMenu();
-			}
-			frame_(errorMsgH_);
-			frame_ = uiMsgH_.menuSelect(context.err);
-			frame_(errorMsgH_);
-			break;
-		}
-		case(SearchPhase::EditStart):
-		{
-			frame_ = uiMsgH_.searchEdit(context.err);
-			frame_(errorMsgH_);
-			break;
-		}
-		case(SearchPhase::DeleteStart):
-		{
-			frame_ = uiMsgH_.searchDelete(context.err);
-			frame_(errorMsgH_);
-			break;
-		}
-		default:
-			break;
+			currentState_->draw();
 		}
 
-
-		//처리
 		SearchPhase nextPhase = currentPhase;
-		switch (currentPhase) {
-		case SearchPhase::SearchStart:
+		if (currentState_)
 		{
-			nextPhase = onSearchStart(context);
-			break;
-		}
-		case SearchPhase::SearchMenuSelect:
-		{
-			nextPhase = onSearchMenuSelect(bookUI, context, result);
-			break;
-		}
-		case SearchPhase::SearchResultPrint:
-		{
-			nextPhase = SearchPhase::SearchNextStart; //그리기 전용
-			break;
-		}
-		case SearchPhase::SearchNextStart:
-		{
-			nextPhase = onSearchNextStart(context, result);
-			break;
-		}
-		case SearchPhase::EditStart:
-		{
-			nextPhase = onEditStart(context, result);
-			break;
-		}
-		case SearchPhase::EditItem:
-		{
-			nextPhase = onEditItem(bookUI, context, result);
-			break;
-		}
-		case SearchPhase::DeleteStart: 
-		{
-			nextPhase = onDeleteStart(context, result);
-			break;
-		}
-		case SearchPhase::DeleteItem:
-		{
-			nextPhase = onDeleteItem(bookUI, context, result);
-			break;
-		}
-		case SearchPhase::SearchAgain:
-		{
-			nextPhase = onSearchAgain(context);
-			break;
-		}
-		case SearchPhase::Exit:
-			break;
-		default:
-			break;
+			nextPhase = currentState_->update();
 		}
 
-		//화면 정리 및 상태 전이
-		if (currentPhase == SearchPhase::SearchStart ||
-			currentPhase == SearchPhase::SearchAgain ||
-			currentPhase == SearchPhase::EditStart ||
-			currentPhase == SearchPhase::DeleteStart)
+		if (nextPhase != currentPhase)
+		{
+			transitionTo(nextPhase);
+			currentPhase = nextPhase;
+		}
+		else
 		{
 			ui_.clearScreen();
 		}
-		currentPhase = nextPhase;
 	}
+
+	ui_.clearScreen(); //종료시 화면 정리
 }
 
-SearchPhase SearchMenu::onSearchStart(ContextData& context) 
+void SearchMenu::transitionTo(SearchPhase nextPhase) 
 {
-	context.menu = inputH_.getInt(IntRule::ZeroOrPositive);
-	lastError_ = inputH_.getLastError();
-	if (!isVariantEqualTo <InputResult>(lastError_, InputResult::SUCCESS))
+	if (nextPhase == SearchPhase::SearchStart ||
+		nextPhase == SearchPhase::SearchInputData ||
+		nextPhase == SearchPhase::SearchResult ||
+		nextPhase == SearchPhase::EditAgain ||
+		nextPhase == SearchPhase::DeleteAgain ||
+		nextPhase == SearchPhase::SearchAgain) 
 	{
-		context.err = wrapVariant<ResultVariant>(lastError_);
-		return SearchPhase::SearchStart;
+		ui_.clearScreen();
 	}
 
-	context.err = nullopt;
-	if (context.menu == 0) 
+	switch (nextPhase) {
+	case SearchPhase::SearchStart: 
 	{
-		return SearchPhase::Exit;
-	}
-	return SearchPhase::SearchMenuSelect;
-}
-
-SearchPhase SearchMenu::onSearchMenuSelect(AddressBookUI& bookUI, ContextData& context, vector<pair<PersonalData, int>>& result)
-{
-	//검색어 그리기
-	lastError_ = processSearchItem(context);
-	if (!isVariantEqualTo<MenuSelectResult>(lastError_, MenuSelectResult::SUCCESS))
-	{
-		context.err = wrapVariant<ResultVariant>(lastError_);
-		return SearchPhase::SearchStart;
-	}
-
-
-	//입력받기
-	string input;
-	if (context.menu == 1) 
-	{
-		input = inputH_.getString(StringRule::EmptyDisallow);
-	}
-	else 
-	{
-		input = inputH_.getString(StringRule::EmptyAllow);
-	}
-
-	lastError_ = inputH_.getLastError();
-	if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS)) 
-	{
-		context.err = wrapVariant<ResultVariant>(lastError_);
-		return SearchPhase::SearchMenuSelect;
-	}
-
-
-	//검색 실행
-	result.clear();
-	context.err = nullopt;
-	switch (context.menu) {
-	case 1: 
-	{
-		result = bookUI.extractAddressBook().searchByName(input);
+		currentState_ = make_unique<SearchStartState>(*this);
 		break;
 	}
-	case 2: 
+	case SearchPhase::SearchInputData:
 	{
-		result = bookUI.extractAddressBook().searchByPhone(input);
+		currentState_ = make_unique<SearchInputDataState>(*this);
 		break;
 	}
-	case 3: 
+	case SearchPhase::SearchResult: 
 	{
-		result = bookUI.extractAddressBook().searchByAddress(input);
+		currentState_ = make_unique<SearchResultState>(*this);
 		break;
 	}
-	case 4: 
+	case SearchPhase::EditStart: 
 	{
-		result = bookUI.extractAddressBook().searchByZipCode(input);
+		currentState_ = make_unique<SearchEditState>(*this);
 		break;
 	}
-	case 5:
+	case SearchPhase::EditItem:
 	{
-		result = bookUI.extractAddressBook().searchByEmail(input);
+		currentState_ = make_unique<SearchEditItemState>(*this);
+		break;
+	}
+	case SearchPhase::EditAgain: 
+	{
+		currentState_ = make_unique<SearchEditAgainState>(*this);
+		break;
+	}
+	case SearchPhase::DeleteStart:
+	{
+		currentState_ = make_unique<SearchDeleteState>(*this);
+		break;
+	}
+	case SearchPhase::DeleteItem:
+	{
+		currentState_ = make_unique<SearchDeleteItemState>(*this);
+		break;
+	}
+	case SearchPhase::DeleteAgain: 
+	{
+		currentState_ = make_unique<SearchDeleteAgainState>(*this);
+		break;
+	}
+	case SearchPhase::SearchAgain:
+	{
+		currentState_ = make_unique<SearchAgainState>(*this);
+		break;
+	}
+	case SearchPhase::Exit:
+	{
+		currentState_ = nullptr;
+		break;
+	}
+	default:
+	{
+		assert(false && "SearchMenu::transitionTo: unhandled SearchPhase!");
 		break;
 	}
 	}
-
-	return SearchPhase::SearchResultPrint;
 }
 
-SearchPhase SearchMenu::onSearchNextStart(ContextData& context, const  vector<pair<PersonalData, int>>& result) 
+void SearchMenu::drawLongTitle() 
 {
-	context.menu = inputH_.getInt(IntRule::ZeroOrPositive);
-	lastError_ = inputH_.getLastError();
-	if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS)) 
+	switch (mode_) {
+	case SearchMode::Search: 
 	{
-		context.err = wrapVariant<ResultVariant>(lastError_);
-		return SearchPhase::SearchResultPrint;
+		frame_ = uiMsgH_.searchLongTitle();
+		frame_(errorMsgH_);
+		break;
 	}
-
-	//입력값 검증
-	int length = static_cast<int>(result.size());
-	if (length == 0) 
+	case SearchMode::Edit: 
 	{
-		lastError_ = processSearchEmptySubMenu(context);
+		frame_ = uiMsgH_.editLongTitle();
+		frame_(errorMsgH_);
+		break;
 	}
-	else 
+	case SearchMode::Delete:
 	{
-		lastError_ = processSearchSubMenu(context);
+		frame_ = uiMsgH_.deleteLongTitle();
+		frame_(errorMsgH_);
+		break;
 	}
-	if (!isVariantEqualTo<MenuSelectResult>(lastError_, MenuSelectResult::SUCCESS)) 
-	{
-		context.err = wrapVariant<ResultVariant>(lastError_);
-		return SearchPhase::SearchResultPrint;
-	}
-
-	context.err = nullopt;
-	//다음 상태 결정
-	if (length == 0) 
-	{
-		switch (context.menu) {
-		case(9):
-			return SearchPhase::SearchStart;
-		case(0):
-			return SearchPhase::Exit;
-		default:
-			return SearchPhase::SearchResultPrint;
-		}
-	}
-	else //검색 결과가 있을 때
-	{
-		switch (context.menu) {
-		case(1):
-			return SearchPhase::EditStart;
-		case(2):
-			return SearchPhase::DeleteStart;
-		case(9):
-			return SearchPhase::SearchAgain;
-		case(0):
-			return SearchPhase::Exit;
-		default:
-			return SearchPhase::SearchResultPrint;
-		}
 	}
 }
 
-SearchPhase SearchMenu::onEditStart(ContextData& context, const vector<pair<PersonalData, int>>& result) 
+void SearchMenu::drawResultTable() 
 {
-	int input = inputH_.getInt(IntRule::PositiveOnly);
-	lastError_ = inputH_.getLastError();
-	if (!isVariantEqualTo <InputResult>(lastError_, InputResult::SUCCESS))
-	{
-		context.err = wrapVariant<ResultVariant>(lastError_);
-		return SearchPhase::SearchNextStart;
-	}
-
-	int resultCount = static_cast<int>(result.size());
-	if (input > resultCount || input <= 0) 
-	{
-		lastError_ = InputResult::WRONG_NUMBER;
-		context.err = wrapVariant<ResultVariant>(lastError_);
-		return SearchPhase::SearchNextStart;
-	}
-
-	context.menu = input - 1;
-	context.err = nullopt;
-	return SearchPhase::EditItem;
-}
-
-SearchPhase SearchMenu::onEditItem(AddressBookUI& bookUI, ContextData& context, vector<pair<PersonalData, int>>& result)
-{
-	int i = context.menu;
-	PersonalData dataToEdit = result[i].first;
-	int index = result[i].second;
-
-	EditMenu editMenu(InputMode::Edit);
-	optional<PersonalData> editResult = editMenu.run(bookUI, dataToEdit);
-
-	if (editResult.has_value())
-	{
-		PersonalData editedData = editResult.value();
-		AddOperationResult addResult = bookUI.extractAddressBook().edit(index, editedData);
-		
-		if (addResult == AddOperationResult::SUCCESS) 
-		{
-			result[i].first = editedData;
-			context.p = editedData;
-			context.err = wrapVariant<ResultVariant>(addResult);
-		}
-		else 
-		{
-			lastError_ = addResult;
-			context.err = wrapVariant<ResultVariant>(lastError_);
-		}
-	}
-	else 
-	{
-		context.err = nullopt;
-	}
-	return SearchPhase::SearchResultPrint;
-}
-
-SearchPhase SearchMenu::onDeleteStart(ContextData& context, const vector<pair<PersonalData, int>>& result) 
-{
-	int input = inputH_.getInt(IntRule::PositiveOnly);
-	lastError_ = inputH_.getLastError();
-
-	if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS)) 
-	{
-		context.err = wrapVariant<ResultVariant>(lastError_);
-		return SearchPhase::SearchNextStart;
-	}
-
-	int resultCount = static_cast<int>(result.size());
-	if (input > resultCount || input <= 0) 
-	{
-		lastError_ = InputResult::WRONG_NUMBER;
-		context.err = wrapVariant<ResultVariant>(lastError_);
-		return SearchPhase::SearchNextStart;
-	}
-
-	context.menu = input - 1;
-	context.err = nullopt;
-	return SearchPhase::DeleteItem;
-}
-
-SearchPhase SearchMenu::onDeleteItem(AddressBookUI& bookUI, ContextData& context, vector<pair<PersonalData, int>>& result) 
-{
-	int i = context.menu;
-	string name = result[i].first.name;
-	int index = result[i].second;
-
-	DeleteMenu deleteMenu;
-	deleteMenu.run(bookUI, index, name);
-
-	return SearchPhase::DeleteAgain;
-}
-
-SearchPhase SearchMenu::onSearchAgain(ContextData& context) 
-{
-	bool yesNo = inputH_.askYesNo();
-	lastError_ = inputH_.getLastError();
-	if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS)) 
-	{
-		context.err = wrapVariant<ResultVariant>(lastError_);
-		return SearchPhase::SearchNextStart;
-	}
-
-	if (yesNo) 
-	{
-		context.err = nullopt;
-		return SearchPhase::SearchStart;
-	}
-	context.err = nullopt;
-	return SearchPhase::SearchNextStart;
-}
-
-void SearchMenu::printSearchResultTable(ContextData& context, vector<pair<PersonalData, int>> result)
-{
-	int page = 0;
-
-	int length = static_cast<int>(result.size());
+	int length = static_cast<int>(searchResult_.size());
 	if (length == 0)
 	{
 		frame_ = uiMsgH_.searchEmpty();
 		frame_(errorMsgH_);
 	}
 	else {
+		int page = 0;
 		for (int i = page; i < length && i < page + 10; i++)
 		{
-			context.p = result[i].first;
-			context.sub = ui_.getPersonalDataTableFormat(context.p);
+			context_.p = searchResult_[i].first;
+			context_.sub = ui_.getPersonalDataTableFormat(context_.p);
 
 			int remainder = (i + 1) % 10;
 			if (remainder == 5)
 			{
-				frame_ = uiMsgH_.tableDataCenter(context.err, i + 1, context.sub);
+				frame_ = uiMsgH_.tableDataCenter(context_.err, i + 1, context_.sub);
 			}
 			else if (remainder == 0 || (i + 1) == length)
 			{
-				frame_ = uiMsgH_.tableDataBottom(context.err, i + 1, context.sub);
+				frame_ = uiMsgH_.tableDataBottom(context_.err, i + 1, context_.sub);
 				frame_(errorMsgH_);
 
-				if (i + 1 != length) 
+				if (i + 1 != length)
 				{
-					frame_ = uiMsgH_.tableContinue(context.err);
+					frame_ = uiMsgH_.tableContinue(context_.err);
 					frame_(errorMsgH_);
 				}
 			}
 			else
 			{
-				frame_ = uiMsgH_.tableDataNormal(context.err, i + 1, context.sub);
+				frame_ = uiMsgH_.tableDataNormal(context_.err, i + 1, context_.sub);
 				frame_(errorMsgH_);
 			}
 		}
 	}
 }
 
-void SearchMenu::printSearchTitle() 
+void SearchMenu::drawResultMsg() 
 {
-	ui_.clearScreen();
-	frame_ = uiMsgH_.searchTitle();
-	frame_(errorMsgH_);
-}
-
-ResultVariant SearchMenu::processSearchItem(ContextData& context)
-{
-	switch (context.menu)
+	if (mode_ == SearchMode::Edit) 
 	{
-	case 1:
+		if (isVariantEqualTo<AddOperationResult>(*context_.err, AddOperationResult::SUCCESS))
+		{
+			frame_ = uiMsgH_.tableEditSuccess(context_.menu + 1, context_.p.name);
+			frame_(errorMsgH_);
+			context_.err = nullopt;
+		}
+		else 
+		{
+			frame_ = uiMsgH_.tableAction(ActionType::Edit);
+			frame_(errorMsgH_);
+		}
+	}
+	else if (mode_ == SearchMode::Delete)
 	{
-		printSearchTitle();
-		frame_ = uiMsgH_.editName(context.err);
+		if (isVariantEqualTo<RemoveOperationResult>(*context_.err, RemoveOperationResult::SUCCESS)) 
+		{
+			frame_ = uiMsgH_.tableDeleteSuccess(context_.menu + 1, context_.p.name);
+			frame_(errorMsgH_);
+			context_.err = nullopt;
+		}
+		else
+		{
+			frame_ = uiMsgH_.tableAction(ActionType::Delete);
+			frame_(errorMsgH_);
+		}
+	}
+	else 
+	{
+		frame_ = uiMsgH_.tableSearchEnd();
 		frame_(errorMsgH_);
-		return MenuSelectResult::SUCCESS;
-	}
-	case 2:
-	{
-		printSearchTitle();
-		frame_ = uiMsgH_.editPhone(context.err);
-		frame_(errorMsgH_);
-		return MenuSelectResult::SUCCESS;
-	}
-	case 3:
-	{
-		printSearchTitle();
-		frame_ = uiMsgH_.editAddress(context.err);
-		frame_(errorMsgH_);
-		return MenuSelectResult::SUCCESS;
-	}
-	case 4:
-	{
-		printSearchTitle();
-		frame_ = uiMsgH_.editZipCode(context.err);
-		frame_(errorMsgH_);
-		return MenuSelectResult::SUCCESS;
-	}
-	case 5:
-	{
-		printSearchTitle();
-		frame_ = uiMsgH_.editEmail(context.err);
-		frame_(errorMsgH_);
-		return MenuSelectResult::SUCCESS;
-	}
-	default:
-		return MenuSelectResult::WRONG_INDEX;
-	}
-}
-
-ResultVariant SearchMenu::processSearchSubMenu(ContextData& context)
-{
-	switch (context.menu)
-	{
-	case(1): return MenuSelectResult::SUCCESS;
-	case(2): return MenuSelectResult::SUCCESS;
-	case(9): return MenuSelectResult::SUCCESS;
-	case(0): return MenuSelectResult::SUCCESS;
-	default: return MenuSelectResult::WRONG_INDEX;
-	}
-}
-
-ResultVariant SearchMenu::processSearchEmptySubMenu(ContextData& context)
-{
-	switch (context.menu)
-	{
-	case(9):
-	{
-		return MenuSelectResult::SUCCESS;
-	}
-	case(0):
-		return MenuSelectResult::SUCCESS;
-	default:
-		return MenuSelectResult::WRONG_INDEX;
 	}
 }

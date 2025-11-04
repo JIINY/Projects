@@ -3,6 +3,7 @@
 #include <functional>
 #include "../Common/DataType.hpp"
 #include "../Common/ResultEnums.hpp"
+#include "UICommonData.hpp"
 #include "UIOutput.hpp"
 
 enum class CancelType;
@@ -12,7 +13,8 @@ class UIPrintHandler
 {
 public:
     UIFrame menuSelect(std::optional<ResultVariant> err);
-    UIFrame cancel(std::optional<ResultVariant> err, CancelType action);
+    UIFrame cancel(std::optional<ResultVariant> err, ActionType action);
+    UIFrame tableAction(ActionType action);
     UIFrame short1Line();
     UIFrame short2Line();
 
@@ -40,7 +42,7 @@ public:
     UIFrame tableDataNormal(std::optional<ResultVariant> err, const int i, const PersonalData& p);
     UIFrame tableDataCenter(std::optional<ResultVariant> err, const int i, const PersonalData& p);
     UIFrame tableDataBottom(std::optional<ResultVariant> err, const int i, const PersonalData& p);
-    UIFrame tableSearchEnd(std::optional<ResultVariant> err);
+    UIFrame tableSearchEnd();
     UIFrame tableComplete(std::optional<ResultVariant> err);
     UIFrame tableContinue(std::optional<ResultVariant> err);
     UIFrame tableStop(std::optional<ResultVariant> err);
@@ -48,6 +50,7 @@ public:
     UIFrame tableDeleteSuccess(const int i, const std::string& name);
 
     UIFrame editTitle();
+    UIFrame editLongTitle();
     UIFrame personalEdit(const PersonalData& p);
     UIFrame editConfirm();
     UIFrame editName(std::optional<ResultVariant> err);
@@ -58,6 +61,7 @@ public:
     UIFrame editInput(std::optional<ResultVariant> err);
 
     UIFrame searchTitle();
+    UIFrame searchLongTitle();
     UIFrame searchResult();
     UIFrame searchSubMenu();
     UIFrame searchEmptySubMenu();
@@ -66,5 +70,6 @@ public:
     UIFrame searchEdit(std::optional<ResultVariant> err);
     UIFrame searchDelete(std::optional<ResultVariant> err);
 
+    UIFrame deleteLongTitle();
     UIFrame deleteConfirm(std::optional<ResultVariant> err, const int i, const std::string& name);
 };

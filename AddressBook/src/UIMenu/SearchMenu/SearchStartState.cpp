@@ -1,47 +1,40 @@
-#include "EditCancelState.hpp"
+#include "SearchStartState.hpp"
 #include <optional>
-#include "EditMenu.hpp"
-#include "../../Common/VariantUtils.hpp"
+#include "../../UI/UICommonData.hpp"
+#include "../../UI/UICommonHeader.hpp"
+#include "SearchMenu.hpp"
 using namespace std;
 
-
-void EditCancelState::draw() 
+void SearchStartState::draw() 
 {
 	auto& context = owner_.getContext();
 	auto& frame = owner_.getUIFrame();
 	auto& uiMsgH = owner_.getUIMsgH();
 	auto& errorMsgH = owner_.getErrorMsgH();
 
-	frame = uiMsgH.editTitle();
+	frame = uiMsgH.searchMenu();
 	frame(errorMsgH);
-	frame = uiMsgH.personalEdit(context.p);
-	frame(errorMsgH);
-	frame = uiMsgH.editConfirm();
-	frame(errorMsgH);
-	frame = uiMsgH.cancel(context.err, ActionType::Edit);
+	frame = uiMsgH.menuSelect(context.err);
 	frame(errorMsgH);
 }
 
-EditPhase EditCancelState::update() 
+SearchPhase SearchStartState::update() 
 {
 	auto& context = owner_.getContext();
 	auto& inputH = owner_.getInputH();
 
-	bool yesNo = inputH.askYesNo();
+	context.menu = inputH.getInt(IntRule::ZeroOrPositive);
 	ResultVariant error = inputH.getLastError();
 	if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS)) 
 	{
 		context.err = wrapVariant<ResultVariant>(error);
-		return EditPhase::EditCancel;
+		return SearchPhase::SearchStart;
 	}
 
 	context.err = nullopt;
-	if (yesNo) 
+	if (context.menu == 0) 
 	{
-		return EditPhase::ExitCancel;
+		return SearchPhase::Exit;
 	}
-	else 
-	{
-		return EditPhase::EditStart;
-	}
+	return SearchPhase::SearchInputData;
 }

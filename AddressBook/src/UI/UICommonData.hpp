@@ -19,12 +19,13 @@ enum class InputMode
     Edit 
 };
 
-enum class CancelType 
+enum class ActionType 
 {
     Input,
     Edit,
     Delete,
-    AddConfirm
+    AddConfirm,
+    Search
 };
 
 enum class AddPhase 
@@ -43,9 +44,8 @@ enum class AddPhase
 enum class SearchPhase 
 {
     SearchStart,
-    SearchMenuSelect,
-    SearchResultPrint,
-    SearchNextStart,
+    SearchInputData,
+    SearchResult,
     EditStart,
     EditItem,
     EditAgain,

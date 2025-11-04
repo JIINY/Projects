@@ -3,6 +3,7 @@
 #include <string>
 #include "../Common/DataType.hpp"
 #include "../Common/ResultEnums.hpp"
+#include "UICommonData.hpp"
 #include "OutputPrintHandler.hpp"
 #include "UIOutput.hpp"
 using namespace std;
@@ -37,12 +38,21 @@ UIFrame UIPrintHandler::menuSelect(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::cancel(optional<ResultVariant> err, CancelType action) 
+UIFrame UIPrintHandler::cancel(optional<ResultVariant> err, ActionType action) 
 {
 	return UIFrame{
 		[action]{
 			OutputPrintHandler::printCancel(action);
 		}, EnterType::None, err, RenderOrder::ErrorToRender
+	};
+}
+
+UIFrame UIPrintHandler::tableAction(ActionType action) 
+{
+	return UIFrame{
+		[action]{
+			OutputPrintHandler::printTableAction(action);
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
@@ -344,12 +354,12 @@ UIFrame UIPrintHandler::tableComplete(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::tableSearchEnd(optional<ResultVariant> err) 
+UIFrame UIPrintHandler::tableSearchEnd() 
 {
 	return UIFrame{
 		[]{
 			OutputPrintHandler::printTableSearchEnd();
-		}, EnterType::None, err, RenderOrder::RenderToError
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
@@ -398,7 +408,7 @@ UIFrame UIPrintHandler::searchTitle()
 	};
 }
 
-UIFrame UIPrintHandler::searchResult() 
+UIFrame UIPrintHandler::searchResult()
 {
 	return UIFrame{
 		[]{
@@ -461,6 +471,36 @@ UIFrame UIPrintHandler::searchDelete(optional<ResultVariant> err)
 		[]{
 			OutputPrintHandler::printDeleteItem();
 		}, EnterType::Both, err, RenderOrder::ErrorToRender
+	};
+}
+
+UIFrame UIPrintHandler::deleteLongTitle() 
+{
+	return UIFrame{
+		[] {
+			OutputPrintHandler::printDeleteLongTitle();
+			OutputPrintHandler::printTableTitle();
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
+	};
+}
+
+UIFrame UIPrintHandler::searchLongTitle()
+{
+	return UIFrame{
+		[] {
+			OutputPrintHandler::printSearchLongTitle();
+			OutputPrintHandler::printTableTitle();
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
+	};
+}
+
+UIFrame UIPrintHandler::editLongTitle()
+{
+	return UIFrame{
+		[] {
+			OutputPrintHandler::printEditLongTitle();
+			OutputPrintHandler::printTableTitle();
+		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 

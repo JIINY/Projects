@@ -1,6 +1,5 @@
 #include "AskAddCancelState.hpp"
 #include <optional>
-#include "../../Common/VariantUtils.hpp"
 #include "../../UI/UICommonData.hpp"
 #include "../../UI/UICommonHeader.hpp"
 #include "AddMenu.hpp"
@@ -16,7 +15,7 @@ void AskAddCancelState::draw()
 
 	frame = uiMsgH.addMenuLine(context.p);
 	frame(errorMsgH);
-	frame = uiMsgH.cancel(context.err, CancelType::Input);
+	frame = uiMsgH.cancel(context.err, ActionType::Input);
 	frame(errorMsgH);
 }
 

@@ -31,11 +31,17 @@
     <Filter Include="src\UIMenu">
       <UniqueIdentifier>{7ab601d9-8e4a-4cab-ac61-d21480e55a5a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\UIMenu\States">
+    <Filter Include="src\UIMenu\PersonalDataInput">
+      <UniqueIdentifier>{bc74523e-8bc1-4dc8-bd25-2a88a0a9bcf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\UIMenu\AddMenu">
+      <UniqueIdentifier>{88f5f574-67b9-4d2a-b061-287af0c5037d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\UIMenu\EditMenu">
       <UniqueIdentifier>{bbfe1c7d-4526-41a7-8acb-92be2859d49e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\UI\States">
-      <UniqueIdentifier>{bc74523e-8bc1-4dc8-bd25-2a88a0a9bcf7}</UniqueIdentifier>
+    <Filter Include="src\UIMenu\SearchMenu">
+      <UniqueIdentifier>{228394a3-cac9-49fd-ae7e-bd8683cdd3fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,12 +72,6 @@
     <ClCompile Include="src\UI\UIPrintHandler.cpp">
       <Filter>src\UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\UIMenu\EditMenu\EditMenu.cpp">
-      <Filter>src\UIMenu</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UIMenu\AddMenu\AddMenu.cpp">
-      <Filter>src\UIMenu</Filter>
-    </ClCompile>
     <ClCompile Include="src\UIMenu\MainMenu.cpp">
       <Filter>src\UIMenu</Filter>
     </ClCompile>
@@ -87,56 +87,92 @@
     <ClCompile Include="src\UIMenu\ViewMenu.cpp">
       <Filter>src\UIMenu</Filter>
     </ClCompile>
-    <ClCompile Include="src\UIMenu\SearchMenu.cpp">
-      <Filter>src\UIMenu</Filter>
-    </ClCompile>
     <ClCompile Include="src\UIMenu\DeleteMenu.cpp">
       <Filter>src\UIMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\EditMenu\EditStartState.cpp">
-      <Filter>src\UIMenu\States</Filter>
+      <Filter>src\UIMenu\EditMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\EditMenu\EditItemState.cpp">
-      <Filter>src\UIMenu\States</Filter>
+      <Filter>src\UIMenu\EditMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\EditMenu\EditCancelState.cpp">
-      <Filter>src\UIMenu\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UIMenu\PersonalDataInput\PersonalDataInput.cpp">
-      <Filter>src\UI</Filter>
+      <Filter>src\UIMenu\EditMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\PersonalDataInput\InputNameState.cpp">
-      <Filter>src\UI\States</Filter>
+      <Filter>src\UIMenu\PersonalDataInput</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\PersonalDataInput\InputAddressState.cpp">
-      <Filter>src\UI\States</Filter>
+      <Filter>src\UIMenu\PersonalDataInput</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\PersonalDataInput\InputEmailState.cpp">
-      <Filter>src\UI\States</Filter>
+      <Filter>src\UIMenu\PersonalDataInput</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\PersonalDataInput\InputPhoneState.cpp">
-      <Filter>src\UI\States</Filter>
+      <Filter>src\UIMenu\PersonalDataInput</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\PersonalDataInput\InputZipCodeState.cpp">
-      <Filter>src\UI\States</Filter>
+      <Filter>src\UIMenu\PersonalDataInput</Filter>
     </ClCompile>
-    <ClCompile Include="src\UIMenu\AddMenu\AddInputStartState.cpp">
-      <Filter>src\UIMenu\States</Filter>
+    <ClCompile Include="src\UIMenu\PersonalDataInput\PersonalDataInput.cpp">
+      <Filter>src\UIMenu\PersonalDataInput</Filter>
     </ClCompile>
-    <ClCompile Include="src\UIMenu\AddMenu\AddEditStartState.cpp">
-      <Filter>src\UIMenu\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UIMenu\AddMenu\AddReviewState.cpp">
-      <Filter>src\UIMenu\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UIMenu\AddMenu\AskAddCancelState.cpp">
-      <Filter>src\UIMenu\States</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UIMenu\AddMenu\AddSuccessState.cpp">
-      <Filter>src\UIMenu\States</Filter>
+    <ClCompile Include="src\UIMenu\AddMenu\AddMenu.cpp">
+      <Filter>src\UIMenu\AddMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\AddMenu\AddAgainState.cpp">
-      <Filter>src\UIMenu\States</Filter>
+      <Filter>src\UIMenu\AddMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\AddMenu\AddEditStartState.cpp">
+      <Filter>src\UIMenu\AddMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\AddMenu\AddInputStartState.cpp">
+      <Filter>src\UIMenu\AddMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\AddMenu\AddReviewState.cpp">
+      <Filter>src\UIMenu\AddMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\AddMenu\AddSuccessState.cpp">
+      <Filter>src\UIMenu\AddMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\AddMenu\AskAddCancelState.cpp">
+      <Filter>src\UIMenu\AddMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\EditMenu\EditMenu.cpp">
+      <Filter>src\UIMenu\EditMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchMenu.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchStartState.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchInputDataState.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchResultState.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchEditState.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchEditItemState.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchDeleteState.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchAgainState.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchDeleteItemState.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchEditAgain.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchDeleteAgainState.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,12 +209,6 @@
     <ClInclude Include="src\UI\UIPrintHandler.hpp">
       <Filter>src\UI</Filter>
     </ClInclude>
-    <ClInclude Include="src\UIMenu\EditMenu\EditMenu.hpp">
-      <Filter>src\UIMenu</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UIMenu\AddMenu\AddMenu.hpp">
-      <Filter>src\UIMenu</Filter>
-    </ClInclude>
     <ClInclude Include="src\UIMenu\MainMenu.hpp">
       <Filter>src\UIMenu</Filter>
     </ClInclude>
@@ -197,65 +227,104 @@
     <ClInclude Include="src\UIMenu\ViewMenu.hpp">
       <Filter>src\UIMenu</Filter>
     </ClInclude>
-    <ClInclude Include="src\UIMenu\SearchMenu.hpp">
-      <Filter>src\UIMenu</Filter>
-    </ClInclude>
     <ClInclude Include="src\UIMenu\DeleteMenu.hpp">
       <Filter>src\UIMenu</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\EditMenu\EditStartState.hpp">
-      <Filter>src\UIMenu\States</Filter>
+      <Filter>src\UIMenu\EditMenu</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\EditMenu\EditItemState.hpp">
-      <Filter>src\UIMenu\States</Filter>
+      <Filter>src\UIMenu\EditMenu</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\EditMenu\EditCancelState.hpp">
-      <Filter>src\UIMenu\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UIMenu\PersonalDataInput\PersonalDataInput.hpp">
-      <Filter>src\UI</Filter>
+      <Filter>src\UIMenu\EditMenu</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\EditMenu\IEditState.hpp">
-      <Filter>src\UIMenu\States</Filter>
+      <Filter>src\UIMenu\EditMenu</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\PersonalDataInput\IDataInputState.hpp">
-      <Filter>src\UI\States</Filter>
+      <Filter>src\UIMenu\PersonalDataInput</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\PersonalDataInput\InputNameState.hpp">
-      <Filter>src\UI\States</Filter>
+      <Filter>src\UIMenu\PersonalDataInput</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\PersonalDataInput\InputPhoneState.hpp">
-      <Filter>src\UI\States</Filter>
+      <Filter>src\UIMenu\PersonalDataInput</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\PersonalDataInput\InputAddressState.hpp">
-      <Filter>src\UI\States</Filter>
+      <Filter>src\UIMenu\PersonalDataInput</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\PersonalDataInput\InputZipCodeState.hpp">
-      <Filter>src\UI\States</Filter>
+      <Filter>src\UIMenu\PersonalDataInput</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\PersonalDataInput\InputEmailState.hpp">
-      <Filter>src\UI\States</Filter>
+      <Filter>src\UIMenu\PersonalDataInput</Filter>
     </ClInclude>
-    <ClInclude Include="src\UIMenu\AddMenu\IAddState.hpp">
-      <Filter>src\UIMenu\States</Filter>
+    <ClInclude Include="src\UIMenu\PersonalDataInput\PersonalDataInput.hpp">
+      <Filter>src\UIMenu\PersonalDataInput</Filter>
     </ClInclude>
-    <ClInclude Include="src\UIMenu\AddMenu\AddInputStartState.hpp">
-      <Filter>src\UIMenu\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UIMenu\AddMenu\AddReviewState.hpp">
-      <Filter>src\UIMenu\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UIMenu\AddMenu\AddEditStartState.hpp">
-      <Filter>src\UIMenu\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UIMenu\AddMenu\AskAddCancelState.hpp">
-      <Filter>src\UIMenu\States</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UIMenu\AddMenu\AddSuccessState.hpp">
-      <Filter>src\UIMenu\States</Filter>
+    <ClInclude Include="src\UIMenu\AddMenu\AddMenu.hpp">
+      <Filter>src\UIMenu\AddMenu</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\AddMenu\AddAgainState.hpp">
-      <Filter>src\UIMenu\States</Filter>
+      <Filter>src\UIMenu\AddMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\AddMenu\AddEditStartState.hpp">
+      <Filter>src\UIMenu\AddMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\AddMenu\AddInputStartState.hpp">
+      <Filter>src\UIMenu\AddMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\AddMenu\AddReviewState.hpp">
+      <Filter>src\UIMenu\AddMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\AddMenu\AddSuccessState.hpp">
+      <Filter>src\UIMenu\AddMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\AddMenu\AskAddCancelState.hpp">
+      <Filter>src\UIMenu\AddMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\AddMenu\IAddState.hpp">
+      <Filter>src\UIMenu\AddMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\EditMenu\EditMenu.hpp">
+      <Filter>src\UIMenu\EditMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchMenu.hpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu\ISearchState.hpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchStartState.hpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchInputDataState.hpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchResultState.hpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchEditState.hpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchEditItemState.hpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchDeleteState.hpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchDeleteItemState.hpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchAgainState.hpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchEditAgain.hpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchDeleteAgainState.hpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

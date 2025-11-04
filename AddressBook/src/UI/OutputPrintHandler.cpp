@@ -73,6 +73,22 @@ void OutputPrintHandler::printSearchLongTitle()
 	cout << "============================================================================================================" << endl;
 }
 
+void OutputPrintHandler::printEditLongTitle()
+{
+	cout << "============================================================================================================" << endl;
+	cout << left << setw(20) << "주소록: 수정 ";
+	cout << right << setw(87) << version << endl;
+	cout << "============================================================================================================" << endl;
+}
+
+void OutputPrintHandler::printDeleteLongTitle()
+{
+	cout << "============================================================================================================" << endl;
+	cout << left << setw(20) << "주소록: 삭제 ";
+	cout << right << setw(87) << version << endl;
+	cout << "============================================================================================================" << endl;
+}
+
 void OutputPrintHandler::printViewTitle() 
 {
 	cout << "============================================================================================================" << endl;
@@ -86,27 +102,44 @@ void OutputPrintHandler::printMenuSelect()
     cout << "메뉴를 선택해 주세요: ";
 }
 
-void OutputPrintHandler::printCancel(CancelType action) 
+void OutputPrintHandler::printCancel(ActionType action) 
 {
 	switch (action) 
 	{
-	case CancelType::Input:
+	case ActionType::Input:
 		cout << "입력을";
 		break;
-	case CancelType::Edit:
+	case ActionType::Edit:
 		cout << "수정을";
 		break;
-	case CancelType::Delete:
+	case ActionType::Delete:
 		cout << "삭제를";
 		break;
-	case CancelType::AddConfirm:
+	case ActionType::AddConfirm:
 		cout << "추가를";
+		break;
+	case ActionType::Search:
+		cout << "검색을";
 		break;
 	}
     cout << " 취소하시겠습니까? (Y/N): ";
 }
 
-
+void OutputPrintHandler::printTableAction(ActionType action) 
+{
+	cout << "검색 결과에서 ";
+	switch (action) {
+	case ActionType::Edit:
+		cout << "수정할";
+		break;
+	case ActionType::Delete:
+		cout << "삭제할";
+		break;
+	default:
+		break;
+	}
+	cout << " 항목을 선택해 주세요.";
+}
 
 void OutputPrintHandler::printMainMenu() 
 {
@@ -173,8 +206,8 @@ void OutputPrintHandler::printAddMenu()
 
 void OutputPrintHandler::printSearchSubMenu() 
 {
-	cout << "[1] 항목 수정하기" << endl;
-	cout << "[2] 항목 삭제하기" << endl;
+	cout << "[1] 주소록 수정하기" << endl;
+	cout << "[2] 주소록 삭제하기" << endl;
 	cout << "[9] 다시 검색하기" << endl;
 	cout << "[0] 메인 메뉴로 돌아가기" << endl;
 	cout << "=======================================" << endl;
