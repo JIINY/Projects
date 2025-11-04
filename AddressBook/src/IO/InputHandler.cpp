@@ -55,7 +55,7 @@ bool InputHandler::isAllDigits(const string& str)
 {
 	for (char ch : str) 
 	{
-		if (isdigit(ch) == 0) //숫자가 아니면 0 반환
+		if (isdigit(static_cast<unsigned char>(ch)) == 0) //숫자가 아니면 0 반환
 		{
 			return false;
 		}
