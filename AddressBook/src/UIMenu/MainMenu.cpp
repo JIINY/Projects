@@ -5,7 +5,7 @@
 #include "../UI/UICommonHeader.hpp"
 #include "../UI/AddressBookUI.hpp"
 #include "AddMenu/AddMenu.hpp"
-#include "ViewMenu.hpp"
+#include "ViewMenu/ViewMenu.hpp"
 #include "SearchMenu/SearchMenu.hpp"
 using namespace std;
 

@@ -41,6 +41,7 @@ public:
     static void printInputAddress();
     static void printInputZipCode();
     static void printInputEmail();
+    static void printInputCommand();
 
     static void printAddMenu();
     static void printAddSuccess(const int i, const PersonalData& p);

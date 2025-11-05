@@ -68,6 +68,9 @@ enum class MenuSelectResult
     SUCCESS,
     WRONG_INDEX,
     EMPTY_ADDRESSBOOK,
+    WRONG_COMMAND,
+    PAGE_START,
+    PAGE_END,
     UNKNOWN
 };
 

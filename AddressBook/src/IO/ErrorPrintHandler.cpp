@@ -122,6 +122,15 @@ void ErrorPrintHandler::printMenuSelectErrorMsg(const MenuSelectResult err)
 	case MenuSelectResult::WRONG_INDEX:
 		this->errorMsg = "[ERROR] 입력: 원하는 메뉴 번호를 입력해 주세요.";
 		break;
+	case MenuSelectResult::WRONG_COMMAND:
+		this->errorMsg = "[ERROR] 입력: 유효한 명령어 키를 입력해 주세요.";
+		break;
+	case MenuSelectResult::PAGE_START:
+		this->errorMsg = "[ERROR] 입력: 첫 페이지입니다.";
+		break;
+	case MenuSelectResult::PAGE_END:
+		this->errorMsg = "[ERROR] 입력: 마지막 페이지입니다.";
+		break;
 	case MenuSelectResult::SUCCESS:
 		this->errorMsg = "";
 		break;

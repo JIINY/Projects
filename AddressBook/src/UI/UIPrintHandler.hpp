@@ -43,8 +43,9 @@ public:
     UIFrame tableDataCenter(std::optional<ResultVariant> err, const int i, const PersonalData& p);
     UIFrame tableDataBottom(std::optional<ResultVariant> err, const int i, const PersonalData& p);
     UIFrame tableSearchEnd();
-    UIFrame tableComplete(std::optional<ResultVariant> err);
-    UIFrame tableContinue(std::optional<ResultVariant> err);
+    UIFrame tableComplete();
+    UIFrame tableContinue();
+    UIFrame tableCommand(std::optional<ResultVariant> err);
     UIFrame tableStop(std::optional<ResultVariant> err);
     UIFrame tableEditSuccess(const int i, const std::string& name);
     UIFrame tableDeleteSuccess(const int i, const std::string& name);

@@ -52,6 +52,7 @@ UIFrame UIPrintHandler::tableAction(ActionType action)
 	return UIFrame{
 		[action]{
 			OutputPrintHandler::printTableAction(action);
+			OutputPrintHandler::printEnter();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
@@ -345,11 +346,12 @@ UIFrame UIPrintHandler::tableDataBottom(optional<ResultVariant> err, const int i
 	};
 }
 
-UIFrame UIPrintHandler::tableComplete(optional<ResultVariant> err)
+UIFrame UIPrintHandler::tableComplete()
 {
 	return UIFrame{
 		[]{
 			OutputPrintHandler::printTableComplete();
+			OutputPrintHandler::printLong1Line();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
@@ -363,12 +365,22 @@ UIFrame UIPrintHandler::tableSearchEnd()
 	};
 }
 
-UIFrame UIPrintHandler::tableContinue(optional<ResultVariant> err) 
+UIFrame UIPrintHandler::tableContinue() 
 {
 	return UIFrame{
 		[]{
 			OutputPrintHandler::printTableContinue();
+			OutputPrintHandler::printLong1Line();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
+	};
+}
+
+UIFrame UIPrintHandler::tableCommand(optional<ResultVariant> err) 
+{
+	return UIFrame{
+		[] {
+			OutputPrintHandler::printInputCommand();
+		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
 }
 
@@ -386,6 +398,7 @@ UIFrame UIPrintHandler::tableEditSuccess(const int i, const string& name)
 	return UIFrame{
 		[i, name] {
 			OutputPrintHandler::printTableEditSuccess(i, name);
+			OutputPrintHandler::printEnter();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
@@ -395,6 +408,7 @@ UIFrame UIPrintHandler::tableDeleteSuccess(const int i, const string& name)
 	return UIFrame{
 		[i, name] {
 			OutputPrintHandler::printTableDeleteSuccess(i, name);
+			OutputPrintHandler::printEnter();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }

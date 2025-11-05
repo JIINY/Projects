@@ -43,6 +43,9 @@
     <Filter Include="src\UIMenu\SearchMenu">
       <UniqueIdentifier>{228394a3-cac9-49fd-ae7e-bd8683cdd3fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\UIMenu\ViewMenu">
+      <UniqueIdentifier>{eea71838-f64e-4ea3-a57e-f8f66dd81156}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -83,9 +86,6 @@
     </ClCompile>
     <ClCompile Include="src\Common\VariantUtils.cpp">
       <Filter>src\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UIMenu\ViewMenu.cpp">
-      <Filter>src\UIMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\DeleteMenu.cpp">
       <Filter>src\UIMenu</Filter>
@@ -170,6 +170,8 @@
     </ClCompile>
     <ClCompile Include="src\UIMenu\SearchMenu\SearchEditAgain.cpp">
       <Filter>소스 파일</Filter>
+    <ClCompile Include="src\UIMenu\ViewMenu\ViewMenu.cpp">
+      <Filter>src\UIMenu\ViewMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\SearchMenu\SearchDeleteAgainState.cpp">
       <Filter>소스 파일</Filter>
@@ -223,9 +225,6 @@
     </ClInclude>
     <ClInclude Include="src\Common\ResultUtils.hpp">
       <Filter>src\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UIMenu\ViewMenu.hpp">
-      <Filter>src\UIMenu</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\DeleteMenu.hpp">
       <Filter>src\UIMenu</Filter>
@@ -325,6 +324,9 @@
     </ClInclude>
     <ClInclude Include="src\UIMenu\SearchMenu\SearchDeleteAgainState.hpp">
       <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\ViewMenu\ViewMenu.hpp">
+      <Filter>src\UIMenu\ViewMenu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

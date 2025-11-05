@@ -88,6 +88,9 @@ string toString(MenuSelectResult value)
     {
     case MenuSelectResult::SUCCESS: return "MenuSelect::SUCCESS";
     case MenuSelectResult::WRONG_INDEX: return "MenuSelect::WRONG_INDEX";
+    case MenuSelectResult::WRONG_COMMAND: return "MenuSelect::WRONG_COMMAND";
+    case MenuSelectResult::PAGE_START: return "MenuSelect::PAGE_START";
+    case MenuSelectResult::PAGE_END: return "MenuSelect::PAGE_END";
     case MenuSelectResult::UNKNOWN: return "MenuSelect::UNKNOWN";
     default: return "MenuSelect::Default";
     }

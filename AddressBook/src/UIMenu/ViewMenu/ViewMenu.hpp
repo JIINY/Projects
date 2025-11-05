@@ -1,9 +1,9 @@
 #pragma once
-#include "../UI/UICommonData.hpp"
-#include "../UI/UICommonHeader.hpp"
+#include "../../UI/UICommonData.hpp"
+#include "../../UI/UICommonHeader.hpp"
 
 class AddressBookUI;
-enum class ViewPhase { Next, Stay, Exit };
+enum class ViewPhase { Prev, Next, Stay, Exit };
 
 class ViewMenu
 {

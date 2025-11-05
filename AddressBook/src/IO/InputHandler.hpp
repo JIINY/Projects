@@ -21,6 +21,22 @@ enum class StringRule
     EmptyDisallow
 };
 
+enum class PagingMenu 
+{
+    View,
+    Search
+};
+
+enum class PagingPhase 
+{
+    Prev,
+    Next,
+    Exit,
+    Error,
+    Stay, //View전용
+    PositiveNums, //여기부터 Search전용
+    Enter
+};
 
 class InputHandler 
 {
@@ -31,7 +47,9 @@ public:
     char getChar();
     std::string getString(StringRule rule);
     bool askYesNo();
-    ResultVariant getLastError() const;
+    PagingPhase getPagingInput(PagingMenu menu);
+    int getPagingInt() { return this->num_; }
+    ResultVariant getLastError() const { return this->lastError_; }
 
 protected:
     static std::string getNegativeSub(const std::string& input);
@@ -49,11 +67,11 @@ protected:
 
 
 private:
-    int num = -1;
-    char ch = '\0';
-    std::string str = "";
-    bool yesNo = false;
-    ResultVariant lastError;
+    int num_ = -1;
+    char ch_ = '\0';
+    std::string str_ = "";
+    bool yesNo_ = false;
+    ResultVariant lastError_;
 
     bool resolveCinFailed();
 };

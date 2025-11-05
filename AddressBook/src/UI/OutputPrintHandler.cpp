@@ -138,7 +138,7 @@ void OutputPrintHandler::printTableAction(ActionType action)
 	default:
 		break;
 	}
-	cout << " 항목을 선택해 주세요.";
+	cout << " 항목을 선택해 주세요: ";
 }
 
 void OutputPrintHandler::printMainMenu() 
@@ -235,12 +235,18 @@ void OutputPrintHandler::printTablePersonalData(const int i, const PersonalData&
 
 void OutputPrintHandler::printTableContinue() 
 {
-	cout << "엔터 키를 누르면 다음 페이지로 넘어갑니다. 중단은 Q를 누르세요. ";
+	cout << "[P] 이전 페이지, [N] 다음 페이지, [Q] 메인 메뉴로 돌아가기" << endl;
 }
 
 void OutputPrintHandler::printTableComplete() 
 {
-	cout << "주소록의 끝입니다. 엔터 키를 누르면 메인 메뉴로 돌아갑니다. ";
+	cout << "주소록의 끝입니다." << endl;
+	cout << "[P] 이전 페이지, [N] 다음 페이지, [Q] 메인 메뉴로 돌아가기" << endl;
+}
+
+void OutputPrintHandler::printInputCommand() 
+{
+	cout << "원하는 명령어 키를 입력해 주세요: ";
 }
 
 void OutputPrintHandler::printTableSearchEnd() 
@@ -251,13 +257,13 @@ void OutputPrintHandler::printTableSearchEnd()
 void OutputPrintHandler::printTableEditSuccess(const int i, const string& name) 
 {
 	cout << "[완료] " << i << "번 " << name << "이(가) 수정되었습니다." << endl;
-	cout << "이어서 수정 / 삭제하시려면 메뉴를 선택해 주세요.";
+	cout << "이어서 수정하시려면 항목을 선택해 주세요.";
 }
 
 void OutputPrintHandler::printTableDeleteSuccess(int i, const string& name)
 {
 	cout << "[완료] " << i << "번 " << name << "이(가) 삭제되었습니다." << endl;
-	cout << "이어서 수정 / 삭제하시려면 메뉴를 선택해 주세요.";
+	cout << "이어서 삭제하시려면 항목을 선택해 주세요.";
 }
 
 void OutputPrintHandler::printTableStop() 
