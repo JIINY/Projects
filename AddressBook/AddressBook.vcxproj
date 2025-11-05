@@ -50,7 +50,7 @@
     <ClCompile Include="src\UIMenu\EditMenu\EditStartState.cpp" />
     <ClCompile Include="src\UIMenu\SearchMenu\SearchResultState.cpp" />
     <ClCompile Include="src\UIMenu\SearchMenu\SearchStartState.cpp" />
-    <ClCompile Include="src\UIMenu\ViewMenu.cpp" />
+    <ClCompile Include="src\UIMenu\ViewMenu\ViewMenu.cpp" />
     <ClCompile Include="src\UI\AddressBookUI.cpp" />
     <ClCompile Include="src\UI\OutputPrintHandler.cpp" />
     <ClCompile Include="src\UIMenu\PersonalDataInput\PersonalDataInput.cpp" />
@@ -100,7 +100,7 @@
     <ClInclude Include="src\UIMenu\EditMenu\IEditState.hpp" />
     <ClInclude Include="src\UIMenu\SearchMenu\SearchResultState.hpp" />
     <ClInclude Include="src\UIMenu\SearchMenu\SearchStartState.hpp" />
-    <ClInclude Include="src\UIMenu\ViewMenu.hpp" />
+    <ClInclude Include="src\UIMenu\ViewMenu\ViewMenu.hpp" />
     <ClInclude Include="src\UI\AddressBookUI.hpp" />
     <ClInclude Include="src\UI\OutputPrintHandler.hpp" />
     <ClInclude Include="src\UIMenu\PersonalDataInput\PersonalDataInput.hpp" />
