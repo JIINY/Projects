@@ -1,21 +1,14 @@
-#pragma once
+﻿#pragma once
 #include <variant>
 
 
 //InputHandler
-enum class IntParsingResult 
-{
-    POSITIVE_NUMBER, 
-    NEGATIVE_NUMBER, 
-    ZERO,
-    EMPTY, 
-    INVALID_CHAR
-};
-
 enum class InputResult 
 {
     SUCCESS, 
     FAIL,
+    YES,
+    NO,
     WRONG_NUMBER, 
     LENGTH_OVER,
     EMPTY_INT, 
@@ -42,7 +35,8 @@ enum class LoadOperationResult
 {
     SUCCESS,
     FAIL,
-    NOT_EXIST_FILE
+    NOT_EXIST_FILE,
+    EMPTY_FILE
 };
 
 enum class AddOperationResult 
@@ -103,6 +97,7 @@ enum class SearchDataResult
 };
 
 
-using ResultVariant = std::variant<IntParsingResult, InputResult, 
+using ResultVariant = std::variant<InputResult, 
     SaveOperationResult, LoadOperationResult, AddOperationResult, RemoveOperationResult, 
     MenuSelectResult, AddDataResult, AddEditResult, EditDataResult, SearchDataResult>;
+

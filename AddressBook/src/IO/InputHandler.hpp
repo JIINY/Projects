@@ -1,31 +1,13 @@
-#pragma once
+ï»¿#pragma once
 #include <string>
 #include <variant>
+#include <optional>
 #include "../Common/ResultEnums.hpp"
+#include "../Common/RuleEnums.hpp"
 #include "../Common/VariantUtils.hpp"
+#include "InputTextSource.hpp"
+#include "StringInputHandler.hpp"
 
-
-enum class IntRule 
-{
-    IntAll,
-    PositiveOnly,
-    NegativeOnly,
-    ZeroOrPositive,
-    ZeroOrNegative,
-    NegativeOneToPositive,
-};
-
-enum class StringRule 
-{
-    EmptyAllow,
-    EmptyDisallow
-};
-
-enum class PagingMenu 
-{
-    View,
-    Search
-};
 
 enum class PagingPhase 
 {
@@ -33,45 +15,38 @@ enum class PagingPhase
     Next,
     Exit,
     Error,
-    Stay, //ViewÀü¿ë
-    PositiveNums, //¿©±âºÎÅÍ SearchÀü¿ë
+    Stay, //Viewì „ìš©
+    PositiveNums, //ì—¬ê¸°ë¶€í„° Searchì „ìš©
     Enter
 };
 
 class InputHandler 
 {
 public:
-    void getAnyKey();
-    bool anyKeyOrQuit();
-    int getInt(IntRule rule);
-    char getChar();
-    std::string getString(StringRule rule);
-    bool askYesNo();
-    PagingPhase getPagingInput(PagingMenu menu);
-    int getPagingInt() { return this->num_; }
-    ResultVariant getLastError() const { return this->lastError_; }
+    ResultVariant getInt(IntRule rule, int& output);
+    ResultVariant getInt(IntRule rule, const std::string& input, int& output);
 
-protected:
-    static std::string getNegativeSub(const std::string& input);
-    static bool isAllDigits(const std::string& str);
-    static bool isAllZero(const std::string& str);
-    std::string toUpper(const std::string& input);
-    IntParsingResult parsingInputNumber(const std::string& input, int& output);
-    InputResult validateIntRule(int i, IntRule rule);
+    ResultVariant getChar(char& output);
+    ResultVariant getChar(const std::string& input, char& output);
 
-    ResultVariant waitForAnyKeyOrQuit();
-    ResultVariant getInputString(StringRule rule);    
-    ResultVariant getInputNumber(IntRule rule);
-    ResultVariant getInputChar();
-    ResultVariant getInputYesNo();
+    ResultVariant getString(StringRule rule, std::string& output);
+    ResultVariant getString(StringRule rule, const std::string& input, std::string& output);
 
+    ResultVariant askYesNo();
+    ResultVariant askYesNo(const std::string& input);
+
+    bool getAnyKey();
+
+    PagingPhase getViewPagingInput();
+    PagingPhase getSearchPagingInput(int& output);
 
 private:
-    int num_ = -1;
-    char ch_ = '\0';
-    std::string str_ = "";
-    bool yesNo_ = false;
-    ResultVariant lastError_;
+    InputTextSource textSource_{};
 
-    bool resolveCinFailed();
+    ResultVariant parsingInt(IntRule rule, const std::string& input, int& output);
+    ResultVariant parsingChar(const std::string& input, char& output);
+    ResultVariant parsingString(StringRule rule, const std::string& input, std::string& output);
+    ResultVariant parsingYesNo(const std::string& input);
+    bool parsingPagingCommand(PagingPhase& phase, std::string& input);
 };
+

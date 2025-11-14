@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "ResultEnums.hpp"
 #include "ResultUtils.hpp"
 #include "../UI/UICommonData.hpp"
@@ -7,7 +7,7 @@
 #include <type_traits>
 
 
-//°¢°¢ÀÇ enumÀ» Variant·Î ·¦ÇÎ
+//ê°ê°ì˜ enumì„ Variantë¡œ ë©í•‘
 template <typename TargetVariant, typename SourceType>
 TargetVariant wrapVariant(const SourceType& src) 
 {
@@ -15,13 +15,13 @@ TargetVariant wrapVariant(const SourceType& src)
 }
 
 
-//ÀÔ·Â°ªÀ¸·Î µé¾î¿Â »óÅÂ°¡ Variant¿Í ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎ
+//ì…ë ¥ê°’ìœ¼ë¡œ ë“¤ì–´ì˜¨ ìƒíƒœê°€ Variantì™€ ì¼ì¹˜í•˜ëŠ”ì§€ í™•ì¸
 template <typename T, typename VariantType>
 bool isVariantEqualTo(const VariantType& variant, T target) 
 {
-    if (holds_alternative<T>(variant)) 
+    if (std::holds_alternative<T>(variant)) 
     {
-        return get<T>(variant) == target;
+        return std::get<T>(variant) == target;
     }
     return false;
 }
@@ -41,7 +41,7 @@ bool isVariantEqualTo(const std::optional<VariantType>& variant, T target)
 }
 
 
-//variant¿¡¼­ ¿øÇÏ´Â Å¸ÀÔ ²¨³»±â
+//variantì—ì„œ ì›í•˜ëŠ” íƒ€ì… êº¼ë‚´ê¸°
 template <typename T, typename VariantType>
 T unwrapVariant(const VariantType& variant) 
 {
@@ -49,6 +49,7 @@ T unwrapVariant(const VariantType& variant)
 }
 
 
-//ResultVariant µğ¹ö±×¿ë ÇÔ¼ö
+//ResultVariant ë””ë²„ê·¸ìš© í•¨ìˆ˜
 void printVariant(const ResultVariant& result);
 void printVariant(const std::optional<ResultVariant>& result);
+

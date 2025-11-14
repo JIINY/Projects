@@ -1,315 +1,213 @@
-#include "InputHandler.hpp"
+ï»¿#include "InputHandler.hpp"
 #include <iostream>
 #include <optional>
 #include <string>
 #include <cctype>
+#include "../Common/ResultEnums.hpp"
+#include "../Common/RuleEnums.hpp"
+#include "../Common/VariantUtils.hpp"
+#include "InputTextSource.hpp"
+#include "InputTextUtils.hpp"
+#include "InputParser.hpp"
+#include "IntInputHandler.hpp"
+#include "CharInputHandler.hpp"
+#include "StringInputHandler.hpp"
 using namespace std;
 
-//Public
-void InputHandler::getAnyKey() 
+
+ResultVariant InputHandler::getInt(IntRule rule, int& output)
 {
-	this->lastError_ = getInputString(StringRule::EmptyAllow);
+	//ìž…ë ¥
+	auto [inputResult, input] = textSource_.readTextSource();
+	if (inputResult == false)
+	{
+		return InputResult::FAIL;
+	}
+
+	return parsingInt(rule, input, output);
 }
 
-bool InputHandler::anyKeyOrQuit() 
+ResultVariant InputHandler::getInt(IntRule rule, const string& input, int& output)
 {
-	this->lastError_ = waitForAnyKeyOrQuit();
-	return this->str_ == "Q";
+	return parsingInt(rule, input, output);
 }
 
-int InputHandler::getInt(IntRule rule) 
+ResultVariant InputHandler::parsingInt(IntRule rule, const std::string& input, int& output) 
 {
-	this->lastError_ = getInputNumber(rule);
-	return this->num_;
-}
-char InputHandler::getChar() 
-{
-	this->lastError_ = getInputChar();
-	return this->ch_;
-}
-string InputHandler::getString(StringRule rule) 
-{
-	this->lastError_ = getInputString(rule);
-	return this->str_;
+	auto [parsingResult, parsingInt] = IntInputHandler::parseAsNumber(rule, input);
+	if (isVariantEqualTo <InputResult>(parsingResult, InputResult::SUCCESS)
+		|| isVariantEqualTo <InputResult>(parsingResult, InputResult::WRONG_NUMBER)
+		|| isVariantEqualTo <InputResult>(parsingResult, InputResult::LENGTH_OVER))
+	{
+		output = parsingInt.value();
+	}
+	return parsingResult;
 }
 
-bool InputHandler::askYesNo() 
+
+ResultVariant InputHandler::getChar(char& output)
 {
-	this->lastError_ = getInputYesNo();
-	return this->yesNo_;
+	auto [inputResult, input] = textSource_.readTextSource();
+	if (inputResult == false)
+	{
+		return InputResult::FAIL;
+	}
+	return parsingChar(input, output);
 }
 
-PagingPhase InputHandler::getPagingInput(PagingMenu menu) 
+ResultVariant InputHandler::getChar(const string& input, char& output) 
 {
-	this->lastError_ = getInputString(StringRule::EmptyAllow);
-	if (!isVariantEqualTo<InputResult>(this->lastError_, InputResult::SUCCESS))
+	return parsingChar(input, output);
+}
+
+ResultVariant InputHandler::parsingChar(const string& input, char& output) 
+{
+	auto [parsingResult, parsingChar] = CharInputHandler::parseAsChar(input);
+	if (isVariantEqualTo <InputResult>(parsingResult, InputResult::SUCCESS)
+		|| isVariantEqualTo <InputResult>(parsingResult, InputResult::LENGTH_OVER))
+	{
+		output = parsingChar.value();
+	}
+	return parsingResult;
+}
+
+
+ResultVariant InputHandler::getString(StringRule rule, string& output)
+{
+	auto [inputResult, input] = textSource_.readTextSource();
+	if (inputResult == false)
+	{
+		return InputResult::FAIL;
+	}
+
+	return parsingString(rule, input, output);
+}
+
+ResultVariant InputHandler::getString(StringRule rule, const string& input, string& output) 
+{
+	return parsingString(rule, input, output);
+}
+
+ResultVariant InputHandler::parsingString(StringRule rule, const string& input, string& output) 
+{
+	auto [parsingResult, parsingString] = StringInputHandler::parseAsString(rule, input);
+	output = parsingString;
+	return parsingResult;
+}
+
+
+ResultVariant InputHandler::askYesNo()
+{
+	auto [inputResult, input] = textSource_.readTextSource();
+	if (inputResult == false)
+	{
+		return InputResult::FAIL;
+	}
+
+	return parsingYesNo(input);
+}
+
+ResultVariant InputHandler::askYesNo(const string& input) 
+{
+	return parsingYesNo(input);
+}
+
+ResultVariant InputHandler::parsingYesNo(const string& input) 
+{
+	if (input.empty())
+	{
+		return InputResult::EMPTY_STRING;
+	}
+	else if (InputParser::isYes(input))
+	{
+		return InputResult::YES;
+	}
+	else if (InputParser::isNo(input)) 
+	{
+		return InputResult::NO;
+	}
+
+	return InputResult::UNKNOWN;
+}
+
+
+bool InputHandler::getAnyKey()
+{
+	auto [inputResult, input] = textSource_.readTextSource();
+	if (inputResult == false)
+	{
+		return false;
+	}
+	return true;
+}
+
+
+PagingPhase InputHandler::getViewPagingInput() 
+{
+	string input = "";
+	ResultVariant inputResult = getString(StringRule::EmptyAllow, input);
+	if (!isVariantEqualTo<InputResult>(inputResult, InputResult::SUCCESS))
 	{
 		return PagingPhase::Error;
 	}
 
-	string input = toUpper(this->str_);
-	if (input == "N") { return PagingPhase::Next; }
-	if (input == "P") { return PagingPhase::Prev; }
-	if (input == "Q") { return PagingPhase::Exit; }
-
-	if (menu == PagingMenu::View) 
+	PagingPhase phase;
+	if (parsingPagingCommand(phase, input))
 	{
-		return PagingPhase::Stay;
+		if (phase == PagingPhase::Enter) { return PagingPhase::Enter; }
+		return phase;
 	}
-	else 
-	{
-		if (this->str_.empty()) 
-		{
-			return PagingPhase::Enter;
-		}
-
-		int parsed = -1;
-		IntParsingResult result = parsingInputNumber(this->str_, parsed);
-
-		if (result == IntParsingResult::POSITIVE_NUMBER) 
-		{
-			this->num_ = parsed;
-			return PagingPhase::PositiveNums;
-		}
-	}
-
-	this->lastError_ = wrapVariant<ResultVariant>(InputResult::INVALID_INT);
 	return PagingPhase::Error;
 }
 
-
-string InputHandler::getNegativeSub(const string& input) 
+PagingPhase InputHandler::getSearchPagingInput(int& output)
 {
-	if (input[0] == '-') 
+	string input = "";
+	ResultVariant inputResult = getString(StringRule::EmptyAllow, input);
+	if (!isVariantEqualTo<InputResult>(inputResult, InputResult::SUCCESS))
 	{
-		string sub = input.substr(1);
-		return sub;
+
+		return PagingPhase::Error;
 	}
-	return input;
-}
 
-bool InputHandler::isAllDigits(const string& str) 
-{
-	for (char ch : str)
+	PagingPhase phase;
+	if (parsingPagingCommand(phase, input)) { return phase; }
+	else
 	{
-		if (isdigit(static_cast<unsigned char>(ch)) == 0) //¼ýÀÚ°¡ ¾Æ´Ï¸é 0 ¹ÝÈ¯
+		auto [parsedResult, parsedInt] = InputParser::parsingInputNumber(input);
+		if (parsedResult == IntParsingResult::POSITIVE_NUMBER)
 		{
-			return false;
+			output = parsedInt.value();
+			return PagingPhase::PositiveNums;
 		}
-	}
-	return true;
-}
-
-bool InputHandler::isAllZero(const string& str) 
-{
-	for (char ch : str)
-	{
-		if (ch != '0') { return false; }
-	}
-	return true;
-}
-
-IntParsingResult InputHandler::parsingInputNumber(const string& input, int& output) 
-{
-	int convertNum = atoi(input.c_str());
-
-	string numCheck = getNegativeSub(input);
-	bool isInputNumber = isAllDigits(numCheck);
-
-	if (input.empty()) 
-	{
-		output = -1;
-		return IntParsingResult::EMPTY;
-	}
-	if (input[0] == '-' && isInputNumber) 
-	{ 
-		output = convertNum;
-		return IntParsingResult::NEGATIVE_NUMBER;
-	}
-	if (isAllZero(input)) 
-	{
-		output = 0;
-		return IntParsingResult::ZERO;
-	}
-	if (!isInputNumber) 
-	{
-		output = -1;
-		return IntParsingResult::INVALID_CHAR; 
-	}
-	output = convertNum;
-	return IntParsingResult::POSITIVE_NUMBER;
-}
-
-ResultVariant InputHandler::waitForAnyKeyOrQuit() 
-{
-	string input;
-	getline(cin, input);
-
-	if (resolveCinFailed()) 
-	{
-		this->str_ = "";
-		return InputResult::FAIL;
-	}
-
-	this->str_ = toUpper(input);
-	return InputResult::SUCCESS;
-}
-
-ResultVariant InputHandler::getInputString(StringRule rule) 
-{
-	string input;
-	getline(cin, input);
-
-	if (resolveCinFailed()) 
-	{
-		this->str_ = "";
-		return InputResult::FAIL;
-	}
-
-	if (input.empty()) 
-	{
-		this->str_ = "";
-		if (rule == StringRule::EmptyAllow) 
-		{
-			return InputResult::SUCCESS;
-		}
-		else 
-		{
-			return InputResult::EMPTY_STRING;
-		}
-	}
-	this->str_ = input;
-	return InputResult::SUCCESS;
-}
-
-InputResult InputHandler::validateIntRule(int i, IntRule rule) 
-{
-	switch (rule) 
-	{
-	case (IntRule::IntAll): return InputResult::SUCCESS;
-	case (IntRule::PositiveOnly): 
-		return (i > 0) ? InputResult::SUCCESS : InputResult::WRONG_NUMBER;
-	case (IntRule::NegativeOnly): 
-		return (i < 0) ? InputResult::SUCCESS : InputResult::WRONG_NUMBER;
-	case (IntRule::ZeroOrPositive): 
-		return (i >= 0) ? InputResult::SUCCESS : InputResult::LENGTH_OVER;
-	case (IntRule::ZeroOrNegative): 
-		return (i <= 0) ? InputResult::SUCCESS : InputResult::LENGTH_OVER;
-	case (IntRule::NegativeOneToPositive): 
-		return (i >= -1) ? InputResult::SUCCESS : InputResult::LENGTH_OVER;
-	default: return InputResult::UNKNOWN;
-	}
-}
-
-ResultVariant InputHandler::getInputNumber(IntRule rule) 
-{
-	string input;
-	getline(cin, input); //ÆÄ½ÌÇÏ±â À§ÇØ ÀÏ´Ü stringÀ¸·Î ÀÔ·Â
-	int num = -1;
-
-	if (resolveCinFailed()) 
-	{
-		this->num_ = -1;
-		return InputResult::FAIL;
-	}
-
-	IntParsingResult result = parsingInputNumber(input, num);
-
-	if (result == IntParsingResult::INVALID_CHAR) { return InputResult::INVALID_INT; }
-	if (result == IntParsingResult::EMPTY) { return InputResult::EMPTY_INT; }
-
-	InputResult ruleResult = validateIntRule(num, rule);
-	if (ruleResult != InputResult::SUCCESS) { return ruleResult; }
-
-	this->num_ = num;
-	return InputResult::SUCCESS;
-}
-
-ResultVariant InputHandler::getInputChar() 
-{
-	string input;
-	getline(cin, input);
-	char ch = '\0';
-
-	if (resolveCinFailed()) 
-	{
-		this->ch_ = ch;
-		return InputResult::FAIL;
 	}
 	
-	if (input.empty()) 
-	{
-		this->ch_ = ch;
-		return InputResult::EMPTY_CHAR;
-	}
-
-	if (input.length() != 1) 
-	{
-		this->ch_ = input[0];
-		this->str_ = input;
-		return InputResult::LENGTH_OVER;
-	}
-
-	if (!isalpha(input[0])) 
-	{
-		this->ch_ = ch;
-		return InputResult::INVALID_CHAR;
-	}
-
-	this->ch_ = input[0];
-	return InputResult::SUCCESS;
+	return PagingPhase::Error;
 }
 
-string InputHandler::toUpper(const string& input) 
+bool InputHandler::parsingPagingCommand(PagingPhase& phase, string& input) 
 {
-	string result = input;
-	for (char& ch : result) 
-	{
-		ch = toupper(static_cast<unsigned char>(ch));
+	input = InputTextUtils::toUpper(input);
+	if (input == "N" || input == "NEXT") 
+	{ 
+		phase = PagingPhase::Next;
+		return true;
 	}
-	return result;
-}
-
-ResultVariant InputHandler::getInputYesNo() 
-{
-	string input;
-	getline(cin, input);
-
-	if (resolveCinFailed()) 
-	{
-		this->str_ = "";
-		return InputResult::FAIL;
+	if (input == "P" || input == "PREV") 
+	{ 
+		phase = PagingPhase::Prev;
+		return true;
 	}
-
-	if (input.empty()) 
-	{
-		this->yesNo_ = false;
-		return InputResult::EMPTY_CHAR;
+	if (input == "Q" || input == "QUIT") 
+	{ 
+		phase = PagingPhase::Exit;
+		return true;
 	}
-
-	this->str_ = toUpper(input);
-	if (this->str_ == "Y" || this->str_ == "YES")
+	if (input == "") 
 	{
-		this->yesNo_ = true;
-		return InputResult::SUCCESS;
-	}
-	if (this->str_ == "N" || this->str_ == "NO")
-	{
-		this->yesNo_ = false;
-		return InputResult::SUCCESS;
-	}
-
-	this->yesNo_ = false;
-	return InputResult::INVALID_YESNO;
-}
-
-bool InputHandler::resolveCinFailed() 
-{
-	if (cin.fail()) 
-	{
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		phase = PagingPhase::Enter;
 		return true;
 	}
 	return false;
 }
+

@@ -168,12 +168,28 @@
     <ClCompile Include="src\UIMenu\SearchMenu\SearchDeleteItemState.cpp">
       <Filter>src\UIMenu\SearchMenu</Filter>
     </ClCompile>
-    <ClCompile Include="src\UIMenu\SearchMenu\SearchEditAgain.cpp">
-      <Filter>소스 파일</Filter>
     <ClCompile Include="src\UIMenu\ViewMenu\ViewMenu.cpp">
       <Filter>src\UIMenu\ViewMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\SearchMenu\SearchDeleteAgainState.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchEditAgain.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IO\InputTextUtils.cpp">
+      <Filter>src\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IO\StringInputHandler.cpp">
+      <Filter>src\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IO\InputParser.cpp">
+      <Filter>src\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IO\IntInputHandler.cpp">
+      <Filter>src\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IO\CharInputHandler.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -327,6 +343,27 @@
     </ClInclude>
     <ClInclude Include="src\UIMenu\ViewMenu\ViewMenu.hpp">
       <Filter>src\UIMenu\ViewMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IO\InputTextUtils.hpp">
+      <Filter>src\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IO\InputTextSource.hpp">
+      <Filter>src\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IO\StringInputHandler.hpp">
+      <Filter>src\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IO\InputParser.hpp">
+      <Filter>src\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IO\IntInputHandler.hpp">
+      <Filter>src\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Common\RuleEnums.hpp">
+      <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IO\CharInputHandler.hpp">
+      <Filter>src\IO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

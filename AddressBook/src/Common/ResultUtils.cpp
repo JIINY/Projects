@@ -1,21 +1,7 @@
-#include "ResultEnums.hpp"
+﻿#include "ResultEnums.hpp"
 #include <string>
 using namespace std;
 
-
-
-string toString(IntParsingResult value) 
-{
-    switch (value) 
-    {
-    case IntParsingResult::POSITIVE_NUMBER: return "IntParsing::POSITIVE_NUMBER";
-    case IntParsingResult::NEGATIVE_NUMBER: return "IntParsing::NEGATIVE_NUMBER";
-    case IntParsingResult::ZERO: return "IntParsing::ZERO";
-    case IntParsingResult::EMPTY: return "IntParsing::EMPTY";
-    case IntParsingResult::INVALID_CHAR: return "IntParsing::INVALID_CHAR";
-    default: return "IntParsing::Default";
-    }
-}
 
 string toString(InputResult value) 
 {
@@ -23,6 +9,8 @@ string toString(InputResult value)
     {
     case InputResult::SUCCESS: return "Input::SUCCESS";
     case InputResult::FAIL: return "Input::FAIL";
+    case InputResult::YES: return "Input::YES";
+    case InputResult::NO: return "Input::NO";
     case InputResult::WRONG_NUMBER: return "Input::WRONG_NUMBER";
     case InputResult::LENGTH_OVER: return "Input::LENGTH_OVER";
     case InputResult::EMPTY_INT: return "Input::EMPTY_INT";
@@ -55,6 +43,7 @@ string toString(LoadOperationResult value)
     case LoadOperationResult::SUCCESS: return "LoadOperationResult::SUCCESS";
     case LoadOperationResult::FAIL: return "LoadOperationResult::Fail";
     case LoadOperationResult::NOT_EXIST_FILE: return "LoadOperationResult::NOT_EXIST_FILE";
+    case LoadOperationResult::EMPTY_FILE: return "LoadOperationResult::EMPTY_FILE";
     default: return "LoadOperationResult::Default";
     }
 }
@@ -139,3 +128,4 @@ string toString(SearchDataResult value)
     default: return "SearchData::Default";
     }
 }
+

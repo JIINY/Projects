@@ -1,4 +1,4 @@
-#include "VariantUtils.hpp"
+ï»¿#include "VariantUtils.hpp"
 #include <iostream>
 #include <optional>
 #include "ResultEnums.hpp"
@@ -7,16 +7,16 @@ using namespace std;
 
 
 
-//ResultVariant µğ¹ö±×¿ë ÇÔ¼ö: variant ³»¿ëÀ» Ãâ·ÂÇÏ´Â º»Ã¼
+//ResultVariant ë””ë²„ê·¸ìš© í•¨ìˆ˜: variant ë‚´ìš©ì„ ì¶œë ¥í•˜ëŠ” ë³¸ì²´
 void printVariant(const ResultVariant& result) 
 {
     visit([](auto&& arg) 
         {
-            cout << toString(arg) << endl; //ResultUtils¿¡¼­ Ãß°¡
+            cout << toString(arg) << endl; //ResultUtilsì—ì„œ ì¶”ê°€
         }, result);
 }
 
-//optional<ResultVariant>°¡ µé¾î¿Ã ¶§ÀÇ Ã³¸®¸¦ À§ÇÑ wrapper (ÇÔ¼ö ¿À¹ö·Îµù)
+//optional<ResultVariant>ê°€ ë“¤ì–´ì˜¬ ë•Œì˜ ì²˜ë¦¬ë¥¼ ìœ„í•œ wrapper (í•¨ìˆ˜ ì˜¤ë²„ë¡œë”©)
 void printVariant(const optional<ResultVariant>& result) 
 {
     if (result.has_value()) 
@@ -28,3 +28,4 @@ void printVariant(const optional<ResultVariant>& result)
         cout << "No Error" << endl;
     }
 }
+
