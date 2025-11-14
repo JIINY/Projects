@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <variant>
 #include <optional>
 #include "../Common/DataType.hpp"
@@ -86,3 +86,4 @@ struct ContextData
     std::optional<ResultVariant> err = std::nullopt;
     int menu = -1;
 };
+

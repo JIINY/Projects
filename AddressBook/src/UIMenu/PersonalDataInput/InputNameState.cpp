@@ -1,4 +1,4 @@
-#include "InputNameState.hpp"
+﻿#include "InputNameState.hpp"
 #include <string>
 #include <optional>
 #include <cassert>
@@ -42,9 +42,9 @@ DataInputPhase InputNameState::update()
 {
 	auto& inputH = owner_.getInputH();
 
-	string name = inputH.getString(StringRule::EmptyDisallow);
-	ResultVariant error = inputH.getLastError();
-	if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS)) 
+	string name = ""; 
+	ResultVariant result = inputH.getString(StringRule::EmptyDisallow, name);
+	if (!isVariantEqualTo<InputResult>(result, InputResult::SUCCESS)) 
 	{
 		owner_.setLastError(wrapVariant<ResultVariant>(EditDataResult::EMPTY_NAME));
 		return DataInputPhase::InputName;
@@ -54,3 +54,4 @@ DataInputPhase InputNameState::update()
 	owner_.setLastError(nullopt);
 	return DataInputPhase::InputPhone;
 }
+

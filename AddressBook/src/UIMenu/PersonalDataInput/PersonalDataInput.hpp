@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <memory>
 #include <optional>
 #include "../../UI/UICommonData.hpp"
@@ -32,16 +32,17 @@ public:
 
 
 private:
-	InputHandler inputH_;
-	UIPrintHandler uiMsgH_;
-	ErrorPrintHandler errorMsgH_;
-	UIFrame frame_;
-	UIUtils ui_;
+	InputHandler inputH_{};
+	UIPrintHandler uiMsgH_{};
+	ErrorPrintHandler errorMsgH_{};
+	UIFrame frame_{};
+	UIUtils ui_{};
 
 	PersonalData data_{};
-	InputMode mode_;
+	InputMode mode_ = InputMode::Add;
 	std::optional<ResultVariant> lastError_ = std::nullopt;
 	std::unique_ptr<IDataInputState> currentState_ = nullptr;
 
 	void transitionTo(DataInputPhase nextPhase);
 };
+

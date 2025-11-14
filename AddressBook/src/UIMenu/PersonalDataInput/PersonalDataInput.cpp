@@ -1,4 +1,4 @@
-#include "PersonalDataInput.hpp"
+ï»¿#include "PersonalDataInput.hpp"
 #include <memory>
 #include <optional>
 #include <cassert>
@@ -13,7 +13,7 @@ using namespace std;
 
 PersonalData PersonalDataInput::run(optional<PersonalData> initialData) 
 {
-	//¸â¹öº¯¼ö ÃÊ±âÈ­
+	//ë©¤ë²„ë³€ìˆ˜ ì´ˆê¸°í™”
 	if (initialData.has_value()) 
 	{
 		data_ = initialData.value();
@@ -24,7 +24,7 @@ PersonalData PersonalDataInput::run(optional<PersonalData> initialData)
 	}
 	lastError_ = nullopt;
 
-	//½ÃÀÛ »óÅÂ·Î ¼³Á¤(ÀÌ¸§ ÀÔ·Â)
+	//ì‹œì‘ ìƒíƒœë¡œ ì„¤ì •(ì´ë¦„ ì…ë ¥)
 	DataInputPhase currentPhase = DataInputPhase::InputName;
 	transitionTo(currentPhase);
 
@@ -87,3 +87,4 @@ void PersonalDataInput::transitionTo(DataInputPhase nextPhase)
 	}
 	}
 }
+

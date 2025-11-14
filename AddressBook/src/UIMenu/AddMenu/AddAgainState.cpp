@@ -1,4 +1,4 @@
-#include "AddAgainState.hpp"
+ï»¿#include "AddAgainState.hpp"
 #include <optional>
 #include "../../UI/AddressBookUI.hpp"
 #include "../../UI/UICommonData.hpp"
@@ -16,7 +16,7 @@ void AddAgainState::draw()
 
 	if (!context.sub.name.empty()) 
 	{
-		frame = uiMsgH.addSuccess(bookUI->getLastAdd() + 1, context.sub); //¼º°ø ¸Þ¼¼Áö
+		frame = uiMsgH.addSuccess(bookUI->getLastAdd() + 1, context.sub); //ì„±ê³µ ë©”ì„¸ì§€
 		frame(errorMsgH);
 	}
 
@@ -28,23 +28,19 @@ AddPhase AddAgainState::update()
 {
 	auto& context = owner_.getContext();
 	auto& inputH = owner_.getInputH();
-
-	bool yesNo = inputH.askYesNo();
-	ResultVariant error = inputH.getLastError();
-
-	if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS)) 
-	{
-		context.err = wrapVariant<ResultVariant>(error);
-		return AddPhase::AddAgain;
-	}
-
 	context.err = nullopt;
-	if (yesNo) 
+
+	ResultVariant result = inputH.askYesNo();
+	if (isVariantEqualTo<InputResult>(result, InputResult::YES))
 	{
 		return AddPhase::AddInputStart;
 	}
-	else 
+	else if (isVariantEqualTo<InputResult>(result, InputResult::NO))
 	{
 		return AddPhase::Exit;
 	}
+
+	context.err = wrapVariant<ResultVariant>(result);
+	return AddPhase::AddAgain;
 }
+

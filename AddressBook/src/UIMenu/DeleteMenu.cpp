@@ -1,4 +1,4 @@
-#include "DeleteMenu.hpp"
+ï»¿#include "DeleteMenu.hpp"
 #include <iostream>
 #include <optional>
 #include "../UI/UICommonData.hpp"
@@ -11,19 +11,13 @@ RemoveOperationResult DeleteMenu::run(AddressBookUI& bookUI, int index, const st
 {
 	optional<ResultVariant> err = nullopt;
 
-	//±×¸®±â
+	//ê·¸ë¦¬ê¸°
 	frame_ = uiMsgH_.deleteConfirm(err, index + 1, name);
 	frame_(errorMsgH_);
 
-	//Ã³¸®
-	bool yesNo = inputH_.askYesNo();
-	lastError_ = inputH_.getLastError();
-	if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS)) 
-	{
-		return RemoveOperationResult::FAIL;
-	}
-
-	if (yesNo) 
+	//ì²˜ë¦¬
+	ResultVariant result = inputH_.askYesNo();
+	if (isVariantEqualTo<InputResult>(result, InputResult::YES))
 	{
 		string removedName;
 		RemoveOperationResult deleteResult = bookUI.extractAddressBook().remove(index, removedName);
@@ -33,15 +27,14 @@ RemoveOperationResult DeleteMenu::run(AddressBookUI& bookUI, int index, const st
 		}
 		else 
 		{
-			lastError_ = deleteResult;
-			errorMsgH_.printErrorMsg(lastError_);
+			result = deleteResult;
+			errorMsgH_.printErrorMsg(result);
 		}
 
 		inputH_.getAnyKey();
 		return deleteResult;
 	}
-	else 
-	{
-		return RemoveOperationResult::FAIL;
-	}
+
+	return RemoveOperationResult::FAIL;
 }
+

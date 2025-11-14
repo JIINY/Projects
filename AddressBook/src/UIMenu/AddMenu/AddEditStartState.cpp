@@ -1,4 +1,4 @@
-#include "AddEditStartState.hpp"
+ï»¿#include "AddEditStartState.hpp"
 #include <optional>
 #include <memory>
 #include "../../Common/VariantUtils.hpp"
@@ -9,7 +9,7 @@
 using namespace std;
 
 
-void AddEditStartState::draw() {} //EditMenu°¡ Ã³¸®
+void AddEditStartState::draw() {} //EditMenuê°€ ì²˜ë¦¬
 
 AddPhase AddEditStartState::update() 
 {
@@ -31,3 +31,4 @@ AddPhase AddEditStartState::update()
 		return AddPhase::AddReview;
 	}
 }
+

@@ -1,10 +1,11 @@
-#include "OutputPrintHandler.hpp"
+ï»¿#include "OutputPrintHandler.hpp"
 #include <iostream>
 #include <iomanip>
 #include "../Common/DataType.hpp"
 #include "../Common/ResultEnums.hpp"
 #include "../Common/VariantUtils.hpp"
 #include "UICommonData.hpp"
+#include "UIUtils.hpp"
 using namespace std;
 
 
@@ -36,7 +37,7 @@ void OutputPrintHandler::printLong2Line()
 void OutputPrintHandler::printAddTitle() 
 {
     cout << "=======================================" << endl;
-    cout << left << setw(20) << "ÁÖ¼Ò·Ï: Ãß°¡ ";
+    cout << left << setw(20) << "ì£¼ì†Œë¡: ì¶”ê°€ ";
     cout << right << setw(18) << version << endl;
     cout << "=======================================" << endl;
 }
@@ -44,7 +45,7 @@ void OutputPrintHandler::printAddTitle()
 void OutputPrintHandler::printAddEditTitle() 
 {
     cout << "=======================================" << endl;
-    cout << left << setw(20) << "ÁÖ¼Ò·Ï: Ãß°¡ ¼öÁ¤ ";
+    cout << left << setw(20) << "ì£¼ì†Œë¡: ì¶”ê°€ ìˆ˜ì • ";
     cout << right << setw(18) << version << endl;
     cout << "=======================================" << endl;
 }
@@ -52,7 +53,7 @@ void OutputPrintHandler::printAddEditTitle()
 void OutputPrintHandler::printEditTitle() 
 {
     cout << "=======================================" << endl;
-    cout << left << setw(20) << "ÁÖ¼Ò·Ï: ¼öÁ¤ ";
+    cout << left << setw(20) << "ì£¼ì†Œë¡: ìˆ˜ì • ";
     cout << right << setw(18) << version << endl;
     cout << "=======================================" << endl;
 }
@@ -60,7 +61,7 @@ void OutputPrintHandler::printEditTitle()
 void OutputPrintHandler::printSearchTitle() 
 {
 	cout << "=======================================" << endl;
-	cout << left << setw(20) << "ÁÖ¼Ò·Ï: Ã£±â ";
+	cout << left << setw(20) << "ì£¼ì†Œë¡: ì°¾ê¸° ";
 	cout << right << setw(18) << version << endl;
 	cout << "=======================================" << endl;
 }
@@ -68,7 +69,7 @@ void OutputPrintHandler::printSearchTitle()
 void OutputPrintHandler::printSearchLongTitle() 
 {
 	cout << "============================================================================================================" << endl;
-	cout << left << setw(20) << "ÁÖ¼Ò·Ï: Ã£±â ";
+	cout << left << setw(20) << "ì£¼ì†Œë¡: ì°¾ê¸° ";
 	cout << right << setw(87) << version << endl;
 	cout << "============================================================================================================" << endl;
 }
@@ -76,7 +77,7 @@ void OutputPrintHandler::printSearchLongTitle()
 void OutputPrintHandler::printEditLongTitle()
 {
 	cout << "============================================================================================================" << endl;
-	cout << left << setw(20) << "ÁÖ¼Ò·Ï: ¼öÁ¤ ";
+	cout << left << setw(20) << "ì£¼ì†Œë¡: ìˆ˜ì • ";
 	cout << right << setw(87) << version << endl;
 	cout << "============================================================================================================" << endl;
 }
@@ -84,7 +85,7 @@ void OutputPrintHandler::printEditLongTitle()
 void OutputPrintHandler::printDeleteLongTitle()
 {
 	cout << "============================================================================================================" << endl;
-	cout << left << setw(20) << "ÁÖ¼Ò·Ï: »èÁ¦ ";
+	cout << left << setw(20) << "ì£¼ì†Œë¡: ì‚­ì œ ";
 	cout << right << setw(87) << version << endl;
 	cout << "============================================================================================================" << endl;
 }
@@ -92,14 +93,14 @@ void OutputPrintHandler::printDeleteLongTitle()
 void OutputPrintHandler::printViewTitle() 
 {
 	cout << "============================================================================================================" << endl;
-	cout << left << setw(20) << "ÁÖ¼Ò·Ï: º¸±â ";
+	cout << left << setw(20) << "ì£¼ì†Œë¡: ë³´ê¸° ";
 	cout << right << setw(87) << version << endl;
 	cout << "============================================================================================================" << endl;
 }
 
 void OutputPrintHandler::printMenuSelect() 
 {
-    cout << "¸Þ´º¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä: ";
+    cout << "ë©”ë‰´ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”: ";
 }
 
 void OutputPrintHandler::printCancel(ActionType action) 
@@ -107,116 +108,116 @@ void OutputPrintHandler::printCancel(ActionType action)
 	switch (action) 
 	{
 	case ActionType::Input:
-		cout << "ÀÔ·ÂÀ»";
+		cout << "ìž…ë ¥ì„";
 		break;
 	case ActionType::Edit:
-		cout << "¼öÁ¤À»";
+		cout << "ìˆ˜ì •ì„";
 		break;
 	case ActionType::Delete:
-		cout << "»èÁ¦¸¦";
+		cout << "ì‚­ì œë¥¼";
 		break;
 	case ActionType::AddConfirm:
-		cout << "Ãß°¡¸¦";
+		cout << "ì¶”ê°€ë¥¼";
 		break;
 	case ActionType::Search:
-		cout << "°Ë»öÀ»";
+		cout << "ê²€ìƒ‰ì„";
 		break;
 	}
-    cout << " Ãë¼ÒÇÏ½Ã°Ú½À´Ï±î? (Y/N): ";
+    cout << " ì·¨ì†Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N): ";
 }
 
 void OutputPrintHandler::printTableAction(ActionType action) 
 {
-	cout << "°Ë»ö °á°ú¿¡¼­ ";
+	cout << "ê²€ìƒ‰ ê²°ê³¼ì—ì„œ ";
 	switch (action) {
 	case ActionType::Edit:
-		cout << "¼öÁ¤ÇÒ";
+		cout << "ìˆ˜ì •í• ";
 		break;
 	case ActionType::Delete:
-		cout << "»èÁ¦ÇÒ";
+		cout << "ì‚­ì œí• ";
 		break;
 	default:
 		break;
 	}
-	cout << " Ç×¸ñÀ» ¼±ÅÃÇØ ÁÖ¼¼¿ä: ";
+	cout << " í•­ëª©ì„ ì„ íƒí•´ ì£¼ì„¸ìš”: ";
 }
 
 void OutputPrintHandler::printMainMenu() 
 {
     cout << "=======================================" << endl;
-    cout << " ÁÖ¼Ò·Ï " << setw(30) << version << endl;
+    cout << " ì£¼ì†Œë¡ " << setw(30) << version << endl;
     cout << "=======================================" << endl;
-    cout << "[1] ÁÖ¼Ò·Ï Ãß°¡" << endl;
-    cout << "[2] ÁÖ¼Ò·Ï º¸±â" << endl;
-    cout << "[3] ÁÖ¼Ò·Ï Ã£±â + ¼öÁ¤/»èÁ¦" << endl;
-    cout << "[0] Á¾·á" << endl;
+    cout << "[1] ì£¼ì†Œë¡ ì¶”ê°€" << endl;
+    cout << "[2] ì£¼ì†Œë¡ ë³´ê¸°" << endl;
+    cout << "[3] ì£¼ì†Œë¡ ì°¾ê¸° + ìˆ˜ì •/ì‚­ì œ" << endl;
+    cout << "[0] ì¢…ë£Œ" << endl;
     cout << "=======================================" << endl;
 }
 
 void OutputPrintHandler::printSearchMenu() 
 {
-	cout << "[1] ÀÌ¸§À¸·Î Ã£±â" << endl;
-	cout << "[2] ÈÞ´ëÆù ¹øÈ£·Î Ã£±â" << endl;
-	cout << "[3] ÁÖ¼Ò·Î Ã£±â" << endl;
-	cout << "[4] ¿ìÆí¹øÈ£·Î Ã£±â" << endl;
-	cout << "[5] ÀÌ¸ÞÀÏ·Î Ã£±â" << endl;
+	cout << "[1] ì´ë¦„ìœ¼ë¡œ ì°¾ê¸°" << endl;
+	cout << "[2] íœ´ëŒ€í° ë²ˆí˜¸ë¡œ ì°¾ê¸°" << endl;
+	cout << "[3] ì£¼ì†Œë¡œ ì°¾ê¸°" << endl;
+	cout << "[4] ìš°íŽ¸ë²ˆí˜¸ë¡œ ì°¾ê¸°" << endl;
+	cout << "[5] ì´ë©”ì¼ë¡œ ì°¾ê¸°" << endl;
 	cout << "---------------------------------------" << endl;
-	cout << "[0] Ãë¼ÒÇÏ°í µ¹¾Æ°¡±â" << endl;
+	cout << "[0] ì·¨ì†Œí•˜ê³  ëŒì•„ê°€ê¸°" << endl;
 	cout << "=======================================" << endl;
 }
 
 void OutputPrintHandler::printInputName() 
 {
-	cout << "ÀÌ    ¸§: ";
+	cout << "ì´    ë¦„: ";
 }
 void OutputPrintHandler::printInputPhone() 
 {
-	cout << "ÇÚ µå Æù: ";
+	cout << "í•¸ ë“œ í°: ";
 }
 void OutputPrintHandler::printInputAddress() 
 {
-	cout << "ÁÖ    ¼Ò: ";
+	cout << "ì£¼    ì†Œ: ";
 }
 void OutputPrintHandler::printInputZipCode() 
 {
-	cout << "¿ìÆí¹øÈ£: ";
+	cout << "ìš°íŽ¸ë²ˆí˜¸: ";
 }
 void OutputPrintHandler::printInputEmail() 
 {
-	cout << "ÀÌ ¸Þ ÀÏ: ";
+	cout << "ì´ ë©” ì¼: ";
 }
 
 void OutputPrintHandler::printPersonalData(const PersonalData& p) 
 {
-    cout << "ÀÌ    ¸§: " << p.name << endl;
-    cout << "ÇÚ µå Æù: " << p.phone << endl;
-    cout << "ÁÖ    ¼Ò: " << p.address << endl;
-    cout << "¿ìÆí¹øÈ£: " << p.zipCode << endl;
-    cout << "ÀÌ ¸Þ ÀÏ: " << p.email << endl;
+    cout << "ì´    ë¦„: " << p.name << endl;
+    cout << "í•¸ ë“œ í°: " << p.phone << endl;
+    cout << "ì£¼    ì†Œ: " << p.address << endl;
+    cout << "ìš°íŽ¸ë²ˆí˜¸: " << p.zipCode << endl;
+    cout << "ì´ ë©” ì¼: " << p.email << endl;
     cout << "=======================================" << endl;
 }
 
 void OutputPrintHandler::printAddMenu() 
 {
-	cout << "[1] Ãß°¡ÇÏ±â" << endl;
-	cout << "[2] ÀÔ·Â ¼öÁ¤ÇÏ±â" << endl;
-	cout << "[0] Ãë¼ÒÇÏ°í µ¹¾Æ°¡±â" << endl;
+	cout << "[1] ì¶”ê°€í•˜ê¸°" << endl;
+	cout << "[2] ìž…ë ¥ ìˆ˜ì •í•˜ê¸°" << endl;
+	cout << "[0] ì·¨ì†Œí•˜ê³  ëŒì•„ê°€ê¸°" << endl;
 	cout << "=======================================" << endl;
 }
 
 void OutputPrintHandler::printSearchSubMenu() 
 {
-	cout << "[1] ÁÖ¼Ò·Ï ¼öÁ¤ÇÏ±â" << endl;
-	cout << "[2] ÁÖ¼Ò·Ï »èÁ¦ÇÏ±â" << endl;
-	cout << "[9] ´Ù½Ã °Ë»öÇÏ±â" << endl;
-	cout << "[0] ¸ÞÀÎ ¸Þ´º·Î µ¹¾Æ°¡±â" << endl;
+	cout << "[1] ì£¼ì†Œë¡ ìˆ˜ì •í•˜ê¸°" << endl;
+	cout << "[2] ì£¼ì†Œë¡ ì‚­ì œí•˜ê¸°" << endl;
+	cout << "[9] ë‹¤ì‹œ ê²€ìƒ‰í•˜ê¸°" << endl;
+	cout << "[0] ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
 	cout << "=======================================" << endl;
 }
 
 void OutputPrintHandler::printSearchEmptySubMenu() 
 {
-	cout << "[9] ´Ù½Ã °Ë»öÇÏ±â" << endl;
-	cout << "[0] ¸ÞÀÎ ¸Þ´º·Î µ¹¾Æ°¡±â" << endl;
+	cout << "[9] ë‹¤ì‹œ ê²€ìƒ‰í•˜ê¸°" << endl;
+	cout << "[0] ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
 	cout << "=======================================" << endl;
 }
 
@@ -228,48 +229,59 @@ void OutputPrintHandler::printTableTitle()
 
 void OutputPrintHandler::printTablePersonalData(const int i, const PersonalData& p) 
 {
+	UIUtils ui_;
+	string no = ui_.truncateByWidth(to_string(i), f.no);
+	string name = ui_.truncateByWidth(p.name, f.name);
+	string phone = ui_.truncateByWidth(p.phone, f.phone);
+	string address = ui_.truncateByWidth(p.address, f.address);
+	string zipCode = ui_.truncateByWidth(p.zipCode, f.zipCode);
+	string email = ui_.truncateByWidth(p.email, f.email);
+
 	cout << left;
-	cout << setw(f.no) << i << setw(f.name) << p.name << setw(f.phone) << p.phone << setw(f.address) << p.address
-		<< setw(f.zipCode) << p.zipCode << setw(f.email) << p.email << endl;
+	cout << no << ui_.getPadding(no, f.no);
+	cout << name << ui_.getPadding(name, f.name);
+	cout << phone << ui_.getPadding(phone, f.phone);
+	cout << address << ui_.getPadding(address, f.address);
+	cout << zipCode << ui_.getPadding(zipCode, f.zipCode);
+	cout << email << endl;
 }
 
-void OutputPrintHandler::printTableContinue() 
+void OutputPrintHandler::printTableCommand() 
 {
-	cout << "[P] ÀÌÀü ÆäÀÌÁö, [N] ´ÙÀ½ ÆäÀÌÁö, [Q] ¸ÞÀÎ ¸Þ´º·Î µ¹¾Æ°¡±â" << endl;
+	cout << "[P] ì´ì „ íŽ˜ì´ì§€, [N] ë‹¤ìŒ íŽ˜ì´ì§€, [Q] ì´ì „ìœ¼ë¡œ ëŒì•„ê°€ê¸°" << endl;
 }
 
 void OutputPrintHandler::printTableComplete() 
 {
-	cout << "ÁÖ¼Ò·ÏÀÇ ³¡ÀÔ´Ï´Ù." << endl;
-	cout << "[P] ÀÌÀü ÆäÀÌÁö, [N] ´ÙÀ½ ÆäÀÌÁö, [Q] ¸ÞÀÎ ¸Þ´º·Î µ¹¾Æ°¡±â" << endl;
+	cout << "ì£¼ì†Œë¡ì˜ ëìž…ë‹ˆë‹¤." << endl;
 }
 
 void OutputPrintHandler::printInputCommand() 
 {
-	cout << "¿øÇÏ´Â ¸í·É¾î Å°¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä: ";
+	cout << "ì›í•˜ëŠ” ëª…ë ¹ì–´ í‚¤ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”: ";
 }
 
-void OutputPrintHandler::printTableSearchEnd() 
+void OutputPrintHandler::printTableSearchEnd()
 {
-	cout << "°Ë»öÀÌ ³¡³µ½À´Ï´Ù. ¼öÁ¤/»èÁ¦ÇÏ½Ã·Á¸é ¸Þ´º¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä. ";
+	cout << "ê²€ìƒ‰ì´ ëë‚¬ìŠµë‹ˆë‹¤. ìˆ˜ì •/ì‚­ì œí•˜ì‹œë ¤ë©´ ë©”ë‰´ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”. ";
 }
 
 void OutputPrintHandler::printTableEditSuccess(const int i, const string& name) 
 {
-	cout << "[¿Ï·á] " << i << "¹ø " << name << "ÀÌ(°¡) ¼öÁ¤µÇ¾ú½À´Ï´Ù." << endl;
-	cout << "ÀÌ¾î¼­ ¼öÁ¤ÇÏ½Ã·Á¸é Ç×¸ñÀ» ¼±ÅÃÇØ ÁÖ¼¼¿ä.";
+	cout << "[ì™„ë£Œ] " << i << "ë²ˆ " << name << "ì´(ê°€) ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
+	cout << "ì´ì–´ì„œ ìˆ˜ì •í•˜ì‹œë ¤ë©´ í•­ëª©ì„ ì„ íƒí•´ ì£¼ì„¸ìš”.";
 }
 
 void OutputPrintHandler::printTableDeleteSuccess(int i, const string& name)
 {
-	cout << "[¿Ï·á] " << i << "¹ø " << name << "ÀÌ(°¡) »èÁ¦µÇ¾ú½À´Ï´Ù." << endl;
-	cout << "ÀÌ¾î¼­ »èÁ¦ÇÏ½Ã·Á¸é Ç×¸ñÀ» ¼±ÅÃÇØ ÁÖ¼¼¿ä.";
+	cout << "[ì™„ë£Œ] " << i << "ë²ˆ " << name << "ì´(ê°€) ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
+	cout << "ì´ì–´ì„œ ì‚­ì œí•˜ì‹œë ¤ë©´ í•­ëª©ì„ ì„ íƒí•´ ì£¼ì„¸ìš”.";
 }
 
 void OutputPrintHandler::printTableStop() 
 {
 	cout << "------------------------------------------------------------------------------------------------------------" << endl;
-	cout << "ÁÖ¼Ò·Ï º¸±â¸¦ Á¾·áÇÏ½Ã°Ú½À´Ï±î? (Y/N) ";
+	cout << "ì£¼ì†Œë¡ ë³´ê¸°ë¥¼ ì¢…ë£Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N) ";
 }
 
 void OutputPrintHandler::printAddSuccess(const int i, const PersonalData& p) 
@@ -277,110 +289,124 @@ void OutputPrintHandler::printAddSuccess(const int i, const PersonalData& p)
 	cout << "============================================================================================================" << endl;
 	cout << " No.   Name        PhoneNumber      Address                                ZipCode    E-Mail   " << endl;
 	cout << "------------------------------------------------------------------------------------------------------------" << endl;
+
+	UIUtils ui_;
+	string no = ui_.truncateByWidth(to_string(i), f.no);
+	string name = ui_.truncateByWidth(p.name, f.name);
+	string phone = ui_.truncateByWidth(p.phone, f.phone);
+	string address = ui_.truncateByWidth(p.address, f.address);
+	string zipCode = ui_.truncateByWidth(p.zipCode, f.zipCode);
+	string email = ui_.truncateByWidth(p.email, f.email);
+
 	cout << left;
-	cout << setw(f.no) << i << setw(f.name) << p.name << setw(f.phone) << p.phone << setw(f.address) << p.address
-		<< setw(f.zipCode) << p.zipCode << setw(f.email) << p.email << endl;
+	cout << no << ui_.getPadding(no, f.no);
+	cout << name << ui_.getPadding(name, f.name);
+	cout << phone << ui_.getPadding(phone, f.phone);
+	cout << address << ui_.getPadding(address, f.address);
+	cout << zipCode << ui_.getPadding(zipCode, f.zipCode);
+	cout << email << endl;
 	cout << "============================================================================================================" << endl;
-	cout << "[¿Ï·á] ÁÖ¼Ò·Ï¿¡ " << p.name << "ÀÌ/°¡ Ãß°¡µÇ¾ú½À´Ï´Ù." << endl;
+	cout << "[ì™„ë£Œ] ì£¼ì†Œë¡ì— " << p.name << "ì´/ê°€ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
 	cout << "---------------------------------------" << endl;
 }
 
 void OutputPrintHandler::printAddAgain() 
 {
-	cout << "ÀÌ¾î¼­ Ãß°¡ÇÏ½Ã°Ú½À´Ï±î? (Y/N): ";
+	cout << "ì´ì–´ì„œ ì¶”ê°€í•˜ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N): ";
 }
 
 void OutputPrintHandler::printPersonalEdit(const PersonalData& p) 
 {
-	cout << "[1] ÀÌ    ¸§: " << p.name << endl;
-	cout << "[2] ÇÚ µå Æù: " << p.phone << endl;
-	cout << "[3] ÁÖ    ¼Ò: " << p.address << endl;
-	cout << "[4] ¿ìÆí¹øÈ£: " << p.zipCode << endl;
-	cout << "[5] ÀÌ ¸Þ ÀÏ: " << p.email << endl;
-	cout << "[6] ÀüºÎ ¼öÁ¤" << endl;
+	cout << "[1] ì´    ë¦„: " << p.name << endl;
+	cout << "[2] í•¸ ë“œ í°: " << p.phone << endl;
+	cout << "[3] ì£¼    ì†Œ: " << p.address << endl;
+	cout << "[4] ìš°íŽ¸ë²ˆí˜¸: " << p.zipCode << endl;
+	cout << "[5] ì´ ë©” ì¼: " << p.email << endl;
+	cout << "[6] ì „ë¶€ ìˆ˜ì •" << endl;
 	cout << "---------------------------------------" << endl;
 }
 
 void OutputPrintHandler::printAddEditConfirm() 
 {
-	cout << "[9] ¼öÁ¤ ¿Ï·áÇÏ°í Ãß°¡ÇÏ±â" << endl;
-	cout << "[0] Ãë¼ÒÇÏ°í µ¹¾Æ°¡±â" << endl;
+	cout << "[9] ìˆ˜ì • ì™„ë£Œí•˜ê³  ì¶”ê°€í•˜ê¸°" << endl;
+	cout << "[0] ì·¨ì†Œí•˜ê³  ëŒì•„ê°€ê¸°" << endl;
 	cout << "=======================================" << endl;
 }
 
 void OutputPrintHandler::printEditConfirm() 
 {
-	cout << "[9] ¼öÁ¤ ¿Ï·á" << endl;
-	cout << "[0] Ãë¼ÒÇÏ°í µ¹¾Æ°¡±â" << endl;
+	cout << "[9] ìˆ˜ì • ì™„ë£Œ" << endl;
+	cout << "[0] ì·¨ì†Œí•˜ê³  ëŒì•„ê°€ê¸°" << endl;
 	cout << "=======================================" << endl;
 }
 
 void OutputPrintHandler::printEditInput() 
 {
-	cout << "¼öÁ¤ÇÒ Ç×¸ñÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä: ";
+	cout << "ìˆ˜ì •í•  í•­ëª©ì„ ìž…ë ¥í•´ ì£¼ì„¸ìš”: ";
 }
 
 void OutputPrintHandler::printEditName() 
 {
-	cout << "[1] ÀÌ   ¸§: ";
+	cout << "[1] ì´   ë¦„: ";
 }
 
 void OutputPrintHandler::printEditPhone() 
 {
-	cout << "[2] ÇÚ µå Æù: ";
+	cout << "[2] í•¸ ë“œ í°: ";
 }
 
 void OutputPrintHandler::printEditAddress() 
 {
-	cout << "[3] ÁÖ    ¼Ò: ";
+	cout << "[3] ì£¼    ì†Œ: ";
 }
 
 void OutputPrintHandler::printEditZipCode() 
 {
-	cout << "[4] ¿ìÆí¹øÈ£: ";
+	cout << "[4] ìš°íŽ¸ë²ˆí˜¸: ";
 }
 
 void OutputPrintHandler::printEditEmail() 
 {
-	cout << "[5] ÀÌ ¸Þ ÀÏ: ";
+	cout << "[5] ì´ ë©” ì¼: ";
 }
 
 void OutputPrintHandler::printEditAgain() 
 {
-	cout << "[¿Ï·á] ¼öÁ¤µÇ¾ú½À´Ï´Ù." << endl;
+	cout << "[ì™„ë£Œ] ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
 	cout << "=======================================" << endl;
-	cout << "°è¼Ó ¼öÁ¤ÇÏ½Ã°Ú½À´Ï±î? (Y/N): ";
+	cout << "ê³„ì† ìˆ˜ì •í•˜ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N): ";
 }
 
 void OutputPrintHandler::printAddConfirm() 
 {
 	cout << "=======================================" << endl;
-	cout << "Ãß°¡ÇÏ½Ã°Ú½À´Ï±î? (Y/N): ";
+	cout << "ì¶”ê°€í•˜ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N): ";
 }
 
 void OutputPrintHandler::printEditItem() 
 {
 	cout << "---------------------------------------" << endl;
-	cout << "¼öÁ¤ÇÒ ÁÖ¼Ò·ÏÀÇ ¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä: ";
+	cout << "ìˆ˜ì •í•  ì£¼ì†Œë¡ì˜ ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”: ";
 }
 
 void OutputPrintHandler::printDeleteItem() {
 	cout << "---------------------------------------" << endl;
-	cout << "»èÁ¦ÇÒ ÁÖ¼Ò·ÏÀÇ ¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä: ";
+	cout << "ì‚­ì œí•  ì£¼ì†Œë¡ì˜ ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”: ";
 }
 
 void OutputPrintHandler::printDeleteConfirm(int i, const string& name) 
 {
-	cout << i << "¹ø " << name << "À»(¸¦) Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î? (Y/N): ";
+	cout << i << "ë²ˆ " << name << "ì„(ë¥¼) ì •ë§ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N): ";
 }
 
 void OutputPrintHandler::printSearchAgain() 
 {
 	cout << "---------------------------------------" << endl;
-	cout << "´Ù½Ã °Ë»öÇÏ½Ã°Ú½À´Ï±î? (Y/N): ";
+	cout << "ë‹¤ì‹œ ê²€ìƒ‰í•˜ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N): ";
 }
 
 void OutputPrintHandler::printSearchEmpty() 
 {
-	cout << "°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù. ¸Þ´º¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä.";
+	cout << "ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤. ë©”ë‰´ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”.";
 }
+

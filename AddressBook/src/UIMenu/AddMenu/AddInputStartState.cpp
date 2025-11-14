@@ -1,11 +1,11 @@
-#include "AddInputStartState.hpp"
+ï»¿#include "AddInputStartState.hpp"
 #include <optional>
 #include "AddMenu.hpp"
 #include "../PersonalDataInput/PersonalDataInput.hpp"
 using namespace std;
 
 
-void AddInputStartState::draw() {} //PersonalDataInputÅ¬·¡½º°¡ Ã³¸®
+void AddInputStartState::draw() {} //PersonalDataInputí´ë˜ìŠ¤ê°€ ì²˜ë¦¬
 
 AddPhase AddInputStartState::update() 
 {
@@ -17,3 +17,4 @@ AddPhase AddInputStartState::update()
 
 	return AddPhase::AddReview;
 }
+

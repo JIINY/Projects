@@ -1,4 +1,4 @@
-#include "SearchDeleteItemState.hpp"
+﻿#include "SearchDeleteItemState.hpp"
 #include <vector>
 #include <optional>
 #include <utility>
@@ -46,3 +46,4 @@ SearchPhase SearchDeleteItemState::update()
 	}
 	return SearchPhase::DeleteAgain;
 }
+

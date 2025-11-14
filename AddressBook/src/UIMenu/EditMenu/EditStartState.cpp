@@ -1,4 +1,4 @@
-#include "EditStartState.hpp"
+﻿#include "EditStartState.hpp"
 #include <optional>
 #include "EditMenu.hpp"
 using namespace std;
@@ -33,12 +33,12 @@ EditPhase EditStartState::update()
 {
 	auto& context = owner_.getContext();
 	auto& inputH = owner_.getInputH();
+	context.menu = -1;
 
-	context.menu = inputH.getInt(IntRule::ZeroOrPositive);
-	ResultVariant error = inputH.getLastError();
-	if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS)) 
+	ResultVariant result = inputH.getInt(IntRule::ZeroOrPositive, context.menu);
+	if (!isVariantEqualTo<InputResult>(result, InputResult::SUCCESS)) 
 	{
-		context.err = wrapVariant<ResultVariant>(error);
+		context.err = wrapVariant<ResultVariant>(result);
 		return EditPhase::EditStart;
 	}
 
@@ -55,9 +55,10 @@ EditPhase EditStartState::update()
 		return EditPhase::EditItem;
 	default: 
 	{
-		error = MenuSelectResult::WRONG_INDEX;
-		context.err = wrapVariant<ResultVariant>(error);
+		result = MenuSelectResult::WRONG_INDEX;
+		context.err = wrapVariant<ResultVariant>(result);
 		return EditPhase::EditStart;
 	}
 	}
 }
+

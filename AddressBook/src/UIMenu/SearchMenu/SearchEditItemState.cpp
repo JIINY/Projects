@@ -1,7 +1,8 @@
-#include "SearchEditItemState.hpp"
+ï»¿#include "SearchEditItemState.hpp"
 #include <vector>
 #include <optional>
 #include <utility>
+#include <cassert>
 #include "../../UI/AddressBookUI.hpp"
 #include "../../UI/UICommonData.hpp"
 #include "../../UI/UICommonHeader.hpp"
@@ -17,25 +18,26 @@ SearchPhase SearchEditItemState::update()
 	auto& resultVec = owner_.accessSearchResult();
 	int i = context.menu;
 
-	if (i >= resultVec.size()) 
-	{
-		context.err = wrapVariant<ResultVariant>(InputResult::WRONG_NUMBER);
-		return SearchPhase::EditItem;
-	}
+	assert(i < resultVec.size() && "SearchEditItemState: Invalid index received.");
 
 	PersonalData dataToEdit = resultVec[i].first;
 	int index = resultVec[i].second;
+	int validIndex = bookUI->extractAddressBook().findIndexByData(dataToEdit);
+
+	assert(validIndex != -1 && "SearchEditItemState: Data in SearchResult_ is stale and not found in AddressBook.");
 
 	EditMenu editMenu(InputMode::Edit);
 	optional<PersonalData> editResult = editMenu.run(*bookUI, dataToEdit);
 	if (editResult.has_value()) 
 	{
 		PersonalData editedData = editResult.value();
-		AddOperationResult addResult = bookUI->extractAddressBook().edit(index, editedData);
+		AddOperationResult addResult = bookUI->extractAddressBook().edit(validIndex, editedData);
 
 		if (addResult == AddOperationResult::SUCCESS) 
 		{
-			resultVec[i].first = editedData; //°Ë»ö °á°úµµ ¾÷µ¥ÀÌÆ®
+			resultVec[i].first = editedData; //ê²€ìƒ‰ ê²°ê³¼ë„ ì—…ë°ì´íŠ¸
+			resultVec[i].second = bookUI->getLastAdd();
+
 			context.p = editedData;
 			context.err = wrapVariant<ResultVariant>(addResult);
 		}
@@ -46,7 +48,8 @@ SearchPhase SearchEditItemState::update()
 	}
 	else
 	{
-		context.err = nullopt; //¼öÁ¤ Ãë¼Ò
+		context.err = nullopt; //ìˆ˜ì • ì·¨ì†Œ
 	}
-	return SearchPhase::EditAgain;
+	return SearchPhase::SearchResult;
 }
+

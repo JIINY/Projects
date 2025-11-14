@@ -1,4 +1,4 @@
-#include "SearchAgainState.hpp"
+﻿#include "SearchAgainState.hpp"
 #include <optional>
 #include "../../UI/UICommonData.hpp"
 #include "../../UI/UICommonHeader.hpp"
@@ -22,21 +22,18 @@ SearchPhase SearchAgainState::update()
 	auto& context = owner_.getContext();
 	auto& inputH = owner_.getInputH();
 
-	bool yesNo = inputH.askYesNo();
-	ResultVariant error = inputH.getLastError();
-	if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS)) 
-	{
-		context.err = wrapVariant<ResultVariant>(error);
-		return SearchPhase::SearchAgain;
-	}
-
+	ResultVariant result = inputH.askYesNo();
 	context.err = nullopt;
-	if (yesNo) 
+	if (isVariantEqualTo<InputResult>(result, InputResult::YES))
 	{
 		return SearchPhase::SearchStart;
 	}
-	else 
+	else if (isVariantEqualTo<InputResult>(result, InputResult::NO))
 	{
 		return SearchPhase::SearchResult;
 	}
+
+	context.err = wrapVariant<ResultVariant>(result);
+	return SearchPhase::SearchAgain;
 }
+

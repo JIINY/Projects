@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "ISearchState.hpp"
 
 class SearchResultState : public ISearchState
@@ -15,3 +15,4 @@ private:
 	SearchPhase processEmptyMenu(int menu);
 	SearchPhase processResultMenu(int menu);
 };
+

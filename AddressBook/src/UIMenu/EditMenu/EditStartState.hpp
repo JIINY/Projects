@@ -1,11 +1,12 @@
-#pragma once
+ï»¿#pragma once
 #include "IEditState.hpp"
 
 class EditStartState : public IEditState
 {
 public:
-	using IEditState::IEditState; //ÁÖÀÎÀ» ¹Ş´Â »ı¼ºÀÚ¸¦ »ó¼Ó
+	using IEditState::IEditState; //ì£¼ì¸ì„ ë°›ëŠ” ìƒì„±ìë¥¼ ìƒì†
 	
 	virtual void draw() override;
 	virtual EditPhase update() override;
 };
+

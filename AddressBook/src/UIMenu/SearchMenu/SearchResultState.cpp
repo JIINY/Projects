@@ -1,4 +1,4 @@
-#include "SearchResultState.hpp"
+﻿#include "SearchResultState.hpp"
 #include <vector>
 #include <optional>
 #include <utility>
@@ -14,9 +14,10 @@ void SearchResultState::draw()
 	auto& uiMsgH = owner_.getUIMsgH();
 	auto& errorMsgH = owner_.getErrorMsgH();
 	int resultSize = static_cast<int>(owner_.accessSearchResult().size());
+	auto* bookUI = owner_.getBookUI();
 
 	owner_.drawLongTitle();
-	owner_.drawResultTable();
+	owner_.drawResultTable(*bookUI, context);
 	owner_.drawResultMsg();
 
 	if (resultSize == 0) 
@@ -39,11 +40,10 @@ SearchPhase SearchResultState::update()
 	auto& inputH = owner_.getInputH();
 	int resultSize = static_cast<int>(owner_.accessSearchResult().size());
 
-	context.menu = inputH.getInt(IntRule::ZeroOrPositive);
-	ResultVariant error = inputH.getLastError();
-	if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS)) 
+	ResultVariant result = inputH.getInt(IntRule::ZeroOrPositive, context.menu);
+	if (!isVariantEqualTo<InputResult>(result, InputResult::SUCCESS)) 
 	{
-		context.err = wrapVariant<ResultVariant>(error);
+		context.err = wrapVariant<ResultVariant>(result);
 		return SearchPhase::SearchResult;
 	}
 
@@ -109,7 +109,7 @@ SearchPhase SearchResultState::processResultMenu(int menu)
 	case(9): 
 	{
 		owner_.setMode(SearchMode::Search);
-		return SearchPhase::SearchAgain;
+		return SearchPhase::SearchStart;
 	}
 	case(0):
 	{
@@ -124,3 +124,4 @@ SearchPhase SearchResultState::processResultMenu(int menu)
 	}
 	}
 }
+

@@ -1,4 +1,4 @@
-#include "MainMenu.hpp"
+ï»¿#include "MainMenu.hpp"
 #include <iostream>
 #include <optional>
 #include "../UI/UICommonData.hpp"
@@ -14,8 +14,6 @@ void MainMenu::run(AddressBookUI& bookUI)
 {
 	processMainMenu(bookUI);
 }
-ResultVariant MainMenu::getLastError() const { return this->lastError_; }
-
 
 void MainMenu::processMainMenu(AddressBookUI& bookUI)
 {
@@ -24,37 +22,37 @@ void MainMenu::processMainMenu(AddressBookUI& bookUI)
 
 	while (true)
 	{
-		//¸ŞÀÎ¸Ş´º + ¿¡·¯¸Ş¼¼Áö Ãâ·Â
+		//ë©”ì¸ë©”ë‰´ + ì—ëŸ¬ë©”ì„¸ì§€ ì¶œë ¥
 		frame_ = uiMsgH_.mainMenu();
 		frame_(errorMsgH_);
 
-		//¸Ş´º¼±ÅÃ Ãâ·Â
+		//ë©”ë‰´ì„ íƒ ì¶œë ¥
 		frame_ = uiMsgH_.menuSelect(err);
 		frame_(errorMsgH_);
 
 
-		//¸Ş´º ÀÔ·ÂÃ³¸®
-		menu = inputH_.getInt(IntRule::ZeroOrPositive);
-		lastError_ = inputH_.getLastError();
-		if (!isVariantEqualTo<InputResult>(lastError_, InputResult::SUCCESS))
+		//ë©”ë‰´ ì…ë ¥ì²˜ë¦¬
+		int menu = -1;
+		ResultVariant result = inputH_.getInt(IntRule::ZeroOrPositive, menu);
+		if (!isVariantEqualTo<InputResult>(result, InputResult::SUCCESS))
 		{
-			err = wrapVariant<ResultVariant>(lastError_);
+			err = wrapVariant<ResultVariant>(result);
 			ui_.clearScreen();
 			continue;
 		}
 
-		//¸Ş´º ¼±ÅÃÃ³¸®
-		if (menu == 0) { break; }
+		//ë©”ë‰´ ì„ íƒì²˜ë¦¬
+		if (menu <= 0) { break; }
 
-		lastError_ = mainMenuController(bookUI, menu);
-		if (!isVariantEqualTo<MenuSelectResult>(lastError_, MenuSelectResult::SUCCESS))
+		result = mainMenuController(bookUI, menu);
+		if (!isVariantEqualTo<MenuSelectResult>(result, MenuSelectResult::SUCCESS))
 		{
-			err = wrapVariant<ResultVariant>(lastError_);
+			err = wrapVariant<ResultVariant>(result);
 			UIUtils::clearScreen();
 			continue;
 		}
 
-		//¿¡·¯°¡ ¾ø´Ù¸é ÃÊ±âÈ­
+		//ì—ëŸ¬ê°€ ì—†ë‹¤ë©´ ì´ˆê¸°í™”
 		err = nullopt;
 		ui_.clearScreen();
 	}
@@ -90,3 +88,4 @@ ResultVariant MainMenu::mainMenuController(AddressBookUI& bookUI, int input)
 		return MenuSelectResult::WRONG_INDEX;
 	}
 }
+

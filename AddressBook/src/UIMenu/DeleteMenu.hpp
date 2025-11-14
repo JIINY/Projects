@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include "../UI/UICommonData.hpp"
 #include "../UI/UICommonHeader.hpp"
@@ -13,9 +13,9 @@ public:
 
 
 private:
-	ResultVariant lastError_;
-	InputHandler inputH_;
-	ErrorPrintHandler errorMsgH_;
-	UIPrintHandler uiMsgH_;
-	UIFrame frame_;
+	InputHandler inputH_{};
+	ErrorPrintHandler errorMsgH_{};
+	UIPrintHandler uiMsgH_{};
+	UIFrame frame_{};
 };
+

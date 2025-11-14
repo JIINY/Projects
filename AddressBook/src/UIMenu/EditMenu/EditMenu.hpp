@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <optional>
 #include <memory>
 #include "../../UI/UICommonData.hpp"
@@ -24,16 +24,17 @@ public:
 
 
 private:
-    InputHandler inputH_;
-    ErrorPrintHandler errorMsgH_;
-    UIPrintHandler uiMsgH_;
-    UIFrame frame_;
-    UIUtils ui_;
-    InputMode mode_;
+    InputHandler inputH_{};
+    ErrorPrintHandler errorMsgH_{};
+    UIPrintHandler uiMsgH_{};
+    UIFrame frame_{};
+    UIUtils ui_{};
 
     AddressBookUI* bookUI_ = nullptr;
     ContextData context_{};
     std::unique_ptr<IEditState> currentState_ = nullptr;
+    InputMode mode_ = InputMode::Add;
 
     void transitionTo(EditPhase nextPhase);
 };
+

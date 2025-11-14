@@ -1,4 +1,4 @@
-#include "EditCancelState.hpp"
+﻿#include "EditCancelState.hpp"
 #include <optional>
 #include "EditMenu.hpp"
 #include "../../Common/VariantUtils.hpp"
@@ -27,21 +27,18 @@ EditPhase EditCancelState::update()
 	auto& context = owner_.getContext();
 	auto& inputH = owner_.getInputH();
 
-	bool yesNo = inputH.askYesNo();
-	ResultVariant error = inputH.getLastError();
-	if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS)) 
-	{
-		context.err = wrapVariant<ResultVariant>(error);
-		return EditPhase::EditCancel;
-	}
-
+	ResultVariant result = inputH.askYesNo();
 	context.err = nullopt;
-	if (yesNo) 
+	if (isVariantEqualTo <InputResult>(result, InputResult::YES))
 	{
 		return EditPhase::ExitCancel;
 	}
-	else 
+	else if (isVariantEqualTo <InputResult>(result, InputResult::NO))
 	{
 		return EditPhase::EditStart;
 	}
+
+	context.err = wrapVariant<ResultVariant>(result);
+	return EditPhase::EditCancel;
 }
+

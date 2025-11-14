@@ -1,4 +1,4 @@
-#include "ErrorPrintHandler.hpp"
+ï»¿#include "ErrorPrintHandler.hpp"
 #include <iostream>
 #include <string>
 #include <variant>
@@ -9,14 +9,14 @@
 using namespace std;
 
 
-void ErrorPrintHandler::printErrorMsg(const std::variant<IntParsingResult, InputResult,
+void ErrorPrintHandler::printErrorMsg(const std::variant<InputResult,
 	SaveOperationResult, LoadOperationResult, AddOperationResult, RemoveOperationResult,
 	MenuSelectResult, AddDataResult, AddEditResult, EditDataResult, SearchDataResult>& err) 
 {
 	setErrorMsg(err);
-	if (this->errorMsg != "") 
+	if (this->errorMsg_ != "") 
 	{
-		cout << this->errorMsg << endl;
+		cout << this->errorMsg_ << endl;
 		OutputPrintHandler::printShort2Line();
 	}
 }
@@ -74,43 +74,43 @@ void ErrorPrintHandler::printInputErrorMsg(const InputResult err)
 	switch (err) 
 	{
 	case InputResult::WRONG_NUMBER:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ÇØ´ç ¹üÀ§ÀÇ ¼ıÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä. -1";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: í•´ë‹¹ ë²”ìœ„ì˜ ìˆ«ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”. -1";
 		break;
 	case InputResult::LENGTH_OVER:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ÇØ´ç ¹üÀ§ÀÇ ¼ıÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: í•´ë‹¹ ë²”ìœ„ì˜ ìˆ«ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.";
 		break;
 	case InputResult::EMPTY_INT:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ¼ıÀÚ¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ìˆ«ìë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.";
 		break;
 	case InputResult::EMPTY_CHAR:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ¹®ÀÚ¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ë¬¸ìë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.";
 		break;
 	case InputResult::EMPTY_STRING:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ¹®ÀåÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ë¬¸ì¥ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”.";
 		break;
 	case InputResult::EMPTY_YESNO:
-		this->errorMsg = "[ERROR] ÀÔ·Â: Y/N¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: Y/Në¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.";
 		break;
 	case InputResult::INVALID_STRING:
-		this->errorMsg = "[ERROR] ÀÔ·Â: Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ¹®ÀåÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë¬¸ì¥ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”.";
 		break;
 	case InputResult::INVALID_INT:
-		this->errorMsg = "[ERROR] ÀÔ·Â: Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ¼ıÀÚ¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ìˆ«ìë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.";
 		break;
 	case InputResult::INVALID_CHAR:
-		this->errorMsg = "[ERROR] ÀÔ·Â: Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ¹®ÀÚ¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë¬¸ìë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.";
 		break;
 	case InputResult::INVALID_YESNO:
-		this->errorMsg = "[ERROR] ÀÔ·Â: Y/N¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: Y/Në¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.";
 		break;
 	case InputResult::UNKNOWN:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î ÀÔ·Â¿¡ ½ÇÆĞÇß½À´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ì…ë ¥ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.";
 		break;
 	case InputResult::SUCCESS:
-		this->errorMsg = "";
+		this->errorMsg_ = "";
 		break;
 	default:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î ÀÔ·Â¿¡ ½ÇÆĞÇß½À´Ï´Ù. -1";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ì…ë ¥ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. -1";
 		break;
 	}
 }
@@ -120,25 +120,25 @@ void ErrorPrintHandler::printMenuSelectErrorMsg(const MenuSelectResult err)
 	switch (err) 
 	{
 	case MenuSelectResult::WRONG_INDEX:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ¿øÇÏ´Â ¸Ş´º ¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì›í•˜ëŠ” ë©”ë‰´ ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.";
 		break;
 	case MenuSelectResult::WRONG_COMMAND:
-		this->errorMsg = "[ERROR] ÀÔ·Â: À¯È¿ÇÑ ¸í·É¾î Å°¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ìœ íš¨í•œ ëª…ë ¹ì–´ í‚¤ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.";
 		break;
 	case MenuSelectResult::PAGE_START:
-		this->errorMsg = "[ERROR] ÀÔ·Â: Ã¹ ÆäÀÌÁöÀÔ´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì²« í˜ì´ì§€ì…ë‹ˆë‹¤.";
 		break;
 	case MenuSelectResult::PAGE_END:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ¸¶Áö¸· ÆäÀÌÁöÀÔ´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ë§ˆì§€ë§‰ í˜ì´ì§€ì…ë‹ˆë‹¤.";
 		break;
 	case MenuSelectResult::SUCCESS:
-		this->errorMsg = "";
+		this->errorMsg_ = "";
 		break;
 	case MenuSelectResult::EMPTY_ADDRESSBOOK:
-		this->errorMsg = "[ERROR] ÁÖ¼Ò·ÏÀÌ ºñ¾î ÀÖ½À´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] ì£¼ì†Œë¡ì´ ë¹„ì–´ ìˆìŠµë‹ˆë‹¤.";
 		break;
 	default:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î ¸Ş´º ¼±ÅÃ¿¡ ½ÇÆĞÇß½À´Ï´Ù. -1";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ë©”ë‰´ ì„ íƒì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. -1";
 		break;
 	}
 }
@@ -148,19 +148,19 @@ void ErrorPrintHandler::printAddOperationErrorMsg(const AddOperationResult err)
 	switch (err) 
 	{
 	case AddOperationResult::FAIL:
-		this->errorMsg = "[ERROR] ·ÎÁ÷: ¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î Ãß°¡ÇÏÁö ¸øÇß½À´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] ë¡œì§: ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ì¶”ê°€í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.";
 		break;
 	case AddOperationResult::EMPTY_NAME:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ÀÌ¸§À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì´ë¦„ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”.";
 		break;
 	case AddOperationResult::UNKNOWN:
-		this->errorMsg = "[ERROR] UI: ¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î Ãß°¡ÇÏÁö ¸øÇß½À´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] UI: ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ì¶”ê°€í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.";
 		break;
 	case AddOperationResult::SUCCESS:
-		this->errorMsg = "";
+		this->errorMsg_ = "";
 		break;
 	default:
-		this->errorMsg = "[ERROR] ·ÎÁ÷: ¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î Ãß°¡ÇÏÁö ¸øÇß½À´Ï´Ù. -1";
+		this->errorMsg_ = "[ERROR] ë¡œì§: ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ì¶”ê°€í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤. -1";
 		break;
 	}
 }
@@ -171,13 +171,13 @@ void ErrorPrintHandler::printRemoveOperationErrorMsg(const RemoveOperationResult
 	switch (err) 
 	{
 	case RemoveOperationResult::WRONG_INDEX:
-		this->errorMsg = "[ERROR] Àß¸øµÈ ¹øÈ£ÀÔ´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] ì˜ëª»ëœ ë²ˆí˜¸ì…ë‹ˆë‹¤.";
 		break;
 	case RemoveOperationResult::FAIL:
-		this->errorMsg = "[ERROR] ¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î »èÁ¦ÇÏÁö ¸øÇß½À´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ì‚­ì œí•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.";
 		break;
 	case RemoveOperationResult::SUCCESS:
-		this->errorMsg = "";
+		this->errorMsg_ = "";
 		break;
 	default:
 		break;
@@ -189,13 +189,13 @@ void ErrorPrintHandler::printAddDataErrorMsg(const AddDataResult err)
 	switch (err) 
 	{
 	case AddDataResult::EMPTY_NAME:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ÁÖ¼Ò·Ï Ãß°¡¸¦ À§ÇØ ÀÌ¸§ ÀÔ·ÂÀÌ ÇÊ¿äÇÕ´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì£¼ì†Œë¡ ì¶”ê°€ë¥¼ ìœ„í•´ ì´ë¦„ ì…ë ¥ì´ í•„ìš”í•©ë‹ˆë‹¤.";
 		break;
 	case AddDataResult::SUCCESS:
-		this->errorMsg = "";
+		this->errorMsg_ = "";
 		break;
 	default:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î ÁÖ¼Ò·Ï Ãß°¡¿¡ ½ÇÆĞÇß½À´Ï´Ù. -1";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ì£¼ì†Œë¡ ì¶”ê°€ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. -1";
 		break;
 	}
 }
@@ -205,13 +205,13 @@ void ErrorPrintHandler::printAddEditErrorMsg(const AddEditResult err)
 	switch (err) 
 	{
 	case AddEditResult::EMPTY_NAME:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ÁÖ¼Ò·Ï Ãß°¡¸¦ À§ÇØ ÀÌ¸§ ÀÔ·ÂÀÌ ÇÊ¿äÇÕ´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì£¼ì†Œë¡ ì¶”ê°€ë¥¼ ìœ„í•´ ì´ë¦„ ì…ë ¥ì´ í•„ìš”í•©ë‹ˆë‹¤.";
 		break;
 	case AddEditResult::SUCCESS:
-		this->errorMsg = "";
+		this->errorMsg_ = "";
 		break;
 	default:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î ÁÖ¼Ò·Ï Ãß°¡ ¼öÁ¤¿¡ ½ÇÆĞÇß½À´Ï´Ù. -1";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ì£¼ì†Œë¡ ì¶”ê°€ ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. -1";
 		break;
 	}
 }
@@ -221,13 +221,13 @@ void ErrorPrintHandler::printEditDataErrorMsg(const EditDataResult err)
 	switch (err) 
 	{
 	case EditDataResult::EMPTY_NAME:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ÁÖ¼Ò·Ï¿¡´Â ÀÌ¸§ ÀÔ·ÂÀÌ ÇÊ¿äÇÕ´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì£¼ì†Œë¡ì—ëŠ” ì´ë¦„ ì…ë ¥ì´ í•„ìš”í•©ë‹ˆë‹¤.";
 		break;
 	case EditDataResult::SUCCESS:
-		this->errorMsg = "";
+		this->errorMsg_ = "";
 		break;
 	default:
-		this->errorMsg = "[ERROR] ÀÔ·Â: ¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î ÁÖ¼Ò·Ï ¼öÁ¤¿¡ ½ÇÆĞÇß½À´Ï´Ù. -1";
+		this->errorMsg_ = "[ERROR] ì…ë ¥: ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ì£¼ì†Œë¡ ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. -1";
 		break;
 	}
 }
@@ -237,13 +237,13 @@ void ErrorPrintHandler::printSaveOperationErrorMsg(const SaveOperationResult err
 	switch (err) 
 	{
 	case SaveOperationResult::SUCCESS:
-		this->errorMsg = "";
+		this->errorMsg_ = "";
 		break;
 	case SaveOperationResult::FAIL:
-		this->errorMsg = "[ERROR] ÀúÀå: ÀúÀå¿¡ ½ÇÆĞÇß½À´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] ì €ì¥: ì €ì¥ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.";
 		break;
 	default:
-		this->errorMsg = "[ERROR] ÀúÀå: ¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î ÀúÀå¿¡ ½ÇÆĞÇß½À´Ï´Ù.-1";
+		this->errorMsg_ = "[ERROR] ì €ì¥: ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ì €ì¥ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.-1";
 		break;
 	}
 }
@@ -253,16 +253,16 @@ void ErrorPrintHandler::printLoadOperationErrorMsg(const LoadOperationResult err
 	switch (err) 
 	{
 	case LoadOperationResult::SUCCESS:
-		this->errorMsg = "";
+		this->errorMsg_ = "";
 		break;
 	case LoadOperationResult::FAIL:
-		this->errorMsg = "[ERROR] ·Îµå: ºÒ·¯¿À±â¿¡ ½ÇÆĞÇß½À´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] ë¡œë“œ: ë¶ˆëŸ¬ì˜¤ê¸°ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.";
 		break;
 	case LoadOperationResult::NOT_EXIST_FILE:
-		this->errorMsg = "";
+		this->errorMsg_ = "";
 		break;
 	default:
-		this->errorMsg = "[ERROR] ·Îµå: ¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î ºÒ·¯¿À±â¿¡ ½ÇÆĞÇß½À´Ï´Ù.-1";
+		this->errorMsg_ = "[ERROR] ë¡œë“œ: ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ë¶ˆëŸ¬ì˜¤ê¸°ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.-1";
 		break;
 	}
 }
@@ -272,13 +272,14 @@ void ErrorPrintHandler::printSearchDataErrorMsg(const SearchDataResult err)
 	switch (err) 
 	{
 	case SearchDataResult::SUCCESS:
-		this->errorMsg = "";
+		this->errorMsg_ = "";
 		break;
 	case SearchDataResult::EMPTY_ITEM:
-		this->errorMsg = "[ERROR] Ã£±â: Æ÷ÇÔÇÏ´Â µ¥ÀÌÅÍ¸¦ Ã£À» ¼ö ¾ø¾ú½À´Ï´Ù.";
+		this->errorMsg_ = "[ERROR] ì°¾ê¸°: í¬í•¨í•˜ëŠ” ë°ì´í„°ë¥¼ ì°¾ì„ ìˆ˜ ì—†ì—ˆìŠµë‹ˆë‹¤.";
 		break;
 	default:
-		this->errorMsg = "[ERROR] Ã£±â: ¾Ë ¼ö ¾ø´Â ÀÌÀ¯·Î Ã£±â¿¡ ½ÇÆĞÇß½À´Ï´Ù. -1";
+		this->errorMsg_ = "[ERROR] ì°¾ê¸°: ì•Œ ìˆ˜ ì—†ëŠ” ì´ìœ ë¡œ ì°¾ê¸°ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. -1";
 		break;
 	}
 }
+

@@ -1,4 +1,4 @@
-#include "UIPrintHandler.hpp"
+﻿#include "UIPrintHandler.hpp"
 #include <optional>
 #include <string>
 #include "../Common/DataType.hpp"
@@ -52,7 +52,7 @@ UIFrame UIPrintHandler::tableAction(ActionType action)
 	return UIFrame{
 		[action]{
 			OutputPrintHandler::printTableAction(action);
-			OutputPrintHandler::printEnter();
+			//OutputPrintHandler::printEnter();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
@@ -351,6 +351,7 @@ UIFrame UIPrintHandler::tableComplete()
 	return UIFrame{
 		[]{
 			OutputPrintHandler::printTableComplete();
+			OutputPrintHandler::printTableCommand();
 			OutputPrintHandler::printLong1Line();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
@@ -365,17 +366,17 @@ UIFrame UIPrintHandler::tableSearchEnd()
 	};
 }
 
-UIFrame UIPrintHandler::tableContinue() 
+UIFrame UIPrintHandler::tableCommand() 
 {
 	return UIFrame{
 		[]{
-			OutputPrintHandler::printTableContinue();
+			OutputPrintHandler::printTableCommand();
 			OutputPrintHandler::printLong1Line();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
 
-UIFrame UIPrintHandler::tableCommand(optional<ResultVariant> err) 
+UIFrame UIPrintHandler::tableCommandInputMessage(optional<ResultVariant> err)
 {
 	return UIFrame{
 		[] {
@@ -526,3 +527,4 @@ UIFrame UIPrintHandler::deleteConfirm(optional<ResultVariant> err, const int i, 
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
 }
+

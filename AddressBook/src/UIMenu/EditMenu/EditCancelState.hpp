@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "IEditState.hpp"
 
 class EditCancelState : public IEditState 
@@ -9,3 +9,4 @@ public:
 	virtual void draw() override;
 	virtual EditPhase update() override;
 };
+

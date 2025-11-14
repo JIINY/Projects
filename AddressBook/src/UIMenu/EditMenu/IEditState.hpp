@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../../UI/UICommonData.hpp"
 
 class EditMenu;
@@ -15,3 +15,4 @@ public:
 protected:
 	EditMenu& owner_;
 };
+

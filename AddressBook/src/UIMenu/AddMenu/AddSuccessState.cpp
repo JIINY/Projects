@@ -1,4 +1,4 @@
-#include "AddSuccessState.hpp"
+ï»¿#include "AddSuccessState.hpp"
 #include <optional>
 #include "../../Common/VariantUtils.hpp"
 #include "../../UI/AddressBookUI.hpp"
@@ -7,7 +7,7 @@
 using namespace std;
 
 
-void AddSuccessState::draw() {} //AddAgainState°¡ ´ã´ç
+void AddSuccessState::draw() {} //AddAgainStateê°€ ë‹´ë‹¹
 
 AddPhase AddSuccessState::update() 
 {
@@ -27,3 +27,4 @@ AddPhase AddSuccessState::update()
 	}
 	return AddPhase::AddAgain;
 }
+

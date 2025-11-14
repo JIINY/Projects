@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../../UI/UICommonData.hpp"
 #include "../../UI/UICommonHeader.hpp"
 
@@ -22,3 +22,4 @@ private:
     void draw(AddressBookUI& bookUI, ContextData& context, int page, int length);
     ViewPhase update(ContextData& context, int page, int length);
 };
+

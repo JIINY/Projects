@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <functional>
 #include <optional>
 #include "../Common/ResultEnums.hpp"
@@ -40,3 +40,4 @@ struct UITemplate
 
     UIFrame instantiate(std::optional<ResultVariant> err) const;
 };
+

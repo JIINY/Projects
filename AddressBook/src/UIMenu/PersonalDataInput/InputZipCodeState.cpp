@@ -1,4 +1,4 @@
-#include "InputZipCodeState.hpp"
+﻿#include "InputZipCodeState.hpp"
 #include <string>
 #include <optional>
 #include <cassert>
@@ -20,8 +20,9 @@ void InputZipCodeState::draw()
 DataInputPhase InputZipCodeState::update()
 {
 	auto& inputH = owner_.getInputH();
-
-	string s = inputH.getString(StringRule::EmptyAllow);
+	string s = "";
+	ResultVariant result = inputH.getString(StringRule::EmptyAllow, s);
 	owner_.setZipCode(s);
 	return DataInputPhase::InputEmail;
 }
+

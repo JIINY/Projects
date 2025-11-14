@@ -1,4 +1,4 @@
-#include "SearchMenu.hpp"
+ï»¿#include "SearchMenu.hpp"
 #include <vector>
 #include <optional>
 #include <algorithm>
@@ -59,7 +59,7 @@ void SearchMenu::run(AddressBookUI& bookUI)
 		}
 	}
 
-	ui_.clearScreen(); //Á¾·á½Ã È­¸é Á¤¸®
+	ui_.clearScreen(); //ì¢…ë£Œì‹œ í™”ë©´ ì •ë¦¬
 }
 
 void SearchMenu::transitionTo(SearchPhase nextPhase) 
@@ -162,54 +162,58 @@ void SearchMenu::drawLongTitle()
 	}
 }
 
-void SearchMenu::drawResultTable() 
+void SearchMenu::drawResultTable(AddressBookUI& bookUI, ContextData& context)
 {
 	int length = static_cast<int>(searchResult_.size());
-	if (length == 0)
+	if (length > 0)
 	{
-		frame_ = uiMsgH_.searchEmpty();
-		frame_(errorMsgH_);
-	}
-	else {
-		int page = 0;
-		for (int i = page; i < length && i < page + 10; i++)
+		int page = page_;
+		int startIndex = page * 10;
+		int endIndex = min(startIndex + 10, length);
+
+		for (int i = startIndex; i < endIndex; ++i)
 		{
-			context_.p = searchResult_[i].first;
-			context_.sub = ui_.getPersonalDataTableFormat(context_.p);
+			int bookIndex = searchResult_[i].second;
+			context.p = bookUI.getPersonalDataAt(bookIndex);
 
-			int remainder = (i + 1) % 10;
-			if (remainder == 5)
+			int displayNum = i + 1;
+			if (i == (endIndex - 1))
 			{
-				frame_ = uiMsgH_.tableDataCenter(context_.err, i + 1, context_.sub);
-			}
-			else if (remainder == 0 || (i + 1) == length)
-			{
-				frame_ = uiMsgH_.tableDataBottom(context_.err, i + 1, context_.sub);
-				frame_(errorMsgH_);
-
-				if (i + 1 != length)
-				{
-					frame_ = uiMsgH_.tableContinue(context_.err);
-					frame_(errorMsgH_);
-				}
+				frame_ = uiMsgH_.tableDataBottom(context.err, displayNum, context.p);
 			}
 			else
 			{
-				frame_ = uiMsgH_.tableDataNormal(context_.err, i + 1, context_.sub);
-				frame_(errorMsgH_);
+				int remainder = (displayNum) % 10;
+				if (remainder == 5)
+				{
+					frame_ = uiMsgH_.tableDataCenter(context.err, displayNum, context.p);
+				}
+				else
+				{
+					frame_ = uiMsgH_.tableDataNormal(context.err, displayNum, context.p);
+				}
 			}
+			frame_(errorMsgH_);
 		}
 	}
 }
 
 void SearchMenu::drawResultMsg() 
 {
+	int length = static_cast<int>(searchResult_.size());
+	if (length > 9)
+	{
+		frame_ = uiMsgH_.tableCommand();
+		frame_(errorMsgH_);
+	}
+
 	if (mode_ == SearchMode::Edit) 
 	{
 		if (isVariantEqualTo<AddOperationResult>(*context_.err, AddOperationResult::SUCCESS))
 		{
 			frame_ = uiMsgH_.tableEditSuccess(context_.menu + 1, context_.p.name);
 			frame_(errorMsgH_);
+
 			context_.err = nullopt;
 		}
 		else 
@@ -232,9 +236,18 @@ void SearchMenu::drawResultMsg()
 			frame_(errorMsgH_);
 		}
 	}
-	else 
+	else
 	{
-		frame_ = uiMsgH_.tableSearchEnd();
-		frame_(errorMsgH_);
+		if (length > 0)
+		{
+			frame_ = uiMsgH_.tableSearchEnd();
+			frame_(errorMsgH_);
+		}
+		else 
+		{
+			frame_ = uiMsgH_.searchEmpty();
+			frame_(errorMsgH_);
+		}
 	}
 }
+

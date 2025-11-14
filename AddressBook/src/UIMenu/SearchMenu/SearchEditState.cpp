@@ -1,4 +1,4 @@
-#include "SearchEditState.hpp"
+﻿#include "SearchEditState.hpp"
 #include <vector>
 #include <optional>
 #include <utility>
@@ -25,22 +25,62 @@ SearchPhase SearchEditState::update()
 	auto& inputH = owner_.getInputH();
 	int resultCount = static_cast<int>(owner_.accessSearchResult().size());
 
-	int input = inputH.getInt(IntRule::PositiveOnly);
-	ResultVariant error = inputH.getLastError();
-	if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS)) 
+	int currentPage = owner_.getCurrentPage();
+	int minNumOnPage = (currentPage * 10) + 1;
+	int maxNumOnPage = min((currentPage + 1) * 10, resultCount);
+
+	int input = -1;
+	PagingPhase phase = inputH.getSearchPagingInput(input);
+	switch (phase) {
+	case PagingPhase::PositiveNums: 
 	{
-		context.err = wrapVariant<ResultVariant>(error);
+		if (input < minNumOnPage || input > maxNumOnPage) 
+		{
+			context.err = wrapVariant<ResultVariant>(InputResult::WRONG_NUMBER);
+			return SearchPhase::EditStart;
+		}
+
+		context.menu = input - 1;
+		context.err = nullopt;
+		return SearchPhase::EditItem;
+	}
+	case PagingPhase::Next:
+	{
+		if (maxNumOnPage < resultCount)
+		{
+			owner_.setCurrentPage(currentPage + 1);
+			context.err = nullopt;
+		}
+		else
+		{
+			context.err = wrapVariant<ResultVariant>(MenuSelectResult::PAGE_END);
+		}
 		return SearchPhase::EditStart;
 	}
-
-	if (input > resultCount) 
+	case PagingPhase::Prev:
 	{
-		error = InputResult::WRONG_NUMBER;
-		context.err = wrapVariant<ResultVariant>(error);
+		if (currentPage > 0) 
+		{
+			owner_.setCurrentPage(currentPage - 1);
+			context.err = nullopt;
+		}
+		else 
+		{
+			context.err = wrapVariant<ResultVariant>(MenuSelectResult::PAGE_START);
+		}
 		return SearchPhase::EditStart;
 	}
-
-	context.menu = input - 1;
-	context.err = nullopt;
-	return SearchPhase::EditItem;
+	case PagingPhase::Exit:
+	{
+		context.err = nullopt;
+		return SearchPhase::SearchResult;
+	}
+	case PagingPhase::Enter:
+		return SearchPhase::EditStart;
+	case PagingPhase::Error:
+	default:
+		context.err = wrapVariant<ResultVariant>(MenuSelectResult::WRONG_COMMAND);
+		return SearchPhase::EditStart;
+	}
 }
+

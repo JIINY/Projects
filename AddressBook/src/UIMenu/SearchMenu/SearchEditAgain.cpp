@@ -1,4 +1,4 @@
-#include "SearchEditAgain.hpp"
+﻿#include "SearchEditAgain.hpp"
 #include <vector>
 #include <optional>
 #include <utility>
@@ -14,9 +14,10 @@ void SearchEditAgainState::draw()
 	auto& frame = owner_.getUIFrame();
 	auto& uiMsgH = owner_.getUIMsgH();
 	auto& errorMsgH = owner_.getErrorMsgH();
+	auto* bookUI = owner_.getBookUI();
 
 	owner_.drawLongTitle();
-	owner_.drawResultTable();
+	owner_.drawResultTable(*bookUI, context);
 	owner_.drawResultMsg();
 
 	frame = uiMsgH.searchEdit(context.err);
@@ -29,18 +30,17 @@ SearchPhase SearchEditAgainState::update()
 	auto& inputH = owner_.getInputH();
 	int resultCount = static_cast<int>(owner_.accessSearchResult().size());
 
-	int input = inputH.getInt(IntRule::PositiveOnly);
-	ResultVariant error = inputH.getLastError();
-	if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS))
+	int input = -1; 
+	ResultVariant result = inputH.getInt(IntRule::PositiveOnly, input);
+	if (!isVariantEqualTo<InputResult>(result, InputResult::SUCCESS))
 	{
-		context.err = wrapVariant<ResultVariant>(error);
+		context.err = wrapVariant<ResultVariant>(result);
 		return SearchPhase::EditAgain;
 	}
-
-	if (input > resultCount)
+	else if (input > resultCount)
 	{
-		error = InputResult::WRONG_NUMBER;
-		context.err = wrapVariant<ResultVariant>(error);
+		result = InputResult::WRONG_NUMBER;
+		context.err = wrapVariant<ResultVariant>(result);
 		return SearchPhase::EditAgain;
 	}
 
@@ -48,3 +48,4 @@ SearchPhase SearchEditAgainState::update()
 	context.err = nullopt;
 	return SearchPhase::EditItem;
 }
+

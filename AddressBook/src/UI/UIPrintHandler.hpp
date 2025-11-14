@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <functional>
 #include "../Common/DataType.hpp"
@@ -44,8 +44,8 @@ public:
     UIFrame tableDataBottom(std::optional<ResultVariant> err, const int i, const PersonalData& p);
     UIFrame tableSearchEnd();
     UIFrame tableComplete();
-    UIFrame tableContinue();
-    UIFrame tableCommand(std::optional<ResultVariant> err);
+    UIFrame tableCommand();
+    UIFrame tableCommandInputMessage(std::optional<ResultVariant> err);
     UIFrame tableStop(std::optional<ResultVariant> err);
     UIFrame tableEditSuccess(const int i, const std::string& name);
     UIFrame tableDeleteSuccess(const int i, const std::string& name);
@@ -74,3 +74,4 @@ public:
     UIFrame deleteLongTitle();
     UIFrame deleteConfirm(std::optional<ResultVariant> err, const int i, const std::string& name);
 };
+

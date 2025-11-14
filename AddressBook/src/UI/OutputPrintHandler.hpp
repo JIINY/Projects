@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 
 enum class ActionType;
@@ -52,7 +52,7 @@ public:
     static void printTableTitle();
     static void printTablePersonalData(const int i, const PersonalData& p);
     static void printTableSearchEnd();
-    static void printTableContinue();
+    static void printTableCommand();
     static void printTableComplete();
     static void printTableStop();
     static void printTableEditSuccess(int i, const std::string& name);
@@ -79,3 +79,4 @@ protected:
 private:
     static constexpr const char* version = "v0.0.1";
 };
+

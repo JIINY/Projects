@@ -1,9 +1,10 @@
-#pragma once
+ï»¿#pragma once
 #include "../Common/DataType.hpp"
 #include "../Common/ResultEnums.hpp"
-#include "../Common/VariantUtils.hpp" //¹ö±× ÃßÀû¿ë
+#include "../Common/VariantUtils.hpp" //ë²„ê·¸ ì¶”ì ìš©
 #include "../IO/InputHandler.hpp"
 #include "../IO/ErrorPrintHandler.hpp"
 #include "OutputPrintHandler.hpp"
 #include "UIPrintHandler.hpp"
 #include "UIUtils.hpp"
+

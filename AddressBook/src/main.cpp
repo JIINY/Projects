@@ -1,5 +1,7 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
+#include <Windows.h>
+#include <locale>
 #include "Common/ResultEnums.hpp"
 #include "Common/VariantUtils.hpp"
 #include "IO/ErrorPrintHandler.hpp"
@@ -9,6 +11,10 @@ using namespace std;
 
 
 int main(void) {
+	SetConsoleCP(CP_UTF8); //windows 콘솔 설정
+	SetConsoleOutputCP(CP_UTF8);
+	setlocale(LC_ALL, ".UTF8"); //C++ 런타임(cout 등) 설정
+
 	AddressBookUI ui;
 	ErrorPrintHandler errorMsgH;
 	AddressBook& b = ui.extractAddressBook();
@@ -27,3 +33,4 @@ int main(void) {
 
 	return 0;
 }
+

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <optional>
 #include <memory>
 #include "../../UI/UICommonData.hpp"
@@ -22,11 +22,11 @@ public:
 
 
 private:
-    InputHandler inputH_;
-    ErrorPrintHandler errorMsgH_;
-    UIPrintHandler uiMsgH_;
-    UIFrame frame_;
-    UIUtils ui_;
+    InputHandler inputH_{};
+    ErrorPrintHandler errorMsgH_{};
+    UIPrintHandler uiMsgH_{};
+    UIFrame frame_{};
+    UIUtils ui_{};
 
     AddressBookUI* bookUI_ = nullptr;
     ContextData context_{};
@@ -34,3 +34,4 @@ private:
 
     void transitionTo(AddPhase nextPhase);
 };
+

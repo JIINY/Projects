@@ -1,4 +1,4 @@
-#include "AskAddCancelState.hpp"
+﻿#include "AskAddCancelState.hpp"
 #include <optional>
 #include "../../UI/UICommonData.hpp"
 #include "../../UI/UICommonHeader.hpp"
@@ -24,21 +24,18 @@ AddPhase AskAddCancelState::update()
 	auto& context = owner_.getContext();
 	auto& inputH = owner_.getInputH();
 
-	bool yesNo = inputH.askYesNo();
-	ResultVariant error = inputH.getLastError();
-	if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS)) 
-	{
-		context.err = wrapVariant<ResultVariant>(error);
-		return AddPhase::AskAddCancel;
-	}
-
+	ResultVariant result = inputH.askYesNo();
 	context.err = nullopt;
-	if (yesNo)
+	if (isVariantEqualTo<InputResult>(result, InputResult::YES))
 	{
 		return AddPhase::Exit;
 	}
-	else 
+	else if (isVariantEqualTo<InputResult>(result, InputResult::NO))
 	{
 		return AddPhase::AddReview;
 	}
+
+	context.err = wrapVariant<ResultVariant>(result);
+	return AddPhase::AskAddCancel;
 }
+

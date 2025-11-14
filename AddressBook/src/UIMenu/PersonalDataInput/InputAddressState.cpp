@@ -1,4 +1,4 @@
-#include "InputAddressState.hpp"
+﻿#include "InputAddressState.hpp"
 #include <string>
 #include <optional>
 #include <cassert>
@@ -20,8 +20,9 @@ void InputAddressState::draw()
 DataInputPhase InputAddressState::update()
 {
 	auto& inputH = owner_.getInputH();
-
-	string s = inputH.getString(StringRule::EmptyAllow);
+	string s = "";
+	ResultVariant result = inputH.getString(StringRule::EmptyAllow, s);
 	owner_.setAddress(s);
 	return DataInputPhase::InputZipCode;
 }
+

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../../UI/UICommonData.hpp"
 
 class SearchMenu;
@@ -15,3 +15,4 @@ public:
 protected:
 	SearchMenu& owner_;
 };
+

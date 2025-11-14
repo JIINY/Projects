@@ -1,4 +1,4 @@
-#include "AddReviewState.hpp"
+﻿#include "AddReviewState.hpp"
 #include <optional>
 #include "../../Common/VariantUtils.hpp"
 #include "../../UI/UICommonData.hpp"
@@ -25,11 +25,10 @@ AddPhase AddReviewState::update()
 	auto& context = owner_.getContext();
 	auto& inputH = owner_.getInputH();
 
-	context.menu = inputH.getInt(IntRule::ZeroOrPositive);
-	ResultVariant error = inputH.getLastError();
-	if (!isVariantEqualTo <InputResult>(error, InputResult::SUCCESS))
+	ResultVariant result = inputH.getInt(IntRule::ZeroOrPositive, context.menu);
+	if (!isVariantEqualTo <InputResult>(result, InputResult::SUCCESS))
 	{
-		context.err = wrapVariant<ResultVariant>(error);
+		context.err = wrapVariant<ResultVariant>(result);
 		return AddPhase::AddReview;
 	}
 
@@ -52,9 +51,10 @@ AddPhase AddReviewState::update()
 	}
 	default:
 	{
-		error = MenuSelectResult::WRONG_INDEX;
-		context.err = wrapVariant<ResultVariant>(error);
+		result = MenuSelectResult::WRONG_INDEX;
+		context.err = wrapVariant<ResultVariant>(result);
 		return AddPhase::AddReview;
 	}
 	}
 }
+

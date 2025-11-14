@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <variant>
 #include <type_traits>
@@ -10,7 +10,7 @@
 class ErrorPrintHandler 
 {
 public:
-    void printErrorMsg(const std::variant<IntParsingResult, InputResult,
+    void printErrorMsg(const std::variant<InputResult,
         SaveOperationResult, LoadOperationResult, AddOperationResult, RemoveOperationResult,
         MenuSelectResult, AddDataResult, AddEditResult, EditDataResult, SearchDataResult>& err);
 
@@ -32,5 +32,6 @@ protected:
 
 
 private:
-    std::string errorMsg = "";
+    std::string errorMsg_ = "";
 };
+

@@ -1,4 +1,4 @@
-#include "InputEmailState.hpp"
+﻿#include "InputEmailState.hpp"
 #include <string>
 #include <optional>
 #include <cassert>
@@ -20,8 +20,9 @@ void InputEmailState::draw()
 DataInputPhase InputEmailState::update()
 {
 	auto& inputH = owner_.getInputH();
-
-	string s = inputH.getString(StringRule::EmptyAllow);
+	string s = "";
+	ResultVariant result = inputH.getString(StringRule::EmptyAllow, s);
 	owner_.setEmail(s);
 	return DataInputPhase::Exit;
 }
+

@@ -1,4 +1,4 @@
-#include "InputPhoneState.hpp"
+﻿#include "InputPhoneState.hpp"
 #include <string>
 #include <optional>
 #include <cassert>
@@ -20,8 +20,9 @@ void InputPhoneState::draw()
 DataInputPhase InputPhoneState::update()
 {
 	auto& inputH = owner_.getInputH();
-
-	string s = inputH.getString(StringRule::EmptyAllow);
+	string s = "";
+	ResultVariant result = inputH.getString(StringRule::EmptyAllow, s);
 	owner_.setPhone(s);
 	return DataInputPhase::InputAddress;
 }
+

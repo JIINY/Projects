@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../../UI/UICommonData.hpp"
 
 class AddMenu;

@@ -1,4 +1,4 @@
-#include "SearchStartState.hpp"
+﻿#include "SearchStartState.hpp"
 #include <optional>
 #include "../../UI/UICommonData.hpp"
 #include "../../UI/UICommonHeader.hpp"
@@ -23,11 +23,10 @@ SearchPhase SearchStartState::update()
 	auto& context = owner_.getContext();
 	auto& inputH = owner_.getInputH();
 
-	context.menu = inputH.getInt(IntRule::ZeroOrPositive);
-	ResultVariant error = inputH.getLastError();
-	if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS)) 
+	ResultVariant result = inputH.getInt(IntRule::ZeroOrPositive, context.menu);
+	if (!isVariantEqualTo<InputResult>(result, InputResult::SUCCESS)) 
 	{
-		context.err = wrapVariant<ResultVariant>(error);
+		context.err = wrapVariant<ResultVariant>(result);
 		return SearchPhase::SearchStart;
 	}
 
@@ -38,3 +37,4 @@ SearchPhase SearchStartState::update()
 	}
 	return SearchPhase::SearchInputData;
 }
+

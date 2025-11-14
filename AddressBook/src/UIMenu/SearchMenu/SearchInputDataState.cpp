@@ -1,4 +1,4 @@
-#include "SearchInputDataState.hpp"
+ï»¿#include "SearchInputDataState.hpp"
 #include <string>
 #include <vector>
 #include <utility>
@@ -69,21 +69,21 @@ SearchPhase SearchInputDataState::update()
 		return SearchPhase::SearchStart;
 	}
 
-	//ÀÔ·Â ¹Þ±â
-	string s;
+	//ìž…ë ¥ ë°›ê¸°
+	string s = "";
+	ResultVariant inputResult;
 	if (context.menu == 1) 
 	{
-		s = inputH.getString(StringRule::EmptyDisallow);
+		inputResult = inputH.getString(StringRule::EmptyDisallow, s);
 	}
 	else 
 	{
-		s = inputH.getString(StringRule::EmptyAllow);
+		inputResult = inputH.getString(StringRule::EmptyAllow, s);
 	}
 
-	ResultVariant error = inputH.getLastError();
-	if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS)) 
+	if (!isVariantEqualTo<InputResult>(inputResult, InputResult::SUCCESS)) 
 	{
-		context.err = wrapVariant<ResultVariant>(error);
+		context.err = wrapVariant<ResultVariant>(inputResult);
 		return SearchPhase::SearchInputData;
 	}
 
@@ -119,3 +119,4 @@ SearchPhase SearchInputDataState::update()
 
 	return SearchPhase::SearchResult;
 }
+

@@ -1,4 +1,4 @@
-#include "EditMenu.hpp"
+ï»¿#include "EditMenu.hpp"
 #include <iostream>
 #include <memory>
 #include <cassert>
@@ -18,7 +18,7 @@ optional<PersonalData> EditMenu::run(AddressBookUI& bookUI, const PersonalData& 
 	context_.err = nullopt;
 	context_.menu = -1;
 
-	//½ÃÀÛ »óÅÂ·Î ¼³Á¤
+	//ì‹œì‘ ìƒíƒœë¡œ ì„¤ì •
 	EditPhase currentPhase = EditPhase::EditStart;
 	transitionTo(currentPhase);
 
@@ -87,3 +87,4 @@ void EditMenu::transitionTo(EditPhase nextPhase)
 	}
 	}
 }
+

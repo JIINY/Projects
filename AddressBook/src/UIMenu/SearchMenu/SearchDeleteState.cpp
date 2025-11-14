@@ -1,4 +1,4 @@
-#include "SearchDeleteState.hpp"
+ï»¿#include "SearchDeleteState.hpp"
 #include <vector>
 #include <optional>
 #include <utility>
@@ -25,23 +25,23 @@ SearchPhase SearchDeleteState::update()
 	auto& inputH = owner_.getInputH();
 	int resultCount = static_cast<int>(owner_.accessSearchResult().size());
 
-	int input = inputH.getInt(IntRule::PositiveOnly);
-	ResultVariant error = inputH.getLastError();
-	if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS)) 
+	int input = -1;
+	ResultVariant result = inputH.getInt(IntRule::PositiveOnly, input);
+	if (!isVariantEqualTo<InputResult>(result, InputResult::SUCCESS)) 
 	{
-		context.err = wrapVariant<ResultVariant>(error);
+		context.err = wrapVariant<ResultVariant>(result);
+		return SearchPhase::DeleteStart;
+	}
+	else if (input > resultCount) 
+	{
+		result = InputResult::WRONG_NUMBER;
+		context.err = wrapVariant<ResultVariant>(result);
 		return SearchPhase::DeleteStart;
 	}
 
-	if (input > resultCount) 
-	{
-		error = InputResult::WRONG_NUMBER;
-		context.err = wrapVariant<ResultVariant>(error);
-		return SearchPhase::DeleteStart;
-	}
-
-	//¼º°ø
+	//ì„±ê³µ
 	context.menu = input - 1;
 	context.err = nullopt;
 	return SearchPhase::DeleteItem;
 }
+

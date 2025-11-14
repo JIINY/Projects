@@ -1,12 +1,13 @@
-#pragma once
+ï»¿#pragma once
 #include "IDataInputState.hpp"
 
 
 class InputEmailState : public IDataInputState
 {
 public:
-	using IDataInputState::IDataInputState; //»ó¼Ó
+	using IDataInputState::IDataInputState; //ìƒì†
 
 	virtual void draw() override;
 	virtual DataInputPhase update() override;
 };
+

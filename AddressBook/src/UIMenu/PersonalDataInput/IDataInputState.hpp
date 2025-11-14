@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../../UI/UICommonData.hpp"
 
 class PersonalDataInput;
@@ -16,3 +16,4 @@ public:
 protected:
 	PersonalDataInput& owner_;
 };
+

@@ -1,4 +1,4 @@
-#include "ViewMenu.hpp"
+ï»¿#include "ViewMenu.hpp"
 #include <iostream>
 #include <optional>
 #include <string>
@@ -22,14 +22,17 @@ void ViewMenu::run(AddressBookUI& bookUI)
 	{
 		ui_.clearScreen();
 		
-		//Å¸ÀÌÆ²
+		//íƒ€ì´í‹€
 		frame_ = uiMsgH_.viewTitle(context.err);
 		frame_(errorMsgH_);
 
-		//ÆäÀÌÁö
+		//í˜ì´ì§€
 		draw(bookUI, context, pageIndex, length);
 
-		//ÀÔ·Â Ã³¸®
+		//ì—ëŸ¬ ì´ˆê¸°í™”
+		context.err = nullopt;
+
+		//ì…ë ¥ ì²˜ë¦¬
 		ViewPhase nextPhase = update(context, pageIndex, length);
 		
 		if (nextPhase == ViewPhase::Next) 
@@ -58,23 +61,22 @@ void ViewMenu::draw(AddressBookUI& bookUI, ContextData& context, int page, int l
 	for (int i = startIndex; i < endIndex; ++i)
 	{
 		context.p = bookUI.getPersonalDataAt(i);
-		context.sub = ui_.getPersonalDataTableFormat(context.p);
 
 		int displayNum = i + 1;
 		if (i == (endIndex - 1)) 
 		{
-			frame_ = uiMsgH_.tableDataBottom(context.err, displayNum, context.sub);
+			frame_ = uiMsgH_.tableDataBottom(context.err, displayNum, context.p);
 		}
 		else 
 		{
 			int remainder = (displayNum) % 10;
 			if (remainder == 5)
 			{
-				frame_ = uiMsgH_.tableDataCenter(context.err, displayNum, context.sub);
+				frame_ = uiMsgH_.tableDataCenter(context.err, displayNum, context.p);
 			}
 			else 
 			{
-				frame_ = uiMsgH_.tableDataNormal(context.err, displayNum, context.sub);
+				frame_ = uiMsgH_.tableDataNormal(context.err, displayNum, context.p);
 			}
 		}
 		frame_(errorMsgH_);
@@ -84,21 +86,20 @@ void ViewMenu::draw(AddressBookUI& bookUI, ContextData& context, int page, int l
 	{
 		frame_ = uiMsgH_.tableComplete();
 		frame_(errorMsgH_);
-		frame_ = uiMsgH_.tableCommand(context.err);
+		frame_ = uiMsgH_.tableCommandInputMessage(context.err);
 	}
 	else 
 	{
-		frame_ = uiMsgH_.tableContinue();
+		frame_ = uiMsgH_.tableCommand();
 		frame_(errorMsgH_);
-		frame_ = uiMsgH_.tableCommand(context.err);
+		frame_ = uiMsgH_.tableCommandInputMessage(context.err);
 	}
 	frame_(errorMsgH_);
 }
 
 ViewPhase ViewMenu::update(ContextData& context, int page, int length)
 {
-	PagingPhase phase = inputH_.getPagingInput(PagingMenu::View);
-	context.err = inputH_.getLastError();
+	PagingPhase phase = inputH_.getViewPagingInput();
 
 	switch (phase) {
 	case PagingPhase::Next:
@@ -123,8 +124,15 @@ ViewPhase ViewMenu::update(ContextData& context, int page, int length)
 		return ViewPhase::Prev;
 	}
 	case PagingPhase::Exit:
+	{
 		context.err = nullopt;
 		return ViewPhase::Exit;
+	}
+	case PagingPhase::Enter:
+	{
+		context.err = nullopt;
+		return ViewPhase::Stay;
+	}
 	default:
 	{
 		context.err = wrapVariant<ResultVariant>(MenuSelectResult::WRONG_COMMAND);
@@ -132,3 +140,4 @@ ViewPhase ViewMenu::update(ContextData& context, int page, int length)
 	}
 	}
 }
+

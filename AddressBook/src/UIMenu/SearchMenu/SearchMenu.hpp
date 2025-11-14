@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <vector>
 #include <memory>
 #include <utility>
@@ -8,7 +8,7 @@
 
 class AddressBookUi;
 
-enum class SearchMode { Search, Edit, Delete };
+enum class SearchMode { Search, SearchEmpty, Edit, Delete };
 
 class SearchMenu
 {
@@ -24,9 +24,12 @@ public:
     
     AddressBookUI* getBookUI() { return bookUI_; }
     std::vector<std::pair<PersonalData, int>>& accessSearchResult() { return searchResult_; }
+    int getCurrentPage() const { return page_; }
+    void setCurrentPage(int page) { page_ = page; }
+    
     void setMode(SearchMode mode) { mode_ = mode; }
     void drawLongTitle();
-    void drawResultTable();
+    void drawResultTable(AddressBookUI& bookUI, ContextData& context);
     void drawResultMsg();
 
 private:
@@ -36,6 +39,7 @@ private:
     UIFrame frame_;
     UIUtils ui_;
     SearchMode mode_ = SearchMode::Search;
+    int page_ = 0;
 
     AddressBookUI* bookUI_ = nullptr;
     ContextData context_;
@@ -44,3 +48,4 @@ private:
 
     void transitionTo(SearchPhase nextPhase);
 };
+

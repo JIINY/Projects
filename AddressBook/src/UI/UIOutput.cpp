@@ -1,4 +1,4 @@
-#include "UIOutput.hpp"
+﻿#include "UIOutput.hpp"
 #include <iostream>
 #include "../Common/ResultEnums.hpp"
 #include "../IO/ErrorPrintHandler.hpp"
@@ -40,3 +40,4 @@ void UIFrame::operator()(ErrorPrintHandler& errorMsgH) const
         break;
     }
 }
+

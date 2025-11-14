@@ -1,4 +1,4 @@
-#include "EditItemState.hpp"
+Ôªø#include "EditItemState.hpp"
 #include <string>
 #include <optional>
 #include <cassert>
@@ -49,7 +49,7 @@ void EditItemState::draw()
 	}
 	default:
 		ui.clearScreen();
-		break; // 6. ¿¸√ººˆ¡§¿∫ PersonalDataInput∞° √≥∏Æ
+		break; // 6. Ï†ÑÏ≤¥ÏàòÏ†ïÏùÄ PersonalDataInputÍ∞Ä Ï≤òÎ¶¨
 	}
 }
 
@@ -58,42 +58,42 @@ EditPhase EditItemState::update()
 {
 	auto& context = owner_.getContext();
 	auto& inputH = owner_.getInputH();
+	string s = "";
 
 	switch (context.menu) {
 	case 1:
 	{
-		string name = inputH.getString(StringRule::EmptyDisallow);
-		ResultVariant error = inputH.getLastError();
-		if (!isVariantEqualTo<InputResult>(error, InputResult::SUCCESS)) 
+		ResultVariant result = inputH.getString(StringRule::EmptyDisallow, s);
+		if (!isVariantEqualTo<InputResult>(result, InputResult::SUCCESS)) 
 		{
 			context.err = wrapVariant<ResultVariant>(EditDataResult::EMPTY_NAME);
 			return EditPhase::EditStart;
 		}
 
-		context.p.name = name;
+		context.p.name = s;
 		break;
 	}
 	case 2: 
 	{
-		string s = inputH.getString(StringRule::EmptyAllow);
+		ResultVariant result = inputH.getString(StringRule::EmptyAllow, s);
 		context.p.phone = s;
 		break;
 	}
 	case 3:
 	{
-		string s = inputH.getString(StringRule::EmptyAllow);
+		ResultVariant result = inputH.getString(StringRule::EmptyAllow, s);
 		context.p.address = s;
 		break;
 	}
 	case 4:
 	{
-		string s = inputH.getString(StringRule::EmptyAllow);
+		ResultVariant result = inputH.getString(StringRule::EmptyAllow, s);
 		context.p.zipCode = s;
 		break;
 	}
 	case 5:
 	{
-		string s = inputH.getString(StringRule::EmptyAllow);
+		ResultVariant result = inputH.getString(StringRule::EmptyAllow, s);
 		context.p.email = s;
 		break;
 	}
@@ -111,3 +111,4 @@ EditPhase EditItemState::update()
 	context.err = nullopt;
 	return EditPhase::EditStart;
 }
+

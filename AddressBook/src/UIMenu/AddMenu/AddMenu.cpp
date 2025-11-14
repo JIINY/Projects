@@ -1,4 +1,4 @@
-#include "AddMenu.hpp"
+ï»¿#include "AddMenu.hpp"
 #include <iostream>
 #include <memory>
 #include <cassert>
@@ -29,20 +29,20 @@ void AddMenu::run(AddressBookUI& bookUI)
 
 	while (currentPhase != AddPhase::Exit)
 	{
-		//±×¸®±â
+		//ê·¸ë¦¬ê¸°
 		if (currentState_) 
 		{
 			currentState_->draw();
 		}
 
-		//Ã³¸®
+		//ì²˜ë¦¬
 		AddPhase nextPhase = currentPhase;
 		if (currentState_) 
 		{
 			nextPhase = currentState_->update();
 		}
 
-		//»óÅÂ ÀüÀÌ
+		//ìƒíƒœ ì „ì´
 		if (nextPhase != currentPhase) 
 		{
 			transitionTo(nextPhase);
@@ -54,7 +54,7 @@ void AddMenu::run(AddressBookUI& bookUI)
 		}
 	}
 
-	//Á¾·á½Ã È­¸é Á¤¸®
+	//ì¢…ë£Œì‹œ í™”ë©´ ì •ë¦¬
 	ui_.clearScreen();
 }
 
@@ -105,3 +105,4 @@ void AddMenu::transitionTo(AddPhase nextPhase)
 	}
 	}
 }
+

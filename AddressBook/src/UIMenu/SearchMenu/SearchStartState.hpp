@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "ISearchState.hpp"
 
 class SearchStartState : public ISearchState
@@ -9,3 +9,4 @@ public:
 	virtual void draw() override;
 	virtual SearchPhase update() override;
 };
+
