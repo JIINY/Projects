@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <vector>
 #include <utility>
 #include <string>
@@ -30,7 +30,7 @@ public:
 	std::vector<std::pair<PersonalData, int>> searchByAddress(const std::string& query) const;
 	std::vector<std::pair<PersonalData, int>> searchByZipCode(const std::string& query) const;
 	std::vector<std::pair<PersonalData, int>> searchByEmail(const std::string& query) const;
-
+	int findIndexByData(const PersonalData& data) const;
 
 protected:
 	AddOperationResult processAdd(const PersonalData& p);
@@ -41,5 +41,6 @@ protected:
 
 private:
 	int lastAdd_ = -1;
-	std::vector<Personal> personal_;
+	std::vector<Personal> personal_{};
 };
+

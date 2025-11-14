@@ -1,7 +1,8 @@
-#include "Personal.hpp"
+﻿#include "Personal.hpp"
 #include <vector>
 #include <string>
 #include "../Common/ResultEnums.hpp"
+#include "../Common/DataType.hpp"
 using namespace std;
 
 
@@ -20,12 +21,6 @@ PersonalData Personal::getData() const
 	PersonalData p = { name_, phone_, address_, zipCode_, email_ };
 	return p;
 }
-string Personal::getName() const { return name_; }
-string Personal::getPhone() const {	return phone_; }
-string Personal::getAddress() const { return address_; }
-string Personal::getZipCode() const { return zipCode_; }
-string Personal::getEmail() const { return email_; }
-
 
 AddOperationResult Personal::setData(const PersonalData& input) 
 {
@@ -48,7 +43,3 @@ AddOperationResult Personal::setName(const string& name)
 	return AddOperationResult::SUCCESS;
 }
 
-void Personal::setPhone(const string& phone) { phone_ = phone; }
-void Personal::setAddress(const string& address) { address_ = address; }
-void Personal::setZipCode(const string& zipCode) { zipCode_ = zipCode; }
-void Personal::setEmail(const string& email) { email_ = email; }

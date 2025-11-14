@@ -1,4 +1,4 @@
-#include "AddressBook.hpp"
+ï»¿#include "AddressBook.hpp"
 #include <vector>
 #include <utility>
 #include <string>
@@ -13,16 +13,23 @@ using namespace std;
 
 SaveOperationResult AddressBook::saveFile(const string& filename) const 
 {
-	ofstream outFile(filename);
+	ofstream outFile(filename, std::ios::binary);
 
-	if (!outFile) //¾²±â °¡´ÉÇÑÁö(e.g. Æú´õ ±ÇÇÑ ¹®Á¦)
+	if (!outFile) //ì“°ê¸° ê°€ëŠ¥í•œì§€(e.g. í´ë” ê¶Œí•œ ë¬¸ì œ)
 	{ 
 		return SaveOperationResult::FAIL;
 	}
 
+	outFile << "\xEF\xBB\xBF"; //UTF-8 BOM í‘œê¸°
+	outFile << "Name,Phone,Address,ZipCode,Email\n"; //CSV í—¤ë”
+
 	for (const auto& p : personal_) 
 	{
-		outFile << p.getName() << ',' << p.getPhone() << ',' << p.getAddress() << ',' << p.getZipCode() << ',' << p.getEmail() << '\n';
+		outFile << p.getName() << ',' 
+			<< p.getPhone() << ',' 
+			<< p.getAddress() << ',' 
+			<< p.getZipCode() << ',' 
+			<< p.getEmail() << '\n';
 	}
 	return SaveOperationResult::SUCCESS;
 }
@@ -40,8 +47,26 @@ LoadOperationResult AddressBook::loadFile(const string& filename)
 		return LoadOperationResult::FAIL;
 	}
 
+	//UTF-8 BOM (3-byte) ê±´ë„ˆë›°ê¸°
+	char bom[3] = { 0 };
+	inFile.read(bom, 3);
+	if (static_cast<unsigned char>(bom[0]) != 0xEF ||
+		static_cast<unsigned char>(bom[1]) != 0xBB ||
+		static_cast<unsigned char>(bom[2]) != 0xBF)
+	{
+		inFile.seekg(0, std::ios::beg);
+	}
+
 	personal_.clear();
 	string line;
+
+	//CSV í—¤ë” í•œ ì¤„ ê±´ë„ˆë›°ê¸°
+	if (!getline(inFile, line)) 
+	{
+		return LoadOperationResult::EMPTY_FILE;
+	}
+
+	//ì½ê¸° ì‹œì‘
 	while (getline(inFile, line)) 
 	{
 		istringstream data(line);
@@ -161,7 +186,7 @@ AddOperationResult AddressBook::edit(int originalIndex, const PersonalData& newD
 		return validationResult; 
 	}
 
-	//newData°¡ À¯È¿ÇÏ´Ù¸é ±âÁ¸ µ¥ÀÌÅÍ¸¦ »èÁ¦
+	//newDataê°€ ìœ íš¨í•˜ë‹¤ë©´ ê¸°ì¡´ ë°ì´í„°ë¥¼ ì‚­ì œ
 	std::string removedName;
 	RemoveOperationResult removeResult = processRemove(originalIndex, removedName);
 	if (removeResult != RemoveOperationResult::SUCCESS) 
@@ -169,7 +194,7 @@ AddOperationResult AddressBook::edit(int originalIndex, const PersonalData& newD
 		return AddOperationResult::FAIL;
 	}
 
-	//newData¸¦ ´Ù½Ã Ãß°¡
+	//newDataë¥¼ ë‹¤ì‹œ ì¶”ê°€
 	AddOperationResult addResult = add(newData);
 	
 	return addResult;
@@ -194,9 +219,30 @@ RemoveOperationResult AddressBook::processRemove(int index, string& name)
 	return RemoveOperationResult::FAIL;
 }
 
-bool AddressBook::popPersonal(int index, string& name) //¸¶Âù°¡Áö·Î length°¡°ø ¾î¶»°Ô ÇÒ °ÇÁö ¸ÂÃç¼­ ¸Å°³º¯¼ö ¼öÁ¤ÇÒ °Í
+bool AddressBook::popPersonal(int index, string& name) //ë§ˆì°¬ê°€ì§€ë¡œ lengthê°€ê³µ ì–´ë–»ê²Œ í•  ê±´ì§€ ë§ì¶°ì„œ ë§¤ê°œë³€ìˆ˜ ìˆ˜ì •í•  ê²ƒ
 {
 	name = personal_[index].getName();
 	personal_.erase(personal_.begin() + (index));
 	return true;
 }
+
+int AddressBook::findIndexByData(const PersonalData& dataToFind) const 
+{
+	//ê°™ì€ ì´ë¦„ì´ ì‹œì‘ë˜ëŠ” ìœ„ì¹˜ ì°¾ê¸°
+	auto it = lower_bound(personal_.begin(), personal_.end(), Personal(dataToFind), 
+		[](const Personal& a, const Personal& b) {
+			return a.getName() < b.getName();
+		});
+
+	while (it != personal_.end() && it->getName() == dataToFind.name) 
+	{
+		if (it->getData() == dataToFind) 
+		{
+			return static_cast<int>(it - personal_.begin());
+		}
+		++it;
+	}
+
+	return -1;
+}
+
