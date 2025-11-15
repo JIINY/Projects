@@ -36,4 +36,3 @@ SearchPhase SearchAgainState::update()
 	context.err = wrapVariant<ResultVariant>(result);
 	return SearchPhase::SearchAgain;
 }
-

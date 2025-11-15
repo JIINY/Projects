@@ -9,4 +9,3 @@ public:
 	virtual void draw() override {}
 	virtual SearchPhase update() override;
 };
-

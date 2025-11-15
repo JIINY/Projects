@@ -15,4 +15,3 @@ private:
 	SearchPhase processEmptyMenu(int menu);
 	SearchPhase processResultMenu(int menu);
 };
-

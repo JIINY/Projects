@@ -15,4 +15,3 @@ public:
 protected:
 	SearchMenu& owner_;
 };
-
