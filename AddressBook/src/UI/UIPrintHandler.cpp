@@ -453,6 +453,26 @@ UIFrame UIPrintHandler::searchEmptySubMenu()
 	};
 }
 
+UIFrame UIPrintHandler::searchEditSubMenu()
+{
+	return UIFrame{
+		[] {
+			OutputPrintHandler::printShort2Line();
+			OutputPrintHandler::printSearchEditSubMenu();
+		}, EnterType::Both, nullopt, RenderOrder::ErrorToRender
+	};
+}
+
+UIFrame UIPrintHandler::searchDeleteSubMenu()
+{
+	return UIFrame{
+		[] {
+			OutputPrintHandler::printShort2Line();
+			OutputPrintHandler::printSearchDeleteSubMenu();
+		}, EnterType::Both, nullopt, RenderOrder::ErrorToRender
+	};
+}
+
 UIFrame UIPrintHandler::searchAgain(optional<ResultVariant> err)
 {
 	return UIFrame{

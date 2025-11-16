@@ -207,17 +207,33 @@ void OutputPrintHandler::printAddMenu()
 
 void OutputPrintHandler::printSearchSubMenu() 
 {
-	cout << "[1] 주소록 수정하기" << endl;
-	cout << "[2] 주소록 삭제하기" << endl;
-	cout << "[9] 다시 검색하기" << endl;
-	cout << "[0] 메인 메뉴로 돌아가기" << endl;
+	cout << "[E] 주소록 수정하기" << endl;
+	cout << "[D] 주소록 삭제하기" << endl;
+	cout << "[S] 다시 검색하기" << endl;
+	cout << "[Q] 메인 메뉴로 돌아가기" << endl;
+	cout << "=======================================" << endl;
+}
+
+void OutputPrintHandler::printSearchEditSubMenu() 
+{
+	cout << "[D] 주소록 삭제하기" << endl;
+	cout << "[S] 다시 검색하기" << endl;
+	cout << "[Q] 메인 메뉴로 돌아가기" << endl;
+	cout << "=======================================" << endl;
+}
+
+void OutputPrintHandler::printSearchDeleteSubMenu() 
+{
+	cout << "[E] 주소록 수정하기" << endl;
+	cout << "[S] 다시 검색하기" << endl;
+	cout << "[Q] 메인 메뉴로 돌아가기" << endl;
 	cout << "=======================================" << endl;
 }
 
 void OutputPrintHandler::printSearchEmptySubMenu() 
 {
-	cout << "[9] 다시 검색하기" << endl;
-	cout << "[0] 메인 메뉴로 돌아가기" << endl;
+	cout << "[S] 다시 검색하기" << endl;
+	cout << "[Q] 메인 메뉴로 돌아가기" << endl;
 	cout << "=======================================" << endl;
 }
 
