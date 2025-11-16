@@ -12,7 +12,7 @@ void SearchEmptyMenuState::draw()
 	auto& uiMsgH = owner_.getUIMsgH();
 	auto& errorMsgH = owner_.getErrorMsgH();
 
-	frame = uiMsgH.searchEmptySubMenu();
+	frame = uiMsgH.searchEmptySubMenu(context.err);
 	frame(errorMsgH);
 	frame = uiMsgH.menuSelect(context.err);
 	frame(errorMsgH);

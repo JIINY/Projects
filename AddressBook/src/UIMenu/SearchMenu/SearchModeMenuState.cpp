@@ -15,7 +15,7 @@ void SearchModeMenuState::draw()
 	auto& uiMsgH = owner_.getUIMsgH();
 	auto& errorMsgH = owner_.getErrorMsgH();
 
-	frame = uiMsgH.searchSubMenu();
+	frame = uiMsgH.searchSubMenu(context.err);
 	frame(errorMsgH);
 	frame = uiMsgH.menuSelect(context.err);
 	frame(errorMsgH);

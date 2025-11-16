@@ -16,7 +16,7 @@ void SearchDeleteMenuState::draw()
 	auto& uiMsgH = owner_.getUIMsgH();
 	auto& errorMsgH = owner_.getErrorMsgH();
 
-	frame = uiMsgH.searchEditSubMenu();
+	frame = uiMsgH.searchEditSubMenu(context.err);
 	frame(errorMsgH);
 	frame = uiMsgH.menuSelect(context.err);
 	frame(errorMsgH);

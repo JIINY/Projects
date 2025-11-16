@@ -52,4 +52,3 @@ SearchPhase SearchEditItemState::update()
 	}
 	return SearchPhase::SearchResult;
 }
-
