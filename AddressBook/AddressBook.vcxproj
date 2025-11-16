@@ -35,6 +35,7 @@
     <ClCompile Include="src\UIMenu\EditMenu\EditMenu.cpp" />
     <ClCompile Include="src\UIMenu\AddMenu\AddMenu.cpp" />
     <ClCompile Include="src\UIMenu\MainMenu.cpp" />
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchActionMenuState.cpp" />
     <ClCompile Include="src\UIMenu\SearchMenu\SearchAgainState.cpp" />
     <ClCompile Include="src\UIMenu\SearchMenu\SearchDeleteItemState.cpp" />
     <ClCompile Include="src\UIMenu\SearchMenu\SearchDeleteMenuState.cpp" />
@@ -92,6 +93,7 @@
     <ClInclude Include="src\UIMenu\AddMenu\AddMenu.hpp" />
     <ClInclude Include="src\UIMenu\MainMenu.hpp" />
     <ClInclude Include="src\UIMenu\SearchMenu\ISearchState.hpp" />
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchActionMenuState.hpp" />
     <ClInclude Include="src\UIMenu\SearchMenu\SearchAgainState.hpp" />
     <ClInclude Include="src\UIMenu\SearchMenu\SearchDeleteItemState.hpp" />
     <ClInclude Include="src\UIMenu\SearchMenu\SearchDeleteMenuState.hpp" />

@@ -201,6 +201,9 @@
     <ClCompile Include="src\UIMenu\SearchMenu\SearchDeleteMenuState.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchActionMenuState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Common\DataType.hpp">
@@ -381,6 +384,9 @@
       <Filter>src\UIMenu\SearchMenu</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\SearchMenu\SearchDeleteMenuState.hpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchActionMenuState.hpp">
       <Filter>src\UIMenu\SearchMenu</Filter>
     </ClInclude>
   </ItemGroup>

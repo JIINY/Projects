@@ -84,6 +84,24 @@ SearchPhase SearchModeMenuState::update()
 		context.err = nullopt;
 		return SearchPhase::SearchResult;
 	}
+	case CommandPhase::PositiveNums: 
+	{
+		int length = static_cast<int>(owner_.accessSearchResult().size());
+		int currentPage = owner_.getCurrentPage();
+		int minNumOnPage = (currentPage * 10) + 1;
+		int maxNumOnPage = min((currentPage + 1) * 10, length);
+
+		if (input < minNumOnPage || input > maxNumOnPage)
+		{
+			context.err = wrapVariant<ResultVariant>(InputResult::WRONG_NUMBER);
+			return SearchPhase::SearchResult;
+		}
+
+		context.menu = input - 1;
+		context.err = nullopt;
+		return SearchPhase::ActionMode;
+
+	}
 	default:
 	{
 		ResultVariant error = MenuSelectResult::WRONG_INDEX;

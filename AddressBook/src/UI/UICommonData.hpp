@@ -49,6 +49,7 @@ enum class SearchPhase
     ModeSelect,
     SearchMode,
     SearchEmptyMode,
+    ActionMode,
     EditMode,
     DeleteMode,
     EditStart,

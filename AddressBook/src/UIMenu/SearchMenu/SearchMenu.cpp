@@ -14,6 +14,7 @@
 #include "SearchResultState.hpp"
 #include "SearchModeSelectState.hpp"
 #include "SearchModeMenuState.hpp"
+#include "SearchActionMenuState.hpp"
 #include "SearchEmptyMenuState.hpp"
 #include "SearchEditMenuState.hpp"
 #include "SearchEditState.hpp"
@@ -33,13 +34,18 @@ void SearchMenu::run(AddressBookUI& bookUI)
 	context_ = ContextData{};
 	context_.err = nullopt;
 	searchResult_.clear();
-
+	bool needsScreenClear = true;
 
 	SearchPhase currentPhase = SearchPhase::SearchStart;
 	transitionTo(currentPhase);
 
 	while (currentPhase != SearchPhase::Exit)
 	{
+		if (needsScreenClear) 
+		{
+			ui_.clearScreen();
+		}
+
 		if (currentState_)
 		{
 			currentState_->draw();
@@ -53,26 +59,34 @@ void SearchMenu::run(AddressBookUI& bookUI)
 
 		if (nextPhase != currentPhase)
 		{
-			transitionTo(nextPhase);
+			needsScreenClear = transitionTo(nextPhase);
 			currentPhase = nextPhase;
 		}
 		else
 		{
-			ui_.clearScreen();
+			if (currentPhase == SearchPhase::SearchStart) 
+			{
+				needsScreenClear = true;
+			}
+			else 
+			{
+				needsScreenClear = false;
+			}
 		}
 	}
 
 	ui_.clearScreen(); //종료시 화면 정리
 }
 
-void SearchMenu::transitionTo(SearchPhase nextPhase) 
+bool SearchMenu::transitionTo(SearchPhase nextPhase) 
 {
+	bool shouldClearNextFrame = false;
 	if (nextPhase == SearchPhase::SearchStart ||
 		nextPhase == SearchPhase::SearchInputData ||
 		nextPhase == SearchPhase::SearchResult ||
 		nextPhase == SearchPhase::SearchAgain) 
 	{
-		ui_.clearScreen();
+		shouldClearNextFrame = true;
 	}
 
 	switch (nextPhase) {
@@ -104,6 +118,11 @@ void SearchMenu::transitionTo(SearchPhase nextPhase)
 	case SearchPhase::SearchEmptyMode:
 	{
 		currentState_ = make_unique<SearchEmptyMenuState>(*this);
+		break;
+	}
+	case SearchPhase::ActionMode:
+	{
+		currentState_ = make_unique<SearchActionMenuState>(*this);
 		break;
 	}
 	case SearchPhase::EditMode:
@@ -152,6 +171,8 @@ void SearchMenu::transitionTo(SearchPhase nextPhase)
 		break;
 	}
 	}
+
+	return shouldClearNextFrame;
 }
 
 void SearchMenu::drawLongTitle() 
@@ -190,23 +211,23 @@ void SearchMenu::drawResultTable(AddressBookUI& bookUI, ContextData& context)
 		for (int i = startIndex; i < endIndex; ++i)
 		{
 			int bookIndex = searchResult_[i].second;
-			context.p = bookUI.getPersonalDataAt(bookIndex);
+			PersonalData p = bookUI.getPersonalDataAt(bookIndex);
 
 			int displayNum = i + 1;
 			if (i == (endIndex - 1))
 			{
-				frame_ = uiMsgH_.tableDataBottom(context.err, displayNum, context.p);
+				frame_ = uiMsgH_.tableDataBottom(context.err, displayNum, p);
 			}
 			else
 			{
 				int remainder = (displayNum) % 10;
 				if (remainder == 5)
 				{
-					frame_ = uiMsgH_.tableDataCenter(context.err, displayNum, context.p);
+					frame_ = uiMsgH_.tableDataCenter(context.err, displayNum, p);
 				}
 				else
 				{
-					frame_ = uiMsgH_.tableDataNormal(context.err, displayNum, context.p);
+					frame_ = uiMsgH_.tableDataNormal(context.err, displayNum, p);
 				}
 			}
 			frame_(errorMsgH_);
@@ -223,7 +244,8 @@ void SearchMenu::drawResultMsg()
 		frame_(errorMsgH_);
 	}
 
-	if (mode_ == SearchMode::Edit) 
+	switch (mode_) {
+	case SearchMode::Edit: 
 	{
 		if (isVariantEqualTo<AddOperationResult>(*context_.err, AddOperationResult::SUCCESS))
 		{
@@ -237,10 +259,11 @@ void SearchMenu::drawResultMsg()
 			frame_ = uiMsgH_.tableAction(ActionType::Edit);
 			frame_(errorMsgH_);
 		}
+		break;
 	}
-	else if (mode_ == SearchMode::Delete)
+	case SearchMode::Delete:
 	{
-		if (isVariantEqualTo<RemoveOperationResult>(*context_.err, RemoveOperationResult::SUCCESS)) 
+		if (isVariantEqualTo<RemoveOperationResult>(*context_.err, RemoveOperationResult::SUCCESS))
 		{
 			frame_ = uiMsgH_.tableDeleteSuccess(context_.menu + 1, context_.p.name);
 			frame_(errorMsgH_);
@@ -251,18 +274,29 @@ void SearchMenu::drawResultMsg()
 			frame_ = uiMsgH_.tableAction(ActionType::Delete);
 			frame_(errorMsgH_);
 		}
+		break;
 	}
-	else
+	case SearchMode::SearchEmpty: 
 	{
-		if (length > 0)
-		{
-			frame_ = uiMsgH_.tableSearchEnd();
-			frame_(errorMsgH_);
-		}
-		else 
-		{
-			frame_ = uiMsgH_.searchEmpty();
-			frame_(errorMsgH_);
-		}
+		frame_ = uiMsgH_.searchEmpty();
+		frame_(errorMsgH_);
+		break;
+	}
+	case SearchMode::Action:
+	{
+		frame_ = uiMsgH_.tableSearchEnd();
+		frame_(errorMsgH_);
+		frame_ = uiMsgH_.searchSubMenu(context_.err);
+		frame_(errorMsgH_);
+		frame_ = uiMsgH_.menuSelect(context_.err);
+		frame_(errorMsgH_);
+		break;
+	}
+	default:
+	{
+		frame_ = uiMsgH_.tableSearchEnd();
+		frame_(errorMsgH_);
+		break;
+	}
 	}
 }

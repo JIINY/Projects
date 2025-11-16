@@ -20,6 +20,8 @@ SearchPhase SearchModeSelectState::update()
 		return SearchPhase::EditMode;
 	case SearchMode::Delete:
 		return SearchPhase::DeleteMode;
+	case SearchMode::Action:
+		return SearchPhase::ActionMode;
 	case SearchMode::Search:
 	default:
 		return SearchPhase::SearchMode;

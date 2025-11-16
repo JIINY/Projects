@@ -8,7 +8,7 @@
 
 class AddressBookUi;
 
-enum class SearchMode { Search, SearchEmpty, Edit, Delete };
+enum class SearchMode { Search, SearchEmpty, Edit, Delete, Action };
 
 class SearchMenu
 {
@@ -47,6 +47,6 @@ private:
     std::unique_ptr<ISearchState> currentState_ = nullptr;
     std::vector<std::pair<PersonalData, int>> searchResult_;
 
-    void transitionTo(SearchPhase nextPhase);
+    bool transitionTo(SearchPhase nextPhase);
 };
 
