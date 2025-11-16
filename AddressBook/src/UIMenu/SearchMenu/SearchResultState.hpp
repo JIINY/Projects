@@ -8,10 +8,4 @@ public:
 
 	virtual void draw() override;
 	virtual SearchPhase update() override;
-
-
-private:
-	SearchPhase processSubMenu(int menu, int resultSize);
-	SearchPhase processEmptyMenu(int menu);
-	SearchPhase processResultMenu(int menu);
 };

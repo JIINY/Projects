@@ -28,6 +28,7 @@ public:
     void setCurrentPage(int page) { page_ = page; }
     
     void setMode(SearchMode mode) { mode_ = mode; }
+    SearchMode getMode() { return mode_; }
     void drawLongTitle();
     void drawResultTable(AddressBookUI& bookUI, ContextData& context);
     void drawResultMsg();

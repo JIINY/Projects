@@ -12,12 +12,15 @@
 #include "SearchStartState.hpp"
 #include "SearchInputDataState.hpp"
 #include "SearchResultState.hpp"
+#include "SearchModeSelectState.hpp"
+#include "SearchModeMenuState.hpp"
+#include "SearchEmptyMenuState.hpp"
+#include "SearchEditMenuState.hpp"
 #include "SearchEditState.hpp"
 #include "SearchEditItemState.hpp"
-#include "SearchEditAgain.hpp"
+#include "SearchDeleteMenuState.hpp"
 #include "SearchDeleteState.hpp"
 #include "SearchDeleteItemState.hpp"
-#include "SearchDeleteAgainState.hpp"
 #include "SearchAgainState.hpp"
 #include "../EditMenu/EditMenu.hpp"
 #include "../DeleteMenu.hpp"
@@ -67,8 +70,6 @@ void SearchMenu::transitionTo(SearchPhase nextPhase)
 	if (nextPhase == SearchPhase::SearchStart ||
 		nextPhase == SearchPhase::SearchInputData ||
 		nextPhase == SearchPhase::SearchResult ||
-		nextPhase == SearchPhase::EditAgain ||
-		nextPhase == SearchPhase::DeleteAgain ||
 		nextPhase == SearchPhase::SearchAgain) 
 	{
 		ui_.clearScreen();
@@ -90,7 +91,27 @@ void SearchMenu::transitionTo(SearchPhase nextPhase)
 		currentState_ = make_unique<SearchResultState>(*this);
 		break;
 	}
-	case SearchPhase::EditStart: 
+	case SearchPhase::ModeSelect: 
+	{
+		currentState_ = make_unique<SearchModeSelectState>(*this);
+		break;
+	}
+	case SearchPhase::SearchMode:
+	{
+		currentState_ = make_unique<SearchModeMenuState>(*this);
+		break;
+	}
+	case SearchPhase::SearchEmptyMode:
+	{
+		currentState_ = make_unique<SearchEmptyMenuState>(*this);
+		break;
+	}
+	case SearchPhase::EditMode:
+	{
+		currentState_ = make_unique<SearchEditMenuState>(*this);
+		break;
+	}
+	case SearchPhase::EditStart:
 	{
 		currentState_ = make_unique<SearchEditState>(*this);
 		break;
@@ -100,9 +121,9 @@ void SearchMenu::transitionTo(SearchPhase nextPhase)
 		currentState_ = make_unique<SearchEditItemState>(*this);
 		break;
 	}
-	case SearchPhase::EditAgain: 
+	case SearchPhase::DeleteMode:
 	{
-		currentState_ = make_unique<SearchEditAgainState>(*this);
+		currentState_ = make_unique<SearchDeleteMenuState>(*this);
 		break;
 	}
 	case SearchPhase::DeleteStart:
@@ -113,11 +134,6 @@ void SearchMenu::transitionTo(SearchPhase nextPhase)
 	case SearchPhase::DeleteItem:
 	{
 		currentState_ = make_unique<SearchDeleteItemState>(*this);
-		break;
-	}
-	case SearchPhase::DeleteAgain: 
-	{
-		currentState_ = make_unique<SearchDeleteAgainState>(*this);
 		break;
 	}
 	case SearchPhase::SearchAgain:
@@ -250,4 +266,3 @@ void SearchMenu::drawResultMsg()
 		}
 	}
 }
-

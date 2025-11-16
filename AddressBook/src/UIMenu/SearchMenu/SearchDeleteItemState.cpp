@@ -44,6 +44,6 @@ SearchPhase SearchDeleteItemState::update()
 	{
 		context.err = wrapVariant<ResultVariant>(result);
 	}
-	return SearchPhase::DeleteAgain;
+	return SearchPhase::SearchResult;
 }
 

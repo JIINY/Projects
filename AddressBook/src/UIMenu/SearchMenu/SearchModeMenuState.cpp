@@ -1,0 +1,94 @@
+#include "SearchModeMenuState.hpp"
+#include <variant>
+#include <utility>
+#include <optional>
+#include "../../UI/UICommonData.hpp"
+#include "../../UI/UICommonHeader.hpp"
+#include "SearchMenu.hpp"
+using namespace std;
+
+
+void SearchModeMenuState::draw() 
+{
+	auto& context = owner_.getContext();
+	auto& frame = owner_.getUIFrame();
+	auto& uiMsgH = owner_.getUIMsgH();
+	auto& errorMsgH = owner_.getErrorMsgH();
+
+	frame = uiMsgH.searchSubMenu();
+	frame(errorMsgH);
+	frame = uiMsgH.menuSelect(context.err);
+	frame(errorMsgH);
+}
+
+SearchPhase SearchModeMenuState::update() 
+{
+	auto& context = owner_.getContext();
+	auto& inputH = owner_.getInputH();
+
+	int i = -1;
+	CommandPhase result = inputH.getSearchPagingInput(i);
+	if (result == CommandPhase::Error)
+	{
+		ResultVariant error = InputResult::FAIL;
+		context.err = wrapVariant<ResultVariant>(error);
+		return SearchPhase::SearchResult;
+	}
+
+	switch (result)
+	{
+	case CommandPhase::Edit:
+	{
+		owner_.setMode(SearchMode::Edit);
+		return SearchPhase::EditStart;
+	}
+	case CommandPhase::Delete:
+	{
+		owner_.setMode(SearchMode::Delete);
+		return SearchPhase::DeleteStart;
+	}
+	case CommandPhase::Search:
+	{
+		owner_.setMode(SearchMode::Search);
+		return SearchPhase::SearchStart;
+	}
+	case CommandPhase::Exit:
+	{
+		owner_.setMode(SearchMode::Search);
+		return SearchPhase::Exit;
+	}
+	case CommandPhase::Next:
+	{
+		int page = owner_.getCurrentPage();
+		int length = static_cast<int>(owner_.accessSearchResult().size());
+
+		bool isLastPage = ((page + 1) * 10) >= length;
+		if (isLastPage)
+		{
+			context.err = wrapVariant<ResultVariant>(MenuSelectResult::PAGE_END);
+			return SearchPhase::SearchResult;
+		}
+		owner_.setCurrentPage(page + 1);
+		context.err = nullopt;
+		return SearchPhase::SearchResult;
+	}
+	case CommandPhase::Prev:
+	{
+		int page = owner_.getCurrentPage();
+		if (page == 0)
+		{
+			context.err = wrapVariant<ResultVariant>(MenuSelectResult::PAGE_START);
+			return SearchPhase::SearchResult;
+		}
+		owner_.setCurrentPage(page - 1);
+		context.err = nullopt;
+		return SearchPhase::SearchResult;
+	}
+	default:
+	{
+		ResultVariant error = MenuSelectResult::WRONG_INDEX;
+		context.err = wrapVariant<ResultVariant>(error);
+		return SearchPhase::SearchResult;
+	}
+	}
+}

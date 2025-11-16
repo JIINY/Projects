@@ -1,11 +1,11 @@
-﻿#pragma once
+#pragma once
 #include "ISearchState.hpp"
 
-class SearchDeleteItemState : public ISearchState
+class SearchDeleteMenuState : public ISearchState
 {
 public:
 	using ISearchState::ISearchState;
 
-	virtual void draw() override {}
+	virtual void draw() override;
 	virtual SearchPhase update() override;
 };

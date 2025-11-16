@@ -1,7 +1,7 @@
-﻿#pragma once
+#pragma once
 #include "ISearchState.hpp"
 
-class SearchDeleteItemState : public ISearchState
+class SearchModeSelectState : public ISearchState
 {
 public:
 	using ISearchState::ISearchState;

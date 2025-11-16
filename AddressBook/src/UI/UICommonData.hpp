@@ -46,12 +46,15 @@ enum class SearchPhase
     SearchStart,
     SearchInputData,
     SearchResult,
+    ModeSelect,
+    SearchMode,
+    SearchEmptyMode,
+    EditMode,
+    DeleteMode,
     EditStart,
     EditItem,
-    EditAgain,
     DeleteStart,
     DeleteItem,
-    DeleteAgain,
     SearchAgain,
     Exit
 };
