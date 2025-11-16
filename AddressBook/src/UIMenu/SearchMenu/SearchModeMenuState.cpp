@@ -26,8 +26,8 @@ SearchPhase SearchModeMenuState::update()
 	auto& context = owner_.getContext();
 	auto& inputH = owner_.getInputH();
 
-	int i = -1;
-	CommandPhase result = inputH.getSearchPagingInput(i);
+	int input = -1;
+	CommandPhase result = inputH.getSearchPagingInput(input);
 	if (result == CommandPhase::Error)
 	{
 		ResultVariant error = InputResult::FAIL;
