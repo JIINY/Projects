@@ -12,12 +12,11 @@ public:
 
 
 private:
-    ResultVariant lastError_;
-    InputHandler inputH_;
-    ErrorPrintHandler errorMsgH_;
-    UIPrintHandler uiMsgH_;
-    UIFrame frame_;
-    UIUtils ui_;
+    InputHandler inputH_{};
+    ErrorPrintHandler errorMsgH_{};
+    UIPrintHandler uiMsgH_{};
+    UIFrame frame_{};
+    UIUtils ui_{};
 
     void draw(AddressBookUI& bookUI, ContextData& context, int page, int length);
     ViewPhase update(ContextData& context, int page, int length);
