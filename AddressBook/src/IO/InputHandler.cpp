@@ -170,7 +170,6 @@ CommandPhase InputHandler::getSearchPagingInput(int& output)
 	}
 
 	CommandPhase phase;
-	input = InputTextUtils::toUpper(input);
 	if (parsingPagingCommand(phase, input))
 	{
 		return phase; 
@@ -193,7 +192,8 @@ CommandPhase InputHandler::getSearchPagingInput(int& output)
 
 bool InputHandler::parsingPagingCommand(CommandPhase& phase, string& input) 
 {
-	if (input == "N" || input == "NEXT") 
+	input = InputTextUtils::toUpper(input); //Upper는 parser의 역할로 호출자의 역할이 아님
+	if (input == "N" || input == "NEXT")
 	{ 
 		phase = CommandPhase::Next;
 		return true;
@@ -218,7 +218,8 @@ bool InputHandler::parsingPagingCommand(CommandPhase& phase, string& input)
 
 bool InputHandler::parsingSearchModeCommand(CommandPhase& phase, string& input) 
 {
-	if (input == "E" || input == "EDIT") 
+	input = InputTextUtils::toUpper(input);
+	if (input == "E" || input == "EDIT")
 	{
 		phase = CommandPhase::Edit;
 		return true;
