@@ -68,6 +68,7 @@ public:
     UIFrame searchEmptySubMenu();
     UIFrame searchEditSubMenu();
     UIFrame searchDeleteSubMenu();
+    UIFrame searchActionSubMenu();
     UIFrame searchAgain(std::optional<ResultVariant> err);
     UIFrame searchEmpty();
     UIFrame searchEdit(std::optional<ResultVariant> err);

@@ -37,6 +37,7 @@ public:
     static void printSearchEmptySubMenu();
     static void printSearchEditSubMenu();
     static void printSearchDeleteSubMenu();
+    static void printSearchActionSubMenu();
 
     static void printInputName();
     static void printInputPhone();

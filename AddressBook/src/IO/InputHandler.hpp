@@ -20,7 +20,8 @@ enum class CommandPhase
     Error,
     Stay, //View전용
     PositiveNums, //여기부터 Search전용
-    Enter
+    Enter,
+    Cancel
 };
 
 class InputHandler 

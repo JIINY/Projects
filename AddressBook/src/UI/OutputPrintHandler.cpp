@@ -230,6 +230,14 @@ void OutputPrintHandler::printSearchDeleteSubMenu()
 	cout << "=======================================" << endl;
 }
 
+void OutputPrintHandler::printSearchActionSubMenu() 
+{
+	cout << "[E] 주소록 수정하기" << endl;
+	cout << "[D] 주소록 삭제하기" << endl;
+	cout << "[C] 선택한 항목 취소하기" << endl;
+	cout << "=======================================" << endl;
+}
+
 void OutputPrintHandler::printSearchEmptySubMenu() 
 {
 	cout << "[S] 다시 검색하기" << endl;
