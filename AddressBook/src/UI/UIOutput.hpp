@@ -16,7 +16,8 @@ enum class EnterType
 enum class RenderOrder 
 {
     RenderToError,
-    ErrorToRender
+    ErrorToRender,
+    RenderOnly
 };
 
 struct UIFrame;

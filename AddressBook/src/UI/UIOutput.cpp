@@ -13,31 +13,43 @@ UIFrame UITemplate::instantiate(std::optional<ResultVariant> err) const
 
 void UIFrame::operator()(ErrorPrintHandler& errorMsgH) const 
 {
-    switch (order) 
-    {
+    switch (order) {
     case RenderOrder::RenderToError:
-        if (enter == EnterType::RenderOnly || enter == EnterType::Both) 
+    {
+        if (enter == EnterType::RenderOnly || enter == EnterType::Both)
         {
-            cout << endl; 
+            cout << endl;
         }
         renderFunc();
-        if (errorPrint.has_value()) 
+        if (errorPrint.has_value())
         {
             errorMsgH.printErrorMsg(errorPrint.value());
         }
         break;
-
+    }
     case RenderOrder::ErrorToRender:
-        if ((enter == EnterType::ErrorOnly && errorPrint.has_value()) || enter == EnterType::Both) 
+    {
+        if ((enter == EnterType::ErrorOnly && errorPrint.has_value()) || enter == EnterType::Both)
         {
             cout << endl;
         }
-        if (errorPrint.has_value()) 
+        if (errorPrint.has_value())
         {
             errorMsgH.printErrorMsg(errorPrint.value());
         }
         renderFunc();
         break;
     }
+    case RenderOrder::RenderOnly: 
+    {
+        if ((enter == EnterType::ErrorOnly && errorPrint.has_value()) || enter == EnterType::Both) 
+        {
+            cout << endl;
+        }
+        renderFunc();
+        break;
+    }
+    }
+
 }
 

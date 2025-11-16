@@ -64,11 +64,11 @@ public:
     UIFrame searchTitle();
     UIFrame searchLongTitle();
     UIFrame searchResult();
-    UIFrame searchSubMenu();
-    UIFrame searchEmptySubMenu();
-    UIFrame searchEditSubMenu();
-    UIFrame searchDeleteSubMenu();
-    UIFrame searchActionSubMenu();
+    UIFrame searchSubMenu(std::optional<ResultVariant> err);
+    UIFrame searchEmptySubMenu(std::optional<ResultVariant> err);
+    UIFrame searchEditSubMenu(std::optional<ResultVariant> err);
+    UIFrame searchDeleteSubMenu(std::optional<ResultVariant> err);
+    UIFrame searchActionSubMenu(std::optional<ResultVariant> err);
     UIFrame searchAgain(std::optional<ResultVariant> err);
     UIFrame searchEmpty();
     UIFrame searchEdit(std::optional<ResultVariant> err);

@@ -52,7 +52,6 @@ UIFrame UIPrintHandler::tableAction(ActionType action)
 	return UIFrame{
 		[action]{
 			OutputPrintHandler::printTableAction(action);
-			//OutputPrintHandler::printEnter();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
@@ -433,53 +432,53 @@ UIFrame UIPrintHandler::searchResult()
 	};
 }
 
-UIFrame UIPrintHandler::searchSubMenu()
+UIFrame UIPrintHandler::searchSubMenu(optional<ResultVariant> err)
 {
 	return UIFrame{
 		[]{
 			OutputPrintHandler::printShort2Line();
 			OutputPrintHandler::printSearchSubMenu();
-		}, EnterType::Both, nullopt, RenderOrder::ErrorToRender
+		}, EnterType::Both, err, RenderOrder::RenderOnly
 	};
 }
 
-UIFrame UIPrintHandler::searchEmptySubMenu()
+UIFrame UIPrintHandler::searchEmptySubMenu(optional<ResultVariant> err)
 {
 	return UIFrame{
 		[]{
 			OutputPrintHandler::printShort2Line();
 			OutputPrintHandler::printSearchEmptySubMenu();
-		}, EnterType::Both, nullopt, RenderOrder::ErrorToRender
+		}, EnterType::Both, err, RenderOrder::RenderOnly
 	};
 }
 
-UIFrame UIPrintHandler::searchEditSubMenu()
+UIFrame UIPrintHandler::searchEditSubMenu(optional<ResultVariant> err)
 {
 	return UIFrame{
 		[] {
 			OutputPrintHandler::printShort2Line();
 			OutputPrintHandler::printSearchEditSubMenu();
-		}, EnterType::Both, nullopt, RenderOrder::ErrorToRender
+		}, EnterType::ErrorOnly, err, RenderOrder::RenderOnly
 	};
 }
 
-UIFrame UIPrintHandler::searchDeleteSubMenu()
+UIFrame UIPrintHandler::searchDeleteSubMenu(optional<ResultVariant> err)
 {
 	return UIFrame{
 		[] {
 			OutputPrintHandler::printShort2Line();
 			OutputPrintHandler::printSearchDeleteSubMenu();
-		}, EnterType::Both, nullopt, RenderOrder::ErrorToRender
+		}, EnterType::ErrorOnly, err, RenderOrder::RenderOnly
 	};
 }
 
-UIFrame UIPrintHandler::searchActionSubMenu()
+UIFrame UIPrintHandler::searchActionSubMenu(optional<ResultVariant> err)
 {
 	return UIFrame{
 		[] {
 			OutputPrintHandler::printShort2Line();
 			OutputPrintHandler::printSearchActionSubMenu();
-		}, EnterType::Both, nullopt, RenderOrder::ErrorToRender
+		}, EnterType::ErrorOnly, err, RenderOrder::RenderOnly
 	};
 }
 
