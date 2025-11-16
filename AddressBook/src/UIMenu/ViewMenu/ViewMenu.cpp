@@ -99,10 +99,10 @@ void ViewMenu::draw(AddressBookUI& bookUI, ContextData& context, int page, int l
 
 ViewPhase ViewMenu::update(ContextData& context, int page, int length)
 {
-	PagingPhase phase = inputH_.getViewPagingInput();
+	CommandPhase phase = inputH_.getViewPagingInput();
 
 	switch (phase) {
-	case PagingPhase::Next:
+	case CommandPhase::Next:
 	{
 		bool isLastPage = ((page + 1) * 10) >= length;
 		if (isLastPage)
@@ -113,7 +113,7 @@ ViewPhase ViewMenu::update(ContextData& context, int page, int length)
 		context.err = nullopt;
 		return ViewPhase::Next;
 	}
-	case PagingPhase::Prev:
+	case CommandPhase::Prev:
 	{
 		if (page == 0)
 		{
@@ -123,12 +123,12 @@ ViewPhase ViewMenu::update(ContextData& context, int page, int length)
 		context.err = nullopt;
 		return ViewPhase::Prev;
 	}
-	case PagingPhase::Exit:
+	case CommandPhase::Exit:
 	{
 		context.err = nullopt;
 		return ViewPhase::Exit;
 	}
-	case PagingPhase::Enter:
+	case CommandPhase::Enter:
 	{
 		context.err = nullopt;
 		return ViewPhase::Stay;

@@ -37,4 +37,3 @@ SearchPhase SearchStartState::update()
 	}
 	return SearchPhase::SearchInputData;
 }
-

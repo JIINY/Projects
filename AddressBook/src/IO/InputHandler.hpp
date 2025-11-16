@@ -9,11 +9,14 @@
 #include "StringInputHandler.hpp"
 
 
-enum class PagingPhase 
+enum class CommandPhase 
 {
+    Edit,
+    Delete,
+    Search,
+    Exit,
     Prev,
     Next,
-    Exit,
     Error,
     Stay, //View전용
     PositiveNums, //여기부터 Search전용
@@ -37,8 +40,8 @@ public:
 
     bool getAnyKey();
 
-    PagingPhase getViewPagingInput();
-    PagingPhase getSearchPagingInput(int& output);
+    CommandPhase getViewPagingInput();
+    CommandPhase getSearchPagingInput(int& output);
 
 private:
     InputTextSource textSource_{};
@@ -47,6 +50,6 @@ private:
     ResultVariant parsingChar(const std::string& input, char& output);
     ResultVariant parsingString(StringRule rule, const std::string& input, std::string& output);
     ResultVariant parsingYesNo(const std::string& input);
-    bool parsingPagingCommand(PagingPhase& phase, std::string& input);
+    bool parsingPagingCommand(CommandPhase& phase, std::string& input);
 };
 

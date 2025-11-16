@@ -142,35 +142,34 @@ bool InputHandler::getAnyKey()
 }
 
 
-PagingPhase InputHandler::getViewPagingInput() 
+CommandPhase InputHandler::getViewPagingInput() 
 {
 	string input = "";
 	ResultVariant inputResult = getString(StringRule::EmptyAllow, input);
 	if (!isVariantEqualTo<InputResult>(inputResult, InputResult::SUCCESS))
 	{
-		return PagingPhase::Error;
+		return CommandPhase::Error;
 	}
 
-	PagingPhase phase;
+	CommandPhase phase;
 	if (parsingPagingCommand(phase, input))
 	{
-		if (phase == PagingPhase::Enter) { return PagingPhase::Enter; }
+		if (phase == CommandPhase::Enter) { return CommandPhase::Enter; }
 		return phase;
 	}
-	return PagingPhase::Error;
+	return CommandPhase::Error;
 }
 
-PagingPhase InputHandler::getSearchPagingInput(int& output)
+CommandPhase InputHandler::getSearchPagingInput(int& output)
 {
 	string input = "";
 	ResultVariant inputResult = getString(StringRule::EmptyAllow, input);
 	if (!isVariantEqualTo<InputResult>(inputResult, InputResult::SUCCESS))
 	{
-
-		return PagingPhase::Error;
+		return CommandPhase::Error;
 	}
 
-	PagingPhase phase;
+	CommandPhase phase;
 	if (parsingPagingCommand(phase, input)) { return phase; }
 	else
 	{
@@ -178,34 +177,34 @@ PagingPhase InputHandler::getSearchPagingInput(int& output)
 		if (parsedResult == IntParsingResult::POSITIVE_NUMBER)
 		{
 			output = parsedInt.value();
-			return PagingPhase::PositiveNums;
+			return CommandPhase::PositiveNums;
 		}
 	}
 	
-	return PagingPhase::Error;
+	return CommandPhase::Error;
 }
 
-bool InputHandler::parsingPagingCommand(PagingPhase& phase, string& input) 
+bool InputHandler::parsingPagingCommand(CommandPhase& phase, string& input) 
 {
 	input = InputTextUtils::toUpper(input);
 	if (input == "N" || input == "NEXT") 
 	{ 
-		phase = PagingPhase::Next;
+		phase = CommandPhase::Next;
 		return true;
 	}
 	if (input == "P" || input == "PREV") 
 	{ 
-		phase = PagingPhase::Prev;
+		phase = CommandPhase::Prev;
 		return true;
 	}
 	if (input == "Q" || input == "QUIT") 
 	{ 
-		phase = PagingPhase::Exit;
+		phase = CommandPhase::Exit;
 		return true;
 	}
 	if (input == "") 
 	{
-		phase = PagingPhase::Enter;
+		phase = CommandPhase::Enter;
 		return true;
 	}
 	return false;

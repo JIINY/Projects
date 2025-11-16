@@ -2,6 +2,7 @@
 #include <vector>
 #include <optional>
 #include <utility>
+#include <algorithm>
 #include "../../UI/UICommonData.hpp"
 #include "../../UI/UICommonHeader.hpp"
 #include "SearchMenu.hpp"
@@ -30,9 +31,9 @@ SearchPhase SearchEditState::update()
 	int maxNumOnPage = min((currentPage + 1) * 10, resultCount);
 
 	int input = -1;
-	PagingPhase phase = inputH.getSearchPagingInput(input);
+	CommandPhase phase = inputH.getSearchPagingInput(input);
 	switch (phase) {
-	case PagingPhase::PositiveNums: 
+	case CommandPhase::PositiveNums: 
 	{
 		if (input < minNumOnPage || input > maxNumOnPage) 
 		{
@@ -44,7 +45,7 @@ SearchPhase SearchEditState::update()
 		context.err = nullopt;
 		return SearchPhase::EditItem;
 	}
-	case PagingPhase::Next:
+	case CommandPhase::Next:
 	{
 		if (maxNumOnPage < resultCount)
 		{
@@ -57,7 +58,7 @@ SearchPhase SearchEditState::update()
 		}
 		return SearchPhase::EditStart;
 	}
-	case PagingPhase::Prev:
+	case CommandPhase::Prev:
 	{
 		if (currentPage > 0) 
 		{
@@ -70,14 +71,14 @@ SearchPhase SearchEditState::update()
 		}
 		return SearchPhase::EditStart;
 	}
-	case PagingPhase::Exit:
+	case CommandPhase::Exit:
 	{
 		context.err = nullopt;
 		return SearchPhase::SearchResult;
 	}
-	case PagingPhase::Enter:
+	case CommandPhase::Enter:
 		return SearchPhase::EditStart;
-	case PagingPhase::Error:
+	case CommandPhase::Error:
 	default:
 		context.err = wrapVariant<ResultVariant>(MenuSelectResult::WRONG_COMMAND);
 		return SearchPhase::EditStart;
