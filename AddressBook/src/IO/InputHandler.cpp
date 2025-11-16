@@ -170,7 +170,15 @@ CommandPhase InputHandler::getSearchPagingInput(int& output)
 	}
 
 	CommandPhase phase;
-	if (parsingPagingCommand(phase, input)) { return phase; }
+	input = InputTextUtils::toUpper(input);
+	if (parsingPagingCommand(phase, input))
+	{
+		return phase; 
+	}
+	else if (parsingSearchModeCommand(phase, input)) 
+	{
+		return phase;
+	}
 	else
 	{
 		auto [parsedResult, parsedInt] = InputParser::parsingInputNumber(input);
@@ -180,13 +188,11 @@ CommandPhase InputHandler::getSearchPagingInput(int& output)
 			return CommandPhase::PositiveNums;
 		}
 	}
-	
 	return CommandPhase::Error;
 }
 
 bool InputHandler::parsingPagingCommand(CommandPhase& phase, string& input) 
 {
-	input = InputTextUtils::toUpper(input);
 	if (input == "N" || input == "NEXT") 
 	{ 
 		phase = CommandPhase::Next;
@@ -210,3 +216,27 @@ bool InputHandler::parsingPagingCommand(CommandPhase& phase, string& input)
 	return false;
 }
 
+bool InputHandler::parsingSearchModeCommand(CommandPhase& phase, string& input) 
+{
+	if (input == "E" || input == "EDIT") 
+	{
+		phase = CommandPhase::Edit;
+		return true;
+	}
+	if (input == "D" || input == "DELETE") 
+	{
+		phase = CommandPhase::Delete;
+		return true;
+	}
+	if (input == "S" || input == "SEARCH") 
+	{
+		phase = CommandPhase::Search;
+		return true;
+	}
+	if (input == "C" || input == "CANCEL" || input == "CANCLE") 
+	{
+		phase = CommandPhase::Cancel;
+		return true;
+	}
+	return false;
+}
