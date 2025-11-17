@@ -458,7 +458,7 @@ UIFrame UIPrintHandler::searchEditSubMenu(optional<ResultVariant> err)
 		[] {
 			OutputPrintHandler::printShort2Line();
 			OutputPrintHandler::printSearchEditSubMenu();
-		}, EnterType::ErrorOnly, err, RenderOrder::RenderOnly
+		}, EnterType::Both, err, RenderOrder::RenderOnly
 	};
 }
 
@@ -468,7 +468,7 @@ UIFrame UIPrintHandler::searchDeleteSubMenu(optional<ResultVariant> err)
 		[] {
 			OutputPrintHandler::printShort2Line();
 			OutputPrintHandler::printSearchDeleteSubMenu();
-		}, EnterType::ErrorOnly, err, RenderOrder::RenderOnly
+		}, EnterType::Both, err, RenderOrder::RenderOnly
 	};
 }
 
@@ -514,7 +514,7 @@ UIFrame UIPrintHandler::searchDelete(optional<ResultVariant> err)
 	return UIFrame{
 		[]{
 			OutputPrintHandler::printDeleteItem();
-		}, EnterType::Both, err, RenderOrder::ErrorToRender
+		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
 }
 
