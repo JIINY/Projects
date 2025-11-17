@@ -209,8 +209,7 @@ void SearchMenu::drawResultTable(AddressBookUI& bookUI, ContextData& context)
 
 		for (int i = startIndex; i < endIndex; ++i)
 		{
-			int bookIndex = searchResult_[i].second;
-			PersonalData p = bookUI.getPersonalDataAt(bookIndex);
+			PersonalData p = searchResult_[i].first;
 
 			int displayNum = i + 1;
 			if (i == (endIndex - 1))

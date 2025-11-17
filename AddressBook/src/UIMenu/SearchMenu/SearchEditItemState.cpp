@@ -36,7 +36,6 @@ SearchPhase SearchEditItemState::update()
 		if (addResult == AddOperationResult::SUCCESS) 
 		{
 			resultVec[i].first = editedData; //검색 결과도 업데이트
-			resultVec[i].second = bookUI->getLastAdd();
 
 			context.p = editedData;
 			context.err = wrapVariant<ResultVariant>(addResult);
