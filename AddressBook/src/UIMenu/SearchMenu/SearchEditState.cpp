@@ -77,11 +77,11 @@ SearchPhase SearchEditState::update()
 		return SearchPhase::SearchResult;
 	}
 	case CommandPhase::Enter:
-		return SearchPhase::EditStart;
+		return SearchPhase::SearchResult;
 	case CommandPhase::Error:
 	default:
 		context.err = wrapVariant<ResultVariant>(MenuSelectResult::WRONG_COMMAND);
-		return SearchPhase::EditStart;
+		return SearchPhase::SearchResult;
 	}
 }
 
