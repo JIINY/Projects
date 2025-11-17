@@ -44,8 +44,8 @@ void SearchMenu::run(AddressBookUI& bookUI)
 		if (needsScreenClear) 
 		{
 			ui_.clearScreen();
+			
 		}
-
 		if (currentState_)
 		{
 			currentState_->draw();
@@ -62,16 +62,13 @@ void SearchMenu::run(AddressBookUI& bookUI)
 			needsScreenClear = transitionTo(nextPhase);
 			currentPhase = nextPhase;
 		}
+		else if (context_.err.has_value()) 
+		{
+			needsScreenClear = true;
+		}
 		else
 		{
-			if (currentPhase == SearchPhase::SearchStart) 
-			{
-				needsScreenClear = true;
-			}
-			else 
-			{
-				needsScreenClear = false;
-			}
+			needsScreenClear = false;
 		}
 	}
 

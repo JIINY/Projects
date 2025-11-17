@@ -75,41 +75,7 @@ PersonalData UIUtils::processInputPersonalData(void (*title)()) //함수 포인�
 void UIUtils::clearScreen()
 {
 #ifdef _WIN32
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	if (hConsole == INVALID_HANDLE_VALUE) 
-	{
-		return;
-	}
-
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-	if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) 
-	{
-		return;
-	}
-
-	//밀어낼 영역: 콘솔버퍼 전체
-	SMALL_RECT scrollRect;
-	scrollRect.Left = 0;
-	scrollRect.Top = 0;
-	scrollRect.Right = csbi.dwSize.X;
-	scrollRect.Bottom = csbi.dwSize.Y;
-
-	//밀어낸 후 목적지: 버퍼 밖(= 화면 밖으로 사라짐)
-	COORD coordDest;
-	coordDest.X = 0;
-	coordDest.Y = -csbi.dwSize.Y; //버퍼 높이만큼 위로 밀어버림
-
-	//밀어낸 빈 공간을 채울 공백+속성
-	CHAR_INFO fill;
-	fill.Char.UnicodeChar = L' ';
-	fill.Attributes = csbi.wAttributes;
-
-	//콘솔 버퍼를 밀어내기(= 스크롤)
-	ScrollConsoleScreenBuffer(hConsole, &scrollRect, NULL, coordDest, &fill); //핸들, 영역, 겹치는 영역 무시(Clipping), 목적지, 빈공간을 채울 문자/속성
-
-	//커서를 0.0으로 이동
-	COORD home = { 0, 0 };
-	SetConsoleCursorPosition(hConsole, home);
+	system("cls");
 #else
 	// ANSI Escape Code (Unix-like 시스템)
 	std::cout << "\033[2J\033[1;1H"; 
