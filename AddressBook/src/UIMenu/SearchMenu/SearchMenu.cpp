@@ -175,6 +175,8 @@ bool SearchMenu::transitionTo(SearchPhase nextPhase)
 void SearchMenu::drawLongTitle() 
 {
 	switch (mode_) {
+	case SearchMode::SearchEmpty:
+	case SearchMode::Action:
 	case SearchMode::Search: 
 	{
 		frame_ = uiMsgH_.searchLongTitle();
