@@ -171,15 +171,21 @@ void ErrorPrintHandler::printRemoveOperationErrorMsg(const RemoveOperationResult
 	switch (err) 
 	{
 	case RemoveOperationResult::WRONG_INDEX:
-		this->errorMsg_ = "[ERROR] 잘못된 번호입니다.";
+		this->errorMsg_ = "[ERROR] 입력: 잘못된 번호입니다.";
 		break;
 	case RemoveOperationResult::FAIL:
 		this->errorMsg_ = "[ERROR] 알 수 없는 이유로 삭제하지 못했습니다.";
 		break;
+	case RemoveOperationResult::NOT_FOUND:
+		this->errorMsg_ = "[ERROR] 입력: 주소록에 존재하지 않는 데이터라 삭제할 수 없습니다.";
+		break;
+	case RemoveOperationResult::FILE_DELETE_FAILED:
+		this->errorMsg_ = "[ERROR] 파일: 파일이 사용중이거나 권한 없음으로 삭제할 수 없습니다."
 	case RemoveOperationResult::SUCCESS:
 		this->errorMsg_ = "";
 		break;
 	default:
+		this->errorMsg_ = "[ERROR] 로직: 알 수 없는 이유로 삭제하지 못했습니다. -1";
 		break;
 	}
 }

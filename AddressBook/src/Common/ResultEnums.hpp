@@ -51,6 +51,8 @@ enum class RemoveOperationResult
 {
     SUCCESS,
     FAIL,
+    NOT_FOUND,
+    FILE_DELETE_FAILED,
     WRONG_INDEX
 };
 

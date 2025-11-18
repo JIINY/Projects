@@ -66,6 +66,8 @@ string toString(RemoveOperationResult value)
     {
     case RemoveOperationResult::SUCCESS: return "RemoveOperation::SUCCESS";
     case RemoveOperationResult::FAIL: return "RemoveOperation::FAIL";
+    case RemoveOperationResult::NOT_FOUND: return "RemoveOperation::NOT_FOUND";
+    case RemoveOperationResult::FILE_DELETE_FAILED: return "RemoveOperation::FILE_DELETE_FAILED";
     case RemoveOperationResult::WRONG_INDEX: return "RemoveOperation::WRONG_INDEX";
     default: return "RemoveOperation::Default";
     }
