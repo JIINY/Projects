@@ -398,7 +398,6 @@ UIFrame UIPrintHandler::tableEditSuccess(const int i, const string& name)
 	return UIFrame{
 		[i, name] {
 			OutputPrintHandler::printTableEditSuccess(i, name);
-			OutputPrintHandler::printEnter();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
@@ -408,7 +407,6 @@ UIFrame UIPrintHandler::tableDeleteSuccess(const int i, const string& name)
 	return UIFrame{
 		[i, name] {
 			OutputPrintHandler::printTableDeleteSuccess(i, name);
-			OutputPrintHandler::printEnter();
 		}, EnterType::None, nullopt, RenderOrder::RenderToError
 	};
 }
@@ -503,7 +501,11 @@ UIFrame UIPrintHandler::searchEmpty()
 UIFrame UIPrintHandler::searchEdit(optional<ResultVariant> err)
 {
 	return UIFrame{		
-		[]{
+		[err]{
+			if (err == nullopt)
+			{
+				OutputPrintHandler::printShort1Line();
+			}
 			OutputPrintHandler::printEditItem();
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
@@ -512,7 +514,11 @@ UIFrame UIPrintHandler::searchEdit(optional<ResultVariant> err)
 UIFrame UIPrintHandler::searchDelete(optional<ResultVariant> err)
 {
 	return UIFrame{
-		[]{
+		[err]{
+			if (err == nullopt) 
+			{
+				OutputPrintHandler::printShort1Line();
+			}
 			OutputPrintHandler::printDeleteItem();
 		}, EnterType::None, err, RenderOrder::ErrorToRender
 	};
