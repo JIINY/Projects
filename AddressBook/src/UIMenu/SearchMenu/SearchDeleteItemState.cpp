@@ -6,7 +6,7 @@
 #include "../../UI/UICommonData.hpp"
 #include "../../UI/UICommonHeader.hpp"
 #include "SearchMenu.hpp"
-#include "../DeleteMenu.hpp"
+#include "../DeleteMenu/DeleteMenu.hpp"
 using namespace std;
 
 

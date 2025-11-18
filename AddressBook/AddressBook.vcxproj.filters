@@ -46,6 +46,9 @@
     <Filter Include="src\UIMenu\ViewMenu">
       <UniqueIdentifier>{eea71838-f64e-4ea3-a57e-f8f66dd81156}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\UIMenu\DeleteMenu">
+      <UniqueIdentifier>{208f007f-7c50-40da-b767-65fe4dca4fdc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -86,9 +89,6 @@
     </ClCompile>
     <ClCompile Include="src\Common\VariantUtils.cpp">
       <Filter>src\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UIMenu\DeleteMenu.cpp">
-      <Filter>src\UIMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\EditMenu\EditStartState.cpp">
       <Filter>src\UIMenu\EditMenu</Filter>
@@ -195,13 +195,19 @@
     <ClCompile Include="src\UIMenu\SearchMenu\SearchModeMenuState.cpp">
       <Filter>src\UIMenu\SearchMenu</Filter>
     </ClCompile>
-    <ClCompile Include="src\UIMenu\SearchMenu\SearchEditMenuState.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UIMenu\SearchMenu\SearchDeleteMenuState.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="src\UIMenu\DeleteMenu\DeleteMenu.cpp">
+      <Filter>src\UIMenu\DeleteMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\SearchMenu\SearchActionMenuState.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchDeleteMenuState.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchEditMenuState.cpp">
+      <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\DeleteMenu\DeleteAllMenu.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -253,9 +259,6 @@
     </ClInclude>
     <ClInclude Include="src\Common\ResultUtils.hpp">
       <Filter>src\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UIMenu\DeleteMenu.hpp">
-      <Filter>src\UIMenu</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\EditMenu\EditStartState.hpp">
       <Filter>src\UIMenu\EditMenu</Filter>
@@ -388,6 +391,12 @@
     </ClInclude>
     <ClInclude Include="src\UIMenu\SearchMenu\SearchActionMenuState.hpp">
       <Filter>src\UIMenu\SearchMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\DeleteMenu\DeleteMenu.hpp">
+      <Filter>src\UIMenu\DeleteMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\DeleteMenu\DeleteAllMenu.hpp">
+      <Filter>src\UIMenu\DeleteMenu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

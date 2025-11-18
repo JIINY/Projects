@@ -1,18 +1,19 @@
 ﻿#include "DeleteMenu.hpp"
 #include <iostream>
+#include <utility>
 #include <optional>
-#include "../UI/UICommonData.hpp"
-#include "../UI/UICommonHeader.hpp"
-#include "../UI/AddressBookUI.hpp"
+#include "../../UI/UICommonData.hpp"
+#include "../../UI/UICommonHeader.hpp"
+#include "../../UI/AddressBookUI.hpp"
 using namespace std;
 
 
-RemoveOperationResult DeleteMenu::run(AddressBookUI& bookUI, int index, const string& name) 
+RemoveOperationResult DeleteMenu::run(AddressBookUI& bookUI, int index, const pair<int, string>& resultInfo)
 {
 	optional<ResultVariant> err = nullopt;
 
 	//그리기
-	frame_ = uiMsgH_.deleteConfirm(err, index + 1, name);
+	frame_ = uiMsgH_.deleteConfirm(err, resultInfo.first, resultInfo.second);
 	frame_(errorMsgH_);
 
 	//처리
@@ -22,19 +23,12 @@ RemoveOperationResult DeleteMenu::run(AddressBookUI& bookUI, int index, const st
 		string removedName;
 		RemoveOperationResult deleteResult = bookUI.extractAddressBook().remove(index, removedName);
 
-		if (deleteResult == RemoveOperationResult::SUCCESS) 
+		if (deleteResult != RemoveOperationResult::SUCCESS) 
 		{
+			errorMsgH_.printErrorMsg(deleteResult);
 		}
-		else 
-		{
-			result = deleteResult;
-			errorMsgH_.printErrorMsg(result);
-		}
-
-		inputH_.getAnyKey();
 		return deleteResult;
 	}
 
 	return RemoveOperationResult::FAIL;
 }
-

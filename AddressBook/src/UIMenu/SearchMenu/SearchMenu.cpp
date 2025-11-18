@@ -24,7 +24,7 @@
 #include "SearchDeleteItemState.hpp"
 #include "SearchAgainState.hpp"
 #include "../EditMenu/EditMenu.hpp"
-#include "../DeleteMenu.hpp"
+#include "../DeleteMenu/DeleteMenu.hpp"
 using namespace std;
 
 

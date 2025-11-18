@@ -31,7 +31,8 @@
     <ClCompile Include="src\IO\InputTextUtils.cpp" />
     <ClCompile Include="src\IO\StringInputHandler.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\UIMenu\DeleteMenu.cpp" />
+    <ClCompile Include="src\UIMenu\DeleteMenu\DeleteAllMenu.cpp" />
+    <ClCompile Include="src\UIMenu\DeleteMenu\DeleteMenu.cpp" />
     <ClCompile Include="src\UIMenu\EditMenu\EditMenu.cpp" />
     <ClCompile Include="src\UIMenu\AddMenu\AddMenu.cpp" />
     <ClCompile Include="src\UIMenu\MainMenu.cpp" />
@@ -88,7 +89,8 @@
     <ClInclude Include="src\IO\InputTextUtils.hpp" />
     <ClInclude Include="src\IO\InputTextSource.hpp" />
     <ClInclude Include="src\IO\StringInputHandler.hpp" />
-    <ClInclude Include="src\UIMenu\DeleteMenu.hpp" />
+    <ClInclude Include="src\UIMenu\DeleteMenu\DeleteAllMenu.hpp" />
+    <ClInclude Include="src\UIMenu\DeleteMenu\DeleteMenu.hpp" />
     <ClInclude Include="src\UIMenu\EditMenu\EditMenu.hpp" />
     <ClInclude Include="src\UIMenu\AddMenu\AddMenu.hpp" />
     <ClInclude Include="src\UIMenu\MainMenu.hpp" />
