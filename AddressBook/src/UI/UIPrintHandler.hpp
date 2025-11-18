@@ -76,5 +76,6 @@ public:
 
     UIFrame deleteLongTitle();
     UIFrame deleteConfirm(std::optional<ResultVariant> err, const int i, const std::string& name);
+    UIFrame deleteAllConfirm(std::optional<ResultVariant> err);
 };
 

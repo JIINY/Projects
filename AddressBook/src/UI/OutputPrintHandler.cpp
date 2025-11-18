@@ -149,7 +149,9 @@ void OutputPrintHandler::printMainMenu()
     cout << "=======================================" << endl;
     cout << "[1] 주소록 추가" << endl;
     cout << "[2] 주소록 보기" << endl;
-    cout << "[3] 주소록 찾기 + 수정/삭제" << endl;
+    cout << "[3] 주소록 찾기" << endl;
+	cout << "---------------------------------------" << endl;
+	cout << "[9] 주소록 비우기" << endl;
     cout << "[0] 종료" << endl;
     cout << "=======================================" << endl;
 }
@@ -412,13 +414,19 @@ void OutputPrintHandler::printEditItem()
 	cout << "수정할 주소록의 번호를 입력해 주세요: ";
 }
 
-void OutputPrintHandler::printDeleteItem() {
+void OutputPrintHandler::printDeleteItem() 
+{
 	cout << "삭제할 주소록의 번호를 입력해 주세요: ";
 }
 
 void OutputPrintHandler::printDeleteConfirm(int i, const string& name) 
 {
 	cout << i << "번 " << name << "을(를) 정말 삭제하시겠습니까? (Y/N): ";
+}
+
+void OutputPrintHandler::printDeleteAllConfirm() 
+{
+	cout << "주소록의 모든 내용이 지워집니다. 주소록을 비우시겠습니까? (Y/N): ";
 }
 
 void OutputPrintHandler::printSearchAgain() 
@@ -431,4 +439,3 @@ void OutputPrintHandler::printSearchEmpty()
 {
 	cout << "검색 결과가 없습니다. 메뉴를 선택해 주세요.";
 }
-

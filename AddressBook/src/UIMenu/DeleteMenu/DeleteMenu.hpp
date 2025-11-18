@@ -19,4 +19,3 @@ private:
 	UIPrintHandler uiMsgH_{};
 	UIFrame frame_{};
 };
-

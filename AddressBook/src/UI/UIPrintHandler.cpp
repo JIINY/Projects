@@ -563,3 +563,11 @@ UIFrame UIPrintHandler::deleteConfirm(optional<ResultVariant> err, const int i, 
 	};
 }
 
+UIFrame UIPrintHandler::deleteAllConfirm(optional<ResultVariant> err)
+{
+	return UIFrame{
+		[] {
+			OutputPrintHandler::printDeleteAllConfirm();
+		}, EnterType::None, err, RenderOrder::ErrorToRender
+	};
+}

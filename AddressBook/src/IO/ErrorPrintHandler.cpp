@@ -180,7 +180,8 @@ void ErrorPrintHandler::printRemoveOperationErrorMsg(const RemoveOperationResult
 		this->errorMsg_ = "[ERROR] 입력: 주소록에 존재하지 않는 데이터라 삭제할 수 없습니다.";
 		break;
 	case RemoveOperationResult::FILE_DELETE_FAILED:
-		this->errorMsg_ = "[ERROR] 파일: 파일이 사용중이거나 권한 없음으로 삭제할 수 없습니다."
+		this->errorMsg_ = "[ERROR] 파일: 파일이 사용중이거나 권한 없음으로 삭제할 수 없습니다.";
+		break;
 	case RemoveOperationResult::SUCCESS:
 		this->errorMsg_ = "";
 		break;

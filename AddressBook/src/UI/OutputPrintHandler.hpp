@@ -73,6 +73,7 @@ public:
 
     static void printDeleteItem();
     static void printDeleteConfirm(int i, const std::string& name);
+    static void printDeleteAllConfirm();
     static void printSearchAgain();
     static void printSearchEmpty();
 

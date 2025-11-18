@@ -7,6 +7,7 @@
 #include "AddMenu/AddMenu.hpp"
 #include "ViewMenu/ViewMenu.hpp"
 #include "SearchMenu/SearchMenu.hpp"
+#include "DeleteMenu/DeleteAllMenu.hpp"
 using namespace std;
 
 
@@ -60,7 +61,10 @@ void MainMenu::processMainMenu(AddressBookUI& bookUI)
 
 ResultVariant MainMenu::mainMenuController(AddressBookUI& bookUI, int input)
 {
-	UIUtils::clearScreen();
+	if (input != 9) 
+	{
+		UIUtils::clearScreen();
+	}
 
 	switch (input)
 	{
@@ -84,8 +88,13 @@ ResultVariant MainMenu::mainMenuController(AddressBookUI& bookUI, int input)
 		search.run(bookUI);
 		return MenuSelectResult::SUCCESS;
 	}
+	case 9: 
+	{
+		DeleteAllMenu deleteAllMenu;
+		deleteAllMenu.run(bookUI, DBConfig::SAVEFILE);
+		return MenuSelectResult::SUCCESS;
+	}
 	default:
 		return MenuSelectResult::WRONG_INDEX;
 	}
 }
-

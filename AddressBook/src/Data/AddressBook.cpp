@@ -6,6 +6,7 @@
 #include <sstream>
 #include <fstream>
 #include <filesystem>
+#include <cstdio>
 #include "../Common/ResultEnums.hpp"
 #include "Personal.hpp"
 using namespace std;
@@ -217,6 +218,31 @@ RemoveOperationResult AddressBook::processRemove(int index, string& name)
 		return RemoveOperationResult::SUCCESS;
 	}
 	return RemoveOperationResult::FAIL;
+}
+
+RemoveOperationResult AddressBook::removeAll(const string& filename)
+{
+	RemoveOperationResult result = processRemoveAll(filename);
+	return result;
+}
+
+RemoveOperationResult AddressBook::processRemoveAll(const string& filename) 
+{
+	if (std::remove(filename.c_str()) != 0) //AddressBook::remove()가 있기 때문에, 어떤 remove인지를 명시
+	{
+		ifstream f(filename);
+		if (f.good()) 
+		{
+			//파일이 존재하는데 삭제가 안된 경우(사용중 or 권한 없음)
+			return RemoveOperationResult::FILE_DELETE_FAILED;
+		}
+	}
+
+	personal_.clear();
+	lastAdd_ = -1;
+
+	std::remove(filename.c_str()); //삭제 성공시 0을 반환, 파일이 없어서 삭제를 못해도 목적 달성
+	return RemoveOperationResult::SUCCESS;
 }
 
 bool AddressBook::popPersonal(int index, string& name) //마찬가지로 length가공 어떻게 할 건지 맞춰서 매개변수 수정할 것

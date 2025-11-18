@@ -23,6 +23,7 @@ public:
 
 	AddOperationResult add(const PersonalData& p);
 	RemoveOperationResult remove(int index, std::string& name);
+	RemoveOperationResult removeAll(const std::string& filename);
 	AddOperationResult edit(int originalIndex, const PersonalData& newData);
 
 	std::vector<std::pair<PersonalData, int>> searchByName(const std::string& query) const;
@@ -35,6 +36,7 @@ public:
 protected:
 	AddOperationResult processAdd(const PersonalData& p);
 	RemoveOperationResult processRemove(int index, std::string& name);
+	RemoveOperationResult processRemoveAll(const std::string& filename);
 
 	bool popPersonal(int index, std::string& name);
 
