@@ -93,26 +93,31 @@ SearchPhase SearchInputDataState::update()
 	case 1: 
 	{
 		result = bookUI->extractAddressBook().searchByName(s);
+		owner_.setCurrentPage(0);
 		break;
 	}
 	case 2:
 	{
 		result = bookUI->extractAddressBook().searchByPhone(s);
+		owner_.setCurrentPage(0);
 		break;
 	}
 	case 3:
 	{
 		result = bookUI->extractAddressBook().searchByAddress(s);
+		owner_.setCurrentPage(0);
 		break;
 	}
 	case 4:
 	{
 		result = bookUI->extractAddressBook().searchByZipCode(s);
+		owner_.setCurrentPage(0);
 		break;
 	}
 	case 5:
 	{
 		result = bookUI->extractAddressBook().searchByEmail(s);
+		owner_.setCurrentPage(0);
 		break;
 	}
 	}
