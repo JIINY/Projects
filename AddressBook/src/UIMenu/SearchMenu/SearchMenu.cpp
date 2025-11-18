@@ -245,14 +245,15 @@ void SearchMenu::drawResultMsg()
 	switch (mode_) {
 	case SearchMode::Edit: 
 	{
-		if (isVariantEqualTo<AddOperationResult>(*context_.err, AddOperationResult::SUCCESS))
+		if (context_.err.has_value() 
+			&& isVariantEqualTo<AddOperationResult>(*context_.err, AddOperationResult::SUCCESS))
 		{
 			frame_ = uiMsgH_.tableEditSuccess(context_.menu + 1, context_.p.name);
 			frame_(errorMsgH_);
 
 			context_.err = nullopt;
 		}
-		else 
+		else //다른 에러거나, nullopt
 		{
 			frame_ = uiMsgH_.tableAction(ActionType::Edit);
 			frame_(errorMsgH_);
@@ -261,7 +262,8 @@ void SearchMenu::drawResultMsg()
 	}
 	case SearchMode::Delete:
 	{
-		if (isVariantEqualTo<RemoveOperationResult>(*context_.err, RemoveOperationResult::SUCCESS))
+		if (context_.err.has_value()
+			&& isVariantEqualTo<RemoveOperationResult>(*context_.err, RemoveOperationResult::SUCCESS))
 		{
 			frame_ = uiMsgH_.tableDeleteSuccess(context_.menu + 1, context_.p.name);
 			frame_(errorMsgH_);
