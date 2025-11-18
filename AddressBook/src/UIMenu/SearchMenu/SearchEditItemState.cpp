@@ -13,6 +13,8 @@ using namespace std;
 
 SearchPhase SearchEditItemState::update() 
 {
+	owner_.setMode(SearchMode::Edit);
+
 	auto& context = owner_.getContext();
 	auto* bookUI = owner_.getBookUI();
 	auto& resultVec = owner_.accessSearchResult();

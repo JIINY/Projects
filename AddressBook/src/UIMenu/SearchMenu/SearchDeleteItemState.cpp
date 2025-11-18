@@ -12,6 +12,8 @@ using namespace std;
 
 SearchPhase SearchDeleteItemState::update() 
 {
+	owner_.setMode(SearchMode::Delete);
+
 	auto& context = owner_.getContext();
 	auto* bookUI = owner_.getBookUI();
 	auto& resultVec = owner_.accessSearchResult();

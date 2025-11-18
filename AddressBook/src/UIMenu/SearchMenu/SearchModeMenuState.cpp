@@ -39,12 +39,10 @@ SearchPhase SearchModeMenuState::update()
 	{
 	case CommandPhase::Edit:
 	{
-		owner_.setMode(SearchMode::Edit);
 		return SearchPhase::EditStart;
 	}
 	case CommandPhase::Delete:
 	{
-		owner_.setMode(SearchMode::Delete);
 		return SearchPhase::DeleteStart;
 	}
 	case CommandPhase::Search:
