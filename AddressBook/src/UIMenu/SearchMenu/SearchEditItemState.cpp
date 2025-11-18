@@ -38,14 +38,9 @@ SearchPhase SearchEditItemState::update()
 		if (addResult == AddOperationResult::SUCCESS) 
 		{
 			resultVec[i].first = editedData; //검색 결과도 업데이트
-
 			context.p = editedData;
-			context.err = wrapVariant<ResultVariant>(addResult);
 		}
-		else 
-		{
-			context.err = wrapVariant<ResultVariant>(addResult);
-		}
+		context.err = wrapVariant<ResultVariant>(addResult);
 	}
 	else
 	{
