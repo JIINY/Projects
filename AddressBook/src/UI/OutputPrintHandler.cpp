@@ -409,12 +409,10 @@ void OutputPrintHandler::printAddConfirm()
 
 void OutputPrintHandler::printEditItem() 
 {
-	cout << "---------------------------------------" << endl;
 	cout << "수정할 주소록의 번호를 입력해 주세요: ";
 }
 
 void OutputPrintHandler::printDeleteItem() {
-	cout << "---------------------------------------" << endl;
 	cout << "삭제할 주소록의 번호를 입력해 주세요: ";
 }
 
