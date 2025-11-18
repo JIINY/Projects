@@ -40,15 +40,18 @@ SearchPhase SearchEditMenuState::update()
 	{
 	case CommandPhase::Delete:
 	{
+		context.err = nullopt;
 		return SearchPhase::DeleteStart;
 	}
 	case CommandPhase::Search:
 	{
+		context.err = nullopt;
 		owner_.setMode(SearchMode::Search);
 		return SearchPhase::SearchStart;
 	}
 	case CommandPhase::Exit:
 	{
+		context.err = nullopt;
 		owner_.setMode(SearchMode::Search);
 		return SearchPhase::Exit;
 	}

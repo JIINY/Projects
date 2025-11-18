@@ -40,16 +40,19 @@ SearchPhase SearchActionMenuState::update()
 	{
 	case CommandPhase::Edit:
 	{
+		context.err = nullopt;
 		owner_.setMode(SearchMode::Edit);
 		return SearchPhase::EditItem;
 	}
 	case CommandPhase::Delete:
 	{
+		context.err = nullopt;
 		owner_.setMode(SearchMode::Delete);
 		return SearchPhase::DeleteItem;
 	}
 	case CommandPhase::Cancel:
 	{
+		context.err = nullopt;
 		owner_.setMode(SearchMode::Search);
 		return SearchPhase::SearchResult;
 	}
