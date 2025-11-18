@@ -25,20 +25,30 @@ SearchPhase SearchDeleteItemState::update()
 		return SearchPhase::DeleteStart;
 	}
 
-	string name = resultVec[i].first.name;
-	int index = resultVec[i].second;
+	PersonalData dataToDelete = resultVec[i].first;
+	const string& backupName = dataToDelete.name;
+	int backupIndex = i + 1;
+
+	int validIndex = bookUI->extractAddressBook().findIndexByData(dataToDelete);
+	if (validIndex == -1) 
+	{
+		context.err = wrapVariant<ResultVariant>(RemoveOperationResult::NOT_FOUND);
+		return SearchPhase::SearchResult;
+	}
 
 	DeleteMenu deleteMenu;
-	RemoveOperationResult result = deleteMenu.run(*bookUI, index, name);
+	RemoveOperationResult result = deleteMenu.run(*bookUI, validIndex, std::make_pair(backupIndex, backupName));
+
 	if (result == RemoveOperationResult::SUCCESS) 
 	{
-		context.p = resultVec[i].first;
+		context.p = dataToDelete;
 		context.err = wrapVariant<ResultVariant>(result);
 
 		resultVec.erase(resultVec.begin() + i);
 
 		if (resultVec.empty()) 
 		{
+			owner_.setMode(SearchMode::SearchEmpty);
 			return SearchPhase::SearchResult;
 		}
 	}
@@ -48,4 +58,3 @@ SearchPhase SearchDeleteItemState::update()
 	}
 	return SearchPhase::SearchResult;
 }
-
