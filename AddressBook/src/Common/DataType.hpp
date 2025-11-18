@@ -21,3 +21,7 @@ struct PersonalData
 	}
 };
 
+namespace DBConfig 
+{
+	static const std::string SAVEFILE = "AddressBook.csv";
+}

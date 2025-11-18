@@ -2,6 +2,7 @@
 #include <string>
 #include <Windows.h>
 #include <locale>
+#include "Common/DataType.hpp"
 #include "Common/ResultEnums.hpp"
 #include "Common/VariantUtils.hpp"
 #include "IO/ErrorPrintHandler.hpp"
@@ -19,14 +20,14 @@ int main(void) {
 	ErrorPrintHandler errorMsgH;
 	AddressBook& b = ui.extractAddressBook();
 
-	LoadOperationResult loadResult = b.loadFile("AddressBook.csv");
+	LoadOperationResult loadResult = b.loadFile(DBConfig::SAVEFILE);
 	if (loadResult != LoadOperationResult::SUCCESS) {
 		errorMsgH.printErrorMsg(wrapVariant<ResultVariant>(loadResult));
 	}
 
 	ui.run();
 
-	SaveOperationResult saveResult = b.saveFile("AddressBook.csv");
+	SaveOperationResult saveResult = b.saveFile(DBConfig::SAVEFILE);
 	if (saveResult != SaveOperationResult::SUCCESS) {
 		errorMsgH.printErrorMsg(wrapVariant<ResultVariant>(saveResult));
 	}
