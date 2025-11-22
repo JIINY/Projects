@@ -208,7 +208,22 @@
       <Filter>src\UIMenu\SearchMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\DeleteMenu\DeleteAllMenu.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>src\UIMenu\DeleteMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\ViewMenu\ViewListState.cpp">
+      <Filter>src\UIMenu\ViewMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\ViewMenu\ViewActionMenuState.cpp">
+      <Filter>src\UIMenu\ViewMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\ViewMenu\ViewDeleteState.cpp">
+      <Filter>src\UIMenu\ViewMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\ViewMenu\ViewEditState.cpp">
+      <Filter>src\UIMenu\ViewMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIMenu\ViewMenu\ViewEmptyState.cpp">
+      <Filter>src\UIMenu\ViewMenu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -397,6 +412,24 @@
     </ClInclude>
     <ClInclude Include="src\UIMenu\DeleteMenu\DeleteAllMenu.hpp">
       <Filter>src\UIMenu\DeleteMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\ViewMenu\IViewState.hpp">
+      <Filter>src\UIMenu\ViewMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\ViewMenu\ViewListState.hpp">
+      <Filter>src\UIMenu\ViewMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\ViewMenu\ViewEditState.hpp">
+      <Filter>src\UIMenu\ViewMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\ViewMenu\ViewDeleteState.hpp">
+      <Filter>src\UIMenu\ViewMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\ViewMenu\ViewActionMenuState.hpp">
+      <Filter>src\UIMenu\ViewMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIMenu\ViewMenu\ViewEmptyState.hpp">
+      <Filter>src\UIMenu\ViewMenu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

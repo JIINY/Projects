@@ -60,6 +60,11 @@
     <ClCompile Include="src\UIMenu\SearchMenu\SearchModeSelectState.cpp" />
     <ClCompile Include="src\UIMenu\SearchMenu\SearchResultState.cpp" />
     <ClCompile Include="src\UIMenu\SearchMenu\SearchStartState.cpp" />
+    <ClCompile Include="src\UIMenu\ViewMenu\ViewActionMenuState.cpp" />
+    <ClCompile Include="src\UIMenu\ViewMenu\ViewDeleteState.cpp" />
+    <ClCompile Include="src\UIMenu\ViewMenu\ViewEditState.cpp" />
+    <ClCompile Include="src\UIMenu\ViewMenu\ViewEmptyState.cpp" />
+    <ClCompile Include="src\UIMenu\ViewMenu\ViewListState.cpp" />
     <ClCompile Include="src\UIMenu\ViewMenu\ViewMenu.cpp" />
     <ClCompile Include="src\UI\AddressBookUI.cpp" />
     <ClCompile Include="src\UI\OutputPrintHandler.cpp" />
@@ -122,6 +127,11 @@
     <ClInclude Include="src\UIMenu\SearchMenu\SearchModeMenuState.hpp" />
     <ClInclude Include="src\UIMenu\SearchMenu\SearchResultState.hpp" />
     <ClInclude Include="src\UIMenu\SearchMenu\SearchStartState.hpp" />
+    <ClInclude Include="src\UIMenu\ViewMenu\IViewState.hpp" />
+    <ClInclude Include="src\UIMenu\ViewMenu\ViewActionMenuState.hpp" />
+    <ClInclude Include="src\UIMenu\ViewMenu\ViewDeleteState.hpp" />
+    <ClInclude Include="src\UIMenu\ViewMenu\ViewEditState.hpp" />
+    <ClInclude Include="src\UIMenu\ViewMenu\ViewListState.hpp" />
     <ClInclude Include="src\UIMenu\ViewMenu\ViewMenu.hpp" />
     <ClInclude Include="src\UI\AddressBookUI.hpp" />
     <ClInclude Include="src\UI\OutputPrintHandler.hpp" />
@@ -136,6 +146,7 @@
     <ClInclude Include="src\UI\UIOutput.hpp" />
     <ClInclude Include="src\UI\UIPrintHandler.hpp" />
     <ClInclude Include="src\UI\UIUtils.hpp" />
+    <ClInclude Include="src\UIMenu\ViewMenu\ViewEmptyState.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

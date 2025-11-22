@@ -15,4 +15,3 @@ public:
 protected:
 	EditMenu& owner_;
 };
-
