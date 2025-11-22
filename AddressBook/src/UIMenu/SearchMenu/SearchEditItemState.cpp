@@ -46,5 +46,5 @@ SearchPhase SearchEditItemState::update()
 	{
 		context.err = nullopt; //수정 취소
 	}
-	return SearchPhase::SearchResult;
+	return SearchPhase::SearchList;
 }

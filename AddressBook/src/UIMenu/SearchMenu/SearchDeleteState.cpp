@@ -30,13 +30,13 @@ SearchPhase SearchDeleteState::update()
 	if (!isVariantEqualTo<InputResult>(result, InputResult::SUCCESS)) 
 	{
 		context.err = wrapVariant<ResultVariant>(result);
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 	else if (input > resultCount) 
 	{
 		result = InputResult::WRONG_NUMBER;
 		context.err = wrapVariant<ResultVariant>(result);
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 
 	//성공

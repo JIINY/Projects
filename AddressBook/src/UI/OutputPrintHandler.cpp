@@ -232,7 +232,7 @@ void OutputPrintHandler::printSearchDeleteSubMenu()
 	cout << "=======================================" << endl;
 }
 
-void OutputPrintHandler::printSearchActionSubMenu() 
+void OutputPrintHandler::printActionSubMenu() 
 {
 	cout << "[E] 주소록 수정하기" << endl;
 	cout << "[D] 주소록 삭제하기" << endl;
@@ -274,7 +274,7 @@ void OutputPrintHandler::printTablePersonalData(const int i, const PersonalData&
 
 void OutputPrintHandler::printTableCommand() 
 {
-	cout << "[P] 이전 페이지, [N] 다음 페이지, [Q] 이전으로 돌아가기" << endl;
+	cout << "[P] 이전 페이지, [N] 다음 페이지, [Q] 이전으로 돌아가기 [숫자] 항목 수정/삭제" << endl;
 }
 
 void OutputPrintHandler::printTableComplete() 

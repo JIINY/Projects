@@ -33,7 +33,7 @@ SearchPhase SearchDeleteItemState::update()
 	if (validIndex == -1) 
 	{
 		context.err = wrapVariant<ResultVariant>(RemoveOperationResult::NOT_FOUND);
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 
 	DeleteMenu deleteMenu;
@@ -49,12 +49,12 @@ SearchPhase SearchDeleteItemState::update()
 		if (resultVec.empty()) 
 		{
 			owner_.setMode(SearchMode::SearchEmpty);
-			return SearchPhase::SearchResult;
+			return SearchPhase::SearchList;
 		}
 	}
 	else 
 	{
 		context.err = wrapVariant<ResultVariant>(result);
 	}
-	return SearchPhase::SearchResult;
+	return SearchPhase::SearchList;
 }

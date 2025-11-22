@@ -122,6 +122,6 @@ SearchPhase SearchInputDataState::update()
 	}
 	}
 
-	return SearchPhase::SearchResult;
+	return SearchPhase::SearchList;
 }
 

@@ -1,4 +1,4 @@
-#include "SearchEmptyMenuState.hpp"
+﻿#include "SearchEmptyMenuState.hpp"
 #include "../../UI/UICommonData.hpp"
 #include "../../UI/UICommonHeader.hpp"
 #include "SearchMenu.hpp"
@@ -30,7 +30,7 @@ SearchPhase SearchEmptyMenuState::update()
 	{
 		ResultVariant error = InputResult::FAIL;
 		context.err = wrapVariant<ResultVariant>(error);
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 
 	switch (result) {
@@ -50,7 +50,7 @@ SearchPhase SearchEmptyMenuState::update()
 	{
 		ResultVariant error = MenuSelectResult::WRONG_COMMAND;
 		context.err = wrapVariant<ResultVariant>(error);
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 	}
 

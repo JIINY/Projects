@@ -1,4 +1,4 @@
-﻿#include "SearchResultState.hpp"
+﻿#include "SearchListState.hpp"
 #include <vector>
 #include <optional>
 #include <utility>
@@ -7,7 +7,7 @@
 #include "SearchMenu.hpp"
 using namespace std;
 
-void SearchResultState::draw() 
+void SearchListState::draw() 
 {
 	auto& context = owner_.getContext();
 	auto& frame = owner_.getUIFrame();
@@ -21,7 +21,7 @@ void SearchResultState::draw()
 	owner_.drawResultMsg();
 }
 
-SearchPhase SearchResultState::update() 
+SearchPhase SearchListState::update() 
 {
 	return SearchPhase::ModeSelect;
 }

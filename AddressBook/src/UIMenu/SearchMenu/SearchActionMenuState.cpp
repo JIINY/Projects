@@ -1,4 +1,4 @@
-#include "SearchActionMenuState.hpp"
+﻿#include "SearchActionMenuState.hpp"
 #include <vector>
 #include <optional>
 #include <utility>
@@ -16,7 +16,7 @@ void SearchActionMenuState::draw()
 	auto& uiMsgH = owner_.getUIMsgH();
 	auto& errorMsgH = owner_.getErrorMsgH();
 
-	frame = uiMsgH.searchActionSubMenu(context.err);
+	frame = uiMsgH.actionSubMenu(context.err);
 	frame(errorMsgH);
 	frame = uiMsgH.menuSelect(context.err);
 	frame(errorMsgH);
@@ -33,7 +33,7 @@ SearchPhase SearchActionMenuState::update()
 	{
 		ResultVariant error = InputResult::FAIL;
 		context.err = wrapVariant<ResultVariant>(error);
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 
 	switch (result)
@@ -54,14 +54,14 @@ SearchPhase SearchActionMenuState::update()
 	{
 		context.err = nullopt;
 		owner_.setMode(SearchMode::Search);
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 	default:
 	{
 		owner_.setMode(SearchMode::Action);
 		ResultVariant error = MenuSelectResult::WRONG_COMMAND;
 		context.err = wrapVariant<ResultVariant>(error);
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 	}
 }

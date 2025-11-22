@@ -142,7 +142,7 @@ bool InputHandler::getAnyKey()
 }
 
 
-CommandPhase InputHandler::getViewPagingInput() 
+CommandPhase InputHandler::getViewPagingInput(int& output) 
 {
 	string input = "";
 	ResultVariant inputResult = getString(StringRule::EmptyAllow, input);
@@ -156,6 +156,19 @@ CommandPhase InputHandler::getViewPagingInput()
 	{
 		if (phase == CommandPhase::Enter) { return CommandPhase::Enter; }
 		return phase;
+	}
+	else if (parsingModeCommand(phase, input))
+	{
+		return phase;
+	}
+	else
+	{
+		auto [parsedResult, parsedInt] = InputParser::parsingInputNumber(input);
+		if (parsedResult == IntParsingResult::POSITIVE_NUMBER)
+		{
+			output = parsedInt.value();
+			return CommandPhase::PositiveNums;
+		}
 	}
 	return CommandPhase::Error;
 }
@@ -174,7 +187,7 @@ CommandPhase InputHandler::getSearchPagingInput(int& output)
 	{
 		return phase; 
 	}
-	else if (parsingSearchModeCommand(phase, input)) 
+	else if (parsingModeCommand(phase, input)) 
 	{
 		return phase;
 	}
@@ -216,7 +229,7 @@ bool InputHandler::parsingPagingCommand(CommandPhase& phase, string& input)
 	return false;
 }
 
-bool InputHandler::parsingSearchModeCommand(CommandPhase& phase, string& input) 
+bool InputHandler::parsingModeCommand(CommandPhase& phase, string& input) 
 {
 	input = InputTextUtils::toUpper(input);
 	if (input == "E" || input == "EDIT")

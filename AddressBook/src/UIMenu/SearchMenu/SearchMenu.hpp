@@ -7,7 +7,6 @@
 #include "ISearchState.hpp"
 
 class AddressBookUi;
-
 enum class SearchMode { Search, SearchEmpty, Edit, Delete, Action };
 
 class SearchMenu

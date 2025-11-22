@@ -74,17 +74,17 @@ SearchPhase SearchEditState::update()
 	case CommandPhase::Exit:
 	{
 		context.err = nullopt;
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 	case CommandPhase::Enter: 
 	{
 		context.err = nullopt;
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 	case CommandPhase::Error:
 	default:
 		context.err = wrapVariant<ResultVariant>(MenuSelectResult::WRONG_COMMAND);
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 }
 

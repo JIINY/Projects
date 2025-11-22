@@ -30,7 +30,7 @@ SearchPhase SearchAgainState::update()
 	}
 	else if (isVariantEqualTo<InputResult>(result, InputResult::NO))
 	{
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 
 	context.err = wrapVariant<ResultVariant>(result);

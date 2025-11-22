@@ -27,6 +27,7 @@ public:
     static void printMenuSelect();
     static void printCancel(const ActionType action);
     static void printTableAction(const ActionType action);
+    static void printActionSubMenu();
 
     static void printPersonalData(const PersonalData& p);
     static void printPersonalEdit(const PersonalData& p);
@@ -37,7 +38,6 @@ public:
     static void printSearchEmptySubMenu();
     static void printSearchEditSubMenu();
     static void printSearchDeleteSubMenu();
-    static void printSearchActionSubMenu();
 
     static void printInputName();
     static void printInputPhone();

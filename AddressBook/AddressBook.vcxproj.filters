@@ -150,7 +150,7 @@
     <ClCompile Include="src\UIMenu\SearchMenu\SearchInputDataState.cpp">
       <Filter>src\UIMenu\SearchMenu</Filter>
     </ClCompile>
-    <ClCompile Include="src\UIMenu\SearchMenu\SearchResultState.cpp">
+    <ClCompile Include="src\UIMenu\SearchMenu\SearchListState.cpp">
       <Filter>src\UIMenu\SearchMenu</Filter>
     </ClCompile>
     <ClCompile Include="src\UIMenu\SearchMenu\SearchEditState.cpp">
@@ -347,7 +347,7 @@
     <ClInclude Include="src\UIMenu\SearchMenu\SearchInputDataState.hpp">
       <Filter>src\UIMenu\SearchMenu</Filter>
     </ClInclude>
-    <ClInclude Include="src\UIMenu\SearchMenu\SearchResultState.hpp">
+    <ClInclude Include="src\UIMenu\SearchMenu\SearchListState.hpp">
       <Filter>src\UIMenu\SearchMenu</Filter>
     </ClInclude>
     <ClInclude Include="src\UIMenu\SearchMenu\SearchEditState.hpp">

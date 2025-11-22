@@ -470,12 +470,12 @@ UIFrame UIPrintHandler::searchDeleteSubMenu(optional<ResultVariant> err)
 	};
 }
 
-UIFrame UIPrintHandler::searchActionSubMenu(optional<ResultVariant> err)
+UIFrame UIPrintHandler::actionSubMenu(optional<ResultVariant> err)
 {
 	return UIFrame{
 		[] {
 			OutputPrintHandler::printShort2Line();
-			OutputPrintHandler::printSearchActionSubMenu();
+			OutputPrintHandler::printActionSubMenu();
 		}, EnterType::ErrorOnly, err, RenderOrder::RenderOnly
 	};
 }

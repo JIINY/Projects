@@ -1,4 +1,4 @@
-#include "SearchModeMenuState.hpp"
+﻿#include "SearchModeMenuState.hpp"
 #include <variant>
 #include <utility>
 #include <optional>
@@ -32,7 +32,7 @@ SearchPhase SearchModeMenuState::update()
 	{
 		ResultVariant error = InputResult::FAIL;
 		context.err = wrapVariant<ResultVariant>(error);
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 
 	switch (result)
@@ -68,11 +68,11 @@ SearchPhase SearchModeMenuState::update()
 		if (isLastPage)
 		{
 			context.err = wrapVariant<ResultVariant>(MenuSelectResult::PAGE_END);
-			return SearchPhase::SearchResult;
+			return SearchPhase::SearchList;
 		}
 		owner_.setCurrentPage(page + 1);
 		context.err = nullopt;
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 	case CommandPhase::Prev:
 	{
@@ -80,11 +80,11 @@ SearchPhase SearchModeMenuState::update()
 		if (page == 0)
 		{
 			context.err = wrapVariant<ResultVariant>(MenuSelectResult::PAGE_START);
-			return SearchPhase::SearchResult;
+			return SearchPhase::SearchList;
 		}
 		owner_.setCurrentPage(page - 1);
 		context.err = nullopt;
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 	case CommandPhase::PositiveNums: 
 	{
@@ -96,7 +96,7 @@ SearchPhase SearchModeMenuState::update()
 		if (input < minNumOnPage || input > maxNumOnPage)
 		{
 			context.err = wrapVariant<ResultVariant>(InputResult::WRONG_NUMBER);
-			return SearchPhase::SearchResult;
+			return SearchPhase::SearchList;
 		}
 
 		context.menu = input - 1;
@@ -108,7 +108,7 @@ SearchPhase SearchModeMenuState::update()
 	{
 		ResultVariant error = MenuSelectResult::WRONG_INDEX;
 		context.err = wrapVariant<ResultVariant>(error);
-		return SearchPhase::SearchResult;
+		return SearchPhase::SearchList;
 	}
 	}
 }

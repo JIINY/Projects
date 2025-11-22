@@ -45,7 +45,7 @@ enum class SearchPhase
 {
     SearchStart,
     SearchInputData,
-    SearchResult,
+    SearchList,
     ModeSelect,
     SearchMode,
     SearchEmptyMode,
@@ -57,6 +57,16 @@ enum class SearchPhase
     DeleteStart,
     DeleteItem,
     SearchAgain,
+    Exit
+};
+
+enum class ViewPhase 
+{ 
+    List, 
+    Empty, 
+    Action, 
+    Edit, 
+    DeleteConfirm, 
     Exit
 };
 
@@ -79,7 +89,7 @@ enum class DataInputPhase
     Exit
 };
 
-using PhaseVariant = std::variant<AddPhase, EditPhase, SearchPhase>;
+using PhaseVariant = std::variant<AddPhase, EditPhase, SearchPhase, ViewPhase>;
 
 struct ContextData 
 {
@@ -90,4 +100,3 @@ struct ContextData
     std::optional<ResultVariant> err = std::nullopt;
     int menu = -1;
 };
-

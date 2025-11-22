@@ -11,7 +11,7 @@
 
 #include "SearchStartState.hpp"
 #include "SearchInputDataState.hpp"
-#include "SearchResultState.hpp"
+#include "SearchListState.hpp"
 #include "SearchModeSelectState.hpp"
 #include "SearchModeMenuState.hpp"
 #include "SearchActionMenuState.hpp"
@@ -80,7 +80,7 @@ bool SearchMenu::transitionTo(SearchPhase nextPhase)
 	bool shouldClearNextFrame = false;
 	if (nextPhase == SearchPhase::SearchStart ||
 		nextPhase == SearchPhase::SearchInputData ||
-		nextPhase == SearchPhase::SearchResult ||
+		nextPhase == SearchPhase::SearchList ||
 		nextPhase == SearchPhase::SearchAgain) 
 	{
 		shouldClearNextFrame = true;
@@ -97,9 +97,9 @@ bool SearchMenu::transitionTo(SearchPhase nextPhase)
 		currentState_ = make_unique<SearchInputDataState>(*this);
 		break;
 	}
-	case SearchPhase::SearchResult: 
+	case SearchPhase::SearchList: 
 	{
-		currentState_ = make_unique<SearchResultState>(*this);
+		currentState_ = make_unique<SearchListState>(*this);
 		break;
 	}
 	case SearchPhase::ModeSelect: 

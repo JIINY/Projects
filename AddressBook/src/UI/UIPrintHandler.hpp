@@ -39,6 +39,8 @@ public:
     UIFrame addEditLine(const PersonalData& p);
 
     UIFrame viewTitle(std::optional<ResultVariant> err);
+    UIFrame actionSubMenu(std::optional<ResultVariant> err);
+
     UIFrame tableDataNormal(std::optional<ResultVariant> err, const int i, const PersonalData& p);
     UIFrame tableDataCenter(std::optional<ResultVariant> err, const int i, const PersonalData& p);
     UIFrame tableDataBottom(std::optional<ResultVariant> err, const int i, const PersonalData& p);
@@ -68,7 +70,6 @@ public:
     UIFrame searchEmptySubMenu(std::optional<ResultVariant> err);
     UIFrame searchEditSubMenu(std::optional<ResultVariant> err);
     UIFrame searchDeleteSubMenu(std::optional<ResultVariant> err);
-    UIFrame searchActionSubMenu(std::optional<ResultVariant> err);
     UIFrame searchAgain(std::optional<ResultVariant> err);
     UIFrame searchEmpty();
     UIFrame searchEdit(std::optional<ResultVariant> err);

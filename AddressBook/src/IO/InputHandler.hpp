@@ -41,7 +41,7 @@ public:
 
     bool getAnyKey();
 
-    CommandPhase getViewPagingInput();
+    CommandPhase getViewPagingInput(int& output);
     CommandPhase getSearchPagingInput(int& output);
 
 private:
@@ -52,6 +52,6 @@ private:
     ResultVariant parsingString(StringRule rule, const std::string& input, std::string& output);
     ResultVariant parsingYesNo(const std::string& input);
     bool parsingPagingCommand(CommandPhase& phase, std::string& input);
-    bool parsingSearchModeCommand(CommandPhase& phase, std::string& input);
+    bool parsingModeCommand(CommandPhase& phase, std::string& input);
 };
 

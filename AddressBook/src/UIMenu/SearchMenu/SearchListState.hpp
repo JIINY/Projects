@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "ISearchState.hpp"
 
-class SearchResultState : public ISearchState
+class SearchListState : public ISearchState
 {
 public:
 	using ISearchState::ISearchState;
